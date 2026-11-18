@@ -1,0 +1,7 @@
+{
+  "name": "spike-hubmap-heart",
+  "private": true,
+  "type": "module",
+  "scripts": { "spike": "node run.mjs" },
+  "dependencies": { "three": "0.170.0" }
+}
