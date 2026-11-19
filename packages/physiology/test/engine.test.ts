@@ -4,7 +4,7 @@ import * as C from '../src/constants';
 import { computeCardiac, cardiacOutput, cycleDuration, SCENARIOS, SCENARIO_ORDER, isScenarioId, REFERENCES, type RefValue } from '../src';
 
 const model = readFileSync(new URL('../../../docs/PHYSIOLOGY_MODEL.md', import.meta.url), 'utf8');
-const constants = Object.entries(C) as [string, RefValue][];
+const constants = (Object.entries(C) as [string, RefValue][]).filter(([, c]) => typeof c === 'object' && 'value' in c && 'quote' in c);
 
 describe('reference values (docs/PHYSIOLOGY_MODEL.md, OpenStax A&P 2e §19.4)', () => {
   it.each([
@@ -93,8 +93,9 @@ describe('respiratory engine (Milestone 2)', () => {
     expect(() => minuteVentilation(0, 500)).toThrow(RangeError);
   });
   it('links lungs to heart: O2 extracted per litre of blood = VO2 / CO', () => {
-    expect(computeRespiratory('rest').oxygenExtraction).toEqual({ value: 64.8, unit: 'mL O2/L', formula: 'avO2=VO2/CO' }); // 0.34 / 5.25
-    expect(computeRespiratory('running').oxygenExtraction.value).toBe(108.7); // 2.12 / 19.5
+    // VO2 first normalised to 70 kg: 0.34 L/min / 76 kg × 70 kg = 0.313 L/min → / 5.25 L/min
+    expect(computeRespiratory('rest').oxygenExtraction).toEqual({ value: 59.6, unit: 'mL O2/L', formula: 'avO2=VO2/CO' });
+    expect(computeRespiratory('running').oxygenExtraction.value).toBe(100.1); // 2.12 → 1.953 L/min / 19.5
     expect(oxygenExtraction(0.25, 5)).toBe(50);
     expect(() => oxygenExtraction(1, 0)).toThrow(RangeError);
   });
@@ -111,5 +112,63 @@ describe('respiratory engine (Milestone 2)', () => {
     const a = computeRespiratory('rest'), b = computeRespiratory('running');
     expect(b.oxygenUptake.value).toBeGreaterThan(a.oxygenUptake.value);
     expect(b.oxygenExtraction.value).toBeGreaterThan(a.oxygenExtraction.value);
+  });
+});
+
+import { computeFlowDistribution, compareExercise, BLOOD_FLOW_TABLE, CARDIAC_REFERENCE_MASS, VO2_REFERENCE_MASS } from '../src';
+
+describe('oxygen uptake normalised to the 70-kg cardiac reference body (Milestone 3)', () => {
+  it('uses the cited reference masses (76 kg College Physics, 70 kg A&P)', () => {
+    expect(VO2_REFERENCE_MASS).toMatchObject({ value: 76, unit: 'kg', ref: 'CP-7.8' });
+    expect(CARDIAC_REFERENCE_MASS).toMatchObject({ value: 70, unit: 'kg', ref: 'OSX-19.4' });
+  });
+  it('derives mL/kg/min and the 70-kg value', () => {
+    const r = computeRespiratory('rest');
+    expect(r.oxygenUptakePerKg).toEqual({ value: 4.47, unit: 'mL/kg/min', formula: 'VO2/kg=VO2/m' });
+    expect(r.oxygenUptake70kg).toEqual({ value: 0.313, unit: 'L/min', formula: 'VO2@70kg=VO2/kg*70' });
+    const x = computeRespiratory('running');
+    expect(x.oxygenUptakePerKg.value).toBe(27.89);
+    expect(x.oxygenUptake70kg.value).toBe(1.953);
+    expect(x.oxygenUptake.value).toBe(2.12); // cited value kept unchanged
+  });
+});
+
+describe('blood-flow distribution (A&P 2e §20.4)', () => {
+  it('table rows sum to the table totals for every column', () => {
+    for (const col of ['rest', 'mild', 'maximal'] as const)
+      expect(BLOOD_FLOW_TABLE.rows.reduce((a, r) => a + r[col], 0)).toBe(BLOOD_FLOW_TABLE.totals[col]);
+  });
+  it('every row quote is documented in PHYSIOLOGY_MODEL.md', () => {
+    for (const r of BLOOD_FLOW_TABLE.rows) expect(model).toContain(r.quote);
+    expect(model).toContain(BLOOD_FLOW_TABLE.totals.quote);
+  });
+  it('rest: shares of the rest column applied to CO 5.25 L/min; flows add up to CO', () => {
+    const d = computeFlowDistribution('rest');
+    expect(d.column).toBe('rest');
+    const m = d.organs.find((o) => o.organ === 'skeletalMuscle')!;
+    expect(m.tableValue).toBe(1200);
+    expect(m.share.value).toBe(0.207); // 1200 / 5800
+    expect(m.flow.value).toBe(1.09); // 5.25 × 0.2069
+    expect(d.organs.reduce((a, o) => a + o.flow.value, 0)).toBeCloseTo(5.25, 1);
+  });
+  it('running uses the maximal-exercise column: skeletal muscle gets most of the output', () => {
+    const d = computeFlowDistribution('running');
+    expect(d.column).toBe('maximal');
+    const m = d.organs.find((o) => o.organ === 'skeletalMuscle')!;
+    expect(m.share.value).toBe(0.714); // 12500 / 17500
+    expect(m.flow.value).toBe(13.93);
+    expect(d.organs.find((o) => o.organ === 'kidney')!.flow.value).toBeLessThan(computeFlowDistribution('rest').organs.find((o) => o.organ === 'kidney')!.flow.value);
+    expect(d.organs.reduce((a, o) => a + o.flow.value, 0)).toBeCloseTo(19.5, 1);
+  });
+});
+
+describe('exercise across systems', () => {
+  it('derives rest→running ratios from engine values only', () => {
+    const c = Object.fromEntries(compareExercise().map((r) => [r.key, r]));
+    expect(c.heartRate.ratio.value).toBe(2);
+    expect(c.cardiacOutput.ratio.value).toBe(3.7);
+    expect(c.oxygenUptake70kg.ratio.value).toBe(6.2);
+    expect(c.muscleFlow.ratio.value).toBe(12.8);
+    expect(c.oxygenExtraction.running).toBeGreaterThan(c.oxygenExtraction.rest);
   });
 });

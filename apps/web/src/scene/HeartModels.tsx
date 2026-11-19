@@ -51,7 +51,7 @@ function useBreathing(scene: THREE.Object3D) {
 
 function Model({ file }: { file: string }) {
   const { scene } = useGLTF(url(file)); // drei registers the Meshopt decoder (no network fetch)
-  const { selected, layers, flowOn, flowStep, select, setHovered, markLoaded } = useAtlas();
+  const { selected, layers, flowOn, flowStep, select, setHovered, markLoaded, requestCamera } = useAtlas();
   useBreathing(scene);
 
   // One material per mesh so each structure can be highlighted independently.
@@ -101,9 +101,16 @@ function Model({ file }: { file: string }) {
     setHovered(name);
     document.body.style.cursor = 'pointer';
   };
+  const focus = (e: ThreeEvent<MouseEvent>) => {
+    const name = pickFrom(e.intersections);
+    if (!name) return;
+    e.stopPropagation();
+    select(name);
+    requestCamera({ kind: 'focus', name: useAtlas.getState().selected ?? name });
+  };
   const out = () => { setHovered(null); document.body.style.cursor = ''; };
 
-  return <primitive object={scene} onClick={pick} onPointerMove={hover} onPointerOut={out} />;
+  return <primitive object={scene} onClick={pick} onDoubleClick={focus} onPointerMove={hover} onPointerOut={out} />;
 }
 
 export function HeartModels() {

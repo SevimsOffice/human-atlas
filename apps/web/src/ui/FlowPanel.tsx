@@ -15,7 +15,7 @@ export function FlowPanel() {
         <div className="flex items-center justify-between gap-2">
           <div aria-live="polite">
             <div className="text-[11px] text-graphite-soft">{t('flow.current')} · <span className="font-mono">{flowStep + 1}/{bloodPath.length}</span></div>
-            <div className="text-sm font-medium" data-testid="flow-step">{t(`flow.steps.${step.id}`)}</div>
+            <div className="text-[13px] font-medium" data-testid="flow-step">{t(`flow.steps.${step.id}`)}</div>
             <div className="text-xs text-graphite-soft">
               {t(step.blood === 'low' ? 'flow.lowO2' : 'flow.highO2')}{!step.modelled && ` · ${t('flow.notModelled')}`}
             </div>

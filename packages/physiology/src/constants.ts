@@ -45,3 +45,32 @@ export const RUNNING_VO2: RefValue = {
   value: 2.12, unit: 'L/min', ref: 'CP-7.8',
   quote: 'Running cross-country | 740 | 2.12',
 };
+
+// ---- Reference bodies (Milestone 3: oxygen uptake normalised to the cardiac reference body) ----
+export const CARDIAC_REFERENCE_MASS: RefValue = {
+  value: 70, unit: 'kg', ref: 'OSX-19.4',
+  quote: 'A mean SV for a resting 70-kg (150-lb) individual would be approximately 70 mL.',
+};
+export const VO2_REFERENCE_MASS: RefValue = {
+  value: 76, unit: 'kg', ref: 'CP-7.8',
+  quote: 'Energy and Oxygen Consumption Rates for a 76-kg male with typical metabolic functions',
+};
+
+// ---- Systemic blood-flow distribution (Milestone 3), A&P 2e §20.4 table, mL/min ----
+export type OrganId = 'skeletalMuscle' | 'heart' | 'brain' | 'integument' | 'kidney' | 'gastrointestinal' | 'others';
+export interface FlowRow { readonly organ: OrganId; readonly rest: number; readonly mild: number; readonly maximal: number; readonly quote: string }
+export const BLOOD_FLOW_TABLE = {
+  ref: 'OSX-20.4' as const,
+  unit: 'mL/min',
+  title: 'Systemic Blood Flow During Rest, Mild Exercise, and Maximal Exercise in a Healthy Young Individual',
+  rows: [
+    { organ: 'skeletalMuscle', rest: 1200, mild: 4500, maximal: 12500, quote: 'Skeletal muscle | 1200 | 4500 | 12,500' },
+    { organ: 'heart', rest: 250, mild: 350, maximal: 750, quote: 'Heart | 250 | 350 | 750' },
+    { organ: 'brain', rest: 750, mild: 750, maximal: 750, quote: 'Brain | 750 | 750 | 750' },
+    { organ: 'integument', rest: 500, mild: 1500, maximal: 1900, quote: 'Integument | 500 | 1500 | 1900' },
+    { organ: 'kidney', rest: 1100, mild: 900, maximal: 600, quote: 'Kidney | 1100 | 900 | 600' },
+    { organ: 'gastrointestinal', rest: 1400, mild: 1100, maximal: 600, quote: 'Gastrointestinal | 1400 | 1100 | 600' },
+    { organ: 'others', rest: 600, mild: 400, maximal: 400, quote: 'Others (i.e., liver, spleen) | 600 | 400 | 400' },
+  ] as readonly FlowRow[],
+  totals: { rest: 5800, mild: 9500, maximal: 17500, quote: 'Total | 5800 | 9500 | 17,500' },
+};

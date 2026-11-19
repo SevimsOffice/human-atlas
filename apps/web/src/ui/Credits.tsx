@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { manifest, SOURCES } from '@atlas/anatomy-manifest';
 import { useAtlas } from '../store';
+import { PoweredBy } from './PoweredBy';
 
 export function Credits() {
   const { t } = useTranslation();
@@ -22,8 +23,18 @@ export function Credits() {
           </li>
         ))}
       </ul>
+      <section className="mt-8 rounded-sm border border-line bg-white p-4" data-testid="credits-derivations">
+        <h2 className="font-medium">{t('credits.derivTitle')}</h2>
+        <ul className="mt-2 list-disc space-y-2 pl-5 text-sm">
+          <li>{t('credits.derivVo2')}</li>
+          <li>{t('credits.derivFick')}</li>
+          <li>{t('credits.derivFlow')}</li>
+          <li>{t('credits.derivPending')}</li>
+        </ul>
+      </section>
       <p className="mt-6 text-sm">{t('credits.texts')}</p>
       <p className="mt-2 text-sm">{t('credits.terms')}</p>
+      <p className="mt-6 border-t border-line pt-3"><PoweredBy testId="credits-powered-by" /></p>
       <button onClick={() => setView('atlas')} className="mt-6 rounded-sm border border-line bg-white px-3 py-1.5 text-sm hover:bg-paper">← {t('credits.back')}</button>
     </main>
   );

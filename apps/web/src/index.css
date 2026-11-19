@@ -13,7 +13,7 @@
 }
 
 html, body, #root { height: 100%; }
-body { margin: 0; background: var(--color-paper); color: var(--color-graphite); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+body { margin: 0; font-size: 13px; background: var(--color-paper); color: var(--color-graphite); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 
 @keyframes beat { 0%, 100% { transform: scale(0.7); opacity: .45 } 12% { transform: scale(1); opacity: 1 } 40% { transform: scale(0.75); opacity: .55 } }
 .beat-dot { animation: beat var(--cycle, 0.8s) infinite ease-out; }

@@ -30,6 +30,7 @@ download → inspect → map → compress  physiology  (pure TS engine)  →  Zu
 - Store slices: `scene` (layers, selection, camera), `scenario` (current id), `physiology` (derived via engine; never set directly).
 - Scene: specimen-stage floor, neutral lighting, per-system accent material, translucency when layers overlap.
 - Panels: Structure inspector, Scenario switcher + measurements (mono font), Sources & credits, educational disclaimer.
+- Camera (`scene/CameraRig.tsx`, limits in `lib/camera.ts`): orbits the heart centre, polar angle 0.2 rad–0.58π (never under the stage or over the top), no panning, distance 0.12–0.9 m, damping 0.1; "reset view" and double-click-to-focus animate target and position.
 - Interaction: orbit/zoom, click select (raycast on manifest meshes), keyboard navigation, layer toggles; camera mode (M7) only emits the same actions.
 
 ## Testing

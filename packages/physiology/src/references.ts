@@ -20,6 +20,12 @@ export const REFERENCES: Readonly<Record<ReferenceId, Reference>> = {
     url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing',
     license: 'CC BY-NC-SA 4.0 (cited for numeric facts only; no text reused)',
   },
+  'OSX-20.4': {
+    id: 'OSX-20.4',
+    citation: 'Betts J.G. et al. Anatomy and Physiology 2e, §20.4 Homeostatic Regulation of the Vascular System, table "Systemic Blood Flow During Rest, Mild Exercise, and Maximal Exercise in a Healthy Young Individual". OpenStax, 2022.',
+    url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/20-4-homeostatic-regulation-of-the-vascular-system',
+    license: 'CC BY-NC-SA 4.0 (cited for numeric facts only; no text reused)',
+  },
   'CP-7.8': {
     id: 'CP-7.8',
     citation: 'Urone P.P., Hinrichs R. et al. College Physics 2e, §7.8 Work, Energy, and Power in Humans, table "Energy and Oxygen Consumption Rates" (76-kg male). OpenStax, 2022.',

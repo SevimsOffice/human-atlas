@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "HUMAN ATLAS",
-    "subtitle": "Kalp ve akciğerler · Milestone 2",
+    "subtitle": "Kalp, akciğerler ve egzersiz · Milestone 3",
     "skip": "Ana içeriğe geç"
   },
   "nav": {
@@ -19,7 +19,11 @@
     "title": "Senaryo",
     "rest": "Dinlenme",
     "running": "Koşu (yoğun egzersiz)",
-    "walkingNote": "Yürüme senaryosu, doğrulanmış ikinci bir kaynak bulunana kadar eklenmedi."
+    "walkingNote": "Yürüme senaryosu, doğrulanmış ikinci bir kaynak bulunana kadar eklenmedi.",
+    "short": {
+      "rest": "Dinlenme",
+      "running": "Koşu"
+    }
   },
   "measure": {
     "title": "Fizyoloji motoru",
@@ -119,21 +123,67 @@
     "attribution": "Atıf",
     "texts": "Açıklama metinleri projeye aittir; olgular OpenStax A&P 2e §19.1'e dayanır ve henüz uzman incelemesinden geçmemiştir.",
     "terms": "Türkçe anatomi terimleri geliştirme sırasında çevrilmiştir ve yayından önce uzman incelemesi gerektirir.",
-    "back": "Atlasa dön"
+    "back": "Atlasa dön",
+    "derivTitle": "Değerler nasıl türetildi",
+    "derivVo2": "Oksijen alımı, College Physics 2e §7.8 tablosunda 76 kg bir erkek için verilmiştir. Kg başına değere (mL/kg/dk) çevrilip kalp değerlerinin dayandığı 70 kg referans bedene (A&P 2e §19.4) doğrusal olarak ölçeklenir. Kaynaktaki değer de ayrıca gösterilir. Kg başına doğrusal ölçekleme bir varsayımdır.",
+    "derivFick": "Kandan alınan oksijen = oksijen alımı (70 kg) ÷ kalp debisi (Fick ilkesi). Kalp ve akciğer motorlarını bağlayan türetilmiş değerdir; formül için ders kitabı atfı henüz eklenmedi.",
+    "derivFlow": "Kan akışı dağılımı A&P 2e §20.4 tablosundan gelir. Tablonun toplamı motorun kalp debisinden farklı olduğu için her organın sütundaki payı alınır ve motorun kalp debisiyle çarpılır. Koşu için \"maksimal egzersiz\" sütunu kullanılır (en yakın sütun).",
+    "derivPending": "Koşu ve yürüme sırasındaki solunum hızı ve soluk hacmi için doğrulanabilir kaynak bekleniyor; değer uydurulmaz."
   },
   "resp": {
     "title": "Solunum motoru",
     "rr": "Solunum hızı",
     "vt": "Soluk hacmi (tidal)",
     "ve": "Dakika ventilasyonu",
-    "vo2": "Oksijen alımı",
+    "vo2": "O₂ alımı (kaynak, 76 kg)",
     "extraction": "Kandan alınan O₂",
     "extractionUnit": "mL O₂/L kan",
     "perMin": "/dk",
-    "extractionNote": "= oksijen alımı ÷ kalp debisi (kalp ile akciğerleri bağlar; açıklayıcı, iki farklı referans bedenden)",
+    "extractionNote": "Kandan alınan O₂ = oksijen alımı (70 kg) ÷ kalp debisi — türetilmiş (Fick ilkesi). Oksijen alımı 76 kg referans bedenden kg başına ölçeklenerek kalp değerlerinin 70 kg bedenine çevrildi.",
     "pending": "kaynak bekleniyor",
     "breathing": "Nefes göstergesi: bir nefes {{s}} s (şematik genişleme, ölçekli değil)",
     "notBreathing": "Bu senaryo için doğrulanmış solunum hızı yok; akciğerler hareketsiz gösteriliyor.",
-    "missingNote": "Koşu sırasındaki solunum hızı ve soluk hacmi için doğrulanabilir bir kaynak henüz bulunamadı; değer uydurulmaz."
+    "missingNote": "Koşu sırasındaki solunum hızı ve soluk hacmi için doğrulanabilir bir kaynak henüz bulunamadı; değer uydurulmaz.",
+    "vo2kg": "O₂ alımı / kg",
+    "vo270": "O₂ alımı (70 kg)",
+    "fick": "türetilmiş (Fick ilkesi)"
+  },
+  "exercise": {
+    "title": "Egzersizde sistemler",
+    "flowTitle": "Kan akışı dağılımı (L/dk)",
+    "showTable": "Tablo",
+    "showChart": "Grafik",
+    "organ": "Organ",
+    "tableValue": "tablodaki değer",
+    "flowNote": "Her organın tablo sütunundaki payı × motorun kalp debisi (türetilmiş). Koşu değerleri OpenStax A&P 2e §20.4 tablosunun maksimal egzersiz sütununa dayanır.",
+    "compareTitle": "Dinlenme → koşu",
+    "runShort": "Koşu",
+    "compareNote": "Tüm değerler motordan; oranlar türetilmiştir. Kas modelleri Milestone 4'te.",
+    "rows": {
+      "heartRate": "Kalp hızı",
+      "strokeVolume": "Atım hacmi",
+      "cardiacOutput": "Kalp debisi",
+      "oxygenUptake70kg": "O₂ alımı (70 kg)",
+      "oxygenExtraction": "Kandan alınan O₂",
+      "muscleFlow": "İskelet kası kan akışı"
+    }
+  },
+  "organs": {
+    "skeletalMuscle": "İskelet kası",
+    "heart": "Kalp",
+    "brain": "Beyin",
+    "integument": "Deri",
+    "kidney": "Böbrek",
+    "gastrointestinal": "Sindirim kanalı",
+    "others": "Diğer (karaciğer, dalak)"
+  },
+  "stage": {
+    "reset": "Görünümü sıfırla",
+    "leftPanel": "Sol panel",
+    "rightPanel": "Sağ panel",
+    "hint": "Sürükle: döndür · Tekerlek: yakınlaştır · Çift tık: yapıya odaklan"
+  },
+  "credit": {
+    "poweredBy": "Geliştiren:"
   }
 }

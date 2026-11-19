@@ -42,7 +42,7 @@ export const SOURCES: readonly SourceEntry[] = [
     changes: 'Subset extracted: IDs, labels, definitions, part_of for structures in the model.',
   },
   {
-    id: 'OSX-AP2E', kind: 'reference', title: 'OpenStax Anatomy and Physiology 2e — §19.1, §19.4 (heart), §22.1–22.3 (respiratory system)',
+    id: 'OSX-AP2E', kind: 'reference', title: 'OpenStax Anatomy and Physiology 2e — §19.1, §19.4 (heart), §20.4 (blood-flow distribution), §22.1–22.3 (respiratory system)',
     url: 'https://openstax.org/details/books/anatomy-and-physiology-2e', license: 'CC BY-NC-SA 4.0 (cited for facts and numbers only; no text reused)',
     licenseUrl: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
     attribution: 'Betts J.G., Young K.A., Wise J.A., et al. Anatomy and Physiology 2e. OpenStax, Rice University, 2022.',
