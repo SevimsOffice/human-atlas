@@ -36,3 +36,46 @@ export function computeCardiac(id: ScenarioId): CardiacState {
     cycleDuration: { value: cycleDuration(s.hr.value), unit: 's', formula: 'T=60/HR' },
   };
 }
+
+export interface RespiratoryState {
+  readonly scenario: ScenarioId;
+  readonly breathingRate: RefValue | null;
+  readonly tidalVolume: RefValue | null;
+  /** VE [L/min] = RR × VT / 1000; null when either input is missing. */
+  readonly minuteVentilation: DerivedValue | null;
+  readonly breathCycle: DerivedValue | null;
+  readonly oxygenUptake: RefValue;
+  /** O2 extracted per litre of blood [mL/L] = VO2 / CO (mass balance). Links the lungs to the heart. */
+  readonly oxygenExtraction: DerivedValue;
+  readonly missing: readonly ('breathingRate' | 'tidalVolume')[];
+}
+
+export function minuteVentilation(rrPerMin: number, vtMl: number): number {
+  if (!(rrPerMin > 0) || !(vtMl > 0)) throw new RangeError('RR and VT must be positive');
+  return clean((rrPerMin * vtMl) / 1000);
+}
+
+/** mL O2 per L blood = VO2 [L/min] / CO [L/min] × 1000. */
+export function oxygenExtraction(vo2LMin: number, coLMin: number): number {
+  if (!(vo2LMin > 0) || !(coLMin > 0)) throw new RangeError('VO2 and CO must be positive');
+  return Math.round((vo2LMin / coLMin) * 1000 * 10) / 10;
+}
+
+export function computeRespiratory(id: ScenarioId): RespiratoryState {
+  const s = SCENARIOS[id];
+  if (!s) throw new RangeError(`unknown scenario: ${String(id)}`);
+  const co = computeCardiac(id).cardiacOutput.value;
+  const missing: ('breathingRate' | 'tidalVolume')[] = [];
+  if (!s.rr) missing.push('breathingRate');
+  if (!s.vt) missing.push('tidalVolume');
+  return {
+    scenario: id,
+    breathingRate: s.rr,
+    tidalVolume: s.vt,
+    minuteVentilation: s.rr && s.vt ? { value: minuteVentilation(s.rr.value, s.vt.value), unit: 'L/min', formula: 'VE=RR*VT' } : null,
+    breathCycle: s.rr ? { value: Math.round((60 / s.rr.value) * 100) / 100, unit: 's', formula: 'Tb=60/RR' } : null,
+    oxygenUptake: s.vo2,
+    oxygenExtraction: { value: oxygenExtraction(s.vo2.value, co), unit: 'mL O2/L', formula: 'avO2=VO2/CO' },
+    missing,
+  };
+}

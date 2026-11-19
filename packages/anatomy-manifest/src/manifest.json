@@ -12,6 +12,11 @@
    "file": "heart-vessels.glb",
    "sourceId": "HRA-VASC-M",
    "hraId": "VH_M_Blood_Vasculature"
+  },
+  {
+   "file": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "hraId": "VH_M_Lung"
   }
  ],
  "structures": {
@@ -128,12 +133,20 @@
     "VH_M_ascending_aorta",
     "VH_M_brachiocephalic_artery_a",
     "VH_M_brachiocephalic_vein_L",
+    "VH_M_bronchial_cartilage",
+    "VH_M_carina",
     "VH_M_descending_aorta_a",
+    "VH_M_left_apical_bronchopulmonary_segment",
     "VH_M_left_common_carotid_artery_a",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_posterior_bronchopulmonary_segment",
     "VH_M_left_subclavian_artery_a",
+    "VH_M_left_superior_bronchopulmonary_segment",
     "VH_M_pulmonary_artery_R",
     "VH_M_pulmonary_trunk",
-    "VH_M_superior_vena_cava"
+    "VH_M_superior_vena_cava",
+    "VH_M_trachea",
+    "VH_M_tracheal_cartilage"
    ]
   },
   "VH_M_aortic_valve": {
@@ -209,6 +222,100 @@
     0.0923,
     0.4958,
     0.1258
+   ]
+  },
+  "VH_M_arytenoid_cartilage": {
+   "name": "VH_M_arytenoid_cartilage",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_cartilage_of_tracheobronchial_tree",
+   "children": [
+    "VH_M_arytenoid_cartilage_L",
+    "VH_M_arytenoid_cartilage_R"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "arytenoid cartilage",
+    "id": "UBERON:0001740"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001740",
+    "via": "hra-crosswalk",
+    "label": "arytenoid cartilage",
+    "definition": "The paired triangular laryngeal cartilages located postlaterally at the level of the thyroid cartilage.",
+    "partOf": []
+   },
+   "center": [
+    -0.0011,
+    0.6576,
+    0.0355
+   ],
+   "size": [
+    0.0242,
+    0.015,
+    0.0161
+   ]
+  },
+  "VH_M_arytenoid_cartilage_L": {
+   "name": "VH_M_arytenoid_cartilage_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_arytenoid_cartilage",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left arytenoid cartilage",
+    "id": "FMA:55114"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0066,
+    0.6575,
+    0.0354
+   ],
+   "size": [
+    0.009,
+    0.0148,
+    0.0159
+   ],
+   "neighbors": [
+    "VH_M_corniculate_cartilage_L",
+    "VH_M_cricoid_cartilage",
+    "VH_M_trachea"
+   ]
+  },
+  "VH_M_arytenoid_cartilage_R": {
+   "name": "VH_M_arytenoid_cartilage_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_arytenoid_cartilage",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right arytenoid cartilage",
+    "id": "FMA:55113"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0079,
+    0.6578,
+    0.0361
+   ],
+   "size": [
+    0.0106,
+    0.0147,
+    0.0149
+   ],
+   "neighbors": [
+    "VH_M_corniculate_cartilage_R",
+    "VH_M_cricoid_cartilage",
+    "VH_M_trachea"
    ]
   },
   "VH_M_ascending_aorta": {
@@ -401,7 +508,8 @@
    ],
    "neighbors": [
     "VH_M_brachiocephalic_artery_a",
-    "VH_M_brachiocephalic_vein_L"
+    "VH_M_brachiocephalic_vein_L",
+    "VH_M_tracheal_cartilage"
    ]
   },
   "VH_M_brachiocephalic_vein": {
@@ -471,6 +579,7 @@
     "VH_M_aortic_arch",
     "VH_M_brachiocephalic_artery_a",
     "VH_M_brachiocephalic_artery_b",
+    "VH_M_left_apical_bronchopulmonary_segment",
     "VH_M_left_common_carotid_artery_a",
     "VH_M_left_common_carotid_artery_b",
     "VH_M_superior_vena_cava"
@@ -501,7 +610,233 @@
     0.0211
    ],
    "neighbors": [
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_apical_bronchopulmonary_segment",
     "VH_M_superior_vena_cava"
+   ]
+  },
+  "VH_M_bronchi": {
+   "name": "VH_M_bronchi",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tracheobronchial_tree",
+   "children": [
+    "VH_M_bronchi_L",
+    "VH_M_bronchi_R"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "bronchus",
+    "id": "UBERON:0002185"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002185",
+    "via": "hra-crosswalk",
+    "label": "bronchus",
+    "definition": "The upper conducting airways of the lung; these airways arise from the terminus of the trachea.",
+    "partOf": [
+     {
+      "id": "UBERON:0007196",
+      "label": "tracheobronchial tree"
+     }
+    ]
+   },
+   "center": [
+    0.004,
+    0.5064,
+    -0.0084
+   ],
+   "size": [
+    0.2279,
+    0.1773,
+    0.1407
+   ]
+  },
+  "VH_M_bronchi_L": {
+   "name": "VH_M_bronchi_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_bronchi",
+   "children": [
+    "VH_M_left_main_bronchus",
+    "VH_M_lobar_bronchus_L",
+    "VH_M_tertiary_bronchi_L"
+   ],
+   "isMesh": false,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0569,
+    0.5064,
+    -0.0103
+   ],
+   "size": [
+    0.122,
+    0.1773,
+    0.137
+   ]
+  },
+  "VH_M_bronchi_R": {
+   "name": "VH_M_bronchi_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_bronchi",
+   "children": [
+    "VH_M_right_main_bronchus",
+    "VH_M_lobar_bronchi_R",
+    "VH_M_tertiary_bronchi_R"
+   ],
+   "isMesh": false,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0582,
+    0.5081,
+    -0.007
+   ],
+   "size": [
+    0.1035,
+    0.1724,
+    0.1379
+   ]
+  },
+  "VH_M_bronchial_cartilage": {
+   "name": "VH_M_bronchial_cartilage",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_cartilage_of_tracheobronchial_tree",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Cartilage of bronchus",
+    "id": "FMA:62649"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001956",
+    "via": "uberon-xref:FMA:62649",
+    "label": "cartilage of bronchus",
+    "definition": "The hyaline cartilaginous structures that support the bronchi, present as irregular rings in the larger bronchi (and not as regular as in the trachea), and as small plates and islands in the smaller bronchi; as the branching continues through the bronchial tree, the amount of hyaline cartilage in the walls decreases until it is absent in the smallest bronchioles[MP].",
+    "partOf": [
+     {
+      "id": "UBERON:0002185",
+      "label": "bronchus"
+     }
+    ]
+   },
+   "center": [
+    0.0072,
+    0.5069,
+    -0.0122
+   ],
+   "size": [
+    0.2202,
+    0.1694,
+    0.1287
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_bronchus",
+    "VH_M_carina",
+    "VH_M_hilum_L",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_hilum_upper_L",
+    "VH_M_hilum_upper_R",
+    "VH_M_left_anterior_basal_bronchus",
+    "VH_M_left_anterior_bronchus",
+    "VH_M_left_apical_bronchus",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_lateral_basal_bronchus",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_lingula_inferior_bronchus",
+    "VH_M_left_lingula_superior_bronchus",
+    "VH_M_left_lingular_bronchus",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_medial_basal_bronchus",
+    "VH_M_left_posterior_basal_bronchus",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchus",
+    "VH_M_left_superior_lobar_bronchus",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_pulmonary_vein_L_inf",
+    "VH_M_pulmonary_vein_R_inf",
+    "VH_M_pulmonary_vein_R_sup",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_anterior_bronchus",
+    "VH_M_right_apical_bronchus",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lateral_basal_bronchus",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_lateral_bronchus",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_main_bronchus",
+    "VH_M_right_medial_basal_bronchus",
+    "VH_M_right_medial_bronchus",
+    "VH_M_right_middle_lobar_bronchus",
+    "VH_M_right_posterior_basal",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchus",
+    "VH_M_right_superior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchus",
+    "VH_M_right_superior_lobar_bronchus",
+    "VH_M_trachea",
+    "VH_M_tracheal_cartilage"
+   ]
+  },
+  "VH_M_bronchus": {
+   "name": "VH_M_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "bronchus",
+    "id": "UBERON:0002185"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002185",
+    "via": "hra-crosswalk",
+    "label": "bronchus",
+    "definition": "The upper conducting airways of the lung; these airways arise from the terminus of the trachea.",
+    "partOf": [
+     {
+      "id": "UBERON:0007196",
+      "label": "tracheobronchial tree"
+     }
+    ]
+   },
+   "center": [
+    -0.0297,
+    0.4798,
+    -0.0403
+   ],
+   "size": [
+    0.028,
+    0.0259,
+    0.0236
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_right_lower_lobar_bronchus"
    ]
   },
   "VH_M_cardiac_artery": {
@@ -551,7 +886,18 @@
    "isMesh": false,
    "crosswalk": null,
    "override": null,
-   "uberon": null,
+   "uberon": {
+    "id": "UBERON:0004151",
+    "via": "uberon-label",
+    "label": "cardiac chamber",
+    "definition": "A cardiac chamber surrounds an enclosed cavity within the heart.",
+    "partOf": [
+     {
+      "id": "UBERON:0000948",
+      "label": "heart"
+     }
+    ]
+   },
    "center": [
     0.0187,
     0.4761,
@@ -607,6 +953,179 @@
     0.0945
    ]
   },
+  "VH_M_carina": {
+   "name": "VH_M_carina",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_cartilage_of_tracheobronchial_tree",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Carina of trachea",
+    "id": "FMA:7465"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0006679",
+    "via": "uberon-xref:FMA:7465",
+    "label": "carina of trachea",
+    "definition": "A cartilaginous ridge within the trachea that runs anteroposteriorly between the two primary bronchi at the site of the tracheal bifurcation at the lower end of the trachea.",
+    "partOf": [
+     {
+      "id": "UBERON:0003126",
+      "label": "trachea"
+     }
+    ]
+   },
+   "center": [
+    -0.0055,
+    0.5416,
+    -0.004
+   ],
+   "size": [
+    0.0276,
+    0.0148,
+    0.0164
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_bronchial_cartilage",
+    "VH_M_left_main_bronchus",
+    "VH_M_right_main_bronchus",
+    "VH_M_trachea"
+   ]
+  },
+  "VH_M_cartilage_of_tracheobronchial_tree": {
+   "name": "VH_M_cartilage_of_tracheobronchial_tree",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tracheobronchial_tree",
+   "children": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_carina",
+    "VH_M_cricoid_cartilage",
+    "VH_M_epiglottic_cartilage",
+    "VH_M_thyroid_cartilage",
+    "VH_M_arytenoid_cartilage",
+    "VH_M_corniculate_cartilage",
+    "VH_M_tracheal_cartilage"
+   ],
+   "isMesh": false,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0072,
+    0.5612,
+    -0.0081
+   ],
+   "size": [
+    0.2202,
+    0.278,
+    0.1369
+   ]
+  },
+  "VH_M_corniculate_cartilage": {
+   "name": "VH_M_corniculate_cartilage",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_cartilage_of_tracheobronchial_tree",
+   "children": [
+    "VH_M_corniculate_cartilage_L",
+    "VH_M_corniculate_cartilage_R"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "Corniculate cartilage",
+    "id": "FMA:55110"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001741",
+    "via": "uberon-xref:FMA:55110",
+    "label": "corniculate cartilage",
+    "definition": "The corniculate cartilages (cartilages of Santorini) are two small conical nodules consisting of yellow elastic cartilage, which articulate with the summits of the arytenoid cartilages and serve to prolong them posteriorly and medially. They are situated in the posterior parts of the aryepiglottic folds of mucous membrane, and are sometimes fused with the arytenoid cartilages. [WP,unvetted].",
+    "partOf": [
+     {
+      "id": "UBERON:0001737",
+      "label": "larynx"
+     },
+     {
+      "id": "UBERON:0008895",
+      "label": "splanchnocranium"
+     }
+    ]
+   },
+   "center": [
+    -0.0014,
+    0.6665,
+    0.0302
+   ],
+   "size": [
+    0.0145,
+    0.0033,
+    0.0057
+   ]
+  },
+  "VH_M_corniculate_cartilage_L": {
+   "name": "VH_M_corniculate_cartilage_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_corniculate_cartilage",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left corniculate cartilage",
+    "id": "FMA:55116"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0033,
+    0.6665,
+    0.0296
+   ],
+   "size": [
+    0.0051,
+    0.0033,
+    0.0044
+   ],
+   "neighbors": [
+    "VH_M_arytenoid_cartilage_L"
+   ]
+  },
+  "VH_M_corniculate_cartilage_R": {
+   "name": "VH_M_corniculate_cartilage_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_corniculate_cartilage",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right corniculate cartilage",
+    "id": "FMA:55115"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.006,
+    0.6666,
+    0.0304
+   ],
+   "size": [
+    0.0053,
+    0.0031,
+    0.0054
+   ],
+   "neighbors": [
+    "VH_M_arytenoid_cartilage_R"
+   ]
+  },
   "VH_M_coronary_sinus": {
    "name": "VH_M_coronary_sinus",
    "model": "heart-vessels.glb",
@@ -651,7 +1170,10 @@
     "VH_M_great_cardiac_vein",
     "VH_M_heart_left_ventricle",
     "VH_M_left_cardiac_atrium",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
     "VH_M_left_marginal_branch",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
     "VH_M_middle_cardiac_vein",
     "VH_M_mitral_valve",
     "VH_M_oblique_vein_of_left_atrium",
@@ -659,6 +1181,44 @@
     "VH_M_right_cardiac_atrium",
     "VH_M_right_coronary_artery",
     "VH_M_small_cardiac_vein"
+   ]
+  },
+  "VH_M_cricoid_cartilage": {
+   "name": "VH_M_cricoid_cartilage",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_cartilage_of_tracheobronchial_tree",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Cricoid cartilage",
+    "id": "FMA:9615"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002375",
+    "via": "uberon-xref:FMA:9615",
+    "label": "cricoid cartilage",
+    "definition": "A cartilaginous ring that provides support for the arytenoid cartilages and forms the caudal part of the larynx.",
+    "partOf": []
+   },
+   "center": [
+    -0.0016,
+    0.6412,
+    0.0374
+   ],
+   "size": [
+    0.0294,
+    0.0274,
+    0.0271
+   ],
+   "neighbors": [
+    "VH_M_arytenoid_cartilage_L",
+    "VH_M_arytenoid_cartilage_R",
+    "VH_M_thyroid_cartilage",
+    "VH_M_trachea",
+    "VH_M_tracheal_cartilage"
    ]
   },
   "VH_M_descending_aorta": {
@@ -745,7 +1305,10 @@
    ],
    "neighbors": [
     "VH_M_aortic_arch",
-    "VH_M_descending_aorta_b"
+    "VH_M_descending_aorta_b",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment"
    ]
   },
   "VH_M_descending_aorta_b": {
@@ -856,6 +1419,43 @@
     "VH_M_mitral_valve",
     "VH_M_posterior_vein_of_left_ventricle"
    ]
+  },
+  "VH_M_epiglottic_cartilage": {
+   "name": "VH_M_epiglottic_cartilage",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_cartilage_of_tracheobronchial_tree",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Epiglottic cartilage",
+    "id": "FMA:55112"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001742",
+    "via": "uberon-xref:FMA:55112",
+    "label": "epiglottic cartilage",
+    "definition": "The most superior of the laryngeal cartilages, which is found at the root of the tongue and folds back over the entrance to the larynx during swallowing.",
+    "partOf": [
+     {
+      "id": "UBERON:0000388",
+      "label": "epiglottis"
+     }
+    ]
+   },
+   "center": [
+    -0.0035,
+    0.6826,
+    0.0373
+   ],
+   "size": [
+    0.0263,
+    0.0352,
+    0.0195
+   ],
+   "neighbors": []
   },
   "VH_M_great_cardiac_vein": {
    "name": "VH_M_great_cardiac_vein",
@@ -979,7 +1579,10 @@
     "VH_M_left_anterior_descending_artery",
     "VH_M_left_cardiac_atrium",
     "VH_M_left_coronary_artery",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
     "VH_M_left_marginal_branch",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
     "VH_M_middle_cardiac_vein",
     "VH_M_mitral_valve",
     "VH_M_posterior_vein_of_left_ventricle",
@@ -1027,6 +1630,7 @@
     "VH_M_great_cardiac_vein",
     "VH_M_heart_left_ventricle",
     "VH_M_interventricular_septum",
+    "VH_M_left_anterior_bronchopulmonary_segment",
     "VH_M_left_anterior_descending_artery",
     "VH_M_left_cardiac_atrium",
     "VH_M_middle_cardiac_vein",
@@ -1078,6 +1682,417 @@
     0.0653,
     0.0838,
     0.068
+   ]
+  },
+  "VH_M_hilum_L": {
+   "name": "VH_M_hilum_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left lung hilus",
+    "id": "UBERON:0004887"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004887",
+    "via": "hra-crosswalk",
+    "label": "left lung hilus",
+    "definition": "A lung hilus that is part of the left lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002168",
+      "label": "left lung"
+     }
+    ]
+   },
+   "center": [
+    0.0484,
+    0.5089,
+    -0.014
+   ],
+   "size": [
+    0.041,
+    0.0753,
+    0.0664
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchus",
+    "VH_M_left_anterior_bronchopulmonary_segment",
+    "VH_M_left_anterior_bronchus",
+    "VH_M_left_apical_bronchopulmonary_segment",
+    "VH_M_left_apical_bronchus",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_lateral_basal_bronchus",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_lingular_bronchus",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchus",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+    "VH_M_left_posterior_basal_bronchus",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchus",
+    "VH_M_left_superior_lobar_bronchus",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_vein_L_inf",
+    "VH_M_pulmonary_vein_L_sup"
+   ]
+  },
+  "VH_M_hilum_R": {
+   "name": "VH_M_hilum_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right lung hilus",
+    "id": "UBERON:0004888"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004888",
+    "via": "hra-crosswalk",
+    "label": "right lung hilus",
+    "definition": "A lung hilus that is part of the right lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002167",
+      "label": "right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0389,
+    0.504,
+    -0.0141
+   ],
+   "size": [
+    0.0501,
+    0.0868,
+    0.0656
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_bronchus",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_pulmonary_vein_R_inf",
+    "VH_M_pulmonary_vein_R_sup",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_anterior_bronchus",
+    "VH_M_right_apical_bronchopulmonary_segment",
+    "VH_M_right_apical_bronchus",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lateral_basal_bronchus",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_lateral_bronchus",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_main_bronchus",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchus",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchus",
+    "VH_M_right_middle_lobar_bronchus",
+    "VH_M_right_posterior_basal",
+    "VH_M_right_posterior_basal_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchus",
+    "VH_M_right_superior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchus",
+    "VH_M_right_superior_lobar_bronchus",
+    "VH_M_superior_vena_cava"
+   ]
+  },
+  "VH_M_hilum_lower_L": {
+   "name": "VH_M_hilum_lower_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left lung hilus",
+    "id": "UBERON:0004887"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004887",
+    "via": "hra-crosswalk",
+    "label": "left lung hilus",
+    "definition": "A lung hilus that is part of the left lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002168",
+      "label": "left lung"
+     }
+    ]
+   },
+   "center": [
+    0.0476,
+    0.5055,
+    -0.0294
+   ],
+   "size": [
+    0.0393,
+    0.0686,
+    0.0358
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchus",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_lateral_basal_bronchus",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchus",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+    "VH_M_left_posterior_basal_bronchus",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchus",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_vein_L_inf"
+   ]
+  },
+  "VH_M_hilum_lower_R": {
+   "name": "VH_M_hilum_lower_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right lung hilus",
+    "id": "UBERON:0004888"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004888",
+    "via": "hra-crosswalk",
+    "label": "right lung hilus",
+    "definition": "A lung hilus that is part of the right lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002167",
+      "label": "right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0389,
+    0.4988,
+    -0.0254
+   ],
+   "size": [
+    0.0501,
+    0.0763,
+    0.0429
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_bronchus",
+    "VH_M_hilum_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_pulmonary_vein_R_inf",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lateral_basal_bronchus",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_main_bronchus",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchus",
+    "VH_M_right_posterior_basal",
+    "VH_M_right_posterior_basal_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchus",
+    "VH_M_right_superior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchus",
+    "VH_M_right_superior_lobar_bronchus"
+   ]
+  },
+  "VH_M_hilum_middle_R": {
+   "name": "VH_M_hilum_middle_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_middle_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right lung hilus",
+    "id": "UBERON:0004888"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004888",
+    "via": "hra-crosswalk",
+    "label": "right lung hilus",
+    "definition": "A lung hilus that is part of the right lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002167",
+      "label": "right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.05,
+    0.4957,
+    0.0009
+   ],
+   "size": [
+    0.0226,
+    0.021,
+    0.0356
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_pulmonary_vein_R_sup",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_lateral_bronchus",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchus",
+    "VH_M_right_middle_lobar_bronchus",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_hilum_upper_L": {
+   "name": "VH_M_hilum_upper_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left lung hilus",
+    "id": "UBERON:0004887"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004887",
+    "via": "hra-crosswalk",
+    "label": "left lung hilus",
+    "definition": "A lung hilus that is part of the left lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002168",
+      "label": "left lung"
+     }
+    ]
+   },
+   "center": [
+    0.0497,
+    0.513,
+    -0.0053
+   ],
+   "size": [
+    0.0384,
+    0.067,
+    0.0489
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_left_anterior_basal_bronchus",
+    "VH_M_left_anterior_bronchopulmonary_segment",
+    "VH_M_left_anterior_bronchus",
+    "VH_M_left_apical_bronchopulmonary_segment",
+    "VH_M_left_apical_bronchus",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_lingular_bronchus",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchus",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_left_superior_lobar_bronchus",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_vein_L_inf",
+    "VH_M_pulmonary_vein_L_sup"
+   ]
+  },
+  "VH_M_hilum_upper_R": {
+   "name": "VH_M_hilum_upper_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right lung hilus",
+    "id": "UBERON:0004888"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004888",
+    "via": "hra-crosswalk",
+    "label": "right lung hilus",
+    "definition": "A lung hilus that is part of the right lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002167",
+      "label": "right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0417,
+    0.5255,
+    -0.0047
+   ],
+   "size": [
+    0.0334,
+    0.0437,
+    0.0453
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_anterior_bronchus",
+    "VH_M_right_apical_bronchopulmonary_segment",
+    "VH_M_right_apical_bronchus",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchus",
+    "VH_M_right_superior_bronchopulmonary_segment",
+    "VH_M_right_superior_lobar_bronchus",
+    "VH_M_superior_vena_cava"
    ]
   },
   "VH_M_inferior_vena_cava": {
@@ -1146,7 +2161,9 @@
    ],
    "neighbors": [
     "VH_M_inferior_vena_cava_b",
-    "VH_M_right_cardiac_atrium"
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_lateral_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchopulmonary_segment"
    ]
   },
   "VH_M_inferior_vena_cava_b": {
@@ -1230,6 +2247,144 @@
     "VH_M_tricuspid_valve"
    ]
   },
+  "VH_M_left_anterior_basal_bronchopulmonary_segment": {
+   "name": "VH_M_left_anterior_basal_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left anterior basal bronchopulmonary segment",
+    "id": "FMA:7378"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0835,
+    0.4697,
+    -0.0069
+   ],
+   "size": [
+    0.1018,
+    0.0934,
+    0.1086
+   ],
+   "neighbors": [
+    "VH_M_left_anterior_bronchopulmonary_segment",
+    "VH_M_left_lateral_basal_bronchopulmonary_segment",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_left_anterior_basal_bronchus": {
+   "name": "VH_M_left_anterior_basal_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left anterior basal segmental bronchus",
+    "id": "FMA:7506"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0868,
+    0.4724,
+    -0.0265
+   ],
+   "size": [
+    0.0623,
+    0.0432,
+    0.0449
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchus"
+   ]
+  },
+  "VH_M_left_anterior_bronchopulmonary_segment": {
+   "name": "VH_M_left_anterior_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left Anterior Bronchopulmonary Segment",
+    "id": "FMA:7373"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0658,
+    0.5356,
+    0.0152
+   ],
+   "size": [
+    0.1141,
+    0.084,
+    0.1331
+   ],
+   "neighbors": [
+    "VH_M_heart_right_ventricle",
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchopulmonary_segment",
+    "VH_M_left_apical_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_pulmonary_trunk"
+   ]
+  },
+  "VH_M_left_anterior_bronchus": {
+   "name": "VH_M_left_anterior_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left anterior segmental bronchus",
+    "id": "FMA:7428"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0712,
+    0.5354,
+    0.0213
+   ],
+   "size": [
+    0.0801,
+    0.0598,
+    0.0738
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_apical_bronchus",
+    "VH_M_left_lingular_bronchus",
+    "VH_M_left_superior_lobar_bronchus",
+    "VH_M_pulmonary_artery_L"
+   ]
+  },
   "VH_M_left_anterior_descending_artery": {
    "name": "VH_M_left_anterior_descending_artery",
    "model": "heart-vessels.glb",
@@ -1244,7 +2399,8 @@
    },
    "override": {
     "reason": "HRA crosswalk (v1.3-v2.0) maps this node to FMA:8636 'Anterior descending branch of left pulmonary artery'; the mesh is a coronary artery. Uberon UBERON:8600102 'left anterior descending artery' (xref FMA:3862) is the matching term. Reported upstream: docs/upstream/hubmap-crosswalk-lad-issue.md",
-    "displayLabel": "left anterior descending artery"
+    "displayLabel": "left anterior descending artery",
+    "crosswalkRejected": false
    },
    "uberon": {
     "id": "UBERON:8600102",
@@ -1276,6 +2432,73 @@
     "VH_M_heart_right_ventricle",
     "VH_M_interventricular_septum",
     "VH_M_left_coronary_artery"
+   ]
+  },
+  "VH_M_left_apical_bronchopulmonary_segment": {
+   "name": "VH_M_left_apical_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left apical bronchopulmonary segment",
+    "id": "FMA:7385"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.054,
+    0.5806,
+    -0.0078
+   ],
+   "size": [
+    0.0992,
+    0.0684,
+    0.0731
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_brachiocephalic_vein_L",
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_bronchopulmonary_segment",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_subclavian_artery_b"
+   ]
+  },
+  "VH_M_left_apical_bronchus": {
+   "name": "VH_M_left_apical_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left apical segmental bronchus",
+    "id": "FMA:7426"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0605,
+    0.5586,
+    -0.0179
+   ],
+   "size": [
+    0.032,
+    0.0729,
+    0.0352
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_bronchus",
+    "VH_M_left_superior_lobar_bronchus",
+    "VH_M_pulmonary_artery_L"
    ]
   },
   "VH_M_left_cardiac_atrium": {
@@ -1311,12 +2534,14 @@
    "neighbors": [
     "VH_M_aortic_valve",
     "VH_M_ascending_aorta",
+    "VH_M_bronchial_cartilage",
     "VH_M_coronary_sinus",
     "VH_M_diagonal_branch_of_left_anterior_descending_artery",
     "VH_M_great_cardiac_vein",
     "VH_M_heart_left_ventricle",
     "VH_M_heart_right_ventricle",
     "VH_M_interventricular_septum",
+    "VH_M_left_main_bronchus",
     "VH_M_left_marginal_branch",
     "VH_M_mitral_valve",
     "VH_M_oblique_vein_of_left_atrium",
@@ -1328,7 +2553,10 @@
     "VH_M_pulmonary_vein_R_inf",
     "VH_M_pulmonary_vein_R_sup",
     "VH_M_right_cardiac_atrium",
-    "VH_M_right_coronary_artery"
+    "VH_M_right_coronary_artery",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_middle_lobar_bronchus"
    ]
   },
   "VH_M_left_common_carotid_artery": {
@@ -1398,7 +2626,9 @@
    "neighbors": [
     "VH_M_aortic_arch",
     "VH_M_brachiocephalic_vein_L",
-    "VH_M_left_common_carotid_artery_b"
+    "VH_M_left_common_carotid_artery_b",
+    "VH_M_trachea",
+    "VH_M_tracheal_cartilage"
    ]
   },
   "VH_M_left_common_carotid_artery_b": {
@@ -1433,7 +2663,9 @@
    ],
    "neighbors": [
     "VH_M_brachiocephalic_vein_L",
-    "VH_M_left_common_carotid_artery_a"
+    "VH_M_left_common_carotid_artery_a",
+    "VH_M_trachea",
+    "VH_M_tracheal_cartilage"
    ]
   },
   "VH_M_left_coronary_artery": {
@@ -1474,6 +2706,336 @@
     "VH_M_left_anterior_descending_artery"
    ]
   },
+  "VH_M_left_inferior_lobar_bronchus": {
+   "name": "VH_M_left_inferior_lobar_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_lobar_bronchus_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "lobar bronchus of left lung lower lobe",
+    "id": "UBERON:0012066"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0012066",
+    "via": "hra-crosswalk",
+    "label": "lobar bronchus of left lung lower lobe",
+    "definition": "A lobar bronchus that is part of a lower lobe of left lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0008953",
+      "label": "lower lobe of left lung"
+     }
+    ]
+   },
+   "center": [
+    0.0498,
+    0.497,
+    -0.029
+   ],
+   "size": [
+    0.0294,
+    0.0319,
+    0.0303
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchus",
+    "VH_M_left_lateral_basal_bronchus",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_medial_basal_bronchus",
+    "VH_M_left_posterior_basal_bronchus",
+    "VH_M_left_superior_bronchus",
+    "VH_M_left_superior_lobar_bronchus",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_vein_L_inf"
+   ]
+  },
+  "VH_M_left_lateral_basal_bronchopulmonary_segment": {
+   "name": "VH_M_left_lateral_basal_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left Lateral Basal Bronchopulmonary Segment",
+    "id": "FMA:7379"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0938,
+    0.4537,
+    -0.0441
+   ],
+   "size": [
+    0.0764,
+    0.0907,
+    0.0819
+   ],
+   "neighbors": [
+    "VH_M_left_anterior_basal_bronchopulmonary_segment",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_left_lateral_basal_bronchus": {
+   "name": "VH_M_left_lateral_basal_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left lateral basal segmental bronchus",
+    "id": "FMA:7507"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0861,
+    0.4623,
+    -0.0435
+   ],
+   "size": [
+    0.0584,
+    0.0504,
+    0.0385
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_left_inferior_lobar_bronchus"
+   ]
+  },
+  "VH_M_left_lingula_inferior_bronchopulmonary_segment": {
+   "name": "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Inferior lingular bronchopulmonary segment",
+    "id": "FMA:7375"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0857,
+    0.452,
+    0.0391
+   ],
+   "size": [
+    0.091,
+    0.1066,
+    0.1153
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_coronary_sinus",
+    "VH_M_heart_left_ventricle",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchopulmonary_segment",
+    "VH_M_left_anterior_basal_bronchus",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_marginal_branch",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchus",
+    "VH_M_posterior_vein_of_left_ventricle"
+   ]
+  },
+  "VH_M_left_lingula_inferior_bronchus": {
+   "name": "VH_M_left_lingula_inferior_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Inferior lingular bronchus",
+    "id": "FMA:7431"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0846,
+    0.4734,
+    0.0217
+   ],
+   "size": [
+    0.0287,
+    0.0325,
+    0.0292
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_left_lingula_superior_bronchus",
+    "VH_M_left_lingular_bronchus"
+   ]
+  },
+  "VH_M_left_lingula_superior_bronchopulmonary_segment": {
+   "name": "VH_M_left_lingula_superior_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Superior lingular bronchopulmonary segment",
+    "id": "FMA:7374"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0696,
+    0.4798,
+    0.0231
+   ],
+   "size": [
+    0.1164,
+    0.0956,
+    0.1488
+   ],
+   "neighbors": [
+    "VH_M_heart_left_ventricle",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchopulmonary_segment",
+    "VH_M_left_anterior_bronchopulmonary_segment",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_pulmonary_vein_L_sup"
+   ]
+  },
+  "VH_M_left_lingula_superior_bronchus": {
+   "name": "VH_M_left_lingula_superior_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Superior lingular bronchus",
+    "id": "FMA:7430"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0767,
+    0.4884,
+    0.0297
+   ],
+   "size": [
+    0.0159,
+    0.0147,
+    0.0394
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_left_lingula_inferior_bronchus",
+    "VH_M_left_lingular_bronchus"
+   ]
+  },
+  "VH_M_left_lingular_bronchus": {
+   "name": "VH_M_left_lingular_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0644,
+    0.4992,
+    0.0035
+   ],
+   "size": [
+    0.0199,
+    0.022,
+    0.0201
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_bronchus",
+    "VH_M_left_lingula_inferior_bronchus",
+    "VH_M_left_lingula_superior_bronchus",
+    "VH_M_left_superior_lobar_bronchus"
+   ]
+  },
+  "VH_M_left_main_bronchus": {
+   "name": "VH_M_left_main_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left Main Bronchus",
+    "id": "UBERON:0002178"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002178",
+    "via": "hra-crosswalk",
+    "label": "left main bronchus",
+    "definition": "The main bronchus on the left side.",
+    "partOf": []
+   },
+   "center": [
+    0.0217,
+    0.5259,
+    -0.013
+   ],
+   "size": [
+    0.0516,
+    0.0442,
+    0.0256
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_bronchial_cartilage",
+    "VH_M_carina",
+    "VH_M_descending_aorta_a",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchus",
+    "VH_M_left_superior_lobar_bronchus",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_vein_L_inf",
+    "VH_M_right_main_bronchus",
+    "VH_M_trachea"
+   ]
+  },
   "VH_M_left_marginal_branch": {
    "name": "VH_M_left_marginal_branch",
    "model": "heart-vessels.glb",
@@ -1503,7 +3065,185 @@
     "VH_M_diagonal_branch_of_left_anterior_descending_artery",
     "VH_M_heart_left_ventricle",
     "VH_M_left_cardiac_atrium",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
     "VH_M_mitral_valve"
+   ]
+  },
+  "VH_M_left_medial_basal_bronchopulmonary_segment": {
+   "name": "VH_M_left_medial_basal_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left Medial Basal Bronchopulmonary Segment",
+    "id": "FMA:7377"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0797,
+    0.4756,
+    -0.0018
+   ],
+   "size": [
+    0.1013,
+    0.1018,
+    0.0984
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_heart_left_ventricle",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchopulmonary_segment",
+    "VH_M_left_anterior_bronchopulmonary_segment",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_left_medial_basal_bronchus": {
+   "name": "VH_M_left_medial_basal_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left medial basal segmental bronchus",
+    "id": "FMA:7505"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0756,
+    0.4688,
+    -0.0037
+   ],
+   "size": [
+    0.0815,
+    0.0474,
+    0.0528
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchus",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_left_posetrior_basal_bronchopulmonary_segment": {
+   "name": "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": null,
+   "override": {
+    "reason": "HRA crosswalk (v1.3) label/ID does not match the node: a bronchopulmonary segment mapped to 'Left posterior basal segmental bronchus' FMA:7508 (a bronchus, the same row as VH_M_left_posterior_basal_bronchus); node name also misspelt 'posetrior' upstream. The crosswalk ID is not used; display label taken from the node name. Reported upstream: docs/upstream/hubmap-crosswalk-lad-issue.md",
+    "displayLabel": "left posterior basal bronchopulmonary segment",
+    "crosswalkRejected": true
+   },
+   "uberon": null,
+   "center": [
+    0.0662,
+    0.4388,
+    -0.0492
+   ],
+   "size": [
+    0.1013,
+    0.0894,
+    0.0837
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_descending_aorta_a",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_left_anterior_basal_bronchopulmonary_segment",
+    "VH_M_left_lateral_basal_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_left_posterior_basal_bronchus": {
+   "name": "VH_M_left_posterior_basal_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left posterior basal segmental bronchus",
+    "id": "FMA:7508"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0586,
+    0.4535,
+    -0.0484
+   ],
+   "size": [
+    0.0578,
+    0.0715,
+    0.0606
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_left_inferior_lobar_bronchus"
+   ]
+  },
+  "VH_M_left_posterior_bronchopulmonary_segment": {
+   "name": "VH_M_left_posterior_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left posterior bronchopulmonary segment",
+    "id": "FMA:7386"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0575,
+    0.5605,
+    -0.0387
+   ],
+   "size": [
+    0.1061,
+    0.0852,
+    0.0634
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_bronchopulmonary_segment",
+    "VH_M_left_apical_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchus"
    ]
   },
   "VH_M_left_subclavian_artery": {
@@ -1572,7 +3312,8 @@
    ],
    "neighbors": [
     "VH_M_aortic_arch",
-    "VH_M_left_subclavian_artery_b"
+    "VH_M_left_subclavian_artery_b",
+    "VH_M_tracheal_cartilage"
    ]
   },
   "VH_M_left_subclavian_artery_b": {
@@ -1606,7 +3347,540 @@
     0.0086
    ],
    "neighbors": [
+    "VH_M_left_apical_bronchopulmonary_segment",
     "VH_M_left_subclavian_artery_a"
+   ]
+  },
+  "VH_M_left_superior_bronchopulmonary_segment": {
+   "name": "VH_M_left_superior_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left superior bronchopulmonary segment",
+    "id": "FMA:7376"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0558,
+    0.5111,
+    -0.0533
+   ],
+   "size": [
+    0.0965,
+    0.1099,
+    0.0752
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_bronchial_cartilage",
+    "VH_M_descending_aorta_a",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_basal_bronchopulmonary_segment",
+    "VH_M_left_lateral_basal_bronchopulmonary_segment",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchus",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_vein_L_inf"
+   ]
+  },
+  "VH_M_left_superior_bronchus": {
+   "name": "VH_M_left_superior_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left superior segmental bronchus",
+    "id": "FMA:7504"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0539,
+    0.5123,
+    -0.0419
+   ],
+   "size": [
+    0.0389,
+    0.0303,
+    0.0393
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_pulmonary_artery_L"
+   ]
+  },
+  "VH_M_left_superior_lobar_bronchus": {
+   "name": "VH_M_left_superior_lobar_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_lobar_bronchus_L",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "lobar bronchus of left lung upper lobe",
+    "id": "UBERON:0012065"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0012065",
+    "via": "hra-crosswalk",
+    "label": "lobar bronchus of left lung upper lobe",
+    "definition": "A lobar bronchus that is part of a upper lobe of left lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0008952",
+      "label": "upper lobe of left lung"
+     }
+    ]
+   },
+   "center": [
+    0.047,
+    0.5153,
+    -0.0076
+   ],
+   "size": [
+    0.0237,
+    0.0186,
+    0.0165
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_bronchus",
+    "VH_M_left_apical_bronchus",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_lingular_bronchus",
+    "VH_M_left_main_bronchus",
+    "VH_M_pulmonary_artery_L"
+   ]
+  },
+  "VH_M_lobar_bronchi_R": {
+   "name": "VH_M_lobar_bronchi_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_bronchi_R",
+   "children": [
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_middle_lobar_bronchus",
+    "VH_M_right_superior_lobar_bronchus"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "lobar bronchus of right lung",
+    "id": "UBERON:0003404"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0003404",
+    "via": "hra-crosswalk",
+    "label": "lobar bronchus of right lung",
+    "definition": "A lobar bronchus that is part of a right lung [Automatically generated definition].",
+    "partOf": [
+     {
+      "id": "UBERON:0002167",
+      "label": "right lung"
+     },
+     {
+      "id": "UBERON:0006518",
+      "label": "right lung lobe"
+     }
+    ]
+   },
+   "center": [
+    -0.0353,
+    0.515,
+    -0.006
+   ],
+   "size": [
+    0.0438,
+    0.0543,
+    0.03
+   ]
+  },
+  "VH_M_lobar_bronchus_L": {
+   "name": "VH_M_lobar_bronchus_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_bronchi_L",
+   "children": [
+    "VH_M_left_superior_lobar_bronchus",
+    "VH_M_left_inferior_lobar_bronchus"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "lobar bronchus of left lung",
+    "id": "UBERON:0003405"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0003405",
+    "via": "hra-crosswalk",
+    "label": "lobar bronchus of left lung",
+    "definition": "A lobar bronchus that is part of a left lung [Automatically generated definition].",
+    "partOf": [
+     {
+      "id": "UBERON:0002168",
+      "label": "left lung"
+     },
+     {
+      "id": "UBERON:0008951",
+      "label": "left lung lobe"
+     }
+    ]
+   },
+   "center": [
+    0.0498,
+    0.5029,
+    -0.0217
+   ],
+   "size": [
+    0.0294,
+    0.0436,
+    0.0448
+   ]
+  },
+  "VH_M_lungs": {
+   "name": "VH_M_lungs",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_respiratory_system",
+   "children": [
+    "VH_M_lungs_L",
+    "VH_M_lungs_R"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "lung",
+    "id": "UBERON:0002048"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002048",
+    "via": "hra-crosswalk",
+    "label": "lung",
+    "definition": "Respiration organ that develops as an outpocketing of the esophagus.",
+    "partOf": [
+     {
+      "id": "UBERON:0000170",
+      "label": "pair of lungs"
+     }
+    ]
+   },
+   "center": [
+    0.0047,
+    0.5002,
+    0.0026
+   ],
+   "size": [
+    0.2594,
+    0.2291,
+    0.1897
+   ]
+  },
+  "VH_M_lungs_L": {
+   "name": "VH_M_lungs_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs",
+   "children": [
+    "VH_M_hilum_L",
+    "VH_M_lungs_L_upper_lobe",
+    "VH_M_lungs_L_lower_lobe"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "left lung",
+    "id": "UBERON:0002168"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002168",
+    "via": "hra-crosswalk",
+    "label": "left lung",
+    "definition": "Lung which consists of the left upper lobe and left lower lobe.[FMA].",
+    "partOf": []
+   },
+   "center": [
+    0.0694,
+    0.5044,
+    0.0032
+   ],
+   "size": [
+    0.13,
+    0.2207,
+    0.1885
+   ]
+  },
+  "VH_M_lungs_L_lower_lobe": {
+   "name": "VH_M_lungs_L_lower_lobe",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L",
+   "children": [
+    "VH_M_hilum_lower_L",
+    "VH_M_left_anterior_basal_bronchopulmonary_segment",
+    "VH_M_left_lateral_basal_bronchopulmonary_segment",
+    "VH_M_left_medial_basal_bronchopulmonary_segment",
+    "VH_M_left_posetrior_basal_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchopulmonary_segment"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "Lower Lobe of Left Lung",
+    "id": "UBERON:0008953"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0008953",
+    "via": "hra-crosswalk",
+    "label": "lower lobe of left lung",
+    "definition": "A lower lobe of lung that is part of a left lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002168",
+      "label": "left lung"
+     }
+    ]
+   },
+   "center": [
+    0.071,
+    0.48,
+    -0.0218
+   ],
+   "size": [
+    0.1269,
+    0.1719,
+    0.1384
+   ]
+  },
+  "VH_M_lungs_L_upper_lobe": {
+   "name": "VH_M_lungs_L_upper_lobe",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_L",
+   "children": [
+    "VH_M_hilum_upper_L",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
+    "VH_M_left_posterior_bronchopulmonary_segment",
+    "VH_M_left_anterior_bronchopulmonary_segment",
+    "VH_M_left_apical_bronchopulmonary_segment",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "Upper Lobe of Left Lung",
+    "id": "UBERON:0008952"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0008952",
+    "via": "hra-crosswalk",
+    "label": "upper lobe of left lung",
+    "definition": "The lobe of the left lung that is closest to the head.",
+    "partOf": [
+     {
+      "id": "UBERON:0002168",
+      "label": "left lung"
+     }
+    ]
+   },
+   "center": [
+    0.0678,
+    0.5068,
+    0.0136
+   ],
+   "size": [
+    0.1267,
+    0.216,
+    0.1678
+   ]
+  },
+  "VH_M_lungs_R": {
+   "name": "VH_M_lungs_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs",
+   "children": [
+    "VH_M_hilum_R",
+    "VH_M_lungs_R_middle_lobe",
+    "VH_M_lungs_R_lower_lobe",
+    "VH_M_lungs_R_upper_lobe"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "right lung",
+    "id": "UBERON:0002167"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002167",
+    "via": "hra-crosswalk",
+    "label": "right lung",
+    "definition": "Lung which consists of the right upper lobe, middle lobe and right lower lobe.[FMA].",
+    "partOf": []
+   },
+   "center": [
+    -0.0632,
+    0.4994,
+    0.0025
+   ],
+   "size": [
+    0.1236,
+    0.2275,
+    0.1895
+   ]
+  },
+  "VH_M_lungs_R_lower_lobe": {
+   "name": "VH_M_lungs_R_lower_lobe",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R",
+   "children": [
+    "VH_M_hilum_lower_R",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_lateral_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_posterior_basal_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchopulmonary_segment"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "Lower Lobe of Right Lung",
+    "id": "UBERON:0002171"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002171",
+    "via": "hra-crosswalk",
+    "label": "lower lobe of right lung",
+    "definition": "The lobe of the right lung that is furtherst from the head.",
+    "partOf": [
+     {
+      "id": "UBERON:0002167",
+      "label": "right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0632,
+    0.4676,
+    -0.0216
+   ],
+   "size": [
+    0.1236,
+    0.1639,
+    0.1413
+   ]
+  },
+  "VH_M_lungs_R_middle_lobe": {
+   "name": "VH_M_lungs_R_middle_lobe",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R",
+   "children": [
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_hilum_middle_R"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "Middle Lobe of Right Lung",
+    "id": "UBERON:0002174"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002174",
+    "via": "hra-crosswalk",
+    "label": "middle lobe of right lung",
+    "definition": "In the human, the right lung is divided into three lobes (as opposed to two lobes on the left), superior, middle, and inferior, by two interlobular fissures: [WP,unvetted].",
+    "partOf": [
+     {
+      "id": "UBERON:0002167",
+      "label": "right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0633,
+    0.4617,
+    0.0346
+   ],
+   "size": [
+    0.115,
+    0.0964,
+    0.1255
+   ]
+  },
+  "VH_M_lungs_R_upper_lobe": {
+   "name": "VH_M_lungs_R_upper_lobe",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R",
+   "children": [
+    "VH_M_right_apical_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_hilum_upper_R"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "Upper Lobe of Right Lung",
+    "id": "UBERON:0002170"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002170",
+    "via": "hra-crosswalk",
+    "label": "upper lobe of right lung",
+    "definition": "The lobe of the right lung that is closest to the head.",
+    "partOf": [
+     {
+      "id": "UBERON:0002167",
+      "label": "right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0608,
+    0.5499,
+    0.0025
+   ],
+   "size": [
+    0.1124,
+    0.1264,
+    0.1533
    ]
   },
   "VH_M_middle_cardiac_vein": {
@@ -1939,7 +4213,8 @@
    "neighbors": [
     "VH_M_coronary_sinus",
     "VH_M_diagonal_branch_of_left_anterior_descending_artery",
-    "VH_M_heart_left_ventricle"
+    "VH_M_heart_left_ventricle",
+    "VH_M_left_lingula_inferior_bronchopulmonary_segment"
    ]
   },
   "VH_M_pulmonary_artery": {
@@ -2013,7 +4288,18 @@
     0.046
    ],
    "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_anterior_bronchus",
+    "VH_M_left_apical_bronchus",
     "VH_M_left_cardiac_atrium",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_superior_bronchopulmonary_segment",
+    "VH_M_left_superior_bronchus",
+    "VH_M_left_superior_lobar_bronchus",
     "VH_M_pulmonary_trunk",
     "VH_M_pulmonary_vein_L_sup"
    ]
@@ -2051,9 +4337,12 @@
    "neighbors": [
     "VH_M_aortic_arch",
     "VH_M_ascending_aorta",
+    "VH_M_bronchial_cartilage",
     "VH_M_left_cardiac_atrium",
     "VH_M_pulmonary_trunk",
     "VH_M_right_cardiac_atrium",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_main_bronchus",
     "VH_M_superior_vena_cava"
    ]
   },
@@ -2097,6 +4386,7 @@
     "VH_M_aortic_valve",
     "VH_M_ascending_aorta",
     "VH_M_heart_right_ventricle",
+    "VH_M_left_anterior_bronchopulmonary_segment",
     "VH_M_left_cardiac_atrium",
     "VH_M_pulmonary_artery_L",
     "VH_M_pulmonary_artery_R",
@@ -2218,7 +4508,14 @@
     0.0181
    ],
    "neighbors": [
-    "VH_M_left_cardiac_atrium"
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_L",
+    "VH_M_hilum_lower_L",
+    "VH_M_hilum_upper_L",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_inferior_lobar_bronchus",
+    "VH_M_left_main_bronchus",
+    "VH_M_left_superior_bronchopulmonary_segment"
    ]
   },
   "VH_M_pulmonary_vein_L_sup": {
@@ -2257,7 +4554,10 @@
     0.014
    ],
    "neighbors": [
+    "VH_M_hilum_L",
+    "VH_M_hilum_upper_L",
     "VH_M_left_cardiac_atrium",
+    "VH_M_left_lingula_superior_bronchopulmonary_segment",
     "VH_M_pulmonary_artery_L"
    ]
   },
@@ -2297,7 +4597,13 @@
     0.0129
    ],
    "neighbors": [
-    "VH_M_left_cardiac_atrium"
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_middle_lobar_bronchus"
    ]
   },
   "VH_M_pulmonary_vein_R_sup": {
@@ -2336,8 +4642,256 @@
     0.0127
    ],
    "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_middle_R",
     "VH_M_left_cardiac_atrium",
-    "VH_M_right_cardiac_atrium"
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_right_middle_lobar_bronchus"
+   ]
+  },
+  "VH_M_respiratory_system": {
+   "name": "VH_M_respiratory_system",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": null,
+   "children": [
+    "VH_M_lungs",
+    "VH_M_tracheobronchial_tree"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "respiratory system",
+    "id": "UBERON:0001004"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001004",
+    "via": "hra-crosswalk",
+    "label": "respiratory system",
+    "definition": "Functional system which consists of structures involved in respiration.",
+    "partOf": []
+   },
+   "center": [
+    0.0047,
+    0.5429,
+    0.0026
+   ],
+   "size": [
+    0.2594,
+    0.3146,
+    0.1897
+   ]
+  },
+  "VH_M_right_anterior_basal_bronchopulmonary_segment": {
+   "name": "VH_M_right_anterior_basal_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right anterior basal bronchopulmonary segment",
+    "id": "FMA:7364"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0807,
+    0.4651,
+    -0.0004
+   ],
+   "size": [
+    0.0886,
+    0.08,
+    0.0989
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_lateral_basal_bronchopulmonary_segment",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_right_anterior_basal_bronchus": {
+   "name": "VH_M_right_anterior_basal_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": null,
+   "override": {
+    "reason": "HRA crosswalk (v1.3) label/ID does not match the node: node 'right_anterior_basal_bronchus' is mapped to 'Right posterior segmental bronchus' FMA:7399, the same row as VH_M_right_posterior_bronchus. The crosswalk ID is not used; display label taken from the node name. Reported upstream: docs/upstream/hubmap-crosswalk-lad-issue.md",
+    "displayLabel": "right anterior basal segmental bronchus",
+    "crosswalkRejected": true
+   },
+   "uberon": null,
+   "center": [
+    -0.0729,
+    0.4758,
+    -0.0136
+   ],
+   "size": [
+    0.0577,
+    0.0337,
+    0.0378
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_lateral_basal_bronchus",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_posterior_basal"
+   ]
+  },
+  "VH_M_right_anterior_bronchopulmonary_segment": {
+   "name": "VH_M_right_anterior_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Anterior Bronchopulmonary Segment",
+    "id": "FMA:7359"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0608,
+    0.5422,
+    0.033
+   ],
+   "size": [
+    0.1124,
+    0.1111,
+    0.0923
+   ],
+   "neighbors": [
+    "VH_M_brachiocephalic_vein_R",
+    "VH_M_hilum_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_apical_bronchopulmonary_segment",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_superior_vena_cava"
+   ]
+  },
+  "VH_M_right_anterior_bronchus": {
+   "name": "VH_M_right_anterior_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right anterior segmental bronchus",
+    "id": "FMA:7400"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0689,
+    0.5313,
+    0.0277
+   ],
+   "size": [
+    0.0766,
+    0.0422,
+    0.0685
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_superior_lobar_bronchus"
+   ]
+  },
+  "VH_M_right_apical_bronchopulmonary_segment": {
+   "name": "VH_M_right_apical_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Apical Bronchopulmonary Segment",
+    "id": "FMA:7338"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0389,
+    0.5765,
+    -0.0063
+   ],
+   "size": [
+    0.0554,
+    0.0732,
+    0.0558
+   ],
+   "neighbors": [
+    "VH_M_brachiocephalic_vein_R",
+    "VH_M_hilum_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_superior_vena_cava",
+    "VH_M_trachea",
+    "VH_M_tracheal_cartilage"
+   ]
+  },
+  "VH_M_right_apical_bronchus": {
+   "name": "VH_M_right_apical_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": null,
+   "override": {
+    "reason": "HRA crosswalk (v1.3) label/ID does not match the node: node 'right_apical_bronchus' is mapped to 'Right superior segmental bronchus' FMA:7416, the same row as VH_M_right_superior_bronchus. The crosswalk ID is not used; display label taken from the node name. Reported upstream: docs/upstream/hubmap-crosswalk-lad-issue.md",
+    "displayLabel": "right apical segmental bronchus",
+    "crosswalkRejected": true
+   },
+   "uberon": null,
+   "center": [
+    -0.0508,
+    0.5665,
+    -0.0044
+   ],
+   "size": [
+    0.0575,
+    0.0557,
+    0.0411
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_superior_lobar_bronchus"
    ]
   },
   "VH_M_right_cardiac_atrium": {
@@ -2383,7 +4937,10 @@
     "VH_M_mitral_valve",
     "VH_M_pulmonary_artery_R",
     "VH_M_pulmonary_vein_R_sup",
+    "VH_M_right_anterior_bronchopulmonary_segment",
     "VH_M_right_coronary_artery",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchopulmonary_segment",
     "VH_M_small_cardiac_vein",
     "VH_M_superior_vena_cava",
     "VH_M_tricuspid_valve"
@@ -2435,6 +4992,263 @@
     "VH_M_tricuspid_valve"
    ]
   },
+  "VH_M_right_intermediate_bronchus": {
+   "name": "VH_M_right_intermediate_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_lobar_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Interlobar bronchus",
+    "id": "FMA:7415"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0275,
+    0.5141,
+    -0.0128
+   ],
+   "size": [
+    0.0281,
+    0.0354,
+    0.0165
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_pulmonary_vein_R_inf",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_main_bronchus",
+    "VH_M_right_middle_lobar_bronchus",
+    "VH_M_right_superior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchus",
+    "VH_M_right_superior_lobar_bronchus"
+   ]
+  },
+  "VH_M_right_lateral_basal_bronchopulmonary_segment": {
+   "name": "VH_M_right_lateral_basal_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Lateral Basal Bronchopulmonary Segment",
+    "id": "FMA:7363"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.074,
+    0.4484,
+    -0.0445
+   ],
+   "size": [
+    0.101,
+    0.0861,
+    0.0727
+   ],
+   "neighbors": [
+    "VH_M_inferior_vena_cava_a",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_posterior_basal_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_right_lateral_basal_bronchus": {
+   "name": "VH_M_right_lateral_basal_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right lateral basal segmental bronchus",
+    "id": "FMA:7419"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0791,
+    0.4633,
+    -0.0515
+   ],
+   "size": [
+    0.0618,
+    0.0561,
+    0.0489
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_posterior_basal"
+   ]
+  },
+  "VH_M_right_lateral_bronchopulmonary_segment": {
+   "name": "VH_M_right_lateral_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_middle_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Lateral Bronchopulmonary Segment",
+    "id": "FMA:7361"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0804,
+    0.4722,
+    0.0181
+   ],
+   "size": [
+    0.0809,
+    0.0754,
+    0.0926
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_right_lateral_bronchus": {
+   "name": "VH_M_right_lateral_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Lateral segmental bronchus",
+    "id": "FMA:7402"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0697,
+    0.4906,
+    0.0142
+   ],
+   "size": [
+    0.0287,
+    0.0127,
+    0.0268
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_right_middle_lobar_bronchus"
+   ]
+  },
+  "VH_M_right_lower_lobar_bronchus": {
+   "name": "VH_M_right_lower_lobar_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right inferior lobar bronchus",
+    "id": "FMA:7404"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0413,
+    0.4936,
+    -0.0187
+   ],
+   "size": [
+    0.022,
+    0.0236,
+    0.024
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_bronchus",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_pulmonary_vein_R_inf",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lateral_basal_bronchus",
+    "VH_M_right_medial_basal_bronchus",
+    "VH_M_right_middle_lobar_bronchus",
+    "VH_M_right_posterior_basal",
+    "VH_M_right_superior_bronchus"
+   ]
+  },
+  "VH_M_right_main_bronchus": {
+   "name": "VH_M_right_main_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Main Bronchus",
+    "id": "UBERON:0002177"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002177",
+    "via": "hra-crosswalk",
+    "label": "right main bronchus",
+    "definition": "The main bronchus on the right side.",
+    "partOf": []
+   },
+   "center": [
+    -0.0168,
+    0.5359,
+    -0.0076
+   ],
+   "size": [
+    0.0207,
+    0.0241,
+    0.0185
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_carina",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_left_main_bronchus",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_superior_bronchopulmonary_segment",
+    "VH_M_right_superior_lobar_bronchus",
+    "VH_M_trachea"
+   ]
+  },
   "VH_M_right_marginal_artery": {
    "name": "VH_M_right_marginal_artery",
    "model": "heart-vessels.glb",
@@ -2476,6 +5290,325 @@
     "VH_M_small_cardiac_vein"
    ]
   },
+  "VH_M_right_medial_basal_bronchopulmonary_segment": {
+   "name": "VH_M_right_medial_basal_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Medial Basal Bronchopulmonary Segment",
+    "id": "FMA:7365"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0357,
+    0.447,
+    0.0029
+   ],
+   "size": [
+    0.0686,
+    0.076,
+    0.0556
+   ],
+   "neighbors": [
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_inferior_vena_cava_a",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_lateral_basal_bronchopulmonary_segment",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_medial_bronchopulmonary_segment",
+    "VH_M_right_posterior_basal_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_right_medial_basal_bronchus": {
+   "name": "VH_M_right_medial_basal_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right medial basal segmental bronchus",
+    "id": "FMA:7417"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0347,
+    0.4554,
+    -0.0218
+   ],
+   "size": [
+    0.039,
+    0.0605,
+    0.0347
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_right_lower_lobar_bronchus"
+   ]
+  },
+  "VH_M_right_medial_bronchopulmonary_segment": {
+   "name": "VH_M_right_medial_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_middle_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Medial Bronchopulmonary Segment",
+    "id": "FMA:7360"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0591,
+    0.4592,
+    0.0534
+   ],
+   "size": [
+    0.1067,
+    0.0914,
+    0.0878
+   ],
+   "neighbors": [
+    "VH_M_hilum_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_pulmonary_vein_R_sup",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_right_medial_bronchus": {
+   "name": "VH_M_right_medial_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Medial segmental bronchus",
+    "id": "FMA:7403"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0551,
+    0.4812,
+    0.0273
+   ],
+   "size": [
+    0.0213,
+    0.0246,
+    0.0419
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_right_middle_lobar_bronchus"
+   ]
+  },
+  "VH_M_right_middle_lobar_bronchus": {
+   "name": "VH_M_right_middle_lobar_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_lobar_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Middle lobar bronchus",
+    "id": "FMA:7401"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0012063",
+    "via": "uberon-xref:FMA:7401",
+    "label": "lobar bronchus of right lung middle lobe",
+    "definition": "A lobar bronchus that is part of a middle lobe of right lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002174",
+      "label": "middle lobe of right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0438,
+    0.4946,
+    -0.0012
+   ],
+   "size": [
+    0.0269,
+    0.0137,
+    0.0202
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_pulmonary_vein_R_inf",
+    "VH_M_pulmonary_vein_R_sup",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lateral_bronchus",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_medial_bronchus"
+   ]
+  },
+  "VH_M_right_posterior_basal": {
+   "name": "VH_M_right_posterior_basal",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right posterior basal segmental bronchus",
+    "id": "FMA:7420"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0412,
+    0.4557,
+    -0.0467
+   ],
+   "size": [
+    0.0276,
+    0.0677,
+    0.0454
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_right_lateral_basal_bronchus",
+    "VH_M_right_lower_lobar_bronchus"
+   ]
+  },
+  "VH_M_right_posterior_basal_bronchopulmonary_segment": {
+   "name": "VH_M_right_posterior_basal_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Posterior Basal Bronchopulmonary Segment",
+    "id": "FMA:7362"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0567,
+    0.4391,
+    -0.0458
+   ],
+   "size": [
+    0.1107,
+    0.107,
+    0.092
+   ],
+   "neighbors": [
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_right_lateral_basal_bronchopulmonary_segment",
+    "VH_M_right_medial_basal_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_right_posterior_bronchopulmonary_segment": {
+   "name": "VH_M_right_posterior_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_upper_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Posterior Bronchopulmonary Segment",
+    "id": "FMA:7339"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0641,
+    0.5559,
+    -0.0341
+   ],
+   "size": [
+    0.1058,
+    0.1034,
+    0.08
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_apical_bronchopulmonary_segment",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchus"
+   ]
+  },
+  "VH_M_right_posterior_bronchus": {
+   "name": "VH_M_right_posterior_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right posterior segmental bronchus",
+    "id": "FMA:7399"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0608,
+    0.5433,
+    -0.026
+   ],
+   "size": [
+    0.0376,
+    0.0353,
+    0.0276
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_superior_bronchopulmonary_segment",
+    "VH_M_right_superior_lobar_bronchus"
+   ]
+  },
   "VH_M_right_posterior_descending_artery": {
    "name": "VH_M_right_posterior_descending_artery",
    "model": "heart-vessels.glb",
@@ -2506,6 +5639,130 @@
     "VH_M_interventricular_septum",
     "VH_M_middle_cardiac_vein",
     "VH_M_right_coronary_artery"
+   ]
+  },
+  "VH_M_right_superior_bronchopulmonary_segment": {
+   "name": "VH_M_right_superior_bronchopulmonary_segment",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "lungs",
+   "parent": "VH_M_lungs_R_lower_lobe",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right Superior Bronchopulmonary Segment",
+    "id": "FMA:7366"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.059,
+    0.4975,
+    -0.0536
+   ],
+   "size": [
+    0.1016,
+    0.1041,
+    0.0773
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_middle_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_anterior_basal_bronchopulmonary_segment",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lateral_basal_bronchopulmonary_segment",
+    "VH_M_right_lateral_bronchopulmonary_segment",
+    "VH_M_right_main_bronchus",
+    "VH_M_right_posterior_basal_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_posterior_bronchus",
+    "VH_M_right_superior_bronchus",
+    "VH_M_right_superior_lobar_bronchus"
+   ]
+  },
+  "VH_M_right_superior_bronchus": {
+   "name": "VH_M_right_superior_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tertiary_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right superior segmental bronchus",
+    "id": "FMA:7416"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0483,
+    0.5216,
+    -0.0476
+   ],
+   "size": [
+    0.0571,
+    0.05,
+    0.0562
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_posterior_bronchopulmonary_segment",
+    "VH_M_right_superior_bronchopulmonary_segment"
+   ]
+  },
+  "VH_M_right_superior_lobar_bronchus": {
+   "name": "VH_M_right_superior_lobar_bronchus",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_lobar_bronchi_R",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right superior lobar bronchus",
+    "id": "FMA:7397"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0005244",
+    "via": "uberon-xref:FMA:7397",
+    "label": "lobar bronchus of right lung cranial lobe",
+    "definition": null,
+    "partOf": [
+     {
+      "id": "UBERON:0002170",
+      "label": "upper lobe of right lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0346,
+    0.5326,
+    -0.01
+   ],
+   "size": [
+    0.0221,
+    0.0191,
+    0.0139
+   ],
+   "neighbors": [
+    "VH_M_bronchial_cartilage",
+    "VH_M_hilum_R",
+    "VH_M_hilum_lower_R",
+    "VH_M_hilum_upper_R",
+    "VH_M_right_anterior_bronchus",
+    "VH_M_right_apical_bronchus",
+    "VH_M_right_intermediate_bronchus",
+    "VH_M_right_main_bronchus",
+    "VH_M_right_posterior_bronchus",
+    "VH_M_right_superior_bronchopulmonary_segment"
    ]
   },
   "VH_M_small_cardiac_vein": {
@@ -2583,8 +5840,283 @@
     "VH_M_ascending_aorta",
     "VH_M_brachiocephalic_vein_L",
     "VH_M_brachiocephalic_vein_R",
+    "VH_M_hilum_R",
+    "VH_M_hilum_upper_R",
     "VH_M_pulmonary_artery_R",
+    "VH_M_right_anterior_bronchopulmonary_segment",
+    "VH_M_right_apical_bronchopulmonary_segment",
     "VH_M_right_cardiac_atrium"
+   ]
+  },
+  "VH_M_tertiary_bronchi_L": {
+   "name": "VH_M_tertiary_bronchi_L",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_bronchi_L",
+   "children": [
+    "VH_M_left_superior_bronchus",
+    "VH_M_left_posterior_basal_bronchus",
+    "VH_M_left_medial_basal_bronchus",
+    "VH_M_left_apical_bronchus",
+    "VH_M_left_anterior_bronchus",
+    "VH_M_left_lingular_bronchus",
+    "VH_M_left_lingula_superior_bronchus",
+    "VH_M_left_lingula_inferior_bronchus",
+    "VH_M_left_lateral_basal_bronchus",
+    "VH_M_left_anterior_basal_bronchus"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "Segmental bronchus",
+    "id": "UBERON:0002184"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002184",
+    "via": "hra-crosswalk",
+    "label": "segmental bronchus",
+    "definition": "The tertiary bronchi (also known as the segmental bronchi) arise from the secondary bronchi. The respiratory epithelium lining their lumen is surrounded by a layer of smooth muscle. This layer is composed of two ribbons of smooth muscle that spiral in opposite directions. The smooth muscle layer is surrounded by irregular plates of hyaline cartilage which help maintain the patency of the airway. Each of the tertiary bronchi serves a specific bronchopulmonary segment. There are 10 tertiary bronchi in the right lung, and eight in the left. The tertiary bronchi get smaller and divide into primary bronchioles. [WP,unvetted].",
+    "partOf": [
+     {
+      "id": "UBERON:0000101",
+      "label": "lobe of lung"
+     }
+    ]
+   },
+   "center": [
+    0.0738,
+    0.5064,
+    -0.0103
+   ],
+   "size": [
+    0.0883,
+    0.1773,
+    0.137
+   ]
+  },
+  "VH_M_tertiary_bronchi_R": {
+   "name": "VH_M_tertiary_bronchi_R",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_bronchi_R",
+   "children": [
+    "VH_M_right_anterior_bronchus",
+    "VH_M_right_lateral_basal_bronchus",
+    "VH_M_right_lateral_bronchus",
+    "VH_M_right_lower_lobar_bronchus",
+    "VH_M_right_medial_basal_bronchus",
+    "VH_M_right_medial_bronchus",
+    "VH_M_right_posterior_basal",
+    "VH_M_right_posterior_bronchus",
+    "VH_M_right_superior_bronchus",
+    "VH_M_right_apical_bronchus",
+    "VH_M_right_anterior_basal_bronchus",
+    "VH_M_bronchus"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "Segmental bronchus",
+    "id": "UBERON:0002184"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002184",
+    "via": "hra-crosswalk",
+    "label": "segmental bronchus",
+    "definition": "The tertiary bronchi (also known as the segmental bronchi) arise from the secondary bronchi. The respiratory epithelium lining their lumen is surrounded by a layer of smooth muscle. This layer is composed of two ribbons of smooth muscle that spiral in opposite directions. The smooth muscle layer is surrounded by irregular plates of hyaline cartilage which help maintain the patency of the airway. Each of the tertiary bronchi serves a specific bronchopulmonary segment. There are 10 tertiary bronchi in the right lung, and eight in the left. The tertiary bronchi get smaller and divide into primary bronchioles. [WP,unvetted].",
+    "partOf": [
+     {
+      "id": "UBERON:0000101",
+      "label": "lobe of lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0626,
+    0.5081,
+    -0.007
+   ],
+   "size": [
+    0.0948,
+    0.1724,
+    0.1379
+   ]
+  },
+  "VH_M_thyroid_cartilage": {
+   "name": "VH_M_thyroid_cartilage",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_cartilage_of_tracheobronchial_tree",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Thyroid cartilage",
+    "id": "FMA:55099"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001738",
+    "via": "uberon-xref:FMA:55099",
+    "label": "thyroid cartilage",
+    "definition": "The largest of the laryngeal cartilages.",
+    "partOf": [
+     {
+      "id": "UBERON:0010212",
+      "label": "laryngeal apparatus"
+     }
+    ]
+   },
+   "center": [
+    -0.0016,
+    0.6596,
+    0.041
+   ],
+   "size": [
+    0.0538,
+    0.0444,
+    0.0386
+   ],
+   "neighbors": [
+    "VH_M_cricoid_cartilage",
+    "VH_M_trachea"
+   ]
+  },
+  "VH_M_trachea": {
+   "name": "VH_M_trachea",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_tracheobronchial_tree",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": null,
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0003126",
+    "via": "uberon-label",
+    "label": "trachea",
+    "definition": "The trachea is the portion of the airway that attaches to the bronchi as it branches [GO:dph].",
+    "partOf": [
+     {
+      "id": "UBERON:0007196",
+      "label": "tracheobronchial tree"
+     }
+    ]
+   },
+   "center": [
+    -0.0032,
+    0.5976,
+    0.0206
+   ],
+   "size": [
+    0.0287,
+    0.1251,
+    0.0672
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_arytenoid_cartilage_L",
+    "VH_M_arytenoid_cartilage_R",
+    "VH_M_bronchial_cartilage",
+    "VH_M_carina",
+    "VH_M_cricoid_cartilage",
+    "VH_M_left_common_carotid_artery_a",
+    "VH_M_left_common_carotid_artery_b",
+    "VH_M_left_main_bronchus",
+    "VH_M_right_apical_bronchopulmonary_segment",
+    "VH_M_right_main_bronchus",
+    "VH_M_thyroid_cartilage",
+    "VH_M_tracheal_cartilage"
+   ]
+  },
+  "VH_M_tracheal_cartilage": {
+   "name": "VH_M_tracheal_cartilage",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_cartilage_of_tracheobronchial_tree",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Tracheal cartilage",
+    "id": "FMA:7434"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0003604",
+    "via": "uberon-xref:FMA:7434",
+    "label": "trachea cartilage",
+    "definition": "The ring-shaped cartilaginous structures that support the trachea.",
+    "partOf": [
+     {
+      "id": "UBERON:0003126",
+      "label": "trachea"
+     }
+    ]
+   },
+   "center": [
+    -0.002,
+    0.5889,
+    0.0203
+   ],
+   "size": [
+    0.029,
+    0.0856,
+    0.0547
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_brachiocephalic_artery_b",
+    "VH_M_bronchial_cartilage",
+    "VH_M_cricoid_cartilage",
+    "VH_M_left_common_carotid_artery_a",
+    "VH_M_left_common_carotid_artery_b",
+    "VH_M_left_subclavian_artery_a",
+    "VH_M_right_apical_bronchopulmonary_segment",
+    "VH_M_trachea"
+   ]
+  },
+  "VH_M_tracheobronchial_tree": {
+   "name": "VH_M_tracheobronchial_tree",
+   "model": "lungs.glb",
+   "sourceId": "HRA-LUNG-M",
+   "layer": "airways",
+   "parent": "VH_M_respiratory_system",
+   "children": [
+    "VH_M_trachea",
+    "VH_M_cartilage_of_tracheobronchial_tree",
+    "VH_M_bronchi"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "tracheobronchial tree",
+    "id": "UBERON:0007196"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0007196",
+    "via": "hra-crosswalk",
+    "label": "tracheobronchial tree",
+    "definition": "The structure from the trachea, bronchi, and bronchioles that forms the airways that supply air to the lungs. The lining of the tracheobronchial tree consists of ciliated columnar epithelial cells.",
+    "partOf": [
+     {
+      "id": "UBERON:0001558",
+      "label": "lower respiratory tract"
+     }
+    ]
+   },
+   "center": [
+    0.004,
+    0.559,
+    -0.0084
+   ],
+   "size": [
+    0.2279,
+    0.2824,
+    0.1407
    ]
   },
   "VH_M_tricuspid_valve": {

@@ -1,27 +1,165 @@
 {
   "_meta": {
     "describes": "Order of structures blood passes through (systemic return -> right heart -> pulmonary circuit -> left heart -> aorta), from OpenStax A&P 2e §19.1 Heart Anatomy [OSX-19.1].",
-    "waypoint": "Each step's position is the bounding-box centre of `at` (from the anatomy manifest). Steps with modelled=false are outside the 3D model (lungs, body tissues); particles are hidden there.",
+    "waypoint": "Each step's position is the bounding-box centre of `at` (from the anatomy manifest). Steps with modelled=false are outside the 3D model (body tissues); particles are hidden there.",
     "timing": "Schematic: particles advance one step per heartbeat (cycle duration from the physiology engine)."
   },
-  "cites": ["OSX-19.1"],
+  "cites": [
+    "OSX-19.1"
+  ],
   "steps": [
-    { "id": "venaeCavae", "at": "VH_M_inferior_vena_cava_a", "highlight": ["VH_M_inferior_vena_cava", "VH_M_superior_vena_cava"], "blood": "low", "modelled": true },
-    { "id": "rightAtrium", "at": "VH_M_right_cardiac_atrium", "highlight": ["VH_M_right_cardiac_atrium"], "blood": "low", "modelled": true },
-    { "id": "tricuspidValve", "at": "VH_M_tricuspid_valve", "highlight": ["VH_M_tricuspid_valve"], "blood": "low", "modelled": true },
-    { "id": "rightVentricle", "at": "VH_M_heart_right_ventricle", "highlight": ["VH_M_heart_right_ventricle"], "blood": "low", "modelled": true },
-    { "id": "pulmonaryValve", "at": "VH_M_pulmonary_valve", "highlight": ["VH_M_pulmonary_valve"], "blood": "low", "modelled": true },
-    { "id": "pulmonaryTrunk", "at": "VH_M_pulmonary_trunk", "highlight": ["VH_M_pulmonary_trunk"], "blood": "low", "modelled": true },
-    { "id": "pulmonaryArteries", "at": "VH_M_pulmonary_artery_R", "highlight": ["VH_M_pulmonary_artery_R", "VH_M_pulmonary_artery_L"], "blood": "low", "modelled": true },
-    { "id": "lungs", "at": null, "highlight": [], "blood": "low", "modelled": false },
-    { "id": "pulmonaryVeins", "at": "VH_M_pulmonary_vein_R_sup", "highlight": ["VH_M_pulmonary_vein"], "blood": "high", "modelled": true },
-    { "id": "leftAtrium", "at": "VH_M_left_cardiac_atrium", "highlight": ["VH_M_left_cardiac_atrium"], "blood": "high", "modelled": true },
-    { "id": "mitralValve", "at": "VH_M_mitral_valve", "highlight": ["VH_M_mitral_valve"], "blood": "high", "modelled": true },
-    { "id": "leftVentricle", "at": "VH_M_heart_left_ventricle", "highlight": ["VH_M_heart_left_ventricle"], "blood": "high", "modelled": true },
-    { "id": "aorticValve", "at": "VH_M_aortic_valve", "highlight": ["VH_M_aortic_valve"], "blood": "high", "modelled": true },
-    { "id": "ascendingAorta", "at": "VH_M_ascending_aorta", "highlight": ["VH_M_ascending_aorta"], "blood": "high", "modelled": true },
-    { "id": "aorticArch", "at": "VH_M_aortic_arch", "highlight": ["VH_M_aortic_arch"], "blood": "high", "modelled": true },
-    { "id": "descendingAorta", "at": "VH_M_descending_aorta_a", "highlight": ["VH_M_descending_aorta"], "blood": "high", "modelled": true },
-    { "id": "body", "at": null, "highlight": [], "blood": "high", "modelled": false }
+    {
+      "id": "venaeCavae",
+      "at": "VH_M_inferior_vena_cava_a",
+      "highlight": [
+        "VH_M_inferior_vena_cava",
+        "VH_M_superior_vena_cava"
+      ],
+      "blood": "low",
+      "modelled": true
+    },
+    {
+      "id": "rightAtrium",
+      "at": "VH_M_right_cardiac_atrium",
+      "highlight": [
+        "VH_M_right_cardiac_atrium"
+      ],
+      "blood": "low",
+      "modelled": true
+    },
+    {
+      "id": "tricuspidValve",
+      "at": "VH_M_tricuspid_valve",
+      "highlight": [
+        "VH_M_tricuspid_valve"
+      ],
+      "blood": "low",
+      "modelled": true
+    },
+    {
+      "id": "rightVentricle",
+      "at": "VH_M_heart_right_ventricle",
+      "highlight": [
+        "VH_M_heart_right_ventricle"
+      ],
+      "blood": "low",
+      "modelled": true
+    },
+    {
+      "id": "pulmonaryValve",
+      "at": "VH_M_pulmonary_valve",
+      "highlight": [
+        "VH_M_pulmonary_valve"
+      ],
+      "blood": "low",
+      "modelled": true
+    },
+    {
+      "id": "pulmonaryTrunk",
+      "at": "VH_M_pulmonary_trunk",
+      "highlight": [
+        "VH_M_pulmonary_trunk"
+      ],
+      "blood": "low",
+      "modelled": true
+    },
+    {
+      "id": "pulmonaryArteries",
+      "at": "VH_M_pulmonary_artery_R",
+      "highlight": [
+        "VH_M_pulmonary_artery_R",
+        "VH_M_pulmonary_artery_L"
+      ],
+      "blood": "low",
+      "modelled": true
+    },
+    {
+      "id": "lungs",
+      "at": "VH_M_lungs_R",
+      "highlight": [
+        "VH_M_lungs"
+      ],
+      "blood": "low",
+      "modelled": true
+    },
+    {
+      "id": "pulmonaryVeins",
+      "at": "VH_M_pulmonary_vein_R_sup",
+      "highlight": [
+        "VH_M_pulmonary_vein"
+      ],
+      "blood": "high",
+      "modelled": true
+    },
+    {
+      "id": "leftAtrium",
+      "at": "VH_M_left_cardiac_atrium",
+      "highlight": [
+        "VH_M_left_cardiac_atrium"
+      ],
+      "blood": "high",
+      "modelled": true
+    },
+    {
+      "id": "mitralValve",
+      "at": "VH_M_mitral_valve",
+      "highlight": [
+        "VH_M_mitral_valve"
+      ],
+      "blood": "high",
+      "modelled": true
+    },
+    {
+      "id": "leftVentricle",
+      "at": "VH_M_heart_left_ventricle",
+      "highlight": [
+        "VH_M_heart_left_ventricle"
+      ],
+      "blood": "high",
+      "modelled": true
+    },
+    {
+      "id": "aorticValve",
+      "at": "VH_M_aortic_valve",
+      "highlight": [
+        "VH_M_aortic_valve"
+      ],
+      "blood": "high",
+      "modelled": true
+    },
+    {
+      "id": "ascendingAorta",
+      "at": "VH_M_ascending_aorta",
+      "highlight": [
+        "VH_M_ascending_aorta"
+      ],
+      "blood": "high",
+      "modelled": true
+    },
+    {
+      "id": "aorticArch",
+      "at": "VH_M_aortic_arch",
+      "highlight": [
+        "VH_M_aortic_arch"
+      ],
+      "blood": "high",
+      "modelled": true
+    },
+    {
+      "id": "descendingAorta",
+      "at": "VH_M_descending_aorta_a",
+      "highlight": [
+        "VH_M_descending_aorta"
+      ],
+      "blood": "high",
+      "modelled": true
+    },
+    {
+      "id": "body",
+      "at": null,
+      "highlight": [],
+      "blood": "high",
+      "modelled": false
+    }
   ]
 }

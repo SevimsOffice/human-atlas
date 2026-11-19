@@ -3,7 +3,7 @@ import type { Layer } from '@atlas/anatomy-manifest';
 import { useAtlas } from '../store';
 import { Panel } from './Panel';
 
-const LAYERS: Layer[] = ['heart', 'greatVessels', 'coronaryVessels'];
+const LAYERS: Layer[] = ['heart', 'greatVessels', 'coronaryVessels', 'lungs', 'airways'];
 
 export function LayerPanel() {
   const { t } = useTranslation();

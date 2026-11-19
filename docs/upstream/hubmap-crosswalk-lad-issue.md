@@ -22,4 +22,10 @@ The mesh sits in the `VH_M_cardiac_artery` group of `VH_M_Blood_Vasculature.glb`
 
 (Present in v1.3 and still in v2.0.)
 
+**Lung (`VH_M_Lung`, v1.3 mapping file) — rows whose label/ID does not match the node:**
+- `VH_M_right_apical_bronchus` → "Right superior segmental bronchus" `FMA:7416` (identical to the row for `VH_M_right_superior_bronchus`).
+- `VH_M_right_anterior_basal_bronchus` → "Right posterior segmental bronchus" `FMA:7399` (identical to the row for `VH_M_right_posterior_bronchus`).
+- `VH_M_left_posetrior_basal_bronchopulmonary_segment` (node name misspelt "posetrior") → "Left posterior basal segmental bronchus" `FMA:7508`, a bronchus, identical to the row for `VH_M_left_posterior_basal_bronchus`; a bronchopulmonary segment term would be expected.
+- `VH_M_trachea` has no ontology ID (Uberon has `UBERON:0003126` "trachea").
+
 Thanks for the reference library — it's excellent to build on.

@@ -64,7 +64,8 @@ export function Inspector() {
                 </div>
                 {s.override && <p className="mt-1 text-[11px] text-amber-900">{t('inspector.overrideNote', { reason: s.override.reason })}</p>}
               </>
-            ) : s.crosswalk ? <span className="font-mono text-graphite-soft">{t('inspector.noUberon', { id: s.crosswalk.id })}</span>
+            ) : s.override?.crosswalkRejected ? <span className="text-[11px] text-amber-900">{t('inspector.overrideNote', { reason: s.override.reason })}</span>
+            : s.crosswalk ? <span className="font-mono text-graphite-soft">{t('inspector.noUberon', { id: s.crosswalk.id })}</span>
               : <span className="text-graphite-soft">{t('inspector.noId')}</span>}
           </Field>
           <Field title={t('inspector.function')}>
@@ -99,7 +100,7 @@ export function Inspector() {
               <p className="mt-1 text-[11px] text-graphite-soft">{t('inspector.neighborsNote', { mm: manifest.neighborThresholdMm })}</p>
             </Field>
           )}
-          <Field title={t('inspector.systems')}>{t('inspector.cardiovascular')}</Field>
+          <Field title={t('inspector.systems')}>{t(s.layer === 'lungs' || s.layer === 'airways' ? 'inspector.respiratory' : 'inspector.cardiovascular')}</Field>
           <Field title={t('inspector.source')}>
             <p className="text-xs" data-testid="inspector-source">
               <a href={src.url} target="_blank" rel="noreferrer" className="underline decoration-line underline-offset-2">{src.title}</a> — {src.license}

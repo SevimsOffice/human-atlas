@@ -10,6 +10,7 @@ const NEIGHBOR_MM = 3; // surfaces closer than this (in model space, metres*1000
 const MODELS = [
   { file: 'heart.glb', raw: 'VH_M_Heart.glb', hraId: 'VH_M_Heart', sourceId: 'HRA-HEART-M', subtree: null },
   { file: 'heart-vessels.glb', raw: 'VH_M_Blood_Vasculature.glb', hraId: 'VH_M_Blood_Vasculature', sourceId: 'HRA-VASC-M', subtree: 'VH_M_blood_vasculature_of_heart' },
+  { file: 'lungs.glb', raw: 'VH_M_Lung.glb', hraId: 'VH_M_Lung', sourceId: 'HRA-LUNG-M', subtree: null },
 ];
 
 // ---- crosswalk CSV ----
@@ -39,7 +40,7 @@ const xwLookup = (model, node) => { const rs = xwRows.get(node) ?? []; const r =
 // ---- Uberon OBO ----
 const obo = await readFile(`${RAW}/uberon/uberon.obo`, 'utf8');
 const uberonVersion = obo.match(/^data-version: (.*)$/m)?.[1] ?? 'unknown';
-const terms = new Map(); const fmaToUberon = new Map();
+const terms = new Map(); const fmaToUberon = new Map(); const labelToUberon = new Map();
 for (const st of obo.split('\n[Term]\n').slice(1)) {
   const id = st.match(/^id: (UBERON:\d+)$/m)?.[1]; if (!id) continue;
   if (/^is_obsolete: true$/m.test(st)) continue;
@@ -47,6 +48,7 @@ for (const st of obo.split('\n[Term]\n').slice(1)) {
   const def = st.match(/^def: "((?:[^"\\]|\\.)*)"/m)?.[1]?.replace(/\\"/g, '"') ?? null;
   const partOf = [...st.matchAll(/^relationship: part_of (UBERON:\d+)/gm)].map((m) => m[1]);
   terms.set(id, { name, def, partOf });
+  if (name && !labelToUberon.has(name)) labelToUberon.set(name, id);
   for (const m of st.matchAll(/^xref: (FMA:\d+)\b/gm)) if (!fmaToUberon.has(m[1])) fmaToUberon.set(m[1], id);
 }
 
@@ -76,31 +78,36 @@ const entries = {}; const meshVerts = new Map();
 for (const M of MODELS) {
   const doc = await io.read(`${RAW}/hubmap/${M.raw}`);
   const roots = M.subtree ? [doc.getRoot().listNodes().find((n) => n.getName() === M.subtree)] : doc.getRoot().getDefaultScene().listChildren();
-  const visit = (node, parent, coronary) => {
+  const visit = (node, parent, coronary, airway) => {
     const name = node.getName();
     const isCoronary = coronary || name === 'VH_M_cardiac_artery' || name === 'VH_M_cardiac_vein';
+    const isAirway = airway || name === 'VH_M_tracheobronchial_tree';
     const cw = xwLookup(M.hraId, name);
     let uberonId = null, uberonVia = null;
     if (cw?.id?.startsWith('UBERON:')) { uberonId = cw.id; uberonVia = 'hra-crosswalk'; }
     else if (cw?.id?.startsWith('FMA:') && fmaToUberon.has(cw.id)) { uberonId = fmaToUberon.get(cw.id); uberonVia = `uberon-xref:${cw.id}`; }
+    else if ((!cw || cw.id === '-' || !cw.id) && labelToUberon.has(name.replace(/^VH_M_/, '').replace(/_/g, ' '))) {
+      // no ID in the crosswalk: accept only an exact Uberon label match of the node name (e.g. "trachea")
+      uberonId = labelToUberon.get(name.replace(/^VH_M_/, '').replace(/_/g, ' ')); uberonVia = 'uberon-label';
+    }
     const ov = overrides[name];
-    if (ov) { uberonId = ov.uberonId; uberonVia = 'override'; }
+    if (ov) { uberonId = ov.uberonId ?? null; uberonVia = ov.uberonId ? 'override' : null; }
     const t = uberonId ? terms.get(uberonId) : null;
     entries[name] = {
       name, model: M.file, sourceId: M.sourceId,
-      layer: M.file === 'heart.glb' ? 'heart' : isCoronary ? 'coronaryVessels' : 'greatVessels',
+      layer: M.file === 'heart.glb' ? 'heart' : M.file === 'lungs.glb' ? (isAirway ? 'airways' : 'lungs') : isCoronary ? 'coronaryVessels' : 'greatVessels',
       parent: parent?.getName() ?? null,
       children: node.listChildren().map((c) => c.getName()),
       isMesh: !!node.getMesh(),
-      crosswalk: cw && cw.id !== '-' ? { label: cw.label, id: cw.id } : null,
-      override: ov ? { reason: ov.reason, displayLabel: ov.crosswalkLabel } : null,
+      crosswalk: cw && cw.id && cw.id !== '-' && !ov?.rejectCrosswalk ? { label: cw.label, id: cw.id } : null,
+      override: ov ? { reason: ov.reason, displayLabel: ov.crosswalkLabel, crosswalkRejected: !!ov.rejectCrosswalk } : null,
       uberon: uberonId ? { id: uberonId, via: uberonVia, label: t?.name ?? null, definition: t?.def ?? null,
         partOf: (t?.partOf ?? []).map((id) => ({ id, label: terms.get(id)?.name ?? null })) } : null,
     };
     const vs = worldVerts(node); if (vs) meshVerts.set(name, vs);
-    node.listChildren().forEach((c) => visit(c, node, isCoronary));
+    node.listChildren().forEach((c) => visit(c, node, isCoronary, isAirway));
   };
-  roots.forEach((r) => visit(r, null, false));
+  roots.forEach((r) => visit(r, null, false, false));
 }
 
 // centres: bbox centre of all descendant mesh vertices

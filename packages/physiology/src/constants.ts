@@ -27,3 +27,21 @@ export const EXERCISE_CO_BOOK: RefValue = {
   value: 19.5, unit: 'L/min', ref: 'OSX-19.4',
   quote: 'This would increase CO to approximately 19.5 L/min',
 };
+
+// ---- Respiratory (Milestone 2) ----
+export const REST_RR: RefValue = {
+  value: 14, unit: 'breaths/min', ref: 'OSX-22.3', range: [12, 18],
+  quote: 'A typical resting respiratory rate is about 14 breaths per minute.',
+};
+export const REST_VT: RefValue = {
+  value: 500, unit: 'mL', ref: 'OSX-22.3',
+  quote: 'Tidal volume (TV) is the amount of air that normally enters the lungs during quiet breathing, which is about 500 milliliters.',
+};
+export const REST_VO2: RefValue = {
+  value: 0.34, unit: 'L/min', ref: 'CP-7.8',
+  quote: 'Sitting at rest | 120 | 0.34',
+};
+export const RUNNING_VO2: RefValue = {
+  value: 2.12, unit: 'L/min', ref: 'CP-7.8',
+  quote: 'Running cross-country | 740 | 2.12',
+};

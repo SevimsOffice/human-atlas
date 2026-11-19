@@ -18,3 +18,6 @@ body { margin: 0; background: var(--color-paper); color: var(--color-graphite); 
 @keyframes beat { 0%, 100% { transform: scale(0.7); opacity: .45 } 12% { transform: scale(1); opacity: 1 } 40% { transform: scale(0.75); opacity: .55 } }
 .beat-dot { animation: beat var(--cycle, 0.8s) infinite ease-out; }
 @media (prefers-reduced-motion: reduce) { .beat-dot { animation: none; } }
+@keyframes breath { 0%, 100% { transform: scale(0.7) } 40% { transform: scale(1.15) } }
+.breath-dot { animation: breath var(--breath, 4s) infinite ease-in-out; }
+@media (prefers-reduced-motion: reduce) { .breath-dot { animation: none; } }

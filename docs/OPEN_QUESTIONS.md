@@ -3,6 +3,11 @@
 ## Decided 2026-11-19 (Phase 0 approval)
 Q1 option B (own texts, OpenStax cited for facts only; commercial use is a goal) · Q2 M4: look for CC BY/CC0 first, Z-Anatomy/BodyParts3D only as fallback with share-alike impact report · Q3 search for a second source, else rest + running only (→ rest + running shipped in M1, see PHYSIOLOGY_MODEL.md) · Q4 official TR terminology if citable, else translations marked needs-expert-review in one file (→ content/terms/anatomy-terms.tr.json) · Q5 male in M1, switch in M4 · Q6 lungs in M2; vasculature in M1 · Q7 "Koşu (yoğun egzersiz) / Running (vigorous exercise)" · Q8 Claude Design export will arrive in design/; M1 uses a minimal UI · Q9 feature branch + PR per milestone; owner reviews, Claude merges.
 
+## Open (Milestone 2)
+- **Q10 Blocked sources.** Running breathing values (RR, VT) and walking cardiac values need a source that this cloud environment cannot open (med.libretexts.org, www.ncbi.nlm.nih.gov are blocked). Options: (a) allow those hosts for this environment, (b) owner provides the pages/PDFs, (c) owner names another accessible textbook.
+- **Q11 Fick principle citation.** O2 extraction = VO2 / CO is shown as a derived link between heart and lungs; the formula still needs a citable textbook statement (OpenStax does not state it). Keep, or hide until cited?
+- **Q12 Mixed reference bodies.** VO2 (College Physics, 76-kg male) and cardiac values (A&P, 70-kg adult) come from different books; the derived extraction is labelled illustrative. Acceptable?
+
 ## Phase 0 questions (original text)
 
 1. **Q1 OpenStax licence.** A&P 2e is CC BY-NC-SA 4.0, not CC BY. Choose: (B, proposed) cite for facts/values only and write our own reviewed short texts; (A) use book text, app stays non-commercial; (C) look for a CC BY source (archived A&P 1e). Is future commercial use a goal?
