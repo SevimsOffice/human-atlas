@@ -1,0 +1,2698 @@
+{
+ "generator": "scripts/build-manifest.mjs",
+ "uberonVersion": "releases/2026-10-01",
+ "neighborThresholdMm": 3,
+ "models": [
+  {
+   "file": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "hraId": "VH_M_Heart"
+  },
+  {
+   "file": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "hraId": "VH_M_Blood_Vasculature"
+  }
+ ],
+ "structures": {
+  "VH_M_anterior_cardiac_vein": {
+   "name": "VH_M_anterior_cardiac_vein",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Anterior cardiac vein",
+    "id": "FMA:76767"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0133,
+    0.4607,
+    0.0676
+   ],
+   "size": [
+    0.0265,
+    0.0459,
+    0.0212
+   ],
+   "neighbors": [
+    "VH_M_heart_right_ventricle",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery",
+    "VH_M_tricuspid_valve"
+   ]
+  },
+  "VH_M_aorta": {
+   "name": "VH_M_aorta",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_arteries_of_heart",
+   "children": [
+    "VH_M_aortic_arch",
+    "VH_M_ascending_aorta",
+    "VH_M_brachiocephalic_artery",
+    "VH_M_left_common_carotid_artery",
+    "VH_M_left_subclavian_artery",
+    "VH_M_descending_aorta"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "aorta",
+    "id": "UBERON:0000947"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0000947",
+    "via": "hra-crosswalk",
+    "label": "aorta",
+    "definition": "The main trunk of the systemic arterial system that carries blood from the heart to all the organs and other structures of the body, bringing oxygenated blood to all parts of the body in the systemic circulation.",
+    "partOf": [
+     {
+      "id": "UBERON:0010191",
+      "label": "aortic system"
+     }
+    ]
+   },
+   "center": [
+    0.0023,
+    0.4352,
+    0.0006
+   ],
+   "size": [
+    0.0603,
+    0.4958,
+    0.0783
+   ]
+  },
+  "VH_M_aortic_arch": {
+   "name": "VH_M_aortic_arch",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_aorta",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "arch of aorta",
+    "id": "UBERON:0001508"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001508",
+    "via": "hra-crosswalk",
+    "label": "arch of aorta",
+    "definition": "The convex portion of the aorta between the ascending and descending parts of the aorta; branches from it include the brachiocephalic trunk, the left common carotid artery, and the left subclavian artery; the brachiocephalic trunk further splits to form the right subclavian artery and the right common carotid artery.",
+    "partOf": [
+     {
+      "id": "UBERON:0001515",
+      "label": "thoracic aorta"
+     }
+    ]
+   },
+   "center": [
+    0.0045,
+    0.5501,
+    0.0061
+   ],
+   "size": [
+    0.0385,
+    0.0389,
+    0.0632
+   ],
+   "neighbors": [
+    "VH_M_ascending_aorta",
+    "VH_M_brachiocephalic_artery_a",
+    "VH_M_brachiocephalic_vein_L",
+    "VH_M_descending_aorta_a",
+    "VH_M_left_common_carotid_artery_a",
+    "VH_M_left_subclavian_artery_a",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_pulmonary_trunk",
+    "VH_M_superior_vena_cava"
+   ]
+  },
+  "VH_M_aortic_valve": {
+   "name": "VH_M_aortic_valve",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_heart_valve",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "aortic valve",
+    "id": "UBERON:0002137"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002137",
+    "via": "hra-crosswalk",
+    "label": "aortic valve",
+    "definition": "Cardiac valve which has as its parts the anterior, right posterior and left posterior cusps, attached to the fibrous ring of aortic valve.[FMA].",
+    "partOf": [
+     {
+      "id": "UBERON:0005956",
+      "label": "outflow part of left ventricle"
+     }
+    ]
+   },
+   "center": [
+    0.0068,
+    0.4992,
+    0.0286
+   ],
+   "size": [
+    0.0247,
+    0.0254,
+    0.0215
+   ],
+   "neighbors": [
+    "VH_M_ascending_aorta",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_coronary_artery",
+    "VH_M_mitral_valve",
+    "VH_M_pulmonary_trunk",
+    "VH_M_pulmonary_valve",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery"
+   ]
+  },
+  "VH_M_arteries_of_heart": {
+   "name": "VH_M_arteries_of_heart",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_blood_vasculature_of_heart",
+   "children": [
+    "VH_M_aorta",
+    "VH_M_cardiac_artery",
+    "VH_M_pulmonary_artery"
+   ],
+   "isMesh": false,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0183,
+    0.4352,
+    0.0243
+   ],
+   "size": [
+    0.0923,
+    0.4958,
+    0.1258
+   ]
+  },
+  "VH_M_ascending_aorta": {
+   "name": "VH_M_ascending_aorta",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_aorta",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "ascending aorta",
+    "id": "UBERON:0001496"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001496",
+    "via": "hra-crosswalk",
+    "label": "ascending aorta",
+    "definition": "The ascending aorta is the portion of the aorta in a two-pass circulatory system that lies between the heart and the arch of aorta[GO]. A portion of the aorta commencing at the upper part of the base of the left ventricle, on a level with the lower border of the third costal cartilage behind the left half of the sternum; it passes obliquely upward, forward, and to the right, in the direction of the heart's axis, as high as the upper border of the second right costal cartilage, describing a slight curve in its course, and being situated, about 6 cm behind the posterior surface of the sternum. The total length is about 5 cm in length [Wikipedia].",
+    "partOf": [
+     {
+      "id": "UBERON:0001515",
+      "label": "thoracic aorta"
+     }
+    ]
+   },
+   "center": [
+    -0.0025,
+    0.519,
+    0.0286
+   ],
+   "size": [
+    0.0258,
+    0.0379,
+    0.0223
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_aortic_valve",
+    "VH_M_heart_right_ventricle",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_coronary_artery",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_pulmonary_trunk",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery",
+    "VH_M_superior_vena_cava"
+   ]
+  },
+  "VH_M_blood_vasculature_of_heart": {
+   "name": "VH_M_blood_vasculature_of_heart",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": null,
+   "children": [
+    "VH_M_arteries_of_heart",
+    "VH_M_veins_of_heart"
+   ],
+   "isMesh": false,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0141,
+    0.426,
+    0.0243
+   ],
+   "size": [
+    0.1302,
+    0.5142,
+    0.1258
+   ]
+  },
+  "VH_M_brachiocephalic_artery": {
+   "name": "VH_M_brachiocephalic_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_aorta",
+   "children": [
+    "VH_M_brachiocephalic_artery_b",
+    "VH_M_brachiocephalic_artery_a"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "brachiocephalic artery",
+    "id": "UBERON:0001529"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001529",
+    "via": "hra-crosswalk",
+    "label": "brachiocephalic artery",
+    "definition": "The short first aortic arch branch and divides into the right subclavian artery and the right common carotid artery.",
+    "partOf": [
+     {
+      "id": "UBERON:0007204",
+      "label": "brachiocephalic vasculature"
+     }
+    ]
+   },
+   "center": [
+    -0.0135,
+    0.5839,
+    0.0228
+   ],
+   "size": [
+    0.0287,
+    0.0463,
+    0.0116
+   ]
+  },
+  "VH_M_brachiocephalic_artery_a": {
+   "name": "VH_M_brachiocephalic_artery_a",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_brachiocephalic_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "brachiocephalic artery",
+    "id": "UBERON:0001529"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001529",
+    "via": "hra-crosswalk",
+    "label": "brachiocephalic artery",
+    "definition": "The short first aortic arch branch and divides into the right subclavian artery and the right common carotid artery.",
+    "partOf": [
+     {
+      "id": "UBERON:0007204",
+      "label": "brachiocephalic vasculature"
+     }
+    ]
+   },
+   "center": [
+    -0.0061,
+    0.57,
+    0.0222
+   ],
+   "size": [
+    0.0139,
+    0.0183,
+    0.0105
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_brachiocephalic_artery_b",
+    "VH_M_brachiocephalic_vein_L"
+   ]
+  },
+  "VH_M_brachiocephalic_artery_b": {
+   "name": "VH_M_brachiocephalic_artery_b",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_brachiocephalic_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "brachiocephalic artery",
+    "id": "UBERON:0001529"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001529",
+    "via": "hra-crosswalk",
+    "label": "brachiocephalic artery",
+    "definition": "The short first aortic arch branch and divides into the right subclavian artery and the right common carotid artery.",
+    "partOf": [
+     {
+      "id": "UBERON:0007204",
+      "label": "brachiocephalic vasculature"
+     }
+    ]
+   },
+   "center": [
+    -0.0172,
+    0.5918,
+    0.024
+   ],
+   "size": [
+    0.0213,
+    0.0305,
+    0.0093
+   ],
+   "neighbors": [
+    "VH_M_brachiocephalic_artery_a",
+    "VH_M_brachiocephalic_vein_L"
+   ]
+  },
+  "VH_M_brachiocephalic_vein": {
+   "name": "VH_M_brachiocephalic_vein",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_veins_of_heart",
+   "children": [
+    "VH_M_brachiocephalic_vein_L",
+    "VH_M_brachiocephalic_vein_R"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "brachiocephalic vein",
+    "id": "FMA:4723"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0003711",
+    "via": "uberon-xref:FMA:4723",
+    "label": "brachiocephalic vein",
+    "definition": "The left and right brachiocephalic veins in the upper chest are formed by the union of each corresponding internal jugular vein and subclavian vein. This is at the level of the sternoclavicular joint. These great vessels merge to form the superior vena cava. The brachiocephalic veins are the major veins returning blood to the superior vena cava.",
+    "partOf": [
+     {
+      "id": "UBERON:0007204",
+      "label": "brachiocephalic vasculature"
+     }
+    ]
+   },
+   "center": [
+    -0.0012,
+    0.581,
+    0.0267
+   ],
+   "size": [
+    0.0996,
+    0.0615,
+    0.0258
+   ]
+  },
+  "VH_M_brachiocephalic_vein_L": {
+   "name": "VH_M_brachiocephalic_vein_L",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_brachiocephalic_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left brachiocephalic vein",
+    "id": "FMA:4761"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0146,
+    0.581,
+    0.0291
+   ],
+   "size": [
+    0.0679,
+    0.0615,
+    0.0211
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_brachiocephalic_artery_a",
+    "VH_M_brachiocephalic_artery_b",
+    "VH_M_left_common_carotid_artery_a",
+    "VH_M_left_common_carotid_artery_b",
+    "VH_M_superior_vena_cava"
+   ]
+  },
+  "VH_M_brachiocephalic_vein_R": {
+   "name": "VH_M_brachiocephalic_vein_R",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_brachiocephalic_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Right brachiocephalic vein",
+    "id": "FMA:4751"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    -0.0367,
+    0.5825,
+    0.0244
+   ],
+   "size": [
+    0.0285,
+    0.0512,
+    0.0211
+   ],
+   "neighbors": [
+    "VH_M_superior_vena_cava"
+   ]
+  },
+  "VH_M_cardiac_artery": {
+   "name": "VH_M_cardiac_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_arteries_of_heart",
+   "children": [
+    "VH_M_left_anterior_descending_artery",
+    "VH_M_right_marginal_artery",
+    "VH_M_right_posterior_descending_artery",
+    "VH_M_diagonal_branch_of_anterior_descending_branch_of_left_coronary_artery",
+    "VH_M_left_coronary_artery",
+    "VH_M_right_coronary_artery",
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_left_marginal_branch"
+   ],
+   "isMesh": false,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0184,
+    0.4675,
+    0.0411
+   ],
+   "size": [
+    0.0923,
+    0.0851,
+    0.0922
+   ]
+  },
+  "VH_M_cardiac_chamber": {
+   "name": "VH_M_cardiac_chamber",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_heart",
+   "children": [
+    "VH_M_left_cardiac_atrium",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_heart_left_ventricle"
+   ],
+   "isMesh": false,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0187,
+    0.4761,
+    0.0376
+   ],
+   "size": [
+    0.1244,
+    0.1054,
+    0.1052
+   ]
+  },
+  "VH_M_cardiac_vein": {
+   "name": "VH_M_cardiac_vein",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_veins_of_heart",
+   "children": [
+    "VH_M_great_cardiac_vein",
+    "VH_M_middle_cardiac_vein",
+    "VH_M_oblique_vein_of_left_atrium",
+    "VH_M_anterior_cardiac_vein",
+    "VH_M_coronary_sinus",
+    "VH_M_posterior_vein_of_left_ventricle",
+    "VH_M_small_cardiac_vein"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "cardiac vein",
+    "id": "UBERON:0004148"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004148",
+    "via": "hra-crosswalk",
+    "label": "cardiac vein",
+    "definition": "Vein of heart that drains the myocardium.",
+    "partOf": [
+     {
+      "id": "UBERON:0000948",
+      "label": "heart"
+     }
+    ]
+   },
+   "center": [
+    0.0263,
+    0.4697,
+    0.0398
+   ],
+   "size": [
+    0.1057,
+    0.0919,
+    0.0945
+   ]
+  },
+  "VH_M_coronary_sinus": {
+   "name": "VH_M_coronary_sinus",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "coronary sinus",
+    "id": "UBERON:0005438"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0005438",
+    "via": "hra-crosswalk",
+    "label": "coronary sinus",
+    "definition": "The short trunk that recieves most of the cardiac veins carrying the blood from the myocardium and delivers it to the right atrium, with the sinoatrial connection occurring between the inferior vena cava and the atrioventricular orifice.",
+    "partOf": [
+     {
+      "id": "UBERON:0000948",
+      "label": "heart"
+     },
+     {
+      "id": "UBERON:0004581",
+      "label": "systemic venous system"
+     }
+    ]
+   },
+   "center": [
+    0.0229,
+    0.4711,
+    0.0089
+   ],
+   "size": [
+    0.0452,
+    0.0645,
+    0.0325
+   ],
+   "neighbors": [
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_great_cardiac_vein",
+    "VH_M_heart_left_ventricle",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_marginal_branch",
+    "VH_M_middle_cardiac_vein",
+    "VH_M_mitral_valve",
+    "VH_M_oblique_vein_of_left_atrium",
+    "VH_M_posterior_vein_of_left_ventricle",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery",
+    "VH_M_small_cardiac_vein"
+   ]
+  },
+  "VH_M_descending_aorta": {
+   "name": "VH_M_descending_aorta",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_aorta",
+   "children": [
+    "VH_M_descending_aorta_a",
+    "VH_M_descending_aorta_b"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "descending aorta",
+    "id": "UBERON:0001514"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001514",
+    "via": "hra-crosswalk",
+    "label": "descending aorta",
+    "definition": "The descending aorta is the portion of the aorta in a two-pass circulatory system from the arch of aorta to the point where it divides into the common iliac arteries[GO]. The descending aorta is part of the aorta, the largest artery in the body. The descending aorta is the part of the aorta beginning at the aortic arch that runs down through the chest and abdomen. The descending aorta is divided into two portions, the thoracic and abdominal, in correspondence with the two great cavities of the trunk in which it is situated. Within the abdomen, the descending aorta branches into the two common iliac arteries which serve the legs. [WP,unvetted].",
+    "partOf": [
+     {
+      "id": "UBERON:0000947",
+      "label": "aorta"
+     },
+     {
+      "id": "UBERON:0001009",
+      "label": "circulatory system"
+     }
+    ]
+   },
+   "center": [
+    0.0122,
+    0.3662,
+    -0.0041
+   ],
+   "size": [
+    0.0201,
+    0.3578,
+    0.0689
+   ]
+  },
+  "VH_M_descending_aorta_a": {
+   "name": "VH_M_descending_aorta_a",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_descending_aorta",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "descending aorta",
+    "id": "UBERON:0001514"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001514",
+    "via": "hra-crosswalk",
+    "label": "descending aorta",
+    "definition": "The descending aorta is the portion of the aorta in a two-pass circulatory system from the arch of aorta to the point where it divides into the common iliac arteries[GO]. The descending aorta is part of the aorta, the largest artery in the body. The descending aorta is the part of the aorta beginning at the aortic arch that runs down through the chest and abdomen. The descending aorta is divided into two portions, the thoracic and abdominal, in correspondence with the two great cavities of the trunk in which it is situated. Within the abdomen, the descending aorta branches into the two common iliac arteries which serve the legs. [WP,unvetted].",
+    "partOf": [
+     {
+      "id": "UBERON:0000947",
+      "label": "aorta"
+     },
+     {
+      "id": "UBERON:0001009",
+      "label": "circulatory system"
+     }
+    ]
+   },
+   "center": [
+    0.013,
+    0.4734,
+    -0.0263
+   ],
+   "size": [
+    0.0183,
+    0.1435,
+    0.0246
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_descending_aorta_b"
+   ]
+  },
+  "VH_M_descending_aorta_b": {
+   "name": "VH_M_descending_aorta_b",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_descending_aorta",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "descending aorta",
+    "id": "UBERON:0001514"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001514",
+    "via": "hra-crosswalk",
+    "label": "descending aorta",
+    "definition": "The descending aorta is the portion of the aorta in a two-pass circulatory system from the arch of aorta to the point where it divides into the common iliac arteries[GO]. The descending aorta is part of the aorta, the largest artery in the body. The descending aorta is the part of the aorta beginning at the aortic arch that runs down through the chest and abdomen. The descending aorta is divided into two portions, the thoracic and abdominal, in correspondence with the two great cavities of the trunk in which it is situated. Within the abdomen, the descending aorta branches into the two common iliac arteries which serve the legs. [WP,unvetted].",
+    "partOf": [
+     {
+      "id": "UBERON:0000947",
+      "label": "aorta"
+     },
+     {
+      "id": "UBERON:0001009",
+      "label": "circulatory system"
+     }
+    ]
+   },
+   "center": [
+    0.0122,
+    0.2953,
+    0.0001
+   ],
+   "size": [
+    0.0201,
+    0.2159,
+    0.0604
+   ],
+   "neighbors": [
+    "VH_M_descending_aorta_a",
+    "VH_M_inferior_vena_cava_b"
+   ]
+  },
+  "VH_M_diagonal_branch_of_anterior_descending_branch_of_left_coronary_artery": {
+   "name": "VH_M_diagonal_branch_of_anterior_descending_branch_of_left_coronary_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Diagonal branch of anterior descending branch of left coronary artery",
+    "id": "FMA:3860"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0485,
+    0.495,
+    0.0437
+   ],
+   "size": [
+    0.0153,
+    0.0106,
+    0.0216
+   ],
+   "neighbors": [
+    "VH_M_great_cardiac_vein",
+    "VH_M_heart_left_ventricle",
+    "VH_M_left_anterior_descending_artery"
+   ]
+  },
+  "VH_M_diagonal_branch_of_left_anterior_descending_artery": {
+   "name": "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Diagonal branch of anterior descending branch of left coronary artery",
+    "id": "FMA:3860"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.032,
+    0.4852,
+    0.0092
+   ],
+   "size": [
+    0.0214,
+    0.038,
+    0.0284
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_heart_left_ventricle",
+    "VH_M_left_anterior_descending_artery",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_coronary_artery",
+    "VH_M_left_marginal_branch",
+    "VH_M_mitral_valve",
+    "VH_M_posterior_vein_of_left_ventricle"
+   ]
+  },
+  "VH_M_great_cardiac_vein": {
+   "name": "VH_M_great_cardiac_vein",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "great vein of heart",
+    "id": "UBERON:0006958"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0006958",
+    "via": "hra-crosswalk",
+    "label": "great vein of heart",
+    "definition": "The Great Cardiac Vein (left coronary vein) begins at the apex of the heart and ascends along the anterior longitudinal sulcus to the base of the ventricles. It then curves to the left in the coronary sulcus, and reaching the back of the heart, opens into the left extremity of the coronary sinus. It receives tributaries from the left atrium and from both ventricles: one, the left marginal vein, is of considerable size, and ascends along the left margin of the heart.",
+    "partOf": []
+   },
+   "center": [
+    0.049,
+    0.4645,
+    0.0523
+   ],
+   "size": [
+    0.0219,
+    0.0747,
+    0.0694
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_diagonal_branch_of_anterior_descending_branch_of_left_coronary_artery",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_left_anterior_descending_artery",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_oblique_vein_of_left_atrium"
+   ]
+  },
+  "VH_M_heart": {
+   "name": "VH_M_heart",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": null,
+   "children": [
+    "VH_M_heart_valve",
+    "VH_M_papillary_muscle_of_heart",
+    "VH_M_cardiac_chamber"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "heart",
+    "id": "UBERON:0000948"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0000948",
+    "via": "hra-crosswalk",
+    "label": "heart",
+    "definition": "A myogenic muscular circulatory organ found in the vertebrate cardiovascular system composed of chambers of cardiac muscle. It is the primary circulatory organ.",
+    "partOf": [
+     {
+      "id": "UBERON:0015410",
+      "label": "heart plus pericardium"
+     }
+    ]
+   },
+   "center": [
+    0.0187,
+    0.4761,
+    0.0376
+   ],
+   "size": [
+    0.1244,
+    0.1054,
+    0.1052
+   ]
+  },
+  "VH_M_heart_left_ventricle": {
+   "name": "VH_M_heart_left_ventricle",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_cardiac_chamber",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "heart left ventricle",
+    "id": "UBERON:0002084"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002084",
+    "via": "hra-crosswalk",
+    "label": "heart left ventricle",
+    "definition": "A cardiac ventricle that is in the left side of the heart.",
+    "partOf": []
+   },
+   "center": [
+    0.0427,
+    0.4643,
+    0.0415
+   ],
+   "size": [
+    0.0764,
+    0.0768,
+    0.0926
+   ],
+   "neighbors": [
+    "VH_M_aortic_valve",
+    "VH_M_coronary_sinus",
+    "VH_M_diagonal_branch_of_anterior_descending_branch_of_left_coronary_artery",
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_great_cardiac_vein",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_left_anterior_descending_artery",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_coronary_artery",
+    "VH_M_left_marginal_branch",
+    "VH_M_middle_cardiac_vein",
+    "VH_M_mitral_valve",
+    "VH_M_posterior_vein_of_left_ventricle",
+    "VH_M_pulmonary_valve",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery",
+    "VH_M_right_posterior_descending_artery",
+    "VH_M_tricuspid_valve"
+   ]
+  },
+  "VH_M_heart_right_ventricle": {
+   "name": "VH_M_heart_right_ventricle",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_cardiac_chamber",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "heart right ventricle",
+    "id": "UBERON:0002080"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002080",
+    "via": "hra-crosswalk",
+    "label": "heart right ventricle",
+    "definition": "A cardiac ventricle that is in the right side of the heart.",
+    "partOf": []
+   },
+   "center": [
+    0.0177,
+    0.4722,
+    0.0575
+   ],
+   "size": [
+    0.0831,
+    0.0977,
+    0.0653
+   ],
+   "neighbors": [
+    "VH_M_anterior_cardiac_vein",
+    "VH_M_aortic_valve",
+    "VH_M_ascending_aorta",
+    "VH_M_great_cardiac_vein",
+    "VH_M_heart_left_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_left_anterior_descending_artery",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_middle_cardiac_vein",
+    "VH_M_mitral_valve",
+    "VH_M_papillary_muscle_of_heart_anterior",
+    "VH_M_papillary_muscle_of_heart_medial",
+    "VH_M_papillary_muscle_of_heart_posterior",
+    "VH_M_pulmonary_trunk",
+    "VH_M_pulmonary_valve",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery",
+    "VH_M_right_marginal_artery",
+    "VH_M_right_posterior_descending_artery",
+    "VH_M_small_cardiac_vein",
+    "VH_M_tricuspid_valve"
+   ]
+  },
+  "VH_M_heart_valve": {
+   "name": "VH_M_heart_valve",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_heart",
+   "children": [
+    "VH_M_mitral_valve",
+    "VH_M_tricuspid_valve",
+    "VH_M_aortic_valve",
+    "VH_M_pulmonary_valve"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "valve",
+    "id": "UBERON:0003978"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0003978",
+    "via": "hra-crosswalk",
+    "label": "valve",
+    "definition": null,
+    "partOf": []
+   },
+   "center": [
+    0.0083,
+    0.4787,
+    0.0305
+   ],
+   "size": [
+    0.0653,
+    0.0838,
+    0.068
+   ]
+  },
+  "VH_M_inferior_vena_cava": {
+   "name": "VH_M_inferior_vena_cava",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_vena_cava",
+   "children": [
+    "VH_M_inferior_vena_cava_b",
+    "VH_M_inferior_vena_cava_a"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "inferior vena cava",
+    "id": "FMA:10951"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001072",
+    "via": "uberon-xref:FMA:10951",
+    "label": "inferior vena cava",
+    "definition": "A vein that carries deoxygenated blood from the lower half of the body into the right atrium of the heart.",
+    "partOf": []
+   },
+   "center": [
+    -0.0154,
+    0.3131,
+    0.0032
+   ],
+   "size": [
+    0.0505,
+    0.2884,
+    0.0492
+   ]
+  },
+  "VH_M_inferior_vena_cava_a": {
+   "name": "VH_M_inferior_vena_cava_a",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_inferior_vena_cava",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "inferior vena cava",
+    "id": "FMA:10951"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001072",
+    "via": "uberon-xref:FMA:10951",
+    "label": "inferior vena cava",
+    "definition": "A vein that carries deoxygenated blood from the lower half of the body into the right atrium of the heart.",
+    "partOf": []
+   },
+   "center": [
+    -0.0203,
+    0.4287,
+    0.0037
+   ],
+   "size": [
+    0.0333,
+    0.0572,
+    0.0483
+   ],
+   "neighbors": [
+    "VH_M_inferior_vena_cava_b",
+    "VH_M_right_cardiac_atrium"
+   ]
+  },
+  "VH_M_inferior_vena_cava_b": {
+   "name": "VH_M_inferior_vena_cava_b",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_inferior_vena_cava",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "inferior vena cava",
+    "id": "FMA:10951"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001072",
+    "via": "uberon-xref:FMA:10951",
+    "label": "inferior vena cava",
+    "definition": "A vein that carries deoxygenated blood from the lower half of the body into the right atrium of the heart.",
+    "partOf": []
+   },
+   "center": [
+    -0.0154,
+    0.2866,
+    0.003
+   ],
+   "size": [
+    0.0505,
+    0.2355,
+    0.0488
+   ],
+   "neighbors": [
+    "VH_M_descending_aorta_b",
+    "VH_M_inferior_vena_cava_a"
+   ]
+  },
+  "VH_M_interventricular_septum": {
+   "name": "VH_M_interventricular_septum",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_cardiac_chamber",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "interventricular septum",
+    "id": "UBERON:0002094"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002094",
+    "via": "hra-crosswalk",
+    "label": "interventricular septum",
+    "definition": "Cardiac septum which separates the right ventricle from the left ventricle.[FMA].",
+    "partOf": []
+   },
+   "center": [
+    0.0326,
+    0.4633,
+    0.0501
+   ],
+   "size": [
+    0.0519,
+    0.0725,
+    0.0668
+   ],
+   "neighbors": [
+    "VH_M_aortic_valve",
+    "VH_M_great_cardiac_vein",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_left_anterior_descending_artery",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_mitral_valve",
+    "VH_M_papillary_muscle_of_heart_anterolateral",
+    "VH_M_papillary_muscle_of_heart_medial",
+    "VH_M_pulmonary_valve",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_posterior_descending_artery",
+    "VH_M_tricuspid_valve"
+   ]
+  },
+  "VH_M_left_anterior_descending_artery": {
+   "name": "VH_M_left_anterior_descending_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Anterior descending branch of left pulmonary artery",
+    "id": "FMA:8636"
+   },
+   "override": {
+    "reason": "HRA crosswalk (v1.3-v2.0) maps this node to FMA:8636 'Anterior descending branch of left pulmonary artery'; the mesh is a coronary artery. Uberon UBERON:8600102 'left anterior descending artery' (xref FMA:3862) is the matching term. Reported upstream: docs/upstream/hubmap-crosswalk-lad-issue.md",
+    "displayLabel": "left anterior descending artery"
+   },
+   "uberon": {
+    "id": "UBERON:8600102",
+    "via": "override",
+    "label": "left anterior descending artery",
+    "definition": "An artery that branches from the left coronary artery and supplies the anterior wall of the left ventricle, the interventricular septum, and the apex of the heart.",
+    "partOf": [
+     {
+      "id": "UBERON:0000915",
+      "label": "thoracic segment of trunk"
+     }
+    ]
+   },
+   "center": [
+    0.0426,
+    0.4664,
+    0.0549
+   ],
+   "size": [
+    0.0358,
+    0.0782,
+    0.0646
+   ],
+   "neighbors": [
+    "VH_M_diagonal_branch_of_anterior_descending_branch_of_left_coronary_artery",
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_great_cardiac_vein",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_left_coronary_artery"
+   ]
+  },
+  "VH_M_left_cardiac_atrium": {
+   "name": "VH_M_left_cardiac_atrium",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_cardiac_chamber",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left cardiac atrium",
+    "id": "UBERON:0002079"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002079",
+    "via": "hra-crosswalk",
+    "label": "left cardiac atrium",
+    "definition": "A cardiac atrium that is in the left side of the heart. It receives oxygenated blood from the pulmonary veins, In mammals this is pumped into the left ventricle, via the Mitral valve.",
+    "partOf": []
+   },
+   "center": [
+    0.0044,
+    0.4926,
+    0.0085
+   ],
+   "size": [
+    0.073,
+    0.0722,
+    0.047
+   ],
+   "neighbors": [
+    "VH_M_aortic_valve",
+    "VH_M_ascending_aorta",
+    "VH_M_coronary_sinus",
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_great_cardiac_vein",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_left_marginal_branch",
+    "VH_M_mitral_valve",
+    "VH_M_oblique_vein_of_left_atrium",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_pulmonary_trunk",
+    "VH_M_pulmonary_vein_L_inf",
+    "VH_M_pulmonary_vein_L_sup",
+    "VH_M_pulmonary_vein_R_inf",
+    "VH_M_pulmonary_vein_R_sup",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery"
+   ]
+  },
+  "VH_M_left_common_carotid_artery": {
+   "name": "VH_M_left_common_carotid_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_aorta",
+   "children": [
+    "VH_M_left_common_carotid_artery_a",
+    "VH_M_left_common_carotid_artery_b"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "left common carotid artery plus branches",
+    "id": "UBERON:0001536"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001536",
+    "via": "hra-crosswalk",
+    "label": "left common carotid artery plus branches",
+    "definition": "The leftmost of the two common carotid arteries, originating from the aortic arch in the thorax.",
+    "partOf": []
+   },
+   "center": [
+    0.0187,
+    0.6257,
+    0.0221
+   ],
+   "size": [
+    0.0276,
+    0.1148,
+    0.0194
+   ]
+  },
+  "VH_M_left_common_carotid_artery_a": {
+   "name": "VH_M_left_common_carotid_artery_a",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_left_common_carotid_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left common carotid artery plus branches",
+    "id": "UBERON:0001536"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001536",
+    "via": "hra-crosswalk",
+    "label": "left common carotid artery plus branches",
+    "definition": "The leftmost of the two common carotid arteries, originating from the aortic arch in the thorax.",
+    "partOf": []
+   },
+   "center": [
+    0.0092,
+    0.5764,
+    0.0165
+   ],
+   "size": [
+    0.0087,
+    0.0162,
+    0.0081
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_brachiocephalic_vein_L",
+    "VH_M_left_common_carotid_artery_b"
+   ]
+  },
+  "VH_M_left_common_carotid_artery_b": {
+   "name": "VH_M_left_common_carotid_artery_b",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_left_common_carotid_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left common carotid artery plus branches",
+    "id": "UBERON:0001536"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001536",
+    "via": "hra-crosswalk",
+    "label": "left common carotid artery plus branches",
+    "definition": "The leftmost of the two common carotid arteries, originating from the aortic arch in the thorax.",
+    "partOf": []
+   },
+   "center": [
+    0.0212,
+    0.6332,
+    0.0245
+   ],
+   "size": [
+    0.0226,
+    0.0998,
+    0.0145
+   ],
+   "neighbors": [
+    "VH_M_brachiocephalic_vein_L",
+    "VH_M_left_common_carotid_artery_a"
+   ]
+  },
+  "VH_M_left_coronary_artery": {
+   "name": "VH_M_left_coronary_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left coronary artery",
+    "id": "UBERON:0001626"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001626",
+    "via": "hra-crosswalk",
+    "label": "left coronary artery",
+    "definition": "Coronary artery which runs along the left side of the heart and predominantly supplies the mycocardium of the left side of the heart[Wikipedia,modified].",
+    "partOf": []
+   },
+   "center": [
+    0.0184,
+    0.5065,
+    0.024
+   ],
+   "size": [
+    0.0133,
+    0.0071,
+    0.0051
+   ],
+   "neighbors": [
+    "VH_M_aortic_valve",
+    "VH_M_ascending_aorta",
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_heart_left_ventricle",
+    "VH_M_left_anterior_descending_artery"
+   ]
+  },
+  "VH_M_left_marginal_branch": {
+   "name": "VH_M_left_marginal_branch",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Left marginal artery",
+    "id": "FMA:3902"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.053,
+    0.4846,
+    0.015
+   ],
+   "size": [
+    0.0229,
+    0.0069,
+    0.0171
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_heart_left_ventricle",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_mitral_valve"
+   ]
+  },
+  "VH_M_left_subclavian_artery": {
+   "name": "VH_M_left_subclavian_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_aorta",
+   "children": [
+    "VH_M_left_subclavian_artery_a",
+    "VH_M_left_subclavian_artery_b"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "left subclavian artery",
+    "id": "UBERON:0001584"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001584",
+    "via": "hra-crosswalk",
+    "label": "left subclavian artery",
+    "definition": "The subclavian artery that supplies the left pectoral appendage.",
+    "partOf": []
+   },
+   "center": [
+    0.0188,
+    0.5902,
+    0.0052
+   ],
+   "size": [
+    0.0177,
+    0.0478,
+    0.0119
+   ]
+  },
+  "VH_M_left_subclavian_artery_a": {
+   "name": "VH_M_left_subclavian_artery_a",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_left_subclavian_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left subclavian artery",
+    "id": "UBERON:0001584"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001584",
+    "via": "hra-crosswalk",
+    "label": "left subclavian artery",
+    "definition": "The subclavian artery that supplies the left pectoral appendage.",
+    "partOf": []
+   },
+   "center": [
+    0.0147,
+    0.5757,
+    0.0043
+   ],
+   "size": [
+    0.0095,
+    0.0187,
+    0.0102
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_left_subclavian_artery_b"
+   ]
+  },
+  "VH_M_left_subclavian_artery_b": {
+   "name": "VH_M_left_subclavian_artery_b",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_left_subclavian_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left subclavian artery",
+    "id": "UBERON:0001584"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001584",
+    "via": "hra-crosswalk",
+    "label": "left subclavian artery",
+    "definition": "The subclavian artery that supplies the left pectoral appendage.",
+    "partOf": []
+   },
+   "center": [
+    0.0213,
+    0.599,
+    0.0068
+   ],
+   "size": [
+    0.0128,
+    0.0302,
+    0.0086
+   ],
+   "neighbors": [
+    "VH_M_left_subclavian_artery_a"
+   ]
+  },
+  "VH_M_middle_cardiac_vein": {
+   "name": "VH_M_middle_cardiac_vein",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "middle cardiac vein",
+    "id": "UBERON:0009687"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0009687",
+    "via": "hra-crosswalk",
+    "label": "middle cardiac vein",
+    "definition": "The middle cardiac vein commences at the apex of the heart, ascends in the posterior longitudinal sulcus, and ends in the coronary sinus near its right extremity.",
+    "partOf": []
+   },
+   "center": [
+    0.0346,
+    0.433,
+    0.049
+   ],
+   "size": [
+    0.0551,
+    0.0186,
+    0.056
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_right_posterior_descending_artery",
+    "VH_M_small_cardiac_vein"
+   ]
+  },
+  "VH_M_mitral_valve": {
+   "name": "VH_M_mitral_valve",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_heart_valve",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "mitral valve",
+    "id": "UBERON:0002135"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002135",
+    "via": "hra-crosswalk",
+    "label": "mitral valve",
+    "definition": "An atrioventricular valve that is part of the outflow part of the left atrium.",
+    "partOf": [
+     {
+      "id": "UBERON:0005966",
+      "label": "outflow part of left atrium"
+     }
+    ]
+   },
+   "center": [
+    0.0227,
+    0.4771,
+    0.0117
+   ],
+   "size": [
+    0.0366,
+    0.0411,
+    0.0305
+   ],
+   "neighbors": [
+    "VH_M_aortic_valve",
+    "VH_M_coronary_sinus",
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_left_marginal_branch",
+    "VH_M_papillary_muscle_of_heart_anterolateral",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery",
+    "VH_M_tricuspid_valve"
+   ]
+  },
+  "VH_M_oblique_vein_of_left_atrium": {
+   "name": "VH_M_oblique_vein_of_left_atrium",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Oblique vein of left atrium",
+    "id": "FMA:4715"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0348,
+    0.5091,
+    0.0208
+   ],
+   "size": [
+    0.0033,
+    0.0131,
+    0.0078
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_great_cardiac_vein",
+    "VH_M_left_cardiac_atrium"
+   ]
+  },
+  "VH_M_papillary_muscle_of_heart": {
+   "name": "VH_M_papillary_muscle_of_heart",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_heart",
+   "children": [
+    "VH_M_papillary_muscle_of_heart_anterior",
+    "VH_M_papillary_muscle_of_heart_anterolateral",
+    "VH_M_papillary_muscle_of_heart_medial",
+    "VH_M_papillary_muscle_of_heart_posterior",
+    "VH_M_papillary_muscle_of_heart_posteromedial"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "papillary muscle of heart",
+    "id": "UBERON:0002494"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002494",
+    "via": "hra-crosswalk",
+    "label": "papillary muscle of heart",
+    "definition": "One of the group of myocardial bundles which terminate in the chordae tendineae that attach to the cusps of the atrioventricular valves; each ventricle has an anterior and a posterior papillary muscle; the right ventricle sometimes has a septal papillary muscle.",
+    "partOf": [
+     {
+      "id": "UBERON:0002082",
+      "label": "cardiac ventricle"
+     }
+    ]
+   },
+   "center": [
+    0.0337,
+    0.4575,
+    0.0544
+   ],
+   "size": [
+    0.0528,
+    0.0522,
+    0.0619
+   ]
+  },
+  "VH_M_papillary_muscle_of_heart_anterior": {
+   "name": "VH_M_papillary_muscle_of_heart_anterior",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_papillary_muscle_of_heart",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Anterior papillary muscle of left ventricle",
+    "id": "FMA:7264"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.019,
+    0.453,
+    0.0771
+   ],
+   "size": [
+    0.0233,
+    0.0144,
+    0.0164
+   ],
+   "neighbors": [
+    "VH_M_heart_right_ventricle"
+   ]
+  },
+  "VH_M_papillary_muscle_of_heart_anterolateral": {
+   "name": "VH_M_papillary_muscle_of_heart_anterolateral",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_papillary_muscle_of_heart",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Anterolateral head of lateral papillary muscle of left ventricle",
+    "id": "FMA:7265"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0455,
+    0.4693,
+    0.0419
+   ],
+   "size": [
+    0.0292,
+    0.0286,
+    0.037
+   ],
+   "neighbors": [
+    "VH_M_interventricular_septum",
+    "VH_M_mitral_valve",
+    "VH_M_papillary_muscle_of_heart_posteromedial"
+   ]
+  },
+  "VH_M_papillary_muscle_of_heart_medial": {
+   "name": "VH_M_papillary_muscle_of_heart_medial",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_papillary_muscle_of_heart",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Septal papillary muscle of right ventricle",
+    "id": "FMA:7262"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0244,
+    0.444,
+    0.0546
+   ],
+   "size": [
+    0.0063,
+    0.0061,
+    0.0085
+   ],
+   "neighbors": [
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum"
+   ]
+  },
+  "VH_M_papillary_muscle_of_heart_posterior": {
+   "name": "VH_M_papillary_muscle_of_heart_posterior",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_papillary_muscle_of_heart",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Posterior papillary muscle of right ventricle",
+    "id": "FMA:7261"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0126,
+    0.4341,
+    0.0587
+   ],
+   "size": [
+    0.0084,
+    0.0055,
+    0.0068
+   ],
+   "neighbors": [
+    "VH_M_heart_right_ventricle"
+   ]
+  },
+  "VH_M_papillary_muscle_of_heart_posteromedial": {
+   "name": "VH_M_papillary_muscle_of_heart_posteromedial",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_papillary_muscle_of_heart",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Posteromedial head of posterior papillary muscle of left ventricle",
+    "id": "FMA:7267"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0455,
+    0.4583,
+    0.0419
+   ],
+   "size": [
+    0.0272,
+    0.0126,
+    0.0337
+   ],
+   "neighbors": [
+    "VH_M_papillary_muscle_of_heart_anterolateral"
+   ]
+  },
+  "VH_M_posterior_vein_of_left_ventricle": {
+   "name": "VH_M_posterior_vein_of_left_ventricle",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Posterior vein of left ventricle",
+    "id": "FMA:4712"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0614,
+    0.4667,
+    0.021
+   ],
+   "size": [
+    0.0355,
+    0.032,
+    0.0445
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_diagonal_branch_of_left_anterior_descending_artery",
+    "VH_M_heart_left_ventricle"
+   ]
+  },
+  "VH_M_pulmonary_artery": {
+   "name": "VH_M_pulmonary_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_arteries_of_heart",
+   "children": [
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_pulmonary_trunk"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "pulmonary artery",
+    "id": "UBERON:0002012"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002012",
+    "via": "hra-crosswalk",
+    "label": "pulmonary artery",
+    "definition": "An artery that carries deoxygenated blood from heart to the lungs. They are the only arteries (other than umbilical arteries in the fetus) that carry deoxygenated blood..",
+    "partOf": [
+     {
+      "id": "UBERON:0008886",
+      "label": "pulmonary vascular system"
+     }
+    ]
+   },
+   "center": [
+    0.016,
+    0.5242,
+    0.0105
+   ],
+   "size": [
+    0.0826,
+    0.0386,
+    0.0764
+   ]
+  },
+  "VH_M_pulmonary_artery_L": {
+   "name": "VH_M_pulmonary_artery_L",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_pulmonary_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left pulmonary artery",
+    "id": "UBERON:0001652"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001652",
+    "via": "hra-crosswalk",
+    "label": "left pulmonary artery",
+    "definition": "The pulmonary artery that supplies the left lung.",
+    "partOf": []
+   },
+   "center": [
+    0.0355,
+    0.5241,
+    -0.0047
+   ],
+   "size": [
+    0.0435,
+    0.0384,
+    0.046
+   ],
+   "neighbors": [
+    "VH_M_left_cardiac_atrium",
+    "VH_M_pulmonary_trunk",
+    "VH_M_pulmonary_vein_L_sup"
+   ]
+  },
+  "VH_M_pulmonary_artery_R": {
+   "name": "VH_M_pulmonary_artery_R",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_pulmonary_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right pulmonary artery",
+    "id": "UBERON:0001651"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001651",
+    "via": "hra-crosswalk",
+    "label": "right pulmonary artery",
+    "definition": "The pulmonary artery that supplies the right lung.",
+    "partOf": []
+   },
+   "center": [
+    -0.0092,
+    0.5247,
+    0.0085
+   ],
+   "size": [
+    0.0323,
+    0.0246,
+    0.0266
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_ascending_aorta",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_pulmonary_trunk",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_superior_vena_cava"
+   ]
+  },
+  "VH_M_pulmonary_trunk": {
+   "name": "VH_M_pulmonary_trunk",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_pulmonary_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "pulmonary trunk",
+    "id": "UBERON:0002333"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002333",
+    "via": "hra-crosswalk",
+    "label": "pulmonary trunk",
+    "definition": "An arterial trunk which is continuous with the heart and branches into the pulmonary arteries.",
+    "partOf": [
+     {
+      "id": "UBERON:0008886",
+      "label": "pulmonary vascular system"
+     }
+    ]
+   },
+   "center": [
+    0.0154,
+    0.5243,
+    0.0253
+   ],
+   "size": [
+    0.0285,
+    0.0384,
+    0.0468
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_aortic_valve",
+    "VH_M_ascending_aorta",
+    "VH_M_heart_right_ventricle",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_pulmonary_artery_L",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_pulmonary_valve"
+   ]
+  },
+  "VH_M_pulmonary_valve": {
+   "name": "VH_M_pulmonary_valve",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_heart_valve",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "pulmonary valve",
+    "id": "UBERON:0002146"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002146",
+    "via": "hra-crosswalk",
+    "label": "pulmonary valve",
+    "definition": "The semilunar valve of the heart that lies between the right ventricle and the pulmonary artery.",
+    "partOf": []
+   },
+   "center": [
+    0.0172,
+    0.5085,
+    0.0423
+   ],
+   "size": [
+    0.0257,
+    0.0242,
+    0.023
+   ],
+   "neighbors": [
+    "VH_M_aortic_valve",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_pulmonary_trunk"
+   ]
+  },
+  "VH_M_pulmonary_vein": {
+   "name": "VH_M_pulmonary_vein",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_veins_of_heart",
+   "children": [
+    "VH_M_pulmonary_vein_R_inf",
+    "VH_M_pulmonary_vein_R_sup",
+    "VH_M_pulmonary_vein_L_inf",
+    "VH_M_pulmonary_vein_L_sup"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "pulmonary vein",
+    "id": "UBERON:0002016"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002016",
+    "via": "hra-crosswalk",
+    "label": "pulmonary vein",
+    "definition": "Pulmonary veins are blood vessels that transport blood from the lungs to the heart[GO].",
+    "partOf": [
+     {
+      "id": "UBERON:0008886",
+      "label": "pulmonary vascular system"
+     }
+    ]
+   },
+   "center": [
+    0.0042,
+    0.505,
+    -0.0047
+   ],
+   "size": [
+    0.0859,
+    0.0578,
+    0.0393
+   ]
+  },
+  "VH_M_pulmonary_vein_L_inf": {
+   "name": "VH_M_pulmonary_vein_L_inf",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_pulmonary_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left inferior pulmonary vein",
+    "id": "FMA:49913"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:8920017",
+    "via": "uberon-xref:FMA:49913",
+    "label": "left inferior pulmonary vein",
+    "definition": "A pulmonary vein that drains blood from the inferior lobe of the left lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002048",
+      "label": "lung"
+     }
+    ]
+   },
+   "center": [
+    0.0314,
+    0.4942,
+    -0.0153
+   ],
+   "size": [
+    0.0228,
+    0.0242,
+    0.0181
+   ],
+   "neighbors": [
+    "VH_M_left_cardiac_atrium"
+   ]
+  },
+  "VH_M_pulmonary_vein_L_sup": {
+   "name": "VH_M_pulmonary_vein_L_sup",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_pulmonary_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "left superior pulmonary vein",
+    "id": "FMA:49916"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:8920019",
+    "via": "uberon-xref:FMA:49916",
+    "label": "left superior pulmonary vein",
+    "definition": "A pulmonary vein that drains blood from the superior lobe and lingula of the left lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002048",
+      "label": "lung"
+     }
+    ]
+   },
+   "center": [
+    0.0398,
+    0.5243,
+    0.008
+   ],
+   "size": [
+    0.0149,
+    0.0194,
+    0.014
+   ],
+   "neighbors": [
+    "VH_M_left_cardiac_atrium",
+    "VH_M_pulmonary_artery_L"
+   ]
+  },
+  "VH_M_pulmonary_vein_R_inf": {
+   "name": "VH_M_pulmonary_vein_R_inf",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_pulmonary_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right inferior pulmonary vein",
+    "id": "FMA:49911"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:8920016",
+    "via": "uberon-xref:FMA:49911",
+    "label": "right inferior pulmonary vein",
+    "definition": "A pulmonary vein that drains blood from the inferior lobe of the right lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002048",
+      "label": "lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0223,
+    0.4887,
+    -0.0128
+   ],
+   "size": [
+    0.0203,
+    0.0252,
+    0.0129
+   ],
+   "neighbors": [
+    "VH_M_left_cardiac_atrium"
+   ]
+  },
+  "VH_M_pulmonary_vein_R_sup": {
+   "name": "VH_M_pulmonary_vein_R_sup",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_pulmonary_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right superior pulmonary vein",
+    "id": "FMA:49914"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:8920018",
+    "via": "uberon-xref:FMA:49914",
+    "label": "right superior pulmonary vein",
+    "definition": "A pulmonary vein that drains blood from the superior and middle lobes of the right lung.",
+    "partOf": [
+     {
+      "id": "UBERON:0002048",
+      "label": "lung"
+     }
+    ]
+   },
+   "center": [
+    -0.0312,
+    0.4975,
+    0.005
+   ],
+   "size": [
+    0.0151,
+    0.0209,
+    0.0127
+   ],
+   "neighbors": [
+    "VH_M_left_cardiac_atrium",
+    "VH_M_right_cardiac_atrium"
+   ]
+  },
+  "VH_M_right_cardiac_atrium": {
+   "name": "VH_M_right_cardiac_atrium",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_cardiac_chamber",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right cardiac atrium",
+    "id": "UBERON:0002078"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002078",
+    "via": "hra-crosswalk",
+    "label": "right cardiac atrium",
+    "definition": "A cardiac atrium that is in the right side of the heart. It receives deoxygenated blood. In mammals, this comes from the superior and inferior vena cava and the coronary sinus, and pumps it into the right ventricle through the tricuspid valve.",
+    "partOf": []
+   },
+   "center": [
+    -0.0174,
+    0.4809,
+    0.0344
+   ],
+   "size": [
+    0.0521,
+    0.0958,
+    0.0628
+   ],
+   "neighbors": [
+    "VH_M_anterior_cardiac_vein",
+    "VH_M_aortic_valve",
+    "VH_M_ascending_aorta",
+    "VH_M_coronary_sinus",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_inferior_vena_cava_a",
+    "VH_M_interventricular_septum",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_mitral_valve",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_pulmonary_vein_R_sup",
+    "VH_M_right_coronary_artery",
+    "VH_M_small_cardiac_vein",
+    "VH_M_superior_vena_cava",
+    "VH_M_tricuspid_valve"
+   ]
+  },
+  "VH_M_right_coronary_artery": {
+   "name": "VH_M_right_coronary_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "right coronary artery",
+    "id": "UBERON:0001625"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001625",
+    "via": "hra-crosswalk",
+    "label": "right coronary artery",
+    "definition": "Coronary artery which runs along the right side of the heart and predominantly supplies the mycocardium of the right side of the heart[Wikipedia,modified].",
+    "partOf": []
+   },
+   "center": [
+    -0.0001,
+    0.4676,
+    0.0333
+   ],
+   "size": [
+    0.0551,
+    0.0695,
+    0.0691
+   ],
+   "neighbors": [
+    "VH_M_anterior_cardiac_vein",
+    "VH_M_aortic_valve",
+    "VH_M_ascending_aorta",
+    "VH_M_coronary_sinus",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_left_cardiac_atrium",
+    "VH_M_mitral_valve",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_marginal_artery",
+    "VH_M_right_posterior_descending_artery",
+    "VH_M_small_cardiac_vein",
+    "VH_M_tricuspid_valve"
+   ]
+  },
+  "VH_M_right_marginal_artery": {
+   "name": "VH_M_right_marginal_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "marginal branch of right coronary artery",
+    "id": "FMA:3818"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:8920003",
+    "via": "uberon-xref:FMA:3818",
+    "label": "right marginal artery",
+    "definition": "An artery that is a branch of the right coronary artery. It follows the acute margin of the heart supplying blood to the right ventricle.",
+    "partOf": [
+     {
+      "id": "UBERON:0000948",
+      "label": "heart"
+     }
+    ]
+   },
+   "center": [
+    -0.0156,
+    0.4425,
+    0.0698
+   ],
+   "size": [
+    0.0245,
+    0.0153,
+    0.0056
+   ],
+   "neighbors": [
+    "VH_M_heart_right_ventricle",
+    "VH_M_right_coronary_artery",
+    "VH_M_small_cardiac_vein"
+   ]
+  },
+  "VH_M_right_posterior_descending_artery": {
+   "name": "VH_M_right_posterior_descending_artery",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_artery",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "Posterior interventricular branch of right coronary artery",
+    "id": "FMA:3840"
+   },
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0349,
+    0.4347,
+    0.0536
+   ],
+   "size": [
+    0.0508,
+    0.0195,
+    0.0487
+   ],
+   "neighbors": [
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_middle_cardiac_vein",
+    "VH_M_right_coronary_artery"
+   ]
+  },
+  "VH_M_small_cardiac_vein": {
+   "name": "VH_M_small_cardiac_vein",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "coronaryVessels",
+   "parent": "VH_M_cardiac_vein",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "small cardiac vein",
+    "id": "UBERON:0035374"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0035374",
+    "via": "hra-crosswalk",
+    "label": "small cardiac vein",
+    "definition": "A vein running parallel to the right coronary artery in the coronary sulcus that drains into the right extremity of the coronary sinus.",
+    "partOf": []
+   },
+   "center": [
+    -0.0098,
+    0.4393,
+    0.0453
+   ],
+   "size": [
+    0.028,
+    0.0121,
+    0.0485
+   ],
+   "neighbors": [
+    "VH_M_coronary_sinus",
+    "VH_M_heart_right_ventricle",
+    "VH_M_middle_cardiac_vein",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery",
+    "VH_M_right_marginal_artery",
+    "VH_M_tricuspid_valve"
+   ]
+  },
+  "VH_M_superior_vena_cava": {
+   "name": "VH_M_superior_vena_cava",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_vena_cava",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "superior vena cava",
+    "id": "FMA:4720"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0001585",
+    "via": "uberon-xref:FMA:4720",
+    "label": "anterior vena cava",
+    "definition": "A vein that carries deoxygenated blood from the upper half of the body into the right atrium of the heart.",
+    "partOf": []
+   },
+   "center": [
+    -0.0254,
+    0.5327,
+    0.02
+   ],
+   "size": [
+    0.0279,
+    0.0668,
+    0.0306
+   ],
+   "neighbors": [
+    "VH_M_aortic_arch",
+    "VH_M_ascending_aorta",
+    "VH_M_brachiocephalic_vein_L",
+    "VH_M_brachiocephalic_vein_R",
+    "VH_M_pulmonary_artery_R",
+    "VH_M_right_cardiac_atrium"
+   ]
+  },
+  "VH_M_tricuspid_valve": {
+   "name": "VH_M_tricuspid_valve",
+   "model": "heart.glb",
+   "sourceId": "HRA-HEART-M",
+   "layer": "heart",
+   "parent": "VH_M_heart_valve",
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "tricuspid valve",
+    "id": "UBERON:0002134"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002134",
+    "via": "hra-crosswalk",
+    "label": "tricuspid valve",
+    "definition": "An atrioventricular valve that is part of the outflow part of the right atrium.",
+    "partOf": [
+     {
+      "id": "UBERON:0005965",
+      "label": "outflow part of right atrium"
+     }
+    ]
+   },
+   "center": [
+    -0.0055,
+    0.4599,
+    0.0457
+   ],
+   "size": [
+    0.0377,
+    0.0462,
+    0.0376
+   ],
+   "neighbors": [
+    "VH_M_anterior_cardiac_vein",
+    "VH_M_heart_left_ventricle",
+    "VH_M_heart_right_ventricle",
+    "VH_M_interventricular_septum",
+    "VH_M_mitral_valve",
+    "VH_M_right_cardiac_atrium",
+    "VH_M_right_coronary_artery",
+    "VH_M_small_cardiac_vein"
+   ]
+  },
+  "VH_M_veins_of_heart": {
+   "name": "VH_M_veins_of_heart",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_blood_vasculature_of_heart",
+   "children": [
+    "VH_M_cardiac_vein",
+    "VH_M_pulmonary_vein",
+    "VH_M_brachiocephalic_vein",
+    "VH_M_vena_cava"
+   ],
+   "isMesh": false,
+   "crosswalk": null,
+   "override": null,
+   "uberon": null,
+   "center": [
+    0.0141,
+    0.3903,
+    0.0313
+   ],
+   "size": [
+    0.1302,
+    0.4429,
+    0.1114
+   ]
+  },
+  "VH_M_vena_cava": {
+   "name": "VH_M_vena_cava",
+   "model": "heart-vessels.glb",
+   "sourceId": "HRA-VASC-M",
+   "layer": "greatVessels",
+   "parent": "VH_M_veins_of_heart",
+   "children": [
+    "VH_M_superior_vena_cava",
+    "VH_M_inferior_vena_cava"
+   ],
+   "isMesh": false,
+   "crosswalk": {
+    "label": "vena cava",
+    "id": "UBERON:0004087"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0004087",
+    "via": "hra-crosswalk",
+    "label": "vena cava",
+    "definition": "Any of the veins that carries deoxygenated blood from a part of the body into the right atrium of the heart.",
+    "partOf": []
+   },
+   "center": [
+    -0.0154,
+    0.3675,
+    0.0069
+   ],
+   "size": [
+    0.0505,
+    0.3972,
+    0.0567
+   ]
+  }
+ }
+}

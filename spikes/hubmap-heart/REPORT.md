@@ -2,7 +2,7 @@
 
 **Result: the data path works.** The HRA heart GLB downloads (via GitHub mirror), loads in Three.js r170 with the stock GLTFLoader in ~0.1 s (local), renders, and click-picking returns per-structure node names.
 
-Run: `./scripts/download-hubmap-heart.sh && cd spikes/hubmap-heart && npm i && node run.mjs`
+Run: `./scripts/download-hubmap.sh && cd spikes/hubmap-heart && npm i && node run.mjs`
 (serves `index.html` + model, opens headless Chromium, prints the report, writes `screenshot.png`.)
 
 | Item | Value |

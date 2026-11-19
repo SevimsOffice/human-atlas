@@ -23,7 +23,7 @@ docs/                   ARCHITECTURE, DATA_SOURCES, SOURCES, PHYSIOLOGY_MODEL, R
 ```
 
 ## Commands
-- Download heart data: `./scripts/download-hubmap-heart.sh`
+- Download heart data: `./scripts/download-hubmap.sh`
 - Data spike: `cd spikes/hubmap-heart && npm i && node run.mjs`
 - (from M1) `npm test` (Vitest), `npm run e2e -- --trace off` (Playwright), `npm run dev`
 
