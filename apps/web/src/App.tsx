@@ -10,6 +10,7 @@ import { FlowPanel } from './ui/FlowPanel';
 import { Inspector } from './ui/Inspector';
 import { StructureList } from './ui/StructureList';
 import { Credits } from './ui/Credits';
+import { startFlowTicker } from './lib/flowClock';
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -59,6 +60,7 @@ export default function App() {
   const { t } = useTranslation();
   const view = useAtlas((s) => s.view);
   const select = useAtlas((s) => s.select);
+  useEffect(() => startFlowTicker(), []);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') select(null); };
     const onHash = () => useAtlas.setState({ view: location.hash === '#/credits' ? 'credits' : 'atlas' });

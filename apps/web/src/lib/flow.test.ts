@@ -1,26 +1,29 @@
 import { describe, expect, it } from 'vitest';
-import { BeatClock, easeBeat, samplePath, resolveWaypoints } from './flow';
+import { FlowClock, easeBeat, samplePath, resolveWaypoints } from './flow';
 import { computeCardiac } from '@atlas/physiology';
 
-describe('BeatClock', () => {
-  it('advances one beat per cycle duration from the engine', () => {
-    const c = new BeatClock();
-    const rest = computeCardiac('rest').cycleDuration.value; // 0.8 s
-    for (let i = 0; i < 16; i++) c.advance(0.1, rest);
-    expect(c.beats).toBeCloseTo(2, 9);
+describe('FlowClock', () => {
+  const rest = computeCardiac('rest').cycleDuration.value; // 0.8 s
+  const run = computeCardiac('running').cycleDuration.value; // 0.4 s
+  it('counts one beat per cycle duration from the engine, from wall-clock time', () => {
+    const c = new FlowClock(rest, 0);
+    c.setRunning(true, 0);
+    expect(c.beatsAt(1600)).toBeCloseTo(2, 9);
   });
   it('runs twice as fast in the running scenario, continuing from the current position', () => {
-    const c = new BeatClock();
-    for (let i = 0; i < 8; i++) c.advance(0.1, computeCardiac('rest').cycleDuration.value);
-    const before = c.beats;
-    for (let i = 0; i < 8; i++) c.advance(0.1, computeCardiac('running').cycleDuration.value);
-    expect(before).toBeCloseTo(1, 9);
-    expect(c.beats - before).toBeCloseTo(2, 9);
+    const c = new FlowClock(rest, 0);
+    c.setRunning(true, 0);
+    c.setCycle(run, 800); // 1 beat at rest
+    expect(c.beatsAt(800)).toBeCloseTo(1, 9);
+    expect(c.beatsAt(1600)).toBeCloseTo(3, 9); // +2 beats in 0.8 s
   });
-  it('clamps long frame gaps', () => {
-    const c = new BeatClock();
-    c.advance(10, 0.8);
-    expect(c.beats).toBeCloseTo(0.25 / 0.8, 9);
+  it('stands still while paused and resumes without a jump', () => {
+    const c = new FlowClock(rest, 0);
+    c.setRunning(true, 0);
+    c.setRunning(false, 400);
+    expect(c.beatsAt(5000)).toBeCloseTo(0.5, 9);
+    c.setRunning(true, 5000);
+    expect(c.beatsAt(5400)).toBeCloseTo(1, 9);
   });
 });
 

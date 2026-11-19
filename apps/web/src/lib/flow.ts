@@ -4,15 +4,28 @@
 
 export type Vec3 = readonly [number, number, number];
 
-/** Accumulates heartbeats over time so a change of heart rate changes speed without jumping position. */
-export class BeatClock {
-  beats = 0;
-  advance(dtSeconds: number, cycleSeconds: number): number {
-    if (cycleSeconds <= 0) throw new RangeError('cycle must be positive');
-    // clamp huge frame gaps (tab in background) to keep the animation continuous
-    this.beats += Math.min(Math.max(dtSeconds, 0), 0.25) / cycleSeconds;
-    return this.beats;
+/**
+ * Counts heartbeats from wall-clock time (not from rendered frames), so the animation speed is
+ * correct even when rendering is slow. Changing the cycle duration or pausing re-anchors the
+ * count, so the position never jumps.
+ */
+export class FlowClock {
+  private anchorBeats = 0;
+  private anchorMs = 0;
+  private running = false;
+  constructor(private cycleSeconds: number, nowMs: number) {
+    if (!(cycleSeconds > 0)) throw new RangeError('cycle must be positive');
+    this.anchorMs = nowMs;
   }
+  beatsAt(nowMs: number): number {
+    return this.running ? this.anchorBeats + Math.max(0, nowMs - this.anchorMs) / 1000 / this.cycleSeconds : this.anchorBeats;
+  }
+  private reanchor(nowMs: number) { this.anchorBeats = this.beatsAt(nowMs); this.anchorMs = nowMs; }
+  setCycle(cycleSeconds: number, nowMs: number) {
+    if (!(cycleSeconds > 0)) throw new RangeError('cycle must be positive');
+    this.reanchor(nowMs); this.cycleSeconds = cycleSeconds;
+  }
+  setRunning(running: boolean, nowMs: number) { this.reanchor(nowMs); this.running = running; }
 }
 
 /** Ejection-like easing: most of the movement happens early in each beat. */

@@ -1,20 +1,17 @@
 import { useMemo, useRef } from 'react';
+import { flowClock } from '../lib/flowClock';
 import { useFrame } from '@react-three/fiber';
 import { Line } from '@react-three/drei';
 import * as THREE from 'three';
 import { bloodPath, manifest } from '@atlas/anatomy-manifest';
-import { computeCardiac } from '@atlas/physiology';
 import { useAtlas } from '../store';
-import { BeatClock, lerp3, resolveWaypoints, samplePath, type Vec3 } from '../lib/flow';
+import { lerp3, resolveWaypoints, samplePath, type Vec3 } from '../lib/flow';
 import { COLORS } from '../lib/colors';
 
 const PER_STEP = 2; // particles per path step (visual density only)
 
 export function BloodFlow() {
-  const scenario = useAtlas((s) => s.scenario);
   const flowOn = useAtlas((s) => s.flowOn);
-  const cycle = computeCardiac(scenario).cycleDuration.value; // engine-owned timing
-  const clock = useRef(new BeatClock());
   const inst = useRef<THREE.InstancedMesh>(null);
   const waypoints = useMemo(() => resolveWaypoints(bloodPath, (n) => (manifest.structures[n]?.center as Vec3) ?? null), []);
   const count = bloodPath.length * PER_STEP;
@@ -26,9 +23,9 @@ export function BloodFlow() {
     return s.modelled && n.modelled ? [waypoints[i], waypoints[(i + 1) % bloodPath.length]] : null;
   }).filter(Boolean) as Vec3[][], [waypoints]);
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     if (!inst.current) return;
-    const beats = flowOn ? clock.current.advance(delta, cycle) : clock.current.beats;
+    const beats = flowClock.beatsAt(performance.now());
     for (let i = 0; i < count; i++) {
       const { step, next, t } = samplePath(beats, bloodPath.length, i / PER_STEP);
       const a = bloodPath[step], b = bloodPath[next];
@@ -40,9 +37,6 @@ export function BloodFlow() {
     }
     inst.current.instanceMatrix.needsUpdate = true;
     if (inst.current.instanceColor) inst.current.instanceColor.needsUpdate = true;
-    const head = samplePath(beats, bloodPath.length).step;
-    const st = useAtlas.getState();
-    if (head !== st.flowStep || Math.floor(beats) !== st.flowBeats) st.setFlowStep(head, Math.floor(beats));
   });
 
   return (
