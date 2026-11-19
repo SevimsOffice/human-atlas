@@ -39,6 +39,34 @@ Verification method: files fetched from the primary host where reachable, otherw
   - Single material for all meshes → we assign our own materials (allowed; recorded as a change in SOURCES.md).
   - Organ coverage: ~30 organs, no full skeleton/muscle system (only vertebrae, pelvis, knees, ligaments). Skeletal/muscular layers (M4) will need another source (see §4).
 
+### 1b. Milestone 4 additions (all CC BY 4.0, Browne & Schlehlein, HRA release v1.3 folder, SHA-256 pinned in `scripts/models.config.json`)
+
+| System (layer) | Models | Raw → shipped |
+|---|---|---|
+| Urinary | Kidney L v1.2, Kidney R v1.2, Ureter L v1.1, Ureter R v1.1, Urinary Bladder v1.1 | 4.5 MB → 1.6 MB |
+| Digestive | Liver v1.1, Pancreas v1.1, Small Intestine v1.1, Large Intestine v1.2 (file `SBU_M_Intestine_Large.glb`) | 2.7 MB → 1.0 MB |
+| Lymphatic | Spleen v1.2 | 0.5 MB → 0.1 MB |
+| Nervous | Spinal Cord v1.0 | 0.5 MB → 0.2 MB |
+| Skeletal (partial) | Pelvis v1.2 (ilium, ischium, pubis, sacrum, coccyx), Knee L/R v1.1 (femur, patella, tibia, fibula, menisci, cartilage) | 2.2 MB → 0.8 MB |
+
+All share the heart's Visible Human male coordinate frame (verified by bounding boxes). Not available on the reachable mirror under the expected names: vertebrae, gallbladder. Not used: Skin (5.9 MB, would hide everything), Allen brain (12 MB; licence to check separately).
+
+**Coverage gaps.** HRA has **no full skeleton** (no skull, ribs, upper limbs, feet) and **no muscular system** (only eye and knee muscles in v2.0). No stomach or oesophagus model.
+
+**Female models.** `VH_F_Heart`, `VH_F_Lung`, `VH_F_Blood_Vasculature` (and female kidney, liver, pelvis … in v2.0) cover the same structures as the male ones: heart 18/18 nodes, lung 85 vs 87, vasculature 155 vs 153 (female adds uterine vessels; male has prostate/iliac details). **But node names differ** (e.g. `left_ventricle` vs `heart_left_ventricle`, `L_lung_upper_lobe` vs `lungs_L_upper_lobe`, `papillary_muscle_of_heart_ant` vs `…_anterior`), and the female body sits in its own coordinate frame. A switch therefore needs a male↔female node mapping built from the crosswalk's Uberon IDs, and a second set of TR terms/texts keys — planned as a follow-up (OPEN_QUESTIONS Q15), not done in M4.
+
+### 1c. Skeleton and muscles beyond HRA — search (M4) and licence impact
+
+| Candidate | What | Licence | Reachable here? | Impact |
+|---|---|---|---|---|
+| NIH 3D Print Exchange, CT-segmented full skeleton (user "MySegmenter", mirrored on Sketchfab by T. Simmons-Ehrhardt) | full skeleton from a real CT scan | CC BY (per listing; to verify on 3d.nih.gov) | **No** (3d.nih.gov, sketchfab.com blocked) | CC BY: attribution only; commercial use OK. **Preferred candidate** — needs owner to download or allow the host. |
+| BlendSwap "Skeleton" (MZiemys) | artist-made male skeleton (.blend) | CC0 | **No** | No obligations, but artistic, not segmented from real data; per-bone names unknown. |
+| CGI Coffee skeleton (OBJ) | artist-made | CC0 | not checked | as above |
+| BodyParts3D (DBCLS) | full skeleton **and muscles**, FMA-mapped | **CC BY-SA 2.1 JP** | **No** (lifesciencedb.jp blocked) | Share-alike: our derived models (and arguably the app bundle that contains them) must be released under CC BY-SA; incompatible with keeping the app under a non-SA licence. Keep under `assets/share-alike/` only after owner approval. |
+| Z-Anatomy (derived from BodyParts3D) | full skeleton, muscles, nerves | **CC BY-SA 4.0** | GitHub only | Same share-alike obligation as BodyParts3D. |
+
+**Not used.** No CC BY / CC0 muscle set was found; muscles stay out until the owner decides on share-alike (Q16) or provides a CC BY source.
+
 ## 2. OpenStax *Anatomy and Physiology 2e*
 
 - **Publisher:** OpenStax, Rice University. Collection `col11496`, slug `anatomy-and-physiology-2e`.

@@ -9,6 +9,11 @@ Q10: keep "source pending"; owner will allow www.ncbi.nlm.nih.gov, then find a p
 ## Decided (M3 review)
 Q13: running uses the "maximal exercise" column, labelled "based on the maximal exercise column of OpenStax A&P 2e §20.4" (owner decision). Review fixes: 3D view ≥ 60 % width, collapsible panels, constrained orbit camera with reset and double-click focus, notes ≤ 680 px, footer credit.
 
+## Open (Milestone 4)
+- **Q15 Male/female switch.** Female HRA models cover the same heart/lung/vessel structures but with different node names and their own coordinate frame. Proposal: a follow-up step that maps female nodes to male ones via Uberon IDs (with a reviewed override list for the ~20 nodes per model that differ), downloads the female set (~20 MB raw) and adds the switch. Go ahead?
+- **Q16 Muscles / full skeleton.** Only share-alike sets (BodyParts3D CC BY-SA 2.1 JP, Z-Anatomy CC BY-SA 4.0) have muscles. CC BY full skeleton (NIH 3D, CT-based) exists but its host is blocked here. Options: (a) owner downloads the NIH skeleton and uploads it, (b) allow 3d.nih.gov, (c) approve share-alike assets in `assets/share-alike/`, (d) keep partial skeleton only.
+- **Q17 Turkish terms for new sub-structures.** 237 sub-structures of the new organs show the English source name flagged "Türkçe terim henüz yok" (list: docs/TR_TERMS_TODO.md). Translate all now (marked needs-expert-review), or wait for the expert?
+
 ## Open (Milestone 3)
 - ~~**Q13 Running ↔ "maximal exercise" column.**~~ (decided above) The A&P §20.4 table has rest / mild / maximal columns; running (HR 150, CO 19.5 L/min) is mapped to "maximal" (17.5 L/min) as the closest. Alternative: show only rest until a running-specific distribution is found.
 - **Q14 Muscles in 3D.** HRA has no skeletal-muscle model, so muscle blood flow is shown in the chart only. M4 will search CC BY/CC0 muscle models first.

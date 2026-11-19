@@ -4,14 +4,13 @@ import { manifest, type Layer } from '@atlas/anatomy-manifest';
 export type V3 = [number, number, number];
 
 export const FOV_DEG = 35;
-export const STAGE_Y = 0.16; // specimen stage (floor) height
 
 /** Orbit limits: never under the specimen stage, never flipped over the top, no panning. */
 export const CAMERA_LIMITS = {
   minPolar: 0.2, // rad from straight up (~11°)
   maxPolar: Math.PI * 0.54, // ~97°: at most slightly below the horizon, still above the stage
   minDistance: 0.12,
-  maxDistance: 1.6,
+  maxDistance: 3.5, // the whole model incl. legs (≈1.6 m tall) must fit
   damping: 0.1,
 } as const;
 
@@ -45,9 +44,12 @@ export function fitView(layers: Partial<Record<Layer, boolean>>, aspect: number,
   return { target, position: target.map((t, k) => t + (dir[k] / n) * distance) as V3 };
 }
 
-const ALL: Record<Layer, boolean> = { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true };
-/** Initial view before the canvas size is known (16:10). */
-export const DEFAULT_VIEW = fitView(ALL, 1.6);
+export const ALL_LAYERS: Record<Layer, boolean> = { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true, urinary: true, digestive: true, lymphatic: true, nervous: true, skeletal: true };
+const ALL = ALL_LAYERS;
+/** Specimen stage (floor) just below the lowest structure of every model, so nothing sinks into it. */
+export const STAGE_Y = boundsOf(ALL_LAYERS)!.min[1] - 0.02;
+/** Initial view before the canvas size is known (16:10), with the default layers (skeleton hidden). */
+export const DEFAULT_VIEW = fitView({ ...ALL, skeletal: false }, 1.6);
 export const MODEL_CENTRE = DEFAULT_VIEW.target;
 
 /** Focus on a structure: its centre becomes the target; distance from its size, keeping the current viewing direction. */

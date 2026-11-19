@@ -31,6 +31,8 @@ download → inspect → map → compress  physiology  (pure TS engine)  →  Zu
 - Scene: specimen-stage floor, neutral lighting, per-system accent material, translucency when layers overlap.
 - Panels: Structure inspector, Scenario switcher + measurements (mono font), Sources & credits, educational disclaimer.
 - Camera (`scene/CameraRig.tsx`, limits in `lib/camera.ts`): orbits the heart centre, polar angle 0.2 rad–0.58π (never under the stage or over the top), no panning, distance 0.12–0.9 m, damping 0.1; "reset view" and double-click-to-focus animate target and position.
+- Models: one config, `scripts/models.config.json`, drives download (SHA-256 pinned), compression, manifest and in-app credits for every HRA model.
+- Cross-section (`lib/section.ts`, `scene/clipPlane.ts`): one shared THREE.Plane on every material (transverse / sagittal / coronal, slider 0–100 % of the visible bounds); picking ignores hits on the removed side.
 - Interaction: orbit/zoom, click select (raycast on manifest meshes), keyboard navigation, layer toggles; camera mode (M7) only emits the same actions.
 
 ## Testing

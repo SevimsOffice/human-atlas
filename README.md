@@ -3,7 +3,7 @@
 An interactive, sourced, browser-based exploration of the human body — anatomy (structure) and physiology (function).
 Educational only: not medical advice, not a diagnostic tool, no patient data.
 
-**Live:** https://sevimsoffice.github.io/human-atlas/ · Status: **Milestone 3 — exercise across systems** (see `docs/ROADMAP.md`).
+**Live:** https://sevimsoffice.github.io/human-atlas/ · Status: **Milestone 4 — body systems as layers + cross-section** (see `docs/ROADMAP.md`).
 
 ## Run locally
 ```bash
@@ -15,7 +15,7 @@ npm run e2e -- --trace off   # Playwright main journey (builds + previews under 
 
 ## Rebuild the data (only needed when sources change)
 ```bash
-npm run data:download  # HuBMAP HRA heart, vasculature, lung, crosswalk, Uberon → data/raw (git-ignored)
+npm run data:download  # every HuBMAP model in scripts/models.config.json, crosswalk, Uberon → data/raw (git-ignored)
 npm run data:build     # → apps/web/public/models/*.glb + packages/anatomy-manifest/src/manifest.json
 ```
 

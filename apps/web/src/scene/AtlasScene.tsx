@@ -31,7 +31,8 @@ export function AtlasScene() {
       gl={{ antialias: !softwareRendering }}
       frameloop={softwareRendering ? 'demand' : 'always'}
       onPointerMissed={() => select(null)}
-      aria-label="3D heart model"
+      aria-label="3D anatomy model"
+      onCreated={({ gl }) => { gl.localClippingEnabled = true; }}
     >
       {softwareRendering && <PacedFrames />}
       <color attach="background" args={['#eceef0']} />
@@ -40,7 +41,7 @@ export function AtlasScene() {
       <directionalLight position={[-0.8, 0.4, -0.6]} intensity={0.5} color="#dfe6ef" />
       {/* specimen stage below the model */}
       <mesh rotation-x={-Math.PI / 2} position={[target[0], STAGE_Y, target[2]]}>
-        <circleGeometry args={[0.32, 96]} />
+        <circleGeometry args={[0.55, 96]} />
         <meshStandardMaterial color="#e1e4e7" roughness={0.95} />
       </mesh>
       <Suspense fallback={null}>

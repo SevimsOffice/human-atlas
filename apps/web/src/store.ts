@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { ScenarioId } from '@atlas/physiology';
 import type { Layer } from '@atlas/anatomy-manifest';
+import type { SectionAxis } from './lib/section';
 import { resolveSelectable } from '@atlas/anatomy-manifest';
 
 export type View = 'atlas' | 'credits';
@@ -10,6 +11,8 @@ interface AtlasState {
   selected: string | null;
   layers: Record<Layer, boolean>;
   flowOn: boolean;
+  section: { enabled: boolean; axis: SectionAxis; t: number };
+  setSection: (patch: Partial<{ enabled: boolean; axis: SectionAxis; t: number }>) => void;
   flowStep: number;
   flowBeats: number;
   breaths: number;
@@ -37,7 +40,10 @@ interface AtlasState {
 export const useAtlas = create<AtlasState>((set) => ({
   scenario: 'rest',
   selected: null,
-  layers: { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true },
+  // skeleton (pelvis + legs down to the knees) starts hidden so the first view frames the trunk organs
+  layers: { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true, urinary: true, digestive: true, lymphatic: true, nervous: true, skeletal: false },
+  section: { enabled: false, axis: 'coronal', t: 0.5 },
+  setSection: (patch) => set((s) => ({ section: { ...s.section, ...patch } })),
   flowOn: true,
   flowStep: 0,
   flowBeats: 0,

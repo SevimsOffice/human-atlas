@@ -7,11 +7,8 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 
 const RAW = 'data/raw';
 const NEIGHBOR_MM = 3; // surfaces closer than this (in model space, metres*1000) count as neighbours
-const MODELS = [
-  { file: 'heart.glb', raw: 'VH_M_Heart.glb', hraId: 'VH_M_Heart', sourceId: 'HRA-HEART-M', subtree: null },
-  { file: 'heart-vessels.glb', raw: 'VH_M_Blood_Vasculature.glb', hraId: 'VH_M_Blood_Vasculature', sourceId: 'HRA-VASC-M', subtree: 'VH_M_blood_vasculature_of_heart' },
-  { file: 'lungs.glb', raw: 'VH_M_Lung.glb', hraId: 'VH_M_Lung', sourceId: 'HRA-LUNG-M', subtree: null },
-];
+const CFG = JSON.parse(await readFile('scripts/models.config.json', 'utf8'));
+const MODELS = CFG.models;
 
 // ---- crosswalk CSV ----
 function parseCsv(text) {
@@ -82,6 +79,7 @@ for (const M of MODELS) {
     const name = node.getName();
     const isCoronary = coronary || name === 'VH_M_cardiac_artery' || name === 'VH_M_cardiac_vein';
     const isAirway = airway || name === 'VH_M_tracheobronchial_tree';
+    if (entries[name]) throw new Error(`duplicate node name across models: ${name} (${entries[name].model} and ${M.file})`);
     const cw = xwLookup(M.hraId, name);
     let uberonId = null, uberonVia = null;
     if (cw?.id?.startsWith('UBERON:')) { uberonId = cw.id; uberonVia = 'hra-crosswalk'; }
@@ -95,7 +93,8 @@ for (const M of MODELS) {
     const t = uberonId ? terms.get(uberonId) : null;
     entries[name] = {
       name, model: M.file, sourceId: M.sourceId,
-      layer: M.file === 'heart.glb' ? 'heart' : M.file === 'lungs.glb' ? (isAirway ? 'airways' : 'lungs') : isCoronary ? 'coronaryVessels' : 'greatVessels',
+      layer: M.layer !== 'auto' ? M.layer
+        : M.file === 'heart.glb' ? 'heart' : M.file === 'lungs.glb' ? (isAirway ? 'airways' : 'lungs') : isCoronary ? 'coronaryVessels' : 'greatVessels',
       parent: parent?.getName() ?? null,
       children: node.listChildren().map((c) => c.getName()),
       isMesh: !!node.getMesh(),
@@ -142,7 +141,7 @@ for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++
 const sorted = Object.fromEntries(Object.keys(entries).sort().map((k) => [k, entries[k]]));
 const manifest = {
   generator: 'scripts/build-manifest.mjs', uberonVersion, neighborThresholdMm: NEIGHBOR_MM,
-  models: MODELS.map(({ file, sourceId, hraId }) => ({ file, sourceId, hraId })), structures: sorted,
+  models: MODELS.map(({ file, sourceId, hraId, layer }) => ({ file, sourceId, hraId, layer })), structures: sorted,
 };
 await mkdir('packages/anatomy-manifest/src', { recursive: true });
 await writeFile('packages/anatomy-manifest/src/manifest.json', JSON.stringify(manifest, null, 1) + '\n');

@@ -8,6 +8,7 @@ import { ScenarioPanel } from './ui/ScenarioPanel';
 import { LayerPanel } from './ui/LayerPanel';
 import { FlowPanel } from './ui/FlowPanel';
 import { RespiratoryPanel } from './ui/RespiratoryPanel';
+import { SectionPanel } from './ui/SectionPanel';
 import { ExercisePanel } from './ui/ExercisePanel';
 import { Inspector } from './ui/Inspector';
 import { StructureList } from './ui/StructureList';
@@ -109,6 +110,7 @@ export default function App() {
               <RespiratoryPanel />
               <FlowPanel />
               <LayerPanel />
+              <SectionPanel />
             </aside>
           )}
           <div className="order-1 flex min-h-[55vh] min-w-0 flex-1 flex-col lg:order-2"><Stage /><ExercisePanel /></div>
