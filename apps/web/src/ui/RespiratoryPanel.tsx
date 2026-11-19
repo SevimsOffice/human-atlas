@@ -9,7 +9,7 @@ function Row({ label, v, testId, note }: { label: string; v: RefValue | DerivedV
   const { t, i18n } = useTranslation();
   return (
     <div className="flex items-baseline justify-between gap-3 py-1.5">
-      <dt className="shrink-0 text-sm">{label}</dt>
+      <dt className="min-w-0 text-sm">{label}</dt>
       <dd className="text-right">
         {v ? (
           <>
@@ -20,7 +20,7 @@ function Row({ label, v, testId, note }: { label: string; v: RefValue | DerivedV
                 <a href={REFERENCES[v.ref].url} target="_blank" rel="noreferrer" title={v.quote} className="underline decoration-line underline-offset-2">
                   {t('measure.ref')}: {v.ref}{v.range ? ` · ${t('measure.range')} ${fmt(v.range[0], i18n.language)}–${fmt(v.range[1], i18n.language)}` : ''}
                 </a>
-              ) : <>{t('measure.derived')}: {v.formula.replace('*', ' × ')}</>}
+              ) : v.formula === 'avO2=VO2/CO' ? <>{t('resp.fick')}</> : <>{t('measure.derived')}: {v.formula.replace(/\*/g, ' × ')}</>}
             </div>
             {note && <div className="max-w-[11rem] text-[10px] text-graphite-soft">{note}</div>}
           </>
@@ -44,9 +44,11 @@ export function RespiratoryPanel() {
         <Row label={t('resp.vt')} v={r.tidalVolume} testId="vt" />
         <Row label={t('resp.ve')} v={r.minuteVentilation} testId="ve" />
         <Row label={t('resp.vo2')} v={r.oxygenUptake} testId="vo2" />
+        <Row label={t('resp.vo2kg')} v={r.oxygenUptakePerKg} testId="vo2kg" />
+        <Row label={t('resp.vo270')} v={r.oxygenUptake70kg} testId="vo270" />
         <Row label={t('resp.extraction')} v={r.oxygenExtraction} testId="extraction" />
       </dl>
-      <p className="mt-1 text-[11px] text-graphite-soft">{t('resp.extraction')} {t('resp.extractionNote')}</p>
+      <p className="mt-1 text-[11px] text-graphite-soft">{t('resp.extractionNote')}</p>
       <div className="mt-2 flex items-center gap-2 text-xs text-graphite-soft">
         <span aria-hidden className={`inline-block h-2.5 w-2.5 rounded-full bg-[#9db7cc] ${r.breathCycle ? 'breath-dot' : 'opacity-40'}`}
           style={{ ['--breath' as string]: `${r.breathCycle?.value ?? 0}s` }} />

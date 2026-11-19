@@ -3,7 +3,14 @@
 ## Decided 2026-11-19 (Phase 0 approval)
 Q1 option B (own texts, OpenStax cited for facts only; commercial use is a goal) · Q2 M4: look for CC BY/CC0 first, Z-Anatomy/BodyParts3D only as fallback with share-alike impact report · Q3 search for a second source, else rest + running only (→ rest + running shipped in M1, see PHYSIOLOGY_MODEL.md) · Q4 official TR terminology if citable, else translations marked needs-expert-review in one file (→ content/terms/anatomy-terms.tr.json) · Q5 male in M1, switch in M4 · Q6 lungs in M2; vasculature in M1 · Q7 "Koşu (yoğun egzersiz) / Running (vigorous exercise)" · Q8 Claude Design export will arrive in design/; M1 uses a minimal UI · Q9 feature branch + PR per milestone; owner reviews, Claude merges.
 
-## Open (Milestone 2)
+## Decided 2026-11-19 (M2 approval)
+Q10: keep "source pending"; owner will allow www.ncbi.nlm.nih.gov, then find a peer-reviewed (open-access preferred) source for RR/VT during running and walking (**host still unreachable at M3 start**) · Q11: keep O2 extraction, labelled "derived (Fick principle)" · Q12: normalise VO2 to mL/kg/min and scale to the 70-kg body, explained on the Sources page (done in M3).
+
+## Open (Milestone 3)
+- **Q13 Running ↔ "maximal exercise" column.** The A&P §20.4 table has rest / mild / maximal columns; running (HR 150, CO 19.5 L/min) is mapped to "maximal" (17.5 L/min) as the closest. Alternative: show only rest until a running-specific distribution is found.
+- **Q14 Muscles in 3D.** HRA has no skeletal-muscle model, so muscle blood flow is shown in the chart only. M4 will search CC BY/CC0 muscle models first.
+
+## Previously open (Milestone 2)
 - **Q10 Blocked sources.** Running breathing values (RR, VT) and walking cardiac values need a source that this cloud environment cannot open (med.libretexts.org, www.ncbi.nlm.nih.gov are blocked). Options: (a) allow those hosts for this environment, (b) owner provides the pages/PDFs, (c) owner names another accessible textbook.
 - **Q11 Fick principle citation.** O2 extraction = VO2 / CO is shown as a derived link between heart and lungs; the formula still needs a citable textbook statement (OpenStax does not state it). Keep, or hide until cited?
 - **Q12 Mixed reference bodies.** VO2 (College Physics, 76-kg male) and cardiac values (A&P, 70-kg adult) come from different books; the derived extraction is labelled illustrative. Acceptable?

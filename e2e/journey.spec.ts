@@ -95,6 +95,8 @@ test('sources & credits page lists every source with its licence', async ({ page
   await ready(page);
   await page.getByTestId('nav-credits').click();
   await expect(page).toHaveURL(/#\/credits$/);
+  await expect(page.getByTestId('credits-derivations')).toContainText('70 kg');
+  await expect(page.getByTestId('credits-derivations')).toContainText('Fick');
   for (const id of ['HRA-HEART-M', 'HRA-VASC-M', 'HRA-LUNG-M', 'HRA-XWALK-1.3', 'UBERON', 'OSX-AP2E', 'OSX-CP2E']) await expect(page.getByTestId(`credit-${id}`)).toBeVisible();
   await expect(page.getByTestId('credit-OSX-AP2E')).toContainText('CC BY-NC-SA 4.0');
   await expect(page.getByTestId('credit-HRA-HEART-M')).toContainText('Kristen Browne');
@@ -109,7 +111,10 @@ test('rest shows cited breathing values, derived ventilation, O2 uptake and the 
   await expect(page.getByTestId('vt')).toHaveText('500');
   await expect(page.getByTestId('ve')).toHaveText('7');
   await expect(page.getByTestId('vo2')).toHaveText('0,34');
-  await expect(page.getByTestId('extraction')).toHaveText('64,8');
+  await expect(page.getByTestId('vo2kg')).toHaveText('4,47');
+  await expect(page.getByTestId('vo270')).toHaveText('0,31');
+  await expect(page.getByTestId('extraction')).toHaveText('59,6');
+  await expect(page.getByTestId('respiratory')).toContainText('türetilmiş (Fick ilkesi)');
   await expect(page.getByTestId('respiratory')).toHaveAttribute('data-breath-cycle-s', '4.29');
   const b0 = await breaths(page);
   await expect.poll(() => breaths(page), { timeout: 9000 }).toBeGreaterThan(b0); // one breath ≈ 4.3 s
@@ -119,7 +124,8 @@ test('running updates O2 uptake and extraction, and marks breathing values as so
   await ready(page);
   await page.getByRole('radio', { name: 'Koşu (yoğun egzersiz)' }).click();
   await expect(page.getByTestId('vo2')).toHaveText('2,12');
-  await expect(page.getByTestId('extraction')).toHaveText('108,7');
+  await expect(page.getByTestId('vo270')).toHaveText('1,95');
+  await expect(page.getByTestId('extraction')).toHaveText('100,1');
   for (const id of ['rr', 'vt', 've']) await expect(page.getByTestId(id)).toHaveAttribute('data-missing', 'true');
   await expect(page.getByTestId('resp-missing')).toBeVisible();
   const b0 = await breaths(page);
@@ -148,4 +154,30 @@ test('clicking the centre still picks the heart through the translucent lungs', 
   await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
   const picked = await page.getByTestId('inspector').getAttribute('data-structure');
   expect(picked).not.toMatch(/lung|lobe|segment/);
+});
+
+// ---- Milestone 3: exercise across systems ----
+test('blood-flow distribution shows rest and running per organ from the engine, with a working table view', async ({ page }) => {
+  await ready(page);
+  const chart = page.getByTestId('flow-distribution');
+  await expect(chart.getByTestId('bar-rest-skeletalMuscle')).toHaveText('1,09');
+  await expect(chart.getByTestId('bar-running-skeletalMuscle')).toHaveText('13,93');
+  await expect(chart.getByTestId('bar-running-kidney')).toHaveText('0,67');
+  await page.getByTestId('flow-table-toggle').click();
+  await expect(page.getByTestId('flow-table')).toBeVisible();
+  await expect(page.getByTestId('table-run-skeletalMuscle')).toContainText('71,4%');
+  await page.getByTestId('flow-table-toggle').click();
+  await expect(page.getByTestId('flow-table')).toHaveCount(0);
+});
+
+test('rest → running comparison across heart, lungs and muscle', async ({ page }) => {
+  await ready(page);
+  const c = page.getByTestId('exercise-compare');
+  await expect(c.getByTestId('ratio-heartRate')).toHaveText('2');
+  await expect(c.getByTestId('ratio-cardiacOutput')).toHaveText('3,7');
+  await expect(c.getByTestId('ratio-oxygenUptake70kg')).toHaveText('6,2');
+  await expect(c.getByTestId('ratio-muscleFlow')).toHaveText('12,8');
+  await page.getByTestId('lang-en').click();
+  await expect(c).toContainText('Skeletal-muscle blood flow');
+  await expect(c.getByTestId('ratio-cardiacOutput')).toHaveText('3.7');
 });

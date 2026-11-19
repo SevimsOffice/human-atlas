@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "HUMAN ATLAS",
-    "subtitle": "Heart and lungs · Milestone 2",
+    "subtitle": "Heart, lungs and exercise · Milestone 3",
     "skip": "Skip to main content"
   },
   "nav": {
@@ -119,21 +119,58 @@
     "attribution": "Attribution",
     "texts": "Explanatory texts are the project's own wording; facts are cited to OpenStax A&P 2e §19.1 and have not yet been expert-reviewed.",
     "terms": "Turkish anatomical terms were translated during development and need expert review before public release.",
-    "back": "Back to atlas"
+    "back": "Back to atlas",
+    "derivTitle": "How values are derived",
+    "derivVo2": "Oxygen uptake is cited from College Physics 2e §7.8 for a 76-kg male. It is converted to mL/kg/min and scaled linearly to the 70-kg reference body of the heart values (A&P 2e §19.4). The cited value is shown too. Linear per-kg scaling is an assumption.",
+    "derivFick": "O₂ taken from blood = oxygen uptake (70 kg) ÷ cardiac output (Fick principle). It is the derived value linking the heart and lung engines; a textbook citation for the formula is still to be added.",
+    "derivFlow": "The blood-flow distribution comes from the A&P 2e §20.4 table. Its totals differ from the engine's cardiac output, so each organ's share of the column is applied to the engine's cardiac output. Running uses the \"maximal exercise\" column (the closest one).",
+    "derivPending": "Breathing rate and tidal volume during running and walking await a verifiable source; no value is invented."
   },
   "resp": {
     "title": "Respiratory engine",
     "rr": "Breathing rate",
     "vt": "Tidal volume",
     "ve": "Minute ventilation",
-    "vo2": "Oxygen uptake",
+    "vo2": "O₂ uptake (cited, 76 kg)",
     "extraction": "O₂ taken from blood",
     "extractionUnit": "mL O₂/L blood",
     "perMin": "/min",
-    "extractionNote": "= oxygen uptake ÷ cardiac output (links heart and lungs; illustrative, two reference bodies)",
+    "extractionNote": "O₂ taken from blood = oxygen uptake (70 kg) ÷ cardiac output — derived (Fick principle). Oxygen uptake was scaled per kg from the 76-kg reference body to the 70-kg body of the heart values.",
     "pending": "source pending",
     "breathing": "Breath indicator: one breath every {{s}} s (schematic expansion, not to scale)",
     "notBreathing": "No verified breathing rate for this scenario; the lungs are shown still.",
-    "missingNote": "No verifiable source yet for breathing rate and tidal volume during running; no value is invented."
+    "missingNote": "No verifiable source yet for breathing rate and tidal volume during running; no value is invented.",
+    "vo2kg": "O₂ uptake per kg",
+    "vo270": "O₂ uptake (70 kg)",
+    "fick": "derived (Fick principle)"
+  },
+  "exercise": {
+    "title": "Exercise across systems",
+    "flowTitle": "Blood-flow distribution (L/min)",
+    "showTable": "Table",
+    "showChart": "Chart",
+    "organ": "Organ",
+    "tableValue": "table value",
+    "flowNote": "Each organ's share of the table column × the engine's cardiac output (derived). Running uses the closest column, \"maximal exercise\" (approximate).",
+    "compareTitle": "Rest → running",
+    "runShort": "Running",
+    "compareNote": "All values from the engine; ratios are derived. Muscle models come in Milestone 4.",
+    "rows": {
+      "heartRate": "Heart rate",
+      "strokeVolume": "Stroke volume",
+      "cardiacOutput": "Cardiac output",
+      "oxygenUptake70kg": "O₂ uptake (70 kg)",
+      "oxygenExtraction": "O₂ taken from blood",
+      "muscleFlow": "Skeletal-muscle blood flow"
+    }
+  },
+  "organs": {
+    "skeletalMuscle": "Skeletal muscle",
+    "heart": "Heart",
+    "brain": "Brain",
+    "integument": "Skin",
+    "kidney": "Kidney",
+    "gastrointestinal": "Gastrointestinal tract",
+    "others": "Other (liver, spleen)"
   }
 }
