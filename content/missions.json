@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "about": "Guided missions (Milestone 5). Text is our own wording; facts cited to OpenStax (OSX-19.1 heart anatomy, OSX-22.2 lungs, OSX-20.4 blood-flow table) and numbers come ONLY from the physiology engine through {placeholders} (see apps/web/src/lib/missions.ts).",
+    "status": "unreviewed = not yet checked by a domain expert."
+  },
+  "missions": [
+    {
+      "id": "rbc-lungs-to-leg",
+      "title": { "tr": "Bir alyuvarı akciğerden bacak kasına izle", "en": "Follow a red blood cell from the lungs to a leg muscle" },
+      "steps": [
+        { "id": "lungs", "focus": "VH_M_lungs_R", "scenario": "rest", "layers": { "lungs": true, "heart": true, "greatVessels": true },
+          "text": { "tr": "Yolculuk akciğerlerde başlar: kan, alveollerde oksijen alır ve oksijeni zengin hâle gelir.", "en": "The journey starts in the lungs: in the alveoli the blood takes up oxygen and becomes oxygen-rich." },
+          "cites": ["OSX-22.2"], "status": "unreviewed" },
+        { "id": "pulmonary-veins", "focus": "VH_M_pulmonary_vein",
+          "text": { "tr": "Oksijeni zengin kan pulmoner venlerle kalbe döner ve sol kulakçığa girer.", "en": "Oxygen-rich blood returns to the heart through the pulmonary veins and enters the left atrium." },
+          "cites": ["OSX-19.1"], "status": "unreviewed" },
+        { "id": "left-ventricle", "focus": "VH_M_heart_left_ventricle",
+          "text": { "tr": "Sol karıncık bu kanı aort kapağından aorta pompalar. Dinlenmede her atımda {sv} mL, dakikada {co} L kan atılır ({hr} atım/dk).", "en": "The left ventricle pumps this blood through the aortic valve into the aorta. At rest it ejects {sv} mL per beat, {co} L per minute ({hr} beats/min)." },
+          "cites": ["OSX-19.1", "OSX-19.4"], "status": "unreviewed" },
+        { "id": "aorta", "focus": "VH_M_descending_aorta",
+          "text": { "tr": "Aort, oksijeni zengin kanı büyük dolaşımın dallarına dağıtır; inen aort gövde boyunca aşağı uzanır.", "en": "The aorta distributes oxygen-rich blood to the branches of the systemic circuit; the descending aorta runs down through the trunk." },
+          "cites": ["OSX-19.1"], "status": "unreviewed" },
+        { "id": "leg-muscle", "focus": "VH_M_femur_L", "layers": { "skeletal": true },
+          "text": { "tr": "Bacakta iskelet kası bu kanı alır (kas modeli henüz yok; uyluk kemiği konumu gösteriyor). Dinlenmede kalp debisinin %{muscleShare}'i ({muscleFlow} L/dk) iskelet kaslarına gider.", "en": "In the leg, skeletal muscle receives this blood (no muscle model yet; the femur marks the location). At rest {muscleShare}% of cardiac output ({muscleFlow} L/min) goes to skeletal muscle." },
+          "cites": ["OSX-20.4"], "status": "unreviewed" }
+      ],
+      "question": {
+        "prompt": { "tr": "Oksijeni zengin kanı aorta hangi boşluk pompalar?", "en": "Which chamber pumps oxygen-rich blood into the aorta?" },
+        "options": [
+          { "tr": "Sağ kulakçık", "en": "Right atrium" },
+          { "tr": "Sağ karıncık", "en": "Right ventricle" },
+          { "tr": "Sol karıncık", "en": "Left ventricle" },
+          { "tr": "Sol kulakçık", "en": "Left atrium" }
+        ],
+        "correct": 2,
+        "explanation": { "tr": "Sol karıncık, büyük dolaşımın ana pompa boşluğudur ve kanı aort kapağından aorta fırlatır.", "en": "The left ventricle is the main pumping chamber of the systemic circuit and ejects blood through the aortic valve into the aorta." },
+        "cites": ["OSX-19.1"]
+      }
+    },
+    {
+      "id": "start-running",
+      "title": { "tr": "Koşmaya başlayınca ne değişir?", "en": "What changes when you start running?" },
+      "steps": [
+        { "id": "heart-rest", "focus": "VH_M_heart", "scenario": "rest",
+          "text": { "tr": "Dinlenmede kalp dakikada {hr} kez atar, her atımda {sv} mL kan pompalar: kalp debisi {co} L/dk.", "en": "At rest the heart beats {hr} times a minute and pumps {sv} mL per beat: a cardiac output of {co} L/min." },
+          "cites": ["OSX-19.4"], "status": "unreviewed" },
+        { "id": "heart-run", "focus": "VH_M_heart_left_ventricle", "scenario": "running",
+          "text": { "tr": "Koşuda kalp hızı {hr} atım/dk'ya, atım hacmi {sv} mL'ye çıkar: kalp debisi {co} L/dk, dinlenmenin {coRatio} katı.", "en": "When running, heart rate rises to {hr} beats/min and stroke volume to {sv} mL: cardiac output is {co} L/min, {coRatio} times rest." },
+          "cites": ["OSX-19.4"], "status": "unreviewed" },
+        { "id": "lungs-run", "focus": "VH_M_lungs_R",
+          "text": { "tr": "Akciğerler de hızlanır: dakikada {rr} nefes, her nefeste {vt} mL hava; dakika ventilasyonu {ve} L/dk.", "en": "The lungs speed up too: {rr} breaths per minute, {vt} mL of air per breath; minute ventilation {ve} L/min." },
+          "cites": ["LEE-2025"], "status": "unreviewed" },
+        { "id": "oxygen", "focus": "VH_M_pulmonary_vein",
+          "text": { "tr": "Vücut daha çok oksijen kullanır: oksijen alımı {vo2} L/dk (70 kg). Her litre kandan {extraction} mL oksijen alınır (Fick ilkesi; dinlenmede {extractionRest}).", "en": "The body uses more oxygen: oxygen uptake is {vo2} L/min (70 kg). {extraction} mL of oxygen is taken from each litre of blood (Fick principle; {extractionRest} at rest)." },
+          "cites": ["CP-7.8", "OSX-19.4"], "status": "unreviewed" },
+        { "id": "flow", "focus": "VH_M_left_kidney", "layers": { "urinary": true, "digestive": true },
+          "text": { "tr": "Kan yeniden dağıtılır: iskelet kası %{muscleShare} ({muscleFlow} L/dk) alırken böbreklerin payı {kidneyFlowRest} L/dk'dan {kidneyFlow} L/dk'ya düşer (maksimal egzersiz sütunu).", "en": "Blood is redistributed: skeletal muscle gets {muscleShare}% ({muscleFlow} L/min) while kidney flow falls from {kidneyFlowRest} to {kidneyFlow} L/min (maximal exercise column)." },
+          "cites": ["OSX-20.4"], "status": "unreviewed" }
+      ],
+      "question": {
+        "prompt": { "tr": "Koşuda kan akışı en çok hangi dokuda artar?", "en": "During running, which tissue's blood flow increases the most?" },
+        "options": [
+          { "tr": "Böbrek", "en": "Kidney" },
+          { "tr": "İskelet kası", "en": "Skeletal muscle" },
+          { "tr": "Beyin", "en": "Brain" },
+          { "tr": "Sindirim kanalı", "en": "Gastrointestinal tract" }
+        ],
+        "correct": 1,
+        "explanation": { "tr": "Motorun hesabına göre iskelet kası akışı {muscleRatio} kat artar; beyin akışı sabit kalır, böbrek ve sindirim kanalı akışı azalır.", "en": "In the engine, skeletal-muscle flow rises {muscleRatio}-fold; brain flow stays constant while kidney and gut flow fall." },
+        "cites": ["OSX-20.4"]
+      }
+    }
+  ]
+}

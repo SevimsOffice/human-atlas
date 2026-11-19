@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "HUMAN ATLAS",
-    "subtitle": "Body systems · Milestone 4",
+    "subtitle": "Body systems · Milestone 5",
     "skip": "Skip to main content"
   },
   "nav": {
@@ -222,5 +222,17 @@
       "sagittal": "Sagittal cut: the left half of the body is removed.",
       "coronal": "Coronal cut: the front is removed; the cut face looks at you."
     }
+  },
+  "missions": {
+    "title": "Missions",
+    "start": "Start",
+    "exit": "Exit mission",
+    "back": "Back",
+    "next": "Next",
+    "toQuestion": "To the question",
+    "question": "Question",
+    "finish": "Finish",
+    "correct": "Correct!",
+    "incorrect": "Not quite."
   }
 }

@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "HUMAN ATLAS",
-    "subtitle": "Vücut sistemleri · Milestone 4",
+    "subtitle": "Vücut sistemleri · Milestone 5",
     "skip": "Ana içeriğe geç"
   },
   "nav": {
@@ -222,5 +222,17 @@
       "sagittal": "Sagital kesit: vücudun sol yarısı kaldırılır.",
       "coronal": "Koronal kesit: ön kısım kaldırılır, kesit yüzü size bakar."
     }
+  },
+  "missions": {
+    "title": "Görevler",
+    "start": "Başla",
+    "exit": "Görevden çık",
+    "back": "Geri",
+    "next": "İleri",
+    "toQuestion": "Soruya geç",
+    "question": "Soru",
+    "finish": "Bitir",
+    "correct": "Doğru!",
+    "incorrect": "Tekrar düşün."
   }
 }

@@ -21,6 +21,11 @@ interface AtlasState {
   view: View;
   cameraRequest: { kind: 'reset' } | { kind: 'focus'; name: string } | null;
   leftOpen: boolean;
+  mission: { id: string; step: number; answer: number | null } | null;
+  startMission: (id: string) => void;
+  missionStep: (delta: number) => void;
+  answerMission: (i: number) => void;
+  exitMission: () => void;
   rightOpen: boolean;
   bottomOpen: boolean;
   requestCamera: (r: { kind: 'reset' } | { kind: 'focus'; name: string }) => void;
@@ -52,6 +57,11 @@ export const useAtlas = create<AtlasState>((set) => ({
   loadedModels: [],
   cameraRequest: null,
   leftOpen: true,
+  mission: null,
+  startMission: (id) => set({ mission: { id, step: 0, answer: null } }),
+  missionStep: (delta) => set((s) => (s.mission ? { mission: { ...s.mission, step: Math.max(0, s.mission.step + delta), answer: null } } : {})),
+  answerMission: (i) => set((s) => (s.mission ? { mission: { ...s.mission, answer: i } } : {})),
+  exitMission: () => set({ mission: null }),
   rightOpen: true,
   bottomOpen: false, // exercise panel collapsed by default: the 3D view gets the height
   // a fresh object each time so repeated requests (reset, reset) still trigger

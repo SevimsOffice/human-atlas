@@ -369,3 +369,56 @@ test('cross-section slider moves a clipping plane and clipped geometry cannot be
   await page.getByTestId('section-toggle').uncheck();
   await expect(stage).toHaveAttribute('data-section', 'off');
 });
+
+// ---- Milestone 5: missions ----
+test('mission: follow a red blood cell — camera and inspector follow each step, numbers come from the engine', async ({ page }) => {
+  await ready(page);
+  await page.waitForTimeout(400);
+  const start = await cam(page);
+  await page.getByTestId('mission-start-rbc-lungs-to-leg').click();
+  const card = page.getByTestId('mission-card');
+  await expect(card).toHaveAttribute('data-step', '0');
+  await expect(page.getByTestId('inspector')).toHaveAttribute('data-structure', 'VH_M_lungs_R');
+  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).not.toBe(start.target);
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('inspector')).toHaveAttribute('data-structure', 'VH_M_heart_left_ventricle');
+  await expect(page.getByTestId('mission-text')).toContainText('70 mL');
+  await expect(page.getByTestId('mission-text')).toContainText('5,25 L');
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('layer-skeletal')).toBeChecked(); // the leg step turns the skeleton on
+  await expect(page.getByTestId('inspector')).toHaveAttribute('data-structure', 'VH_M_femur_L');
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('mission-question')).toBeVisible();
+  await page.getByTestId('mission-option-0').click();
+  await expect(page.getByTestId('mission-feedback')).toContainText('Tekrar düşün');
+  await expect(page.getByTestId('mission-option-2')).toBeDisabled();
+  await page.getByTestId('mission-finish').click();
+  await expect(card).toHaveCount(0);
+});
+
+test('mission: what changes when you start running — scenario switches and values update', async ({ page }) => {
+  await ready(page);
+  await page.getByTestId('mission-start-start-running').click();
+  await expect(page.getByTestId('mission-text')).toContainText('75');
+  await expect(page.getByTestId('hr')).toHaveText('75');
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByRole('radio', { name: 'Koşu (yoğun egzersiz)' })).toHaveAttribute('aria-checked', 'true');
+  await expect(page.getByTestId('hr')).toHaveText('150');
+  await expect(page.getByTestId('mission-text')).toContainText('19,5');
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('mission-text')).toContainText('39,9');
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('mission-text')).toContainText('13,93');
+  await page.getByTestId('mission-back').click();
+  await expect(page.getByTestId('mission-card')).toHaveAttribute('data-step', '3');
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-option-1').click();
+  await expect(page.getByTestId('mission-feedback')).toContainText('Doğru');
+  await expect(page.getByTestId('mission-feedback')).toContainText('12,8');
+  await page.getByTestId('lang-en').click();
+  await expect(page.getByTestId('mission-feedback')).toContainText('12.8-fold');
+});

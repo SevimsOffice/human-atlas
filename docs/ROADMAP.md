@@ -9,7 +9,7 @@ Each milestone ends with: app runs, tests pass, existing behaviour preserved, SO
 | 2 | Lungs + respiratory engine ✅ | Lung model; RR, VT, VE, O₂ uptake linked to CO; breathing animation | OSX ch. 22 values | engine coupling tests |
 | 3 | Exercise across systems ✅ | rest→walk→run drives heart, lungs, muscle blood-flow distribution | cited flow-distribution table | scenario integration tests |
 | 4 | Remaining systems + cross-section ✅ | Layers: skeletal, muscular, nervous, digestive, urinary; clipping-plane slider | HRA organs; skeleton/muscle source (Q2) | layer toggle e2e |
-| 5 | Missions (in progress) | Guided step sequences (e.g. follow an RBC lungs → leg muscle) | — | mission e2e |
+| 5 | Missions (in review) | Guided step sequences (e.g. follow an RBC lungs → leg muscle) | — | mission e2e |
 | 6 | AI tutor | Retrieval over sourced content, citations, "I don't know" | licensed text corpus (Q1) | grounding evals |
 | 7 | Camera mode (optional) | Hand cursor, dwell-select, palm-rotate → same actions as mouse | — | works fully without camera |
 | 8 | Deployment | Static hosting, CDN for models, credits/licence review | — | prod smoke test |

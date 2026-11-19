@@ -3,7 +3,7 @@
 An interactive, sourced, browser-based exploration of the human body — anatomy (structure) and physiology (function).
 Educational only: not medical advice, not a diagnostic tool, no patient data.
 
-**Live:** https://sevimsoffice.github.io/human-atlas/ · Status: **Milestone 4 — body systems as layers + cross-section** (see `docs/ROADMAP.md`).
+**Live:** https://sevimsoffice.github.io/human-atlas/ · Status: **Milestone 5 — guided missions** (see `docs/ROADMAP.md`).
 
 ## Run locally
 ```bash
