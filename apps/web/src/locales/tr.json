@@ -151,7 +151,7 @@
     "showChart": "Grafik",
     "organ": "Organ",
     "tableValue": "tablodaki değer",
-    "flowNote": "Her organın tablo sütunundaki payı × motorun kalp debisi (türetilmiş). Koşu için en yakın sütun olan \"maksimal egzersiz\" kullanıldı (yaklaşık).",
+    "flowNote": "Her organın tablo sütunundaki payı × motorun kalp debisi (türetilmiş). Koşu değerleri OpenStax A&P 2e §20.4 tablosunun maksimal egzersiz sütununa dayanır.",
     "compareTitle": "Dinlenme → koşu",
     "runShort": "Koşu",
     "compareNote": "Tüm değerler motordan; oranlar türetilmiştir. Kas modelleri Milestone 4'te.",
@@ -172,5 +172,14 @@
     "kidney": "Böbrek",
     "gastrointestinal": "Sindirim kanalı",
     "others": "Diğer (karaciğer, dalak)"
+  },
+  "stage": {
+    "reset": "Görünümü sıfırla",
+    "leftPanel": "Sol panel",
+    "rightPanel": "Sağ panel",
+    "hint": "Sürükle: döndür · Tekerlek: yakınlaştır · Çift tık: yapıya odaklan"
+  },
+  "credit": {
+    "poweredBy": "Geliştiren:"
   }
 }

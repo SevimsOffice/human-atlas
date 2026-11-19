@@ -181,3 +181,98 @@ test('rest → running comparison across heart, lungs and muscle', async ({ page
   await expect(c).toContainText('Skeletal-muscle blood flow');
   await expect(c.getByTestId('ratio-cardiacOutput')).toHaveText('3.7');
 });
+
+// ---- M3 review fixes: camera, layout, credit ----
+const cam = async (page: Page) => {
+  const d = await page.getByTestId('stage').evaluate((el) => ({ ...(el as HTMLElement).dataset }));
+  return { polar: Number(d.camPolar), distance: Number(d.camDistance), target: String(d.camTarget) };
+};
+async function canvasBox(page: Page) { return (await page.locator('[data-testid=stage] canvas').boundingBox())!; }
+
+test('camera orbits the model centre and cannot flip over the top or under the floor', async ({ page }) => {
+  await ready(page);
+  await expect.poll(async () => (await cam(page)).target).toBe('0.0187,0.4861,0.0376'); // heart centre, not the floor
+  const b = await canvasBox(page);
+  const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
+  for (const dy of [600, -1200]) { // drag far down, then far up
+    await page.mouse.move(cx, cy); await page.mouse.down();
+    for (let i = 1; i <= 10; i++) await page.mouse.move(cx, cy + (dy * i) / 10);
+    await page.mouse.up(); await page.waitForTimeout(600);
+    const { polar } = await cam(page);
+    expect(polar).toBeGreaterThanOrEqual(11.4); // minPolar 0.2 rad
+    expect(polar).toBeLessThanOrEqual(104.5); // maxPolar 0.58π
+  }
+});
+
+test('panning is disabled and zoom is clamped', async ({ page }) => {
+  await ready(page);
+  const before = (await cam(page)).target;
+  const b = await canvasBox(page);
+  const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
+  await page.mouse.move(cx, cy); await page.mouse.down({ button: 'right' });
+  await page.mouse.move(cx + 200, cy + 100, { steps: 8 }); await page.mouse.up({ button: 'right' });
+  await page.waitForTimeout(500);
+  expect((await cam(page)).target).toBe(before);
+  for (let i = 0; i < 25; i++) await page.mouse.wheel(0, -400);
+  await page.waitForTimeout(800);
+  expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.119);
+  for (let i = 0; i < 40; i++) await page.mouse.wheel(0, 600);
+  await page.waitForTimeout(800);
+  expect((await cam(page)).distance).toBeLessThanOrEqual(0.901);
+});
+
+test('double-click focuses a structure; reset view returns to the model centre', async ({ page }) => {
+  await ready(page);
+  const b = await canvasBox(page);
+  await page.mouse.dblclick(b.x + b.width / 2, b.y + b.height / 2);
+  const picked = await page.getByTestId('inspector').getAttribute('data-structure');
+  expect(picked).toMatch(/^VH_M_/);
+  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).not.toBe('0.0187,0.4861,0.0376');
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).toBe('0.0187,0.4861,0.0376');
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeCloseTo(0.601, 2);
+});
+
+test('3D view is the dominant area and side/bottom panels collapse', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await ready(page);
+  const w = (await page.getByTestId('stage').boundingBox())!.width;
+  expect(w / 1440).toBeGreaterThanOrEqual(0.6);
+  await page.getByTestId('toggle-left').click();
+  await page.getByTestId('toggle-right').click();
+  await expect(page.getByTestId('panel-left')).toHaveCount(0);
+  await expect(page.getByTestId('panel-right')).toHaveCount(0);
+  await expect.poll(async () => (await page.getByTestId('stage').boundingBox())!.width).toBeGreaterThan(1400);
+  const h = (await page.getByTestId('stage').boundingBox())!.height;
+  await page.getByTestId('toggle-bottom').click();
+  await expect(page.getByTestId('panel-bottom')).toHaveCount(0);
+  await expect.poll(async () => (await page.getByTestId('stage').boundingBox())!.height).toBeGreaterThan(h);
+  await page.getByTestId('toggle-left').click();
+  await expect(page.getByTestId('panel-left')).toBeVisible();
+});
+
+test('text under the 3D view is limited to a readable line length and labels the §20.4 column', async ({ page }) => {
+  await ready(page);
+  const note = page.getByTestId('flow-note');
+  expect((await note.boundingBox())!.width).toBeLessThanOrEqual(680);
+  await expect(note).toContainText('maksimal egzersiz sütununa');
+  await page.getByTestId('lang-en').click();
+  await expect(note).toContainText('based on the maximal exercise column of OpenStax A&P 2e §20.4');
+});
+
+test('footer and Sources page credit Sevim Durmuş with links opening in a new tab', async ({ page }) => {
+  await ready(page);
+  const f = page.getByTestId('powered-by');
+  await expect(f).toContainText('Geliştiren: Sevim Durmuş');
+  for (const [id, href] of [['instagram', 'https://www.instagram.com/sevimsoffice/'], ['linkedin', 'https://www.linkedin.com/in/sevimdurmus/']]) {
+    const a = page.getByTestId(`powered-by-${id}`);
+    await expect(a).toHaveAttribute('href', href);
+    await expect(a).toHaveAttribute('target', '_blank');
+    await expect(a).toHaveAttribute('rel', /noopener/);
+  }
+  await page.getByTestId('lang-en').click();
+  await expect(f).toContainText('Powered by Sevim Durmuş');
+  await page.getByTestId('nav-credits').click();
+  await expect(page.getByTestId('credits-powered-by')).toContainText('Powered by Sevim Durmuş');
+  await expect(page.getByTestId('credits-powered-by-linkedin')).toHaveAttribute('href', 'https://www.linkedin.com/in/sevimdurmus/');
+});

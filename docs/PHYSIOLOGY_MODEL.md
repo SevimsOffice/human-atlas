@@ -124,7 +124,7 @@ OpenStax A&P §22.6 describes exercise hyperpnea only qualitatively; Biology 2e 
 
 Formulas: `share = organ / column total` and `organ flow = engine CO × share` (both derived). The table's totals (5.8 / 17.5 L/min) differ from the engine's CO (5.25 / 19.5 L/min, §19.4), so the engine uses each organ's **share** of the column and applies it to its own CO; the cited mL/min are shown alongside.
 
-Scenario → column: rest → "Resting"; running (HR 150) → "Maximal exercise", the closest column for vigorous exercise (the table has no running column; "mild" totals 9.5 L/min, far below 19.5). This mapping is an approximation and is stated in the UI.
+Scenario → column: rest → "Resting"; running (HR 150) → "Maximal exercise", the closest column for vigorous exercise (the table has no running column; "mild" totals 9.5 L/min, far below 19.5). This mapping is an approximation, accepted by the owner (Q13), and labelled in the UI "based on the maximal exercise column of OpenStax A&P 2e §20.4".
 
 | Organ | Rest share → flow | Running share → flow |
 |---|---|---|

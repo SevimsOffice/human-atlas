@@ -6,8 +6,11 @@ Q1 option B (own texts, OpenStax cited for facts only; commercial use is a goal)
 ## Decided 2026-11-19 (M2 approval)
 Q10: keep "source pending"; owner will allow www.ncbi.nlm.nih.gov, then find a peer-reviewed (open-access preferred) source for RR/VT during running and walking (**host still unreachable at M3 start**) · Q11: keep O2 extraction, labelled "derived (Fick principle)" · Q12: normalise VO2 to mL/kg/min and scale to the 70-kg body, explained on the Sources page (done in M3).
 
+## Decided (M3 review)
+Q13: running uses the "maximal exercise" column, labelled "based on the maximal exercise column of OpenStax A&P 2e §20.4" (owner decision). Review fixes: 3D view ≥ 60 % width, collapsible panels, constrained orbit camera with reset and double-click focus, notes ≤ 680 px, footer credit.
+
 ## Open (Milestone 3)
-- **Q13 Running ↔ "maximal exercise" column.** The A&P §20.4 table has rest / mild / maximal columns; running (HR 150, CO 19.5 L/min) is mapped to "maximal" (17.5 L/min) as the closest. Alternative: show only rest until a running-specific distribution is found.
+- ~~**Q13 Running ↔ "maximal exercise" column.**~~ (decided above) The A&P §20.4 table has rest / mild / maximal columns; running (HR 150, CO 19.5 L/min) is mapped to "maximal" (17.5 L/min) as the closest. Alternative: show only rest until a running-specific distribution is found.
 - **Q14 Muscles in 3D.** HRA has no skeletal-muscle model, so muscle blood flow is shown in the chart only. M4 will search CC BY/CC0 muscle models first.
 
 ## Previously open (Milestone 2)

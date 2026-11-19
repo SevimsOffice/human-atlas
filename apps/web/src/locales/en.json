@@ -151,7 +151,7 @@
     "showChart": "Chart",
     "organ": "Organ",
     "tableValue": "table value",
-    "flowNote": "Each organ's share of the table column × the engine's cardiac output (derived). Running uses the closest column, \"maximal exercise\" (approximate).",
+    "flowNote": "Each organ's share of the table column × the engine's cardiac output (derived). Running is based on the maximal exercise column of OpenStax A&P 2e §20.4.",
     "compareTitle": "Rest → running",
     "runShort": "Running",
     "compareNote": "All values from the engine; ratios are derived. Muscle models come in Milestone 4.",
@@ -172,5 +172,14 @@
     "kidney": "Kidney",
     "gastrointestinal": "Gastrointestinal tract",
     "others": "Other (liver, spleen)"
+  },
+  "stage": {
+    "reset": "Reset view",
+    "leftPanel": "Left panel",
+    "rightPanel": "Right panel",
+    "hint": "Drag: rotate · Wheel: zoom · Double-click: focus a structure"
+  },
+  "credit": {
+    "poweredBy": "Powered by"
   }
 }

@@ -16,6 +16,12 @@ interface AtlasState {
   hovered: string | null;
   loadedModels: string[];
   view: View;
+  cameraRequest: { kind: 'reset' } | { kind: 'focus'; name: string } | null;
+  leftOpen: boolean;
+  rightOpen: boolean;
+  bottomOpen: boolean;
+  requestCamera: (r: { kind: 'reset' } | { kind: 'focus'; name: string }) => void;
+  togglePanel: (side: 'left' | 'right' | 'bottom') => void;
   setScenario: (s: ScenarioId) => void;
   select: (name: string | null) => void;
   toggleLayer: (l: Layer) => void;
@@ -38,6 +44,13 @@ export const useAtlas = create<AtlasState>((set) => ({
   breaths: 0,
   hovered: null,
   loadedModels: [],
+  cameraRequest: null,
+  leftOpen: true,
+  rightOpen: true,
+  bottomOpen: true,
+  // a fresh object each time so repeated requests (reset, reset) still trigger
+  requestCamera: (r) => set({ cameraRequest: { ...r } }),
+  togglePanel: (side) => set((s) => (side === 'left' ? { leftOpen: !s.leftOpen } : side === 'right' ? { rightOpen: !s.rightOpen } : { bottomOpen: !s.bottomOpen })),
   view: location.hash === '#/credits' ? 'credits' : 'atlas',
   setScenario: (scenario) => set({ scenario }),
   select: (name) => set({ selected: name ? resolveSelectable(name) : null }),

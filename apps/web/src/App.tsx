@@ -13,6 +13,7 @@ import { Inspector } from './ui/Inspector';
 import { StructureList } from './ui/StructureList';
 import { Credits } from './ui/Credits';
 import { startFlowTicker } from './lib/flowClock';
+import { PoweredBy } from './ui/PoweredBy';
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -49,7 +50,32 @@ function Stage() {
       <AtlasScene />
       {(!loaded || active) && <div className="pointer-events-none absolute inset-0 grid place-items-center text-sm text-graphite-soft">{t('loading')}</div>}
       {hovered && <HoverLabel name={hovered} />}
+      <StageControls />
     </div>
+  );
+}
+
+function StageControls() {
+  const { t } = useTranslation();
+  const { leftOpen, rightOpen, togglePanel, requestCamera } = useAtlas();
+  const btn = 'pointer-events-auto rounded-sm border border-line bg-white/90 px-2 py-1 text-[11px] hover:bg-white';
+  return (
+    <>
+      <div className="pointer-events-none absolute right-2 top-2 flex gap-1">
+        <button className={btn} onClick={() => requestCamera({ kind: 'reset' })} data-testid="reset-view">{t('stage.reset')}</button>
+      </div>
+      <div className="pointer-events-none absolute bottom-2 left-2 hidden gap-1 lg:flex">
+        <button className={btn} onClick={() => togglePanel('left')} aria-expanded={leftOpen} aria-controls="panel-left" data-testid="toggle-left">
+          {leftOpen ? '◂ ' : '▸ '}{t('stage.leftPanel')}
+        </button>
+      </div>
+      <div className="pointer-events-none absolute bottom-2 right-2 hidden gap-1 lg:flex">
+        <button className={btn} onClick={() => togglePanel('right')} aria-expanded={rightOpen} aria-controls="panel-right" data-testid="toggle-right">
+          {t('stage.rightPanel')}{rightOpen ? ' ▸' : ' ◂'}
+        </button>
+      </div>
+      <p className="pointer-events-none absolute left-2 top-2 hidden text-[10px] text-graphite-soft lg:block" style={{ marginTop: 28 }}>{t('stage.hint')}</p>
+    </>
   );
 }
 
@@ -62,6 +88,8 @@ export default function App() {
   const { t } = useTranslation();
   const view = useAtlas((s) => s.view);
   const select = useAtlas((s) => s.select);
+  const leftOpen = useAtlas((s) => s.leftOpen);
+  const rightOpen = useAtlas((s) => s.rightOpen);
   useEffect(() => startFlowTicker(), []);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') select(null); };
@@ -75,20 +103,27 @@ export default function App() {
       <Header />
       {view === 'credits' ? <div className="flex-1 overflow-auto"><Credits /></div> : (
         <main id="main" className="flex min-h-0 flex-1 flex-col lg:flex-row">
-          <aside className="order-2 w-full overflow-auto border-line bg-paper lg:order-1 lg:w-72 lg:border-r">
-            <ScenarioPanel />
-            <RespiratoryPanel />
-            <FlowPanel />
-            <LayerPanel />
-          </aside>
-          <div className="order-1 flex min-h-[50vh] flex-1 flex-col lg:order-2"><Stage /><ExercisePanel /></div>
-          <aside className="order-3 w-full overflow-auto border-line bg-paper lg:w-80 lg:border-l">
-            <Inspector />
-            <StructureList />
-          </aside>
+          {leftOpen && (
+            <aside className="order-2 w-full overflow-auto border-line bg-paper lg:order-1 lg:w-60 lg:shrink-0 lg:border-r" data-testid="panel-left">
+              <ScenarioPanel />
+              <RespiratoryPanel />
+              <FlowPanel />
+              <LayerPanel />
+            </aside>
+          )}
+          <div className="order-1 flex min-h-[55vh] min-w-0 flex-1 flex-col lg:order-2"><Stage /><ExercisePanel /></div>
+          {rightOpen && (
+            <aside className="order-3 w-full overflow-auto border-line bg-paper lg:w-64 lg:shrink-0 lg:border-l" data-testid="panel-right">
+              <Inspector />
+              <StructureList />
+            </aside>
+          )}
         </main>
       )}
-      <footer className="border-t border-line bg-white px-4 py-1.5 text-[11px] text-graphite-soft" data-testid="disclaimer">{t('disclaimer')}</footer>
+      <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-line bg-white px-3 py-1.5 text-[11px] text-graphite-soft">
+        <span data-testid="disclaimer">{t('disclaimer')}</span>
+        <PoweredBy />
+      </footer>
     </div>
   );
 }
