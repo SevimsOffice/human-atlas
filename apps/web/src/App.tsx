@@ -15,6 +15,8 @@ import { StructureList } from './ui/StructureList';
 import { Credits } from './ui/Credits';
 import { startFlowTicker } from './lib/flowClock';
 import { PoweredBy } from './ui/PoweredBy';
+import { sectionPlane } from './lib/section';
+import { boundsOf } from './lib/camera';
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -46,8 +48,12 @@ function Stage() {
   const { active } = useProgress();
   const loaded = useAtlas((s) => s.loadedModels.length === manifest.models.length);
   const hovered = useAtlas((s) => s.hovered);
+  const section = useAtlas((s) => s.section);
+  const layers = useAtlas((s) => s.layers);
+  const sectionPos = sectionPlane(section.axis, section.t, boundsOf(layers) ?? boundsOf({ heart: true })!).constant;
   return (
-    <div className="relative min-h-[300px] flex-1" data-testid="stage" data-ready={loaded && !active}>
+    <div className="relative min-h-[300px] flex-1" data-testid="stage" data-ready={loaded && !active}
+      data-section={section.enabled ? `${section.axis}:${section.t.toFixed(2)}` : 'off'} data-section-pos={sectionPos.toFixed(4)}>
       <AtlasScene />
       {(!loaded || active) && <div className="pointer-events-none absolute inset-0 grid place-items-center text-sm text-graphite-soft">{t('loading')}</div>}
       {hovered && <HoverLabel name={hovered} />}

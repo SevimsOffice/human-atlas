@@ -301,7 +301,7 @@ test('footer and Sources page credit Sevim Durmuş with links opening in a new t
 
 test('side panels: compact scenario control and one-line structure rows', async ({ page }) => {
   await ready(page);
-  const seg = page.getByRole('radiogroup');
+  const seg = page.getByRole('radiogroup', { name: /senaryo/i });
   expect((await seg.boundingBox())!.height).toBeLessThanOrEqual(34);
   const row = page.getByRole('button', { name: /^Sağ kulakçık/ });
   expect((await row.boundingBox())!.height).toBeLessThanOrEqual(24);

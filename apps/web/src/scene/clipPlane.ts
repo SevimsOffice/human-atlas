@@ -12,8 +12,6 @@ function update() {
   const p = sectionPlane(section.axis, section.t, b);
   clipPlane.normal.set(...p.normal);
   clipPlane.constant = p.constant;
-  const el = typeof document !== 'undefined' ? document.querySelector<HTMLElement>('[data-testid=stage]') : null;
-  if (el) { el.dataset.section = section.enabled ? `${section.axis}:${section.t.toFixed(2)}` : 'off'; el.dataset.sectionPos = p.constant.toFixed(4); }
 }
 update();
 useAtlas.subscribe((s, prev) => { if (s.section !== prev.section || s.layers !== prev.layers) update(); });
