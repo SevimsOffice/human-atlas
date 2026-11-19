@@ -13,7 +13,7 @@
     "build": "npm run build -w @atlas/web",
     "preview": "npm run preview -w @atlas/web",
     "test": "vitest run",
-    "typecheck": "tsc -p packages/physiology && tsc -p apps/web --noEmit",
+    "typecheck": "tsc -p packages/physiology && tsc -p packages/anatomy-manifest && tsc -p apps/web",
     "e2e": "playwright test"
   },
   "devDependencies": {
