@@ -4,7 +4,7 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { useAtlas } from '../store';
-import { CAMERA_LIMITS, DEFAULT_VIEW, focusView, type V3 } from '../lib/camera';
+import { CAMERA_LIMITS, DEFAULT_VIEW, fitView, focusView, type V3 } from '../lib/camera';
 
 const v = (a: V3) => new THREE.Vector3(...a);
 
@@ -21,18 +21,33 @@ function publish(controls: OrbitControlsImpl, camera: THREE.Camera) {
 export function CameraRig() {
   const controls = useRef<OrbitControlsImpl>(null);
   const camera = useThree((s) => s.camera);
+  const size = useThree((s) => s.size);
+  const layers = useAtlas((s) => s.layers);
+  const fitted = useRef(false);
+
+  // On load (once the canvas has its real size): frame every visible model, no animation.
+  useEffect(() => {
+    const c = controls.current;
+    if (!c || fitted.current || !size.width || !size.height) return;
+    const f = fitView(layers, size.width / size.height);
+    c.target.set(...f.target); camera.position.set(...f.position); c.update();
+    fitted.current = true;
+  }, [size, layers, camera]);
   const request = useAtlas((s) => s.cameraRequest);
   const goal = useRef<{ target: THREE.Vector3; position: THREE.Vector3 } | null>(null);
 
   useEffect(() => {
     const c = controls.current;
     if (!c || !request) return;
-    if (request.kind === 'reset') goal.current = { target: v(DEFAULT_VIEW.target), position: v(DEFAULT_VIEW.position) };
+    if (request.kind === 'reset') {
+      const f = fitView(useAtlas.getState().layers, size.width / Math.max(1, size.height));
+      goal.current = { target: v(f.target), position: v(f.position) };
+    }
     else {
       const f = focusView(request.name, camera.position.toArray() as V3, c.target.toArray() as V3);
       if (f) goal.current = { target: v(f.target), position: v(f.position) };
     }
-  }, [request, camera]);
+  }, [request, camera, size]);
 
   useFrame((_, dt) => {
     const c = controls.current;

@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { CameraRig } from './CameraRig';
-import { DEFAULT_VIEW } from '../lib/camera';
+import { DEFAULT_VIEW, STAGE_Y } from '../lib/camera';
 import { HeartModels } from './HeartModels';
 import { BloodFlow } from './BloodFlow';
 import { useAtlas } from '../store';
@@ -39,7 +39,7 @@ export function AtlasScene() {
       <directionalLight position={[0.5, 1.2, 1]} intensity={1.6} />
       <directionalLight position={[-0.8, 0.4, -0.6]} intensity={0.5} color="#dfe6ef" />
       {/* specimen stage below the model */}
-      <mesh rotation-x={-Math.PI / 2} position={[target[0], 0.16, target[2]]}>
+      <mesh rotation-x={-Math.PI / 2} position={[target[0], STAGE_Y, target[2]]}>
         <circleGeometry args={[0.32, 96]} />
         <meshStandardMaterial color="#e1e4e7" roughness={0.95} />
       </mesh>

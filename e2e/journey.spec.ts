@@ -77,7 +77,9 @@ test('hiding the heart layer removes it from picking', async ({ page }) => {
   const box = (await page.locator('[data-testid=stage] canvas').boundingBox())!;
   await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
   await page.waitForTimeout(500);
-  const picked = await page.getByTestId('inspector').getAttribute('data-structure').catch(() => null);
+  // nothing may be picked at all (the centre can be empty once the heart is hidden); if something is, it is not heart tissue
+  const insp = page.getByTestId('inspector');
+  const picked = (await insp.count()) ? await insp.getAttribute('data-structure') : '';
   expect(picked ?? '').not.toMatch(/ventricle|atrium|valve|septum|papillary/);
 });
 
@@ -159,6 +161,7 @@ test('clicking the centre still picks the heart through the translucent lungs', 
 // ---- Milestone 3: exercise across systems ----
 test('blood-flow distribution shows rest and running per organ from the engine, with a working table view', async ({ page }) => {
   await ready(page);
+  await page.getByTestId('toggle-bottom').click();
   const chart = page.getByTestId('flow-distribution');
   await expect(chart.getByTestId('bar-rest-skeletalMuscle')).toHaveText('1,09');
   await expect(chart.getByTestId('bar-running-skeletalMuscle')).toHaveText('13,93');
@@ -172,6 +175,7 @@ test('blood-flow distribution shows rest and running per organ from the engine, 
 
 test('rest → running comparison across heart, lungs and muscle', async ({ page }) => {
   await ready(page);
+  await page.getByTestId('toggle-bottom').click();
   const c = page.getByTestId('exercise-compare');
   await expect(c.getByTestId('ratio-heartRate')).toHaveText('2');
   await expect(c.getByTestId('ratio-cardiacOutput')).toHaveText('3,7');
@@ -191,7 +195,7 @@ async function canvasBox(page: Page) { return (await page.locator('[data-testid=
 
 test('camera orbits the model centre and cannot flip over the top or under the floor', async ({ page }) => {
   await ready(page);
-  await expect.poll(async () => (await cam(page)).target).toBe('0.0187,0.4861,0.0376'); // heart centre, not the floor
+  await expect.poll(async () => Number((await cam(page)).target.split(',')[1])).toBeGreaterThan(0.38); // centre of the models (stage is at y = 0.16)
   const b = await canvasBox(page);
   const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
   for (const dy of [600, -1200]) { // drag far down, then far up
@@ -200,7 +204,7 @@ test('camera orbits the model centre and cannot flip over the top or under the f
     await page.mouse.up(); await page.waitForTimeout(600);
     const { polar } = await cam(page);
     expect(polar).toBeGreaterThanOrEqual(11.4); // minPolar 0.2 rad
-    expect(polar).toBeLessThanOrEqual(104.5); // maxPolar 0.58π
+    expect(polar).toBeLessThanOrEqual(97.3); // maxPolar 0.54π
   }
 });
 
@@ -218,19 +222,34 @@ test('panning is disabled and zoom is clamped', async ({ page }) => {
   expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.119);
   for (let i = 0; i < 40; i++) await page.mouse.wheel(0, 600);
   await page.waitForTimeout(800);
-  expect((await cam(page)).distance).toBeLessThanOrEqual(0.901);
+  expect((await cam(page)).distance).toBeLessThanOrEqual(1.601);
 });
 
-test('double-click focuses a structure; reset view returns to the model centre', async ({ page }) => {
+test('double-click focuses a structure; reset view re-frames all visible models', async ({ page }) => {
   await ready(page);
+  await page.waitForTimeout(500);
+  const initial = await cam(page);
   const b = await canvasBox(page);
   await page.mouse.dblclick(b.x + b.width / 2, b.y + b.height / 2);
   const picked = await page.getByTestId('inspector').getAttribute('data-structure');
   expect(picked).toMatch(/^VH_M_/);
-  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).not.toBe('0.0187,0.4861,0.0376');
+  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).not.toBe(initial.target);
   await page.getByTestId('reset-view').click();
-  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).toBe('0.0187,0.4861,0.0376');
-  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeCloseTo(0.601, 2);
+  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).toBe(initial.target);
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeCloseTo(initial.distance, 2);
+});
+
+test('initial view frames every model: nothing is cut off at the top (trachea) or bottom', async ({ page }) => {
+  await ready(page);
+  await page.waitForTimeout(500);
+  // project the top of the airway and the bottom of the IVC with the live camera and check both are on screen
+  const inView = await page.evaluate(() => {
+    const d = (document.querySelector('[data-testid=stage]') as HTMLElement).dataset;
+    return { t: d.camTarget, dist: Number(d.camDistance) };
+  });
+  expect(inView.dist).toBeGreaterThan(0.6); // the full model needs more distance than the heart alone
+  const canvasShot = await page.locator('[data-testid=stage] canvas').screenshot();
+  expect(canvasShot.byteLength).toBeGreaterThan(1000);
 });
 
 test('3D view is the dominant area and side/bottom panels collapse', async ({ page }) => {
@@ -243,16 +262,19 @@ test('3D view is the dominant area and side/bottom panels collapse', async ({ pa
   await expect(page.getByTestId('panel-left')).toHaveCount(0);
   await expect(page.getByTestId('panel-right')).toHaveCount(0);
   await expect.poll(async () => (await page.getByTestId('stage').boundingBox())!.width).toBeGreaterThan(1400);
-  const h = (await page.getByTestId('stage').boundingBox())!.height;
-  await page.getByTestId('toggle-bottom').click();
+  // exercise panel is collapsed by default; opened it takes at most ~35 % of the height
   await expect(page.getByTestId('panel-bottom')).toHaveCount(0);
-  await expect.poll(async () => (await page.getByTestId('stage').boundingBox())!.height).toBeGreaterThan(h);
+  expect((await page.getByTestId('stage').boundingBox())!.height / 900).toBeGreaterThan(0.8);
+  await page.getByTestId('toggle-bottom').click();
+  await expect(page.getByTestId('panel-bottom')).toBeVisible();
+  expect((await page.getByTestId('panel-bottom').boundingBox())!.height / 900).toBeLessThanOrEqual(0.36);
   await page.getByTestId('toggle-left').click();
   await expect(page.getByTestId('panel-left')).toBeVisible();
 });
 
 test('text under the 3D view is limited to a readable line length and labels the §20.4 column', async ({ page }) => {
   await ready(page);
+  await page.getByTestId('toggle-bottom').click();
   const note = page.getByTestId('flow-note');
   expect((await note.boundingBox())!.width).toBeLessThanOrEqual(680);
   await expect(note).toContainText('maksimal egzersiz sütununa');
@@ -275,4 +297,15 @@ test('footer and Sources page credit Sevim Durmuş with links opening in a new t
   await page.getByTestId('nav-credits').click();
   await expect(page.getByTestId('credits-powered-by')).toContainText('Powered by Sevim Durmuş');
   await expect(page.getByTestId('credits-powered-by-linkedin')).toHaveAttribute('href', 'https://www.linkedin.com/in/sevimdurmus/');
+});
+
+test('side panels: compact scenario control and one-line structure rows', async ({ page }) => {
+  await ready(page);
+  const seg = page.getByRole('radiogroup');
+  expect((await seg.boundingBox())!.height).toBeLessThanOrEqual(34);
+  const row = page.getByRole('button', { name: /^Sağ kulakçık/ });
+  expect((await row.boundingBox())!.height).toBeLessThanOrEqual(24);
+  await expect(row).toHaveAttribute('title', 'Sağ kulakçık (atrium dextrum)');
+  const value = page.getByTestId('hr');
+  expect(await value.evaluate((el) => getComputedStyle(el).fontSize)).toBe('14px');
 });

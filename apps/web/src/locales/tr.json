@@ -19,7 +19,11 @@
     "title": "Senaryo",
     "rest": "Dinlenme",
     "running": "Koşu (yoğun egzersiz)",
-    "walkingNote": "Yürüme senaryosu, doğrulanmış ikinci bir kaynak bulunana kadar eklenmedi."
+    "walkingNote": "Yürüme senaryosu, doğrulanmış ikinci bir kaynak bulunana kadar eklenmedi.",
+    "short": {
+      "rest": "Dinlenme",
+      "running": "Koşu"
+    }
   },
   "measure": {
     "title": "Fizyoloji motoru",

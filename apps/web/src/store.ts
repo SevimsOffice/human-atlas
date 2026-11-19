@@ -47,7 +47,7 @@ export const useAtlas = create<AtlasState>((set) => ({
   cameraRequest: null,
   leftOpen: true,
   rightOpen: true,
-  bottomOpen: true,
+  bottomOpen: false, // exercise panel collapsed by default: the 3D view gets the height
   // a fresh object each time so repeated requests (reset, reset) still trigger
   requestCamera: (r) => set({ cameraRequest: { ...r } }),
   togglePanel: (side) => set((s) => (side === 'left' ? { leftOpen: !s.leftOpen } : side === 'right' ? { rightOpen: !s.rightOpen } : { bottomOpen: !s.bottomOpen })),

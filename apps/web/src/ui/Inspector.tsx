@@ -9,9 +9,9 @@ const uberonUrl = (id: string) => `http://purl.obolibrary.org/obo/${id.replace('
 
 function Field({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="py-2">
+    <div className="py-1.5">
       <dt className="mb-0.5 text-[11px] uppercase tracking-[0.08em] text-graphite-soft">{title}</dt>
-      <dd className="text-sm">{children}</dd>
+      <dd className="text-[13px]">{children}</dd>
     </div>
   );
 }
@@ -47,7 +47,7 @@ export function Inspector() {
       <div data-testid="inspector" data-structure={s.name}>
         <div className="flex items-start justify-between gap-2">
           <div>
-            <h3 className="text-lg font-semibold leading-tight" data-testid="inspector-name">{name.text}</h3>
+            <h3 className="text-[15px] font-semibold leading-tight" data-testid="inspector-name">{name.text}</h3>
             <p className="text-xs text-graphite-soft">{other.text}</p>
             {(name.needsReview || other.needsReview) && <div className="mt-1"><Badge tone="warn">{t('inspector.termReview')}</Badge></div>}
           </div>

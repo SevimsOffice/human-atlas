@@ -107,7 +107,7 @@ export function ExercisePanel() {
         {open ? '▾' : '▸'} {t('exercise.title')}
       </button>
       {open && (
-        <div className="flex max-h-[32vh] flex-col gap-4 overflow-auto lg:flex-row" data-testid="panel-bottom">
+        <div className="flex max-h-[35vh] flex-col gap-4 overflow-auto lg:flex-row" data-testid="panel-bottom">
           <FlowChart />
           <Comparison />
         </div>

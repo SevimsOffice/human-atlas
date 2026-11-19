@@ -10,21 +10,23 @@ function Row({ label, v, testId, lang }: { label: string; v: RefValue | DerivedV
   const { t } = useTranslation();
   const isRef = 'ref' in v;
   return (
-    <div className="flex items-baseline justify-between gap-3 py-1.5">
-      <dt className="shrink-0 text-sm">{label}</dt>
-      <dd className="text-right">
-        <span data-testid={testId} className="font-mono text-base tabular-nums">{fmt(v.value, lang)}</span>
-        <span className="ml-1 font-mono text-xs text-graphite-soft">{v.unit}</span>
-        <div className="font-mono text-[10px] text-graphite-soft">
-          {isRef ? (
-            <a href={REFERENCES[v.ref].url} target="_blank" rel="noreferrer" title={v.quote} className="underline decoration-line underline-offset-2">
-              {t('measure.ref')}: {v.ref}
-              {v.range ? ` · ${t('measure.range')} ${fmt(v.range[0], lang)}–${fmt(v.range[1], lang)}` : ''}
-            </a>
-          ) : (
-            <>{t('measure.derived')}: {v.formula.replace('*', ' × ')}</>
-          )}
-        </div>
+    <div className="py-1">
+      <div className="flex items-baseline justify-between gap-2">
+        <dt className="min-w-0 text-[13px] leading-tight">{label}</dt>
+        <dd className="shrink-0 whitespace-nowrap">
+          <span data-testid={testId} className="font-mono text-[14px] tabular-nums">{fmt(v.value, lang)}</span>
+          <span className="ml-1 font-mono text-[11px] text-graphite-soft">{v.unit}</span>
+        </dd>
+      </div>
+      <dd className="truncate whitespace-nowrap text-right font-mono text-[9.5px] leading-tight text-graphite-soft">
+        {isRef ? (
+          <a href={REFERENCES[v.ref].url} target="_blank" rel="noreferrer" title={v.quote} className="underline decoration-line underline-offset-2">
+            {t('measure.ref')}: {v.ref}
+            {v.range ? ` · ${t('measure.range')} ${fmt(v.range[0], lang)}–${fmt(v.range[1], lang)}` : ''}
+          </a>
+        ) : (
+          <>{t('measure.derived')}: {v.formula.replace('*', ' × ')}</>
+        )}
       </dd>
     </div>
   );
@@ -39,15 +41,17 @@ export function ScenarioPanel() {
   return (
     <>
       <Panel title={t('scenario.title')} id="scenario-h">
-        <div role="radiogroup" aria-labelledby="scenario-h" className="grid grid-cols-2 gap-1 rounded-sm border border-line bg-white p-1">
+        <div role="radiogroup" aria-labelledby="scenario-h" className="grid h-8 grid-cols-2 rounded-sm border border-line bg-white p-0.5">
           {SCENARIO_ORDER.map((id) => (
             <button key={id} role="radio" aria-checked={scenario === id} onClick={() => setScenario(id)}
-              className={`rounded-sm px-2 py-1.5 text-sm transition-colors ${scenario === id ? 'bg-graphite text-white' : 'hover:bg-paper'}`}>
-              {t(`scenario.${id}`)}
+              aria-label={t(`scenario.${id}`)} title={t(`scenario.${id}`)}
+              className={`truncate whitespace-nowrap rounded-[2px] px-2 text-[12px] leading-none transition-colors ${scenario === id ? 'bg-graphite text-white' : 'hover:bg-paper'}`}>
+              {t(`scenario.short.${id}`)}
             </button>
           ))}
         </div>
-        <p className="mt-2 text-xs text-graphite-soft">{t('scenario.walkingNote')}</p>
+        <p className="mt-1 text-[11px] text-graphite">{t(`scenario.${scenario}`)}</p>
+        <p className="mt-0.5 text-[11px] leading-snug text-graphite-soft">{t('scenario.walkingNote')}</p>
       </Panel>
       <Panel title={t('measure.title')} id="measure-h">
         <dl className="divide-y divide-line" data-testid="measurements">
@@ -56,7 +60,7 @@ export function ScenarioPanel() {
           <Row label={t('measure.co')} v={st.cardiacOutput} testId="co" lang={lang} />
           <Row label={t('measure.cycle')} v={st.cycleDuration} testId="cycle" lang={lang} />
         </dl>
-        <div className="mt-2 flex items-center gap-2 text-xs text-graphite-soft">
+        <div className="mt-1 flex items-center gap-2 text-[11px] text-graphite-soft">
           <span aria-hidden className="beat-dot inline-block h-2.5 w-2.5 rounded-full bg-cardio" style={{ ['--cycle' as string]: `${st.cycleDuration.value}s` }} />
           {t('measure.beat')}
         </div>

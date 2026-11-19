@@ -19,7 +19,11 @@
     "title": "Scenario",
     "rest": "Rest",
     "running": "Running (vigorous exercise)",
-    "walkingNote": "Walking is not included until a second verified source is found."
+    "walkingNote": "Walking is not included until a second verified source is found.",
+    "short": {
+      "rest": "Rest",
+      "running": "Running"
+    }
   },
   "measure": {
     "title": "Physiology engine",
