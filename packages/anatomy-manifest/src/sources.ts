@@ -61,6 +61,12 @@ export const SOURCES: readonly SourceEntry[] = [
     changes: 'None. Values cited in docs/PHYSIOLOGY_MODEL.md; texts in content/texts are our own wording.',
   },
   {
+    id: 'LEE-2025', kind: 'reference', title: 'Lee, Seo & Lee 2025 — Ventilatory responses to progressive treadmill speeds in women (IJERPH 22:718)',
+    url: 'https://doi.org/10.3390/ijerph22050718', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+    attribution: 'Lee S.H., Seo Y., Lee D.T. Int J Environ Res Public Health 22(5):718, 2025. doi:10.3390/ijerph22050718.',
+    changes: 'None. Running breathing rate, tidal volume and minute ventilation (9 km/h, oronasal) cited in docs/PHYSIOLOGY_MODEL.md.',
+  },
+  {
     id: 'OSX-CP2E', kind: 'reference', title: 'OpenStax College Physics 2e — §7.8 Work, Energy, and Power in Humans (oxygen consumption table)',
     url: 'https://openstax.org/details/books/college-physics-2e', license: 'CC BY-NC-SA 4.0 (cited for numbers only; no text reused)',
     licenseUrl: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',

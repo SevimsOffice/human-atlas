@@ -42,8 +42,8 @@ export interface RespiratoryState {
   readonly scenario: ScenarioId;
   readonly breathingRate: RefValue | null;
   readonly tidalVolume: RefValue | null;
-  /** VE [L/min] = RR × VT / 1000; null when either input is missing. */
-  readonly minuteVentilation: DerivedValue | null;
+  /** VE: cited when the source measured it, else derived RR × VT / 1000; null when inputs are missing. */
+  readonly minuteVentilation: RefValue | DerivedValue | null;
   readonly breathCycle: DerivedValue | null;
   /** VO2 as cited (College Physics, 76-kg reference body). */
   readonly oxygenUptake: RefValue;
@@ -80,7 +80,7 @@ export function computeRespiratory(id: ScenarioId): RespiratoryState {
     scenario: id,
     breathingRate: s.rr,
     tidalVolume: s.vt,
-    minuteVentilation: s.rr && s.vt ? { value: minuteVentilation(s.rr.value, s.vt.value), unit: 'L/min', formula: 'VE=RR*VT' } : null,
+    minuteVentilation: s.ve ?? (s.rr && s.vt ? { value: minuteVentilation(s.rr.value, s.vt.value), unit: 'L/min', formula: 'VE=RR*VT' } : null),
     breathCycle: s.rr ? { value: Math.round((60 / s.rr.value) * 100) / 100, unit: 's', formula: 'Tb=60/RR' } : null,
     oxygenUptake: s.vo2,
     oxygenUptakePerKg: { value: Math.round(perKg * 100) / 100, unit: 'mL/kg/min', formula: 'VO2/kg=VO2/m' },

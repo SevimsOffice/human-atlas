@@ -99,14 +99,14 @@ describe('respiratory engine (Milestone 2)', () => {
     expect(oxygenExtraction(0.25, 5)).toBe(50);
     expect(() => oxygenExtraction(1, 0)).toThrow(RangeError);
   });
-  it('running: VO2 2.12 L/min is cited; breathing rate and tidal volume are reported missing, never invented', () => {
+  it('running: breathing values cited from Lee et al. 2025 (9 km/h, oronasal); VE is the measured value', () => {
     const r = computeRespiratory('running');
     expect(r.oxygenUptake).toMatchObject({ value: 2.12, ref: 'CP-7.8' });
-    expect(r.breathingRate).toBeNull();
-    expect(r.tidalVolume).toBeNull();
-    expect(r.minuteVentilation).toBeNull();
-    expect(r.breathCycle).toBeNull();
-    expect(r.missing).toEqual(['breathingRate', 'tidalVolume']);
+    expect(r.breathingRate).toMatchObject({ value: 39.9, unit: 'breaths/min', ref: 'LEE-2025' });
+    expect(r.tidalVolume).toMatchObject({ value: 1500, unit: 'mL', ref: 'LEE-2025' });
+    expect(r.minuteVentilation).toMatchObject({ value: 55.2, unit: 'L/min', ref: 'LEE-2025' });
+    expect(r.breathCycle?.value).toBe(1.5);
+    expect(r.missing).toEqual([]);
   });
   it('switching scenario changes oxygen uptake and extraction together with cardiac output', () => {
     const a = computeRespiratory('rest'), b = computeRespiratory('running');

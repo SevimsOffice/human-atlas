@@ -1,4 +1,4 @@
-# Physiology model (v3 — Milestones 1–3: heart, lungs, exercise across systems)
+# Physiology model (v4 — Milestones 1–5)
 
 The engine (`packages/physiology`) is a pure, deterministic function of a scenario: `compute(scenario) → state`. Every constant below has a reference ID; the code stores the ID next to the value and tests assert both. Values marked **derived** are computed by a stated formula, never typed in.
 
@@ -8,6 +8,7 @@ The engine (`packages/physiology`) is a pure, deterministic function of a scenar
 
 - **[OSX-22.3]** Betts J.G. et al., *Anatomy and Physiology 2e*, OpenStax 2022, §22.3 "The Process of Breathing" (module m46549). CC BY-NC-SA 4.0. Also used for texts: §22.1 (m46548) [OSX-22.1], §22.2 (m46551) [OSX-22.2].
 - **[OSX-20.4]** Betts J.G. et al., *Anatomy and Physiology 2e*, OpenStax 2022, §20.4 "Homeostatic Regulation of the Vascular System" (module m46603), table "Systemic Blood Flow During Rest, Mild Exercise, and Maximal Exercise in a Healthy Young Individual". CC BY-NC-SA 4.0.
+- **[LEE-2025]** Lee S.H., Seo Y., Lee D.T. *Ventilatory Responses to Progressive Treadmill Speeds in Women: A Comparative Analysis of Nasal, Oral, and Oronasal Breathing Conditions.* Int J Environ Res Public Health 22(5):718, 2025. doi:10.3390/ijerph22050718 (PMC12111123). **CC BY 4.0**, peer-reviewed. 10 healthy recreationally active women, 24.1 ± 2.1 y; COSMED K5 breath-by-breath; treadmill 5–11 km/h.
 - **[CP-7.8]** Urone P.P., Hinrichs R. et al., *College Physics 2e*, OpenStax 2022, §7.8 "Work, Energy, and Power in Humans" (module m42153), table "Energy and Oxygen Consumption Rates" for a 76-kg male. CC BY-NC-SA 4.0. Quote anchors for table rows are written `activity | watts | L O2/min` exactly as the row reads.
 
 ## Variables (M1)
@@ -79,7 +80,7 @@ Formulas:
 - `O2 extraction = VO2(70 kg) / CO × 1000` — mass balance of oxygen across the body, labelled in the app **"derived (Fick principle)"** (owner decision 2026-11-19). A textbook statement of the formula is still to be cited (none of the OpenStax books states it). This is the value that links the respiratory engine to the cardiac engine.
 - `VO2/kg = VO2 × 1000 / 76 kg` and `VO2(70 kg) = VO2/kg × 70 kg / 1000` — normalisation to the cardiac reference body (owner decision 2026-11-19, M3). The cited VO2 is kept and shown as well.
 
-Reference values:
+Reference values (rest; running in the M5 section below):
 
 | Quantity | Value | Range | Ref | Quote anchor |
 |---|---|---|---|---|
@@ -96,15 +97,30 @@ Scenario results:
 | Scenario | RR | VT | VE (derived) | T_breath | VO2 cited (76 kg) | VO2/kg (derived) | VO2 at 70 kg (derived) | O2 extraction (derived, Fick) |
 |---|---|---|---|---|---|---|---|---|
 | rest | 14 | 500 mL | 7.0 L/min | 4.29 s | 0.34 L/min | 4.47 mL/kg/min | 0.313 L/min | 0.313 / 5.25 → 59.6 mL/L |
-| running | **source pending** | **source pending** | — | — | 2.12 L/min | 27.89 mL/kg/min | 1.953 L/min | 1.953 / 19.5 → 100.1 mL/L |
+| running | 39.9 /min [LEE-2025] | 1500 mL [LEE-2025] | 55.2 L/min (measured) [LEE-2025] | 1.50 s | 2.12 L/min | 27.89 mL/kg/min | 1.953 L/min | 1.953 / 19.5 → 100.1 mL/L |
 
 Caveats: VO2 is cited for a 76-kg male (College Physics) and is scaled linearly per kg to the 70-kg body of the cardiac values (A&P). Linear per-kg scaling is itself an assumption, stated in the app and on the Sources page. "Rest" uses the *sitting at rest* row (same table as the running row), not the basal metabolic rate (250 mL/min, lying, fasted).
 
-### Running breathing values — search log (M2)
+### Running breathing values (M5)
+Source found once NCBI became reachable (owner allowed www.ncbi.nlm.nih.gov, pmc.ncbi.nlm.nih.gov, eutils.ncbi.nlm.nih.gov). [LEE-2025], table "Ventilatory responses across breathing conditions and speeds", **oronasal** (normal) breathing, **9 km/h**:
+
+| Quantity | Value | Quote anchor (row as it reads: speed \| nasal \| oral \| oronasal) |
+|---|---|---|
+| Breathing rate | 39.9 breaths/min | "Rf (breaths/min) | 9 | 36.8 ± 9.6 | 39.4 ± 5.3 | 39.9 ± 10.9" |
+| Tidal volume | 1.5 L = 1500 mL | "VT (L) | 9 | 1.5 ± 0.4 | 1.4 ± 0.2 | 1.5 ± 0.3" |
+| Minute ventilation | 55.2 L/min (measured; used instead of RR × VT of means = 59.9) | "VE (L/min) | 9 | 52.5 ± 3.6 | 54.8 ± 7.8 | 55.2 ± 9.0" |
+
+Why 9 km/h: its measured HR (154.6 bpm oronasal) matches the engine's running HR (150 bpm, [OSX-19.4]). Caveats: 10 young women, mask-based measurement; the cardiac values come from a different reference body.
+
+**Walking candidates (not used — owner to decide whether to add a walking scenario):**
+- [LEE-2025] 5 km/h oronasal: HR 107.8 bpm, VT 0.9 L, Rf 29.0 /min, VE 25.6 L/min (no stroke volume).
+- Liu F. et al. *Cardiodynamic variables measured by impedance cardiography during a 6-minute walk test…* PLoS ONE 2021, doi:10.1371/journal.pone.0252219, CC BY 4.0 (PMC8148309): 62 healthy young adults; rest HR 86, SV 68.2 mL, CO 5.8 L/min; end of a brisk 6-minute walk (671 ± 59 m) HR 156, SV 95.6 mL, CO 15.0 L/min.
+
+### Running breathing values — search log (M2, superseded)
 OpenStax A&P §22.6 describes exercise hyperpnea only qualitatively; Biology 2e gives 12–15 breaths/min at rest only. The *Open Textbook of Exercise Physiology* (MacIntosh, LibreTexts) was found but could not be opened from the dev environment (med.libretexts.org blocked), so no value was verified. The engine reports `missing: ['breathingRate','tidalVolume']` for running; the UI shows "source pending" and does not animate breathing at an invented rate.
 
 ### Animation (M2)
-- Lungs expand and relax once per breath cycle `T_breath` from the engine (rest 4.29 s). The amplitude is schematic (not to scale) and labelled as such. With no sourced RR (running) the lungs are shown still, with a note.
+- Lungs expand and relax once per breath cycle `T_breath` from the engine (rest 4.29 s, running 1.50 s). The amplitude is schematic (not to scale) and labelled as such. With no sourced RR the lungs would be shown still, with a note.
 - The blood path's lung step now points at the modelled right lung, where the particles change from oxygen-poor to oxygen-rich.
 
 ## Exercise across systems (M3)

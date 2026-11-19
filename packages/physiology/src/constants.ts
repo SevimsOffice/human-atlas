@@ -74,3 +74,19 @@ export const BLOOD_FLOW_TABLE = {
   ] as readonly FlowRow[],
   totals: { rest: 5800, mild: 9500, maximal: 17500, quote: 'Total | 5800 | 9500 | 17,500' },
 };
+
+// ---- Running breathing values (Milestone 5, source found once NCBI became reachable) ----
+// Lee et al. 2025, treadmill 9 km/h, oronasal (normal) breathing; mean of 10 young women. Their HR at
+// 9 km/h (154.6 bpm) matches the engine's running HR (150 bpm), which is why this row is used.
+export const RUNNING_RR: RefValue = {
+  value: 39.9, unit: 'breaths/min', ref: 'LEE-2025',
+  quote: 'Rf (breaths/min) | 9 | 36.8 ± 9.6 | 39.4 ± 5.3 | 39.9 ± 10.9',
+};
+export const RUNNING_VT: RefValue = {
+  value: 1500, unit: 'mL', ref: 'LEE-2025', // table gives litres: 1.5 L = 1500 mL
+  quote: 'VT (L) | 9 | 1.5 ± 0.4 | 1.4 ± 0.2 | 1.5 ± 0.3',
+};
+export const RUNNING_VE: RefValue = {
+  value: 55.2, unit: 'L/min', ref: 'LEE-2025',
+  quote: 'VE (L/min) | 9 | 52.5 ± 3.6 | 54.8 ± 7.8 | 55.2 ± 9.0',
+};

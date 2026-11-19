@@ -15,6 +15,7 @@ import { StructureList } from './ui/StructureList';
 import { Credits } from './ui/Credits';
 import { startFlowTicker } from './lib/flowClock';
 import { PoweredBy } from './ui/PoweredBy';
+import { MissionCard, MissionList, MissionRunner } from './ui/Missions';
 import { sectionPlane } from './lib/section';
 import { boundsOf } from './lib/camera';
 
@@ -58,6 +59,8 @@ function Stage() {
       {(!loaded || active) && <div className="pointer-events-none absolute inset-0 grid place-items-center text-sm text-graphite-soft">{t('loading')}</div>}
       {hovered && <HoverLabel name={hovered} />}
       <StageControls />
+      <MissionCard />
+      <p className="pointer-events-none absolute bottom-2 left-1/2 hidden -translate-x-1/2 rounded-sm bg-white/80 px-2 py-0.5 text-[11px] text-graphite-soft lg:block" data-testid="muscle-note">{t('stage.muscleNote')}</p>
     </div>
   );
 }
@@ -107,11 +110,13 @@ export default function App() {
 
   return (
     <div className="flex h-full flex-col">
+      <MissionRunner />
       <Header />
       {view === 'credits' ? <div className="flex-1 overflow-auto"><Credits /></div> : (
         <main id="main" className="flex min-h-0 flex-1 flex-col lg:flex-row">
           {leftOpen && (
             <aside className="order-2 w-full overflow-auto border-line bg-paper lg:order-1 lg:w-60 lg:shrink-0 lg:border-r" data-testid="panel-left">
+              <MissionList />
               <ScenarioPanel />
               <RespiratoryPanel />
               <FlowPanel />

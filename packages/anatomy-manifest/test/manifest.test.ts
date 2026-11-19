@@ -100,10 +100,13 @@ describe('labels and texts', () => {
     }
     expect(Object.values(trTerms).every((t) => t.status === 'needs-expert-review')).toBe(true);
   });
-  it('structures without a Turkish term fall back to the English source label, flagged', () => {
-    const l = label('VH_M_cortex_of_kidney_L', 'tr');
+  it('every structure of every model now has a Turkish term (all needs-expert-review)', () => {
+    for (const s of all) expect(label(s.name, 'tr').missingTr, s.name).toBeUndefined();
+    expect(label('VH_M_cortex_of_kidney_L', 'tr').text).toBe('Sol böbrek korteksi');
+  });
+  it('an unknown structure would still fall back to an English label, flagged', () => {
+    const l = label('VH_M_not_in_terms', 'tr');
     expect(l.missingTr).toBe(true);
-    expect(l.text.toLowerCase()).toContain('cortex of kidney');
   });
   it('no orphan terms or texts (every key is a real node)', () => {
     const keys = new Set(all.map((s) => s.name.replace('VH_M_', '')));

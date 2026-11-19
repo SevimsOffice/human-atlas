@@ -9,7 +9,14 @@ Q10: keep "source pending"; owner will allow www.ncbi.nlm.nih.gov, then find a p
 ## Decided (M3 review)
 Q13: running uses the "maximal exercise" column, labelled "based on the maximal exercise column of OpenStax A&P 2e §20.4" (owner decision). Review fixes: 3D view ≥ 60 % width, collapsible panels, constrained orbit camera with reset and double-click focus, notes ≤ 680 px, footer credit.
 
-## Open (Milestone 4)
+## Decided 2026-11-19 (M4 approval)
+Q15: male/female switch later (ROADMAP milestone 9) · Q16: no share-alike assets; muscles chart-only with a note in the 3D view; owner allowed 3d.nih.gov + NCBI hosts (done, plus eutils.ncbi.nlm.nih.gov) · Q17: all 237 sub-structure terms translated (needs-expert-review).
+
+## Open (Milestone 5)
+- **Q18 Walking scenario.** Now possible from two CC BY peer-reviewed sources (see PHYSIOLOGY_MODEL.md): breathing at 5 km/h from Lee et al. 2025; heart rate/stroke volume/cardiac output at the end of a brisk 6-minute walk from Liu et al. 2021 (PLoS ONE). The two describe different walking intensities and groups. Add a "Yürüme" scenario labelled with both sources, or keep walking out?
+- **Q19 NIH CT skeleton (3DPX-016838).** CC BY confirmed via the NIH 3D API. File `Skeleton.stl`, 26,643,984 bytes, at https://nih3d-v2-data-cln-media-prod.s3.amazonaws.com/497900/Skeleton.stl (host not allowed here). It is ONE unlabelled mesh from a different body and coordinate frame: no per-bone selection or Uberon IDs, and it must be registered (scaled/aligned) to the HRA frame. Options: (a) allow the S3 host and let me register it to the HRA pelvis/femurs by a scripted fit, shown as an unlabelled "full skeleton (outline)" layer; (b) skip it and keep the HRA partial skeleton.
+
+## Open (Milestone 4, answered above)
 - **Q15 Male/female switch.** Female HRA models cover the same heart/lung/vessel structures but with different node names and their own coordinate frame. Proposal: a follow-up step that maps female nodes to male ones via Uberon IDs (with a reviewed override list for the ~20 nodes per model that differ), downloads the female set (~20 MB raw) and adds the switch. Go ahead?
 - **Q16 Muscles / full skeleton.** Only share-alike sets (BodyParts3D CC BY-SA 2.1 JP, Z-Anatomy CC BY-SA 4.0) have muscles. CC BY full skeleton (NIH 3D, CT-based) exists but its host is blocked here. Options: (a) owner downloads the NIH skeleton and uploads it, (b) allow 3d.nih.gov, (c) approve share-alike assets in `assets/share-alike/`, (d) keep partial skeleton only.
 - **Q17 Turkish terms for new sub-structures.** 237 sub-structures of the new organs show the English source name flagged "Türkçe terim henüz yok" (list: docs/TR_TERMS_TODO.md). Translate all now (marked needs-expert-review), or wait for the expert?

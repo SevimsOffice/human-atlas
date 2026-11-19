@@ -122,17 +122,19 @@ test('rest shows cited breathing values, derived ventilation, O2 uptake and the 
   await expect.poll(() => breaths(page), { timeout: 9000 }).toBeGreaterThan(b0); // one breath ≈ 4.3 s
 });
 
-test('running updates O2 uptake and extraction, and marks breathing values as source pending (no invented rate)', async ({ page }) => {
+test('running updates O2 uptake and extraction, and shows cited running breathing values (Lee et al. 2025)', async ({ page }) => {
   await ready(page);
   await page.getByRole('radio', { name: 'Koşu (yoğun egzersiz)' }).click();
   await expect(page.getByTestId('vo2')).toHaveText('2,12');
   await expect(page.getByTestId('vo270')).toHaveText('1,95');
   await expect(page.getByTestId('extraction')).toHaveText('100,1');
-  for (const id of ['rr', 'vt', 've']) await expect(page.getByTestId(id)).toHaveAttribute('data-missing', 'true');
-  await expect(page.getByTestId('resp-missing')).toBeVisible();
+  await expect(page.getByTestId('rr')).toHaveText('39,9');
+  await expect(page.getByTestId('vt')).toHaveText('1.500');
+  await expect(page.getByTestId('ve')).toHaveText('55,2');
+  await expect(page.getByTestId('respiratory')).toContainText('LEE-2025');
+  await expect(page.getByTestId('respiratory')).toHaveAttribute('data-breath-cycle-s', '1.5');
   const b0 = await breaths(page);
-  await page.waitForTimeout(5000);
-  expect(await breaths(page)).toBe(b0); // lungs held still
+  await expect.poll(() => breaths(page), { timeout: 6000 }).toBeGreaterThan(b0 + 1); // one breath ≈ 1.5 s
 });
 
 test('lungs are selectable with Uberon IDs and respiratory texts; the lung layer can be hidden', async ({ page }) => {
@@ -336,11 +338,12 @@ test('turning the skeleton on re-frames the view to include the legs', async ({ 
   await expect(page.getByTestId('inspector-system')).toHaveText('İskelet sistemi');
 });
 
-test('structures without a Turkish term show the English source name with a flag', async ({ page }) => {
+test('sub-structures of the new organs have Turkish terms marked for expert review', async ({ page }) => {
   await ready(page);
   await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
-  await page.getByTestId('inspector').getByRole('button', { name: /cortex of kidney/i }).first().click();
-  await expect(page.getByTestId('inspector')).toContainText('Türkçe terim henüz yok');
+  await page.getByTestId('inspector').getByRole('button', { name: /^Sol böbrek korteksi/ }).first().click();
+  await expect(page.getByTestId('inspector-name')).toHaveText('Sol böbrek korteksi');
+  await expect(page.getByTestId('inspector')).toContainText('Türkçe terim uzman incelemesi bekliyor');
 });
 
 test('cross-section slider moves a clipping plane and clipped geometry cannot be picked', async ({ page }) => {
@@ -365,4 +368,57 @@ test('cross-section slider moves a clipping plane and clipped geometry cannot be
   expect(picked ?? '').not.toMatch(/heart|atrium|ventricle|lung|lobe|aort/);
   await page.getByTestId('section-toggle').uncheck();
   await expect(stage).toHaveAttribute('data-section', 'off');
+});
+
+// ---- Milestone 5: missions ----
+test('mission: follow a red blood cell — camera and inspector follow each step, numbers come from the engine', async ({ page }) => {
+  await ready(page);
+  await page.waitForTimeout(400);
+  const start = await cam(page);
+  await page.getByTestId('mission-start-rbc-lungs-to-leg').click();
+  const card = page.getByTestId('mission-card');
+  await expect(card).toHaveAttribute('data-step', '0');
+  await expect(page.getByTestId('inspector')).toHaveAttribute('data-structure', 'VH_M_lungs_R');
+  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).not.toBe(start.target);
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('inspector')).toHaveAttribute('data-structure', 'VH_M_heart_left_ventricle');
+  await expect(page.getByTestId('mission-text')).toContainText('70 mL');
+  await expect(page.getByTestId('mission-text')).toContainText('5,25 L');
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('layer-skeletal')).toBeChecked(); // the leg step turns the skeleton on
+  await expect(page.getByTestId('inspector')).toHaveAttribute('data-structure', 'VH_M_femur_L');
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('mission-question')).toBeVisible();
+  await page.getByTestId('mission-option-0').click();
+  await expect(page.getByTestId('mission-feedback')).toContainText('Tekrar düşün');
+  await expect(page.getByTestId('mission-option-2')).toBeDisabled();
+  await page.getByTestId('mission-finish').click();
+  await expect(card).toHaveCount(0);
+});
+
+test('mission: what changes when you start running — scenario switches and values update', async ({ page }) => {
+  await ready(page);
+  await page.getByTestId('mission-start-start-running').click();
+  await expect(page.getByTestId('mission-text')).toContainText('75');
+  await expect(page.getByTestId('hr')).toHaveText('75');
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByRole('radio', { name: 'Koşu (yoğun egzersiz)' })).toHaveAttribute('aria-checked', 'true');
+  await expect(page.getByTestId('hr')).toHaveText('150');
+  await expect(page.getByTestId('mission-text')).toContainText('19,5');
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('mission-text')).toContainText('39,9');
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-next').click();
+  await expect(page.getByTestId('mission-text')).toContainText('13,93');
+  await page.getByTestId('mission-back').click();
+  await expect(page.getByTestId('mission-card')).toHaveAttribute('data-step', '3');
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-next').click();
+  await page.getByTestId('mission-option-1').click();
+  await expect(page.getByTestId('mission-feedback')).toContainText('Doğru');
+  await expect(page.getByTestId('mission-feedback')).toContainText('12,8');
+  await page.getByTestId('lang-en').click();
+  await expect(page.getByTestId('mission-feedback')).toContainText('12.8-fold');
 });
