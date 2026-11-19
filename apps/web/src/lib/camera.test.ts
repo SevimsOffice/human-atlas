@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { boundsOf, CAMERA_LIMITS, fitView, focusView, FOV_DEG, STAGE_Y } from './camera';
 
-const ALL = { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true };
+import { ALL_LAYERS as ALL } from './camera';
 
 /** Does the box fit inside the view frustum from this camera (simple pinhole check)? */
 function fits(view: { target: number[]; position: number[] }, aspect: number) {

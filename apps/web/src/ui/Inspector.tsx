@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { label, manifest, resolveSelectable, SOURCES, textFor, type Lang } from '@atlas/anatomy-manifest';
+import { label, manifest, resolveSelectable, SOURCES, SYSTEM_LAYERS, textFor, type Lang } from '@atlas/anatomy-manifest';
 import { useAtlas } from '../store';
 import { Badge, Panel } from './Panel';
 import { StructureLink } from './StructureLink';
@@ -49,7 +49,7 @@ export function Inspector() {
           <div>
             <h3 className="text-[15px] font-semibold leading-tight" data-testid="inspector-name">{name.text}</h3>
             <p className="text-xs text-graphite-soft">{other.text}</p>
-            {(name.needsReview || other.needsReview) && <div className="mt-1"><Badge tone="warn">{t('inspector.termReview')}</Badge></div>}
+            {(name.needsReview || other.needsReview) && <div className="mt-1"><Badge tone="warn">{t(name.missingTr || other.missingTr ? 'inspector.termMissing' : 'inspector.termReview')}</Badge></div>}
           </div>
           <button onClick={() => select(null)} aria-label={t('inspector.close')} className="rounded-sm border border-line px-2 text-sm hover:bg-paper">×</button>
         </div>
@@ -100,7 +100,7 @@ export function Inspector() {
               <p className="mt-1 text-[11px] text-graphite-soft">{t('inspector.neighborsNote', { mm: manifest.neighborThresholdMm })}</p>
             </Field>
           )}
-          <Field title={t('inspector.systems')}>{t(s.layer === 'lungs' || s.layer === 'airways' ? 'inspector.respiratory' : 'inspector.cardiovascular')}</Field>
+          <Field title={t('inspector.systems')}><span data-testid="inspector-system">{t(`systems.${SYSTEM_LAYERS.find((g) => g.layers.includes(s.layer))?.system ?? 'cardiovascular'}`)}</span></Field>
           <Field title={t('inspector.source')}>
             <p className="text-xs" data-testid="inspector-source">
               <a href={src.url} target="_blank" rel="noreferrer" className="underline decoration-line underline-offset-2">{src.title}</a> — {src.license}

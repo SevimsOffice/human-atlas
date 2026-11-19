@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "HUMAN ATLAS",
-    "subtitle": "Kalp, akciğerler ve egzersiz · Milestone 3",
+    "subtitle": "Vücut sistemleri · Milestone 4",
     "skip": "Ana içeriğe geç"
   },
   "nav": {
@@ -43,7 +43,12 @@
     "coronaryVessels": "Koroner damarlar",
     "flow": "Kan yolu animasyonu",
     "lungs": "Akciğerler",
-    "airways": "Hava yolları"
+    "airways": "Hava yolları",
+    "urinary": "Böbrekler ve idrar yolları",
+    "digestive": "Sindirim organları",
+    "lymphatic": "Dalak",
+    "nervous": "Omurilik",
+    "skeletal": "Leğen ve bacak kemikleri"
   },
   "flow": {
     "title": "Kan yolu",
@@ -81,7 +86,12 @@
     "greatVessels": "Büyük damarlar",
     "coronaryVessels": "Koroner damarlar",
     "lungs": "Akciğerler ve loblar",
-    "airways": "Hava yolları"
+    "airways": "Hava yolları",
+    "urinary": "Boşaltım",
+    "digestive": "Sindirim",
+    "lymphatic": "Lenf",
+    "nervous": "Sinir",
+    "skeletal": "İskelet (kısmi)"
   },
   "inspector": {
     "title": "Yapı inceleyici",
@@ -113,7 +123,8 @@
     },
     "termReview": "Türkçe terim uzman incelemesi bekliyor",
     "noText": "Bu yapı için henüz açıklama metni yok.",
-    "respiratory": "Solunum sistemi"
+    "respiratory": "Solunum sistemi",
+    "termMissing": "Türkçe terim henüz yok (İngilizce kaynak adı gösteriliyor)"
   },
   "credits": {
     "title": "Kaynaklar ve katkılar",
@@ -185,5 +196,30 @@
   },
   "credit": {
     "poweredBy": "Geliştiren:"
+  },
+  "systems": {
+    "cardiovascular": "Dolaşım sistemi",
+    "respiratory": "Solunum sistemi",
+    "urinary": "Boşaltım sistemi",
+    "digestive": "Sindirim sistemi",
+    "lymphatic": "Lenf sistemi",
+    "nervous": "Sinir sistemi",
+    "skeletal": "İskelet sistemi"
+  },
+  "section": {
+    "title": "Kesit",
+    "enable": "Kesit düzlemini aç",
+    "axis": "Kesit yönü",
+    "position": "Kesit konumu",
+    "axes": {
+      "transverse": "Enine",
+      "sagittal": "Sagital",
+      "coronal": "Koronal"
+    },
+    "hint": {
+      "transverse": "Enine kesit: düzlemin üstü kaldırılır.",
+      "sagittal": "Sagital kesit: vücudun sol yarısı kaldırılır.",
+      "coronal": "Koronal kesit: ön kısım kaldırılır, kesit yüzü size bakar."
+    }
   }
 }

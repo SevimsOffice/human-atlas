@@ -24,7 +24,8 @@ docs/                   ARCHITECTURE, DATA_SOURCES, SOURCES, PHYSIOLOGY_MODEL, R
 
 ## Commands
 - `npm ci` · `npm run dev` · `npm test` (Vitest) · `npm run e2e -- --trace off` (Playwright) · `npm run typecheck`
-- Data: `npm run data:download` then `npm run data:build` (regenerates models + manifest; commit both)
+- Data: `npm run data:download` then `npm run data:build` (regenerates models + manifest; commit both). Add a model = add one entry to `scripts/models.config.json`.
+- Missing TR terms report: `node scripts/report-missing-tr.mjs` → docs/TR_TERMS_TODO.md
 - Deploy: push to `main` or a `claude/**` branch → `.github/workflows/ci-pages.yml` → https://sevimsoffice.github.io/human-atlas/
 - Content to review: `content/texts/structures.json` (status unreviewed/reviewed), `content/terms/anatomy-terms.tr.json` (needs-expert-review)
 

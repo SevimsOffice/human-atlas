@@ -195,7 +195,7 @@ async function canvasBox(page: Page) { return (await page.locator('[data-testid=
 
 test('camera orbits the model centre and cannot flip over the top or under the floor', async ({ page }) => {
   await ready(page);
-  await expect.poll(async () => Number((await cam(page)).target.split(',')[1])).toBeGreaterThan(0.38); // centre of the models (stage is at y = 0.16)
+  await expect.poll(async () => Number((await cam(page)).target.split(',')[1])).toBeGreaterThan(0.2); // centre of the visible organs, well above the stage
   const b = await canvasBox(page);
   const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
   for (const dy of [600, -1200]) { // drag far down, then far up
@@ -222,7 +222,7 @@ test('panning is disabled and zoom is clamped', async ({ page }) => {
   expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.119);
   for (let i = 0; i < 40; i++) await page.mouse.wheel(0, 600);
   await page.waitForTimeout(800);
-  expect((await cam(page)).distance).toBeLessThanOrEqual(1.601);
+  expect((await cam(page)).distance).toBeLessThanOrEqual(3.501);
 });
 
 test('double-click focuses a structure; reset view re-frames all visible models', async ({ page }) => {
@@ -301,11 +301,68 @@ test('footer and Sources page credit Sevim Durmuş with links opening in a new t
 
 test('side panels: compact scenario control and one-line structure rows', async ({ page }) => {
   await ready(page);
-  const seg = page.getByRole('radiogroup');
+  const seg = page.getByRole('radiogroup', { name: /senaryo/i });
   expect((await seg.boundingBox())!.height).toBeLessThanOrEqual(34);
   const row = page.getByRole('button', { name: /^Sağ kulakçık/ });
   expect((await row.boundingBox())!.height).toBeLessThanOrEqual(24);
   await expect(row).toHaveAttribute('title', 'Sağ kulakçık (atrium dextrum)');
   const value = page.getByTestId('hr');
   expect(await value.evaluate((el) => getComputedStyle(el).fontSize)).toBe('14px');
+});
+
+// ---- Milestone 4: remaining systems + cross-section ----
+test('body systems are layers: urinary, digestive, lymphatic and nervous on, skeleton off by default', async ({ page }) => {
+  await ready(page);
+  for (const l of ['urinary', 'digestive', 'lymphatic', 'nervous']) await expect(page.getByTestId(`layer-${l}`)).toBeChecked();
+  await expect(page.getByTestId('layer-skeletal')).not.toBeChecked();
+  await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
+  await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0004538');
+  await expect(page.getByTestId('inspector-system')).toHaveText('Boşaltım sistemi');
+  await expect(page.getByTestId('inspector-source')).toContainText('Kidney, Male, Left v1.2');
+  await page.getByRole('button', { name: /^Karaciğer$/ }).click();
+  await expect(page.getByTestId('inspector-system')).toHaveText('Sindirim sistemi');
+  await page.getByRole('button', { name: /^Omurilik/ }).click();
+  await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0002240');
+});
+
+test('turning the skeleton on re-frames the view to include the legs', async ({ page }) => {
+  await ready(page);
+  await page.waitForTimeout(500);
+  const before = await cam(page);
+  await page.getByTestId('layer-skeletal').check();
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(before.distance + 0.3);
+  await page.getByRole('button', { name: /^Sol uyluk kemiği/ }).click();
+  await expect(page.getByTestId('inspector-system')).toHaveText('İskelet sistemi');
+});
+
+test('structures without a Turkish term show the English source name with a flag', async ({ page }) => {
+  await ready(page);
+  await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
+  await page.getByTestId('inspector').getByRole('button', { name: /cortex of kidney/i }).first().click();
+  await expect(page.getByTestId('inspector')).toContainText('Türkçe terim henüz yok');
+});
+
+test('cross-section slider moves a clipping plane and clipped geometry cannot be picked', async ({ page }) => {
+  await ready(page);
+  const stage = page.getByTestId('stage');
+  await expect(stage).toHaveAttribute('data-section', 'off');
+  await page.getByTestId('section-toggle').check();
+  await expect(stage).toHaveAttribute('data-section', 'coronal:0.50');
+  await page.getByTestId('section-axis-transverse').click();
+  await page.getByTestId('section-slider').fill('3');
+  await expect(stage).toHaveAttribute('data-section', 'transverse:0.03');
+  const low = Number(await stage.getAttribute('data-section-pos'));
+  await page.getByTestId('section-slider').fill('90');
+  await expect.poll(async () => Number(await stage.getAttribute('data-section-pos'))).toBeGreaterThan(low);
+  // nearly everything removed: a click in the centre must not pick a heart or lung structure
+  await page.getByTestId('section-slider').fill('3');
+  const b = (await page.locator('[data-testid=stage] canvas').boundingBox())!;
+  await page.mouse.click(b.x + b.width / 2, b.y + b.height * 0.35);
+  await page.waitForTimeout(400);
+  const insp = page.getByTestId('inspector');
+  const picked = (await insp.count()) ? await insp.getAttribute('data-structure') : '';
+  expect(picked ?? '').not.toMatch(/heart|atrium|ventricle|lung|lobe|aort/);
+  await page.getByTestId('section-toggle').uncheck();
+  await expect(stage).toHaveAttribute('data-section', 'off');
 });

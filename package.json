@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "data:download": "bash scripts/download-hubmap.sh",
+    "data:download": "node scripts/download-hubmap.mjs",
     "data:build": "node scripts/build-models.mjs && node scripts/build-manifest.mjs",
     "dev": "npm run dev -w @atlas/web",
     "build": "npm run build -w @atlas/web",

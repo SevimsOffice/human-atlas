@@ -10,6 +10,17 @@ export interface SourceEntry {
   readonly changes: string;
 }
 
+import modelsConfig from '../../../scripts/models.config.json';
+
+/** HuBMAP models added from Milestone 4 on: credits generated from scripts/models.config.json (single source of truth). */
+const GENERATED_MODEL_SOURCES: SourceEntry[] = (modelsConfig as { models: { sourceId: string; title: string; url: string; attribution: string; layer: string }[] }).models
+  .filter((m) => m.layer !== 'auto')
+  .map((m) => ({
+    id: m.sourceId, kind: 'model', title: `${m.title} (HuBMAP Human Reference Atlas)`, url: m.url,
+    license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/', attribution: m.attribution,
+    changes: 'Compressed with Meshopt (quantized geometry); materials replaced at runtime; clipped by the cross-section slider. Node names unchanged.',
+  }));
+
 export const SOURCES: readonly SourceEntry[] = [
   {
     id: 'HRA-HEART-M', kind: 'model', title: '3D Reference Organ for Heart, Male v1.2 (HuBMAP Human Reference Atlas)',
@@ -29,6 +40,7 @@ export const SOURCES: readonly SourceEntry[] = [
     attribution: 'Kristen Browne; Heidi Schlehlein. 2022. 3D Reference Organ for Lung, Male v1.2. HuBMAP.',
     changes: 'Compressed with Meshopt (quantized geometry); materials replaced at runtime; lungs scaled during the schematic breathing animation. Node names unchanged.',
   },
+  ...GENERATED_MODEL_SOURCES,
   {
     id: 'HRA-XWALK-1.3', kind: 'mapping', title: 'ASCT+B Tables to 3D Reference Object Library Mapping (HRA v1.3)',
     url: 'https://github.com/hubmapconsortium/ccf-releases/tree/main/v1.3/models', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',

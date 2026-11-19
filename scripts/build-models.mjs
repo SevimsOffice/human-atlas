@@ -2,6 +2,7 @@
 //  heart.glb         <- VH_M_Heart.glb (all nodes)
 //  heart-vessels.glb <- VH_M_Blood_Vasculature.glb, subtree "VH_M_blood_vasculature_of_heart" only
 //  lungs.glb         <- VH_M_Lung.glb (all nodes: lungs + tracheobronchial tree)
+//  …and every other model listed in scripts/models.config.json (M4: urinary, digestive, lymphatic, nervous, skeletal)
 // Changes (recorded in docs/SOURCES.md): subtree extraction, dedup, weld, Meshopt compression (quantization).
 // Node names are preserved: they are the join key to the anatomy manifest.
 import { NodeIO } from '@gltf-transform/core';
@@ -37,6 +38,6 @@ async function build(src, dest, keepSubtree) {
   console.log(`${dest}: ${(size / 1024).toFixed(0)} KiB`);
 }
 
-await build('VH_M_Heart.glb', 'heart.glb');
-await build('VH_M_Blood_Vasculature.glb', 'heart-vessels.glb', 'VH_M_blood_vasculature_of_heart');
-await build('VH_M_Lung.glb', 'lungs.glb');
+import { readFileSync } from 'node:fs';
+const cfg = JSON.parse(readFileSync('scripts/models.config.json', 'utf8'));
+for (const m of cfg.models) await build(m.raw, m.file, m.subtree ?? undefined);

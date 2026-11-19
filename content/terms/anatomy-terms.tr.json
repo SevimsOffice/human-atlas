@@ -3,7 +3,8 @@
     "purpose": "Turkish display names for every structure in packages/anatomy-manifest. One file so an expert can check all terms before public release.",
     "status": "Every term is a translation made during development and is marked needs-expert-review. No openly citable official Turkish anatomical terminology list was found (search 2026-11-19). Reviewer reference: FIPAT Terminologia Anatomica 2nd ed. (Latin, freely distributable PDF) https://fipat.library.dal.ca/ta2/",
     "keys": "GLB node name without the VH_M_ prefix. Segment meshes ending in _a/_b use their parent's term.",
-    "reviewWorkflow": "Reviewer changes `tr` if needed and sets `status` to `expert-reviewed` plus `reviewer` and `date`."
+    "reviewWorkflow": "Reviewer changes `tr` if needed and sets `status` to `expert-reviewed` plus `reviewer` and `date`.",
+    "coverage": "Milestone 4: Turkish terms exist for every structure of the heart, vessels and lungs, and for the top-level and listed structures of the newly added organs. Other new sub-structures fall back to the English source label and are flagged 'Türkçe terim henüz yok' in the app; scripts/report-missing-tr.mjs lists them."
   },
   "terms": {
     "heart": {
@@ -592,6 +593,126 @@
     },
     "right_anterior_basal_bronchus": {
       "tr": "Sağ anterior bazal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "left_kidney": {
+      "tr": "Sol böbrek",
+      "status": "needs-expert-review"
+    },
+    "right_kidney": {
+      "tr": "Sağ böbrek",
+      "status": "needs-expert-review"
+    },
+    "ureter_L": {
+      "tr": "Sol üreter",
+      "status": "needs-expert-review"
+    },
+    "ureter_R": {
+      "tr": "Sağ üreter",
+      "status": "needs-expert-review"
+    },
+    "renal_pelvis_ureter_L": {
+      "tr": "Sol böbrek pelvisi ve üreter",
+      "status": "needs-expert-review"
+    },
+    "renal_pelvis_ureter_R": {
+      "tr": "Sağ böbrek pelvisi ve üreter",
+      "status": "needs-expert-review"
+    },
+    "urinary_bladder": {
+      "tr": "İdrar kesesi (mesane)",
+      "status": "needs-expert-review"
+    },
+    "liver": {
+      "tr": "Karaciğer",
+      "status": "needs-expert-review"
+    },
+    "pancreas": {
+      "tr": "Pankreas",
+      "status": "needs-expert-review"
+    },
+    "small_intestine": {
+      "tr": "İnce bağırsak",
+      "status": "needs-expert-review"
+    },
+    "duodenum": {
+      "tr": "Onikiparmak bağırsağı (duodenum)",
+      "status": "needs-expert-review"
+    },
+    "jejunum": {
+      "tr": "Jejunum",
+      "status": "needs-expert-review"
+    },
+    "ileum": {
+      "tr": "İleum",
+      "status": "needs-expert-review"
+    },
+    "colon": {
+      "tr": "Kalın bağırsak",
+      "status": "needs-expert-review"
+    },
+    "rectum": {
+      "tr": "Rektum",
+      "status": "needs-expert-review"
+    },
+    "spleen": {
+      "tr": "Dalak",
+      "status": "needs-expert-review"
+    },
+    "spinal_cord": {
+      "tr": "Omurilik (medulla spinalis)",
+      "status": "needs-expert-review"
+    },
+    "pelvis": {
+      "tr": "Leğen kemiği (pelvis)",
+      "status": "needs-expert-review"
+    },
+    "sacrum": {
+      "tr": "Sakrum (kuyruk sokumu kemiği)",
+      "status": "needs-expert-review"
+    },
+    "coccyx": {
+      "tr": "Koksiks",
+      "status": "needs-expert-review"
+    },
+    "femur_L": {
+      "tr": "Sol uyluk kemiği (femur)",
+      "status": "needs-expert-review"
+    },
+    "femur_R": {
+      "tr": "Sağ uyluk kemiği (femur)",
+      "status": "needs-expert-review"
+    },
+    "patella_L": {
+      "tr": "Sol diz kapağı kemiği (patella)",
+      "status": "needs-expert-review"
+    },
+    "patella_R": {
+      "tr": "Sağ diz kapağı kemiği (patella)",
+      "status": "needs-expert-review"
+    },
+    "tibia_L": {
+      "tr": "Sol kaval kemiği (tibia)",
+      "status": "needs-expert-review"
+    },
+    "tibia_R": {
+      "tr": "Sağ kaval kemiği (tibia)",
+      "status": "needs-expert-review"
+    },
+    "fibula_L": {
+      "tr": "Sol baldır kemiği (fibula)",
+      "status": "needs-expert-review"
+    },
+    "fibula_R": {
+      "tr": "Sağ baldır kemiği (fibula)",
+      "status": "needs-expert-review"
+    },
+    "knee_L": {
+      "tr": "Sol diz",
+      "status": "needs-expert-review"
+    },
+    "knee_R": {
+      "tr": "Sağ diz",
       "status": "needs-expert-review"
     }
   }

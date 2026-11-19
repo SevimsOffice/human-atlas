@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "HUMAN ATLAS",
-    "subtitle": "Heart, lungs and exercise · Milestone 3",
+    "subtitle": "Body systems · Milestone 4",
     "skip": "Skip to main content"
   },
   "nav": {
@@ -43,7 +43,12 @@
     "coronaryVessels": "Coronary vessels",
     "flow": "Blood path animation",
     "lungs": "Lungs",
-    "airways": "Airways"
+    "airways": "Airways",
+    "urinary": "Kidneys and urinary tract",
+    "digestive": "Digestive organs",
+    "lymphatic": "Spleen",
+    "nervous": "Spinal cord",
+    "skeletal": "Pelvis and leg bones"
   },
   "flow": {
     "title": "Blood path",
@@ -81,7 +86,12 @@
     "greatVessels": "Great vessels",
     "coronaryVessels": "Coronary vessels",
     "lungs": "Lungs and lobes",
-    "airways": "Airways"
+    "airways": "Airways",
+    "urinary": "Urinary",
+    "digestive": "Digestive",
+    "lymphatic": "Lymphatic",
+    "nervous": "Nervous",
+    "skeletal": "Skeletal (partial)"
   },
   "inspector": {
     "title": "Structure inspector",
@@ -113,7 +123,8 @@
     },
     "termReview": "Turkish term awaiting expert review",
     "noText": "No explanatory text for this structure yet.",
-    "respiratory": "Respiratory system"
+    "respiratory": "Respiratory system",
+    "termMissing": "No Turkish term yet (English source label shown)"
   },
   "credits": {
     "title": "Sources & credits",
@@ -185,5 +196,30 @@
   },
   "credit": {
     "poweredBy": "Powered by"
+  },
+  "systems": {
+    "cardiovascular": "Cardiovascular system",
+    "respiratory": "Respiratory system",
+    "urinary": "Urinary system",
+    "digestive": "Digestive system",
+    "lymphatic": "Lymphatic system",
+    "nervous": "Nervous system",
+    "skeletal": "Skeletal system"
+  },
+  "section": {
+    "title": "Cross-section",
+    "enable": "Enable section plane",
+    "axis": "Section direction",
+    "position": "Section position",
+    "axes": {
+      "transverse": "Transverse",
+      "sagittal": "Sagittal",
+      "coronal": "Coronal"
+    },
+    "hint": {
+      "transverse": "Transverse cut: everything above the plane is removed.",
+      "sagittal": "Sagittal cut: the left half of the body is removed.",
+      "coronal": "Coronal cut: the front is removed; the cut face looks at you."
+    }
   }
 }
