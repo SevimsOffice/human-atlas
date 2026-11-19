@@ -58,6 +58,7 @@ function Stage() {
       {(!loaded || active) && <div className="pointer-events-none absolute inset-0 grid place-items-center text-sm text-graphite-soft">{t('loading')}</div>}
       {hovered && <HoverLabel name={hovered} />}
       <StageControls />
+      <p className="pointer-events-none absolute bottom-2 left-1/2 hidden -translate-x-1/2 rounded-sm bg-white/80 px-2 py-0.5 text-[11px] text-graphite-soft lg:block" data-testid="muscle-note">{t('stage.muscleNote')}</p>
     </div>
   );
 }

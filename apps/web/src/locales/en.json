@@ -139,7 +139,7 @@
     "derivVo2": "Oxygen uptake is cited from College Physics 2e §7.8 for a 76-kg male. It is converted to mL/kg/min and scaled linearly to the 70-kg reference body of the heart values (A&P 2e §19.4). The cited value is shown too. Linear per-kg scaling is an assumption.",
     "derivFick": "O₂ taken from blood = oxygen uptake (70 kg) ÷ cardiac output (Fick principle). It is the derived value linking the heart and lung engines; a textbook citation for the formula is still to be added.",
     "derivFlow": "The blood-flow distribution comes from the A&P 2e §20.4 table. Its totals differ from the engine's cardiac output, so each organ's share of the column is applied to the engine's cardiac output. Running uses the \"maximal exercise\" column (the closest one).",
-    "derivPending": "Breathing rate and tidal volume during running and walking await a verifiable source; no value is invented."
+    "derivPending": "Breathing rate, tidal volume and ventilation during running come from Lee et al. 2025 (IJERPH, CC BY 4.0): 9 km/h, normal (oronasal) breathing; the heart rate at that speed (154.6/min) matches the engine's running heart rate (150/min). A walking scenario is not included yet."
   },
   "resp": {
     "title": "Respiratory engine",
@@ -192,7 +192,8 @@
     "reset": "Reset view",
     "leftPanel": "Left panel",
     "rightPanel": "Right panel",
-    "hint": "Drag: rotate · Wheel: zoom · Double-click: focus a structure"
+    "hint": "Drag: rotate · Wheel: zoom · Double-click: focus a structure",
+    "muscleNote": "No muscle model yet; muscle blood flow is shown in the exercise panel."
   },
   "credit": {
     "poweredBy": "Powered by"
