@@ -15,5 +15,5 @@ export interface DerivedValue {
   readonly formula: FormulaId;
 }
 
-export type ReferenceId = 'OSX-19.4';
-export type FormulaId = 'CO=HR*SV' | 'T=60/HR';
+export type ReferenceId = 'OSX-19.4' | 'OSX-22.3' | 'CP-7.8';
+export type FormulaId = 'CO=HR*SV' | 'T=60/HR' | 'VE=RR*VT' | 'Tb=60/RR' | 'avO2=VO2/CO';

@@ -1,7 +1,18 @@
 {
-  "app": { "title": "HUMAN ATLAS", "subtitle": "Kalp · Milestone 1", "skip": "Ana içeriğe geç" },
-  "nav": { "atlas": "Atlas", "credits": "Kaynaklar ve katkılar" },
-  "lang": { "label": "Dil", "tr": "TR", "en": "EN" },
+  "app": {
+    "title": "HUMAN ATLAS",
+    "subtitle": "Kalp ve akciğerler · Milestone 2",
+    "skip": "Ana içeriğe geç"
+  },
+  "nav": {
+    "atlas": "Atlas",
+    "credits": "Kaynaklar ve katkılar"
+  },
+  "lang": {
+    "label": "Dil",
+    "tr": "TR",
+    "en": "EN"
+  },
   "disclaimer": "Yalnızca eğitim amaçlıdır. Tıbbi tavsiye ya da tanı aracı değildir. Gerçek hasta verisi kullanılmaz.",
   "loading": "3B model yükleniyor…",
   "scenario": {
@@ -12,27 +23,62 @@
   },
   "measure": {
     "title": "Fizyoloji motoru",
-    "hr": "Kalp hızı", "sv": "Atım hacmi", "co": "Kalp debisi", "cycle": "Kalp döngüsü süresi",
-    "ref": "Kaynak", "derived": "türetilmiş", "range": "aralık", "beat": "Atım göstergesi"
+    "hr": "Kalp hızı",
+    "sv": "Atım hacmi",
+    "co": "Kalp debisi",
+    "cycle": "Kalp döngüsü süresi",
+    "ref": "Kaynak",
+    "derived": "türetilmiş",
+    "range": "aralık",
+    "beat": "Atım göstergesi"
   },
-  "layers": { "title": "Katmanlar", "heart": "Kalp", "greatVessels": "Büyük damarlar", "coronaryVessels": "Koroner damarlar", "flow": "Kan yolu animasyonu" },
+  "layers": {
+    "title": "Katmanlar",
+    "heart": "Kalp",
+    "greatVessels": "Büyük damarlar",
+    "coronaryVessels": "Koroner damarlar",
+    "flow": "Kan yolu animasyonu",
+    "lungs": "Akciğerler",
+    "airways": "Hava yolları"
+  },
   "flow": {
     "title": "Kan yolu",
     "current": "Şu anki adım",
     "timing": "Şematik zamanlama: her kalp atışında bir adım ({{s}} s). Gerçek akış süreleri değildir.",
-    "pause": "Duraklat", "play": "Oynat",
+    "pause": "Duraklat",
+    "play": "Oynat",
     "notModelled": "modelde yok",
-    "lowO2": "oksijeni az kan", "highO2": "oksijeni zengin kan",
+    "lowO2": "oksijeni az kan",
+    "highO2": "oksijeni zengin kan",
     "steps": {
       "venaeCavae": "Ana toplardamarlar (vücuttan dönüş)",
-      "rightAtrium": "Sağ kulakçık", "tricuspidValve": "Triküspit kapak", "rightVentricle": "Sağ karıncık",
-      "pulmonaryValve": "Pulmoner kapak", "pulmonaryTrunk": "Pulmoner gövde", "pulmonaryArteries": "Pulmoner arterler",
-      "lungs": "Akciğerler (Milestone 2)", "pulmonaryVeins": "Pulmoner venler", "leftAtrium": "Sol kulakçık",
-      "mitralValve": "Mitral kapak", "leftVentricle": "Sol karıncık", "aorticValve": "Aort kapağı",
-      "ascendingAorta": "Çıkan aort", "aorticArch": "Aort kavsi", "descendingAorta": "İnen aort", "body": "Vücut dokuları"
+      "rightAtrium": "Sağ kulakçık",
+      "tricuspidValve": "Triküspit kapak",
+      "rightVentricle": "Sağ karıncık",
+      "pulmonaryValve": "Pulmoner kapak",
+      "pulmonaryTrunk": "Pulmoner gövde",
+      "pulmonaryArteries": "Pulmoner arterler",
+      "lungs": "Akciğerler (oksijen alımı)",
+      "pulmonaryVeins": "Pulmoner venler",
+      "leftAtrium": "Sol kulakçık",
+      "mitralValve": "Mitral kapak",
+      "leftVentricle": "Sol karıncık",
+      "aorticValve": "Aort kapağı",
+      "ascendingAorta": "Çıkan aort",
+      "aorticArch": "Aort kavsi",
+      "descendingAorta": "İnen aort",
+      "body": "Vücut dokuları"
     }
   },
-  "list": { "title": "Yapılar", "chambers": "Boşluklar", "valves": "Kapaklar ve kaslar", "greatVessels": "Büyük damarlar", "coronaryVessels": "Koroner damarlar" },
+  "list": {
+    "title": "Yapılar",
+    "chambers": "Boşluklar",
+    "valves": "Kapaklar ve kaslar",
+    "greatVessels": "Büyük damarlar",
+    "coronaryVessels": "Koroner damarlar",
+    "lungs": "Akciğerler ve loblar",
+    "airways": "Hava yolları"
+  },
   "inspector": {
     "title": "Yapı inceleyici",
     "empty": "3B modelde ya da listede bir yapıya tıklayın.",
@@ -40,7 +86,12 @@
     "ontology": "Ontoloji kimliği",
     "noUberon": "Uberon karşılığı yok (kaynaktaki kimlik: {{id}})",
     "noId": "Kaynakta ontoloji kimliği yok",
-    "via": { "hra-crosswalk": "HRA eşleme tablosu", "uberon-xref": "Uberon çapraz başvurusu ({{x}})", "override": "Belgelenmiş düzeltme" },
+    "via": {
+      "hra-crosswalk": "HRA eşleme tablosu",
+      "uberon-xref": "Uberon çapraz başvurusu ({{x}})",
+      "override": "Belgelenmiş düzeltme",
+      "uberon-label": "Uberon etiketiyle birebir eşleşme"
+    },
     "overrideNote": "Kaynak eşleme düzeltildi: {{reason}}",
     "definition": "Uberon tanımı (İngilizce)",
     "partOf": "Parçası olduğu yapı",
@@ -52,16 +103,37 @@
     "systems": "İlgili sistemler",
     "cardiovascular": "Dolaşım sistemi",
     "source": "Kaynak",
-    "textStatus": { "unreviewed": "uzman incelemesi yapılmadı", "reviewed": "uzman incelemesinden geçti" },
+    "textStatus": {
+      "unreviewed": "uzman incelemesi yapılmadı",
+      "reviewed": "uzman incelemesinden geçti"
+    },
     "termReview": "Türkçe terim uzman incelemesi bekliyor",
-    "noText": "Bu yapı için henüz açıklama metni yok."
+    "noText": "Bu yapı için henüz açıklama metni yok.",
+    "respiratory": "Solunum sistemi"
   },
   "credits": {
     "title": "Kaynaklar ve katkılar",
     "intro": "Bu uygulamadaki her 3B model, eşleme, ontoloji ve sayısal değer aşağıdaki kaynaklardan gelir.",
-    "license": "Lisans", "changes": "Yapılan değişiklikler", "attribution": "Atıf",
+    "license": "Lisans",
+    "changes": "Yapılan değişiklikler",
+    "attribution": "Atıf",
     "texts": "Açıklama metinleri projeye aittir; olgular OpenStax A&P 2e §19.1'e dayanır ve henüz uzman incelemesinden geçmemiştir.",
     "terms": "Türkçe anatomi terimleri geliştirme sırasında çevrilmiştir ve yayından önce uzman incelemesi gerektirir.",
     "back": "Atlasa dön"
+  },
+  "resp": {
+    "title": "Solunum motoru",
+    "rr": "Solunum hızı",
+    "vt": "Soluk hacmi (tidal)",
+    "ve": "Dakika ventilasyonu",
+    "vo2": "Oksijen alımı",
+    "extraction": "Kandan alınan O₂",
+    "extractionUnit": "mL O₂/L kan",
+    "perMin": "/dk",
+    "extractionNote": "= oksijen alımı ÷ kalp debisi (kalp ile akciğerleri bağlar; açıklayıcı, iki farklı referans bedenden)",
+    "pending": "kaynak bekleniyor",
+    "breathing": "Nefes göstergesi: bir nefes {{s}} s (şematik genişleme, ölçekli değil)",
+    "notBreathing": "Bu senaryo için doğrulanmış solunum hızı yok; akciğerler hareketsiz gösteriliyor.",
+    "missingNote": "Koşu sırasındaki solunum hızı ve soluk hacmi için doğrulanabilir bir kaynak henüz bulunamadı; değer uydurulmaz."
   }
 }

@@ -41,6 +41,35 @@ describe('anatomy manifest integrity', () => {
   });
 });
 
+describe('lungs (Milestone 2)', () => {
+  it('adds the HRA lung model with lungs and airway layers', () => {
+    expect(manifest.models.map((m) => m.file)).toEqual(['heart.glb', 'heart-vessels.glb', 'lungs.glb']);
+    expect(manifest.structures.VH_M_lungs_R).toMatchObject({ layer: 'lungs', sourceId: 'HRA-LUNG-M' });
+    expect(manifest.structures.VH_M_lungs_R.uberon?.id).toBe('UBERON:0002167');
+    expect(manifest.structures.VH_M_left_main_bronchus.layer).toBe('airways');
+  });
+  it('the right lung has three lobes and the left two (matches OpenStax §22.2)', () => {
+    expect(manifest.structures.VH_M_lungs_R.children.filter((c) => c.includes('lobe'))).toHaveLength(3);
+    expect(manifest.structures.VH_M_lungs_L.children.filter((c) => c.includes('lobe'))).toHaveLength(2);
+  });
+  it('the trachea (no crosswalk ID) is resolved only by exact Uberon label', () => {
+    expect(manifest.structures.VH_M_trachea.crosswalk).toBeNull();
+    expect(manifest.structures.VH_M_trachea.uberon).toMatchObject({ id: 'UBERON:0003126', via: 'uberon-label' });
+  });
+  it('crosswalk rows that contradict their node are rejected with a reason, not remapped', () => {
+    for (const n of ['VH_M_right_apical_bronchus', 'VH_M_right_anterior_basal_bronchus', 'VH_M_left_posetrior_basal_bronchopulmonary_segment']) {
+      const s = manifest.structures[n];
+      expect(s.override?.crosswalkRejected, n).toBe(true);
+      expect(s.crosswalk).toBeNull();
+      expect(s.uberon).toBeNull();
+    }
+    expect(label('VH_M_right_apical_bronchus', 'en').text).toBe('Right apical segmental bronchus');
+  });
+  it('the blood path passes through the modelled lungs', () => {
+    expect(bloodPath.find((s) => s.id === 'lungs')).toMatchObject({ at: 'VH_M_lungs_R', modelled: true });
+  });
+});
+
 describe('labels and texts', () => {
   it('every structure has a Turkish term marked for review and an English label', () => {
     for (const s of all) {
@@ -67,6 +96,7 @@ describe('labels and texts', () => {
     expect(resolveSelectable('VH_M_pulmonary_artery_L')).toBe('VH_M_pulmonary_artery_L');
     expect(textFor('VH_M_ascending_aorta')?.key).toBe('aorta');
     expect(label('VH_M_left_anterior_descending_artery', 'en').text).toBe('Left anterior descending artery');
+    expect(label('VH_M_left_main_bronchus', 'en').text).toBe('Left main bronchus');
   });
   it('inspector list items exist', () => {
     for (const g of LIST_GROUPS) for (const i of g.items) expect(manifest.structures[i], i).toBeDefined();

@@ -7,6 +7,7 @@ import { AtlasScene } from './scene/AtlasScene';
 import { ScenarioPanel } from './ui/ScenarioPanel';
 import { LayerPanel } from './ui/LayerPanel';
 import { FlowPanel } from './ui/FlowPanel';
+import { RespiratoryPanel } from './ui/RespiratoryPanel';
 import { Inspector } from './ui/Inspector';
 import { StructureList } from './ui/StructureList';
 import { Credits } from './ui/Credits';
@@ -75,6 +76,7 @@ export default function App() {
         <main id="main" className="flex min-h-0 flex-1 flex-col lg:flex-row">
           <aside className="order-2 w-full overflow-auto border-line bg-paper lg:order-1 lg:w-72 lg:border-r">
             <ScenarioPanel />
+            <RespiratoryPanel />
             <FlowPanel />
             <LayerPanel />
           </aside>

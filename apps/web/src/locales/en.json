@@ -1,7 +1,18 @@
 {
-  "app": { "title": "HUMAN ATLAS", "subtitle": "Heart · Milestone 1", "skip": "Skip to main content" },
-  "nav": { "atlas": "Atlas", "credits": "Sources & credits" },
-  "lang": { "label": "Language", "tr": "TR", "en": "EN" },
+  "app": {
+    "title": "HUMAN ATLAS",
+    "subtitle": "Heart and lungs · Milestone 2",
+    "skip": "Skip to main content"
+  },
+  "nav": {
+    "atlas": "Atlas",
+    "credits": "Sources & credits"
+  },
+  "lang": {
+    "label": "Language",
+    "tr": "TR",
+    "en": "EN"
+  },
   "disclaimer": "Educational only. Not medical advice and not a diagnostic tool. No real patient data is used.",
   "loading": "Loading 3D model…",
   "scenario": {
@@ -12,27 +23,62 @@
   },
   "measure": {
     "title": "Physiology engine",
-    "hr": "Heart rate", "sv": "Stroke volume", "co": "Cardiac output", "cycle": "Cardiac cycle duration",
-    "ref": "Source", "derived": "derived", "range": "range", "beat": "Beat indicator"
+    "hr": "Heart rate",
+    "sv": "Stroke volume",
+    "co": "Cardiac output",
+    "cycle": "Cardiac cycle duration",
+    "ref": "Source",
+    "derived": "derived",
+    "range": "range",
+    "beat": "Beat indicator"
   },
-  "layers": { "title": "Layers", "heart": "Heart", "greatVessels": "Great vessels", "coronaryVessels": "Coronary vessels", "flow": "Blood path animation" },
+  "layers": {
+    "title": "Layers",
+    "heart": "Heart",
+    "greatVessels": "Great vessels",
+    "coronaryVessels": "Coronary vessels",
+    "flow": "Blood path animation",
+    "lungs": "Lungs",
+    "airways": "Airways"
+  },
   "flow": {
     "title": "Blood path",
     "current": "Current step",
     "timing": "Schematic timing: one step per heartbeat ({{s}} s). Not real transit times.",
-    "pause": "Pause", "play": "Play",
+    "pause": "Pause",
+    "play": "Play",
     "notModelled": "not in model",
-    "lowO2": "oxygen-poor blood", "highO2": "oxygen-rich blood",
+    "lowO2": "oxygen-poor blood",
+    "highO2": "oxygen-rich blood",
     "steps": {
       "venaeCavae": "Venae cavae (return from body)",
-      "rightAtrium": "Right atrium", "tricuspidValve": "Tricuspid valve", "rightVentricle": "Right ventricle",
-      "pulmonaryValve": "Pulmonary valve", "pulmonaryTrunk": "Pulmonary trunk", "pulmonaryArteries": "Pulmonary arteries",
-      "lungs": "Lungs (Milestone 2)", "pulmonaryVeins": "Pulmonary veins", "leftAtrium": "Left atrium",
-      "mitralValve": "Mitral valve", "leftVentricle": "Left ventricle", "aorticValve": "Aortic valve",
-      "ascendingAorta": "Ascending aorta", "aorticArch": "Aortic arch", "descendingAorta": "Descending aorta", "body": "Body tissues"
+      "rightAtrium": "Right atrium",
+      "tricuspidValve": "Tricuspid valve",
+      "rightVentricle": "Right ventricle",
+      "pulmonaryValve": "Pulmonary valve",
+      "pulmonaryTrunk": "Pulmonary trunk",
+      "pulmonaryArteries": "Pulmonary arteries",
+      "lungs": "Lungs (oxygen uptake)",
+      "pulmonaryVeins": "Pulmonary veins",
+      "leftAtrium": "Left atrium",
+      "mitralValve": "Mitral valve",
+      "leftVentricle": "Left ventricle",
+      "aorticValve": "Aortic valve",
+      "ascendingAorta": "Ascending aorta",
+      "aorticArch": "Aortic arch",
+      "descendingAorta": "Descending aorta",
+      "body": "Body tissues"
     }
   },
-  "list": { "title": "Structures", "chambers": "Chambers", "valves": "Valves and muscles", "greatVessels": "Great vessels", "coronaryVessels": "Coronary vessels" },
+  "list": {
+    "title": "Structures",
+    "chambers": "Chambers",
+    "valves": "Valves and muscles",
+    "greatVessels": "Great vessels",
+    "coronaryVessels": "Coronary vessels",
+    "lungs": "Lungs and lobes",
+    "airways": "Airways"
+  },
   "inspector": {
     "title": "Structure inspector",
     "empty": "Click a structure in the 3D model or in the list.",
@@ -40,7 +86,12 @@
     "ontology": "Ontology ID",
     "noUberon": "No Uberon match (source ID: {{id}})",
     "noId": "No ontology ID in source",
-    "via": { "hra-crosswalk": "HRA crosswalk", "uberon-xref": "Uberon cross-reference ({{x}})", "override": "Documented correction" },
+    "via": {
+      "hra-crosswalk": "HRA crosswalk",
+      "uberon-xref": "Uberon cross-reference ({{x}})",
+      "override": "Documented correction",
+      "uberon-label": "Exact Uberon label match"
+    },
     "overrideNote": "Source mapping corrected: {{reason}}",
     "definition": "Uberon definition",
     "partOf": "Part of",
@@ -52,16 +103,37 @@
     "systems": "Related systems",
     "cardiovascular": "Cardiovascular system",
     "source": "Source",
-    "textStatus": { "unreviewed": "not yet expert-reviewed", "reviewed": "expert-reviewed" },
+    "textStatus": {
+      "unreviewed": "not yet expert-reviewed",
+      "reviewed": "expert-reviewed"
+    },
     "termReview": "Turkish term awaiting expert review",
-    "noText": "No explanatory text for this structure yet."
+    "noText": "No explanatory text for this structure yet.",
+    "respiratory": "Respiratory system"
   },
   "credits": {
     "title": "Sources & credits",
     "intro": "Every 3D model, mapping, ontology term and number in this app comes from the sources below.",
-    "license": "License", "changes": "Changes made", "attribution": "Attribution",
+    "license": "License",
+    "changes": "Changes made",
+    "attribution": "Attribution",
     "texts": "Explanatory texts are the project's own wording; facts are cited to OpenStax A&P 2e §19.1 and have not yet been expert-reviewed.",
     "terms": "Turkish anatomical terms were translated during development and need expert review before public release.",
     "back": "Back to atlas"
+  },
+  "resp": {
+    "title": "Respiratory engine",
+    "rr": "Breathing rate",
+    "vt": "Tidal volume",
+    "ve": "Minute ventilation",
+    "vo2": "Oxygen uptake",
+    "extraction": "O₂ taken from blood",
+    "extractionUnit": "mL O₂/L blood",
+    "perMin": "/min",
+    "extractionNote": "= oxygen uptake ÷ cardiac output (links heart and lungs; illustrative, two reference bodies)",
+    "pending": "source pending",
+    "breathing": "Breath indicator: one breath every {{s}} s (schematic expansion, not to scale)",
+    "notBreathing": "No verified breathing rate for this scenario; the lungs are shown still.",
+    "missingNote": "No verifiable source yet for breathing rate and tidal volume during running; no value is invented."
   }
 }

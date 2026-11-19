@@ -74,3 +74,42 @@ describe('scenarios', () => {
     expect(() => computeCardiac('walking' as never)).toThrow(RangeError);
   });
 });
+
+import { computeRespiratory, minuteVentilation, oxygenExtraction } from '../src';
+
+describe('respiratory engine (Milestone 2)', () => {
+  it('rest: RR 14, VT 500 mL (OpenStax A&P §22.3), VO2 0.34 L/min (College Physics §7.8)', () => {
+    const r = computeRespiratory('rest');
+    expect(r.breathingRate).toMatchObject({ value: 14, unit: 'breaths/min', ref: 'OSX-22.3', range: [12, 18] });
+    expect(r.tidalVolume).toMatchObject({ value: 500, unit: 'mL', ref: 'OSX-22.3' });
+    expect(r.oxygenUptake).toMatchObject({ value: 0.34, unit: 'L/min', ref: 'CP-7.8' });
+    expect(r.missing).toEqual([]);
+  });
+  it('derives minute ventilation VE = RR × VT and the breath cycle 60/RR', () => {
+    const r = computeRespiratory('rest');
+    expect(r.minuteVentilation).toEqual({ value: 7, unit: 'L/min', formula: 'VE=RR*VT' });
+    expect(r.breathCycle?.value).toBe(4.29);
+    expect(minuteVentilation(12, 500)).toBe(6);
+    expect(() => minuteVentilation(0, 500)).toThrow(RangeError);
+  });
+  it('links lungs to heart: O2 extracted per litre of blood = VO2 / CO', () => {
+    expect(computeRespiratory('rest').oxygenExtraction).toEqual({ value: 64.8, unit: 'mL O2/L', formula: 'avO2=VO2/CO' }); // 0.34 / 5.25
+    expect(computeRespiratory('running').oxygenExtraction.value).toBe(108.7); // 2.12 / 19.5
+    expect(oxygenExtraction(0.25, 5)).toBe(50);
+    expect(() => oxygenExtraction(1, 0)).toThrow(RangeError);
+  });
+  it('running: VO2 2.12 L/min is cited; breathing rate and tidal volume are reported missing, never invented', () => {
+    const r = computeRespiratory('running');
+    expect(r.oxygenUptake).toMatchObject({ value: 2.12, ref: 'CP-7.8' });
+    expect(r.breathingRate).toBeNull();
+    expect(r.tidalVolume).toBeNull();
+    expect(r.minuteVentilation).toBeNull();
+    expect(r.breathCycle).toBeNull();
+    expect(r.missing).toEqual(['breathingRate', 'tidalVolume']);
+  });
+  it('switching scenario changes oxygen uptake and extraction together with cardiac output', () => {
+    const a = computeRespiratory('rest'), b = computeRespiratory('running');
+    expect(b.oxygenUptake.value).toBeGreaterThan(a.oxygenUptake.value);
+    expect(b.oxygenExtraction.value).toBeGreaterThan(a.oxygenExtraction.value);
+  });
+});

@@ -3,6 +3,8 @@ import { textFor, type Structure } from '@atlas/anatomy-manifest';
 // Visual direction (CLAUDE.md): calm lab palette, one accent per system. Cardiovascular = deep red.
 export const COLORS = {
   tissue: '#8e3b3f',
+  lung: '#9db7cc', // respiratory: soft blue
+  airway: '#d9d4c7',
   valve: '#d8d0bf',
   bloodLow: '#4b6a8c',
   bloodHigh: '#a8323a',
@@ -12,6 +14,8 @@ export const COLORS = {
 
 /** Colour of a mesh: vessels by the oxygen content of the blood they carry (sourced in content/texts), heart tissue neutral. */
 export function colorFor(s: Structure): string {
+  if (s.layer === 'lungs') return COLORS.lung;
+  if (s.layer === 'airways') return COLORS.airway;
   if (/valve/.test(s.name)) return COLORS.valve;
   if (s.layer !== 'heart') {
     const blood = textFor(s.name)?.text.blood;

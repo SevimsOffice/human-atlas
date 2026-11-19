@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "about": "Short explanatory texts written for HUMAN ATLAS (own wording; facts cited to OpenStax A&P 2e §19.1 [OSX-19.1], which is CC BY-NC-SA 4.0 — no text copied). Licence of these texts: project licence.",
+    "about": "Short explanatory texts written for HUMAN ATLAS (own wording; facts cited to OpenStax A&P 2e §19.1 [OSX-19.1] and §22.1–22.3 [OSX-22.1..22.3], which is CC BY-NC-SA 4.0 — no text copied). Licence of these texts: project licence.",
     "status": "unreviewed = written during development, not yet checked by a domain expert. Set to reviewed with reviewer + date after checking.",
     "keys": "GLB node name without VH_M_. Segment meshes (_a/_b) and children inherit the nearest ancestor's text."
   },
@@ -154,6 +154,62 @@
       "blood": "low",
       "en": "Veins that drain the heart muscle; the coronary sinus collects this blood and empties into the right atrium.",
       "tr": "Kalp kasının kanını toplayan venler; koroner sinüs bu kanı toplayarak sağ kulakçığa boşaltır."
+    },
+    "lungs": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-22.2"
+      ],
+      "en": "Paired, pyramid-shaped organs connected to the trachea by the right and left bronchi; below, they are bordered by the diaphragm. Here blood takes up oxygen.",
+      "tr": "Sağ ve sol bronşlarla soluk borusuna bağlanan, piramit biçimli çift organlar; altta diyaframla sınırlanır. Kan burada oksijen alır."
+    },
+    "lungs_R": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-22.2"
+      ],
+      "en": "The right lung has three lobes: superior, middle and inferior.",
+      "tr": "Sağ akciğerin üç lobu vardır: üst, orta ve alt."
+    },
+    "lungs_L": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-22.2"
+      ],
+      "en": "The left lung has two lobes, superior and inferior; the cardiac notch on its surface leaves space for the heart.",
+      "tr": "Sol akciğerin iki lobu vardır, üst ve alt; yüzeyindeki kardiyak çentik kalbe yer bırakır."
+    },
+    "tracheobronchial_tree": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-22.1"
+      ],
+      "en": "The airway from the larynx through the trachea into the branching bronchi of both lungs (conducting zone: no gas exchange).",
+      "tr": "Gırtlaktan soluk borusuna ve iki akciğerin dallanan bronşlarına uzanan hava yolu (iletim bölgesi: gaz değişimi olmaz)."
+    },
+    "trachea": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-22.1"
+      ],
+      "en": "The windpipe; it branches into the right and left primary bronchi at the carina.",
+      "tr": "Soluk borusu; karina hizasında sağ ve sol ana bronşlara ayrılır."
+    },
+    "bronchi": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-22.1"
+      ],
+      "en": "The primary bronchi enter the lungs at the hilum and keep branching into a bronchial tree.",
+      "tr": "Ana bronşlar akciğerlere hilustan girer ve dallanarak bronş ağacını oluşturur."
+    },
+    "cartilage_of_tracheobronchial_tree": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-22.1"
+      ],
+      "en": "Cartilages of the airway. The thyroid cartilage, epiglottis and cricoid cartilage form the main structure of the larynx.",
+      "tr": "Hava yolunun kıkırdakları. Tiroid kıkırdak, epiglot ve krikoid kıkırdak gırtlağın ana yapısını oluşturur."
     }
   }
 }

@@ -95,7 +95,57 @@ test('sources & credits page lists every source with its licence', async ({ page
   await ready(page);
   await page.getByTestId('nav-credits').click();
   await expect(page).toHaveURL(/#\/credits$/);
-  for (const id of ['HRA-HEART-M', 'HRA-VASC-M', 'HRA-XWALK-1.3', 'UBERON', 'OSX-AP2E']) await expect(page.getByTestId(`credit-${id}`)).toBeVisible();
+  for (const id of ['HRA-HEART-M', 'HRA-VASC-M', 'HRA-LUNG-M', 'HRA-XWALK-1.3', 'UBERON', 'OSX-AP2E', 'OSX-CP2E']) await expect(page.getByTestId(`credit-${id}`)).toBeVisible();
   await expect(page.getByTestId('credit-OSX-AP2E')).toContainText('CC BY-NC-SA 4.0');
   await expect(page.getByTestId('credit-HRA-HEART-M')).toContainText('Kristen Browne');
+});
+
+// ---- Milestone 2: lungs and respiratory engine ----
+const breaths = async (page: Page) => Number(await page.getByTestId('respiratory').getAttribute('data-breaths'));
+
+test('rest shows cited breathing values, derived ventilation, O2 uptake and the heart–lung link', async ({ page }) => {
+  await ready(page);
+  await expect(page.getByTestId('rr')).toHaveText('14');
+  await expect(page.getByTestId('vt')).toHaveText('500');
+  await expect(page.getByTestId('ve')).toHaveText('7');
+  await expect(page.getByTestId('vo2')).toHaveText('0,34');
+  await expect(page.getByTestId('extraction')).toHaveText('64,8');
+  await expect(page.getByTestId('respiratory')).toHaveAttribute('data-breath-cycle-s', '4.29');
+  const b0 = await breaths(page);
+  await expect.poll(() => breaths(page), { timeout: 9000 }).toBeGreaterThan(b0); // one breath ≈ 4.3 s
+});
+
+test('running updates O2 uptake and extraction, and marks breathing values as source pending (no invented rate)', async ({ page }) => {
+  await ready(page);
+  await page.getByRole('radio', { name: 'Koşu (yoğun egzersiz)' }).click();
+  await expect(page.getByTestId('vo2')).toHaveText('2,12');
+  await expect(page.getByTestId('extraction')).toHaveText('108,7');
+  for (const id of ['rr', 'vt', 've']) await expect(page.getByTestId(id)).toHaveAttribute('data-missing', 'true');
+  await expect(page.getByTestId('resp-missing')).toBeVisible();
+  const b0 = await breaths(page);
+  await page.waitForTimeout(5000);
+  expect(await breaths(page)).toBe(b0); // lungs held still
+});
+
+test('lungs are selectable with Uberon IDs and respiratory texts; the lung layer can be hidden', async ({ page }) => {
+  await ready(page);
+  await page.getByRole('button', { name: /^Sağ akciğer$/ }).click();
+  const insp = page.getByTestId('inspector');
+  await expect(insp).toHaveAttribute('data-structure', 'VH_M_lungs_R');
+  await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0002167');
+  await expect(page.getByTestId('inspector-text')).toContainText('üç lobu');
+  await expect(insp).toContainText('Solunum sistemi');
+  await expect(page.getByTestId('inspector-source')).toContainText('Lung, Male v1.2');
+  await page.getByRole('button', { name: /^Soluk borusu/ }).click();
+  await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0003126');
+  await page.getByTestId('layer-lungs').uncheck();
+  await expect(page.getByTestId('layer-lungs')).not.toBeChecked();
+});
+
+test('clicking the centre still picks the heart through the translucent lungs', async ({ page }) => {
+  await ready(page);
+  const box = (await page.locator('[data-testid=stage] canvas').boundingBox())!;
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  const picked = await page.getByTestId('inspector').getAttribute('data-structure');
+  expect(picked).not.toMatch(/lung|lobe|segment/);
 });

@@ -5,7 +5,7 @@ import bloodPathJson from '../../../content/blood-path.json';
 
 export * from './sources';
 
-export type Layer = 'heart' | 'greatVessels' | 'coronaryVessels';
+export type Layer = 'heart' | 'greatVessels' | 'coronaryVessels' | 'lungs' | 'airways';
 export type Lang = 'tr' | 'en';
 export type Blood = 'low' | 'high';
 
@@ -18,7 +18,7 @@ export interface Structure {
   children: string[];
   isMesh: boolean;
   crosswalk: { label: string; id: string } | null;
-  override: { reason: string; displayLabel: string } | null;
+  override: { reason: string; displayLabel: string; crosswalkRejected: boolean } | null;
   uberon: { id: string; via: string; label: string | null; definition: string | null; partOf: { id: string; label: string | null }[] } | null;
   center: [number, number, number] | null;
   size?: [number, number, number];
@@ -55,7 +55,8 @@ export function resolveSelectable(name: string): string {
   return name;
 }
 
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+/** Sentence case: source labels mix 'Left Main Bronchus' and 'left main bronchus'. */
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 
 /** Display label. EN comes from the sources (override > HRA crosswalk > Uberon > node name); TR from the terms file. */
 export function label(name: string, lang: Lang): { text: string; needsReview: boolean } {
@@ -91,4 +92,6 @@ export const LIST_GROUPS: { id: string; layer: Layer; items: string[] }[] = [
   { id: 'valves', layer: 'heart', items: ['VH_M_tricuspid_valve', 'VH_M_pulmonary_valve', 'VH_M_mitral_valve', 'VH_M_aortic_valve', 'VH_M_papillary_muscle_of_heart'] },
   { id: 'greatVessels', layer: 'greatVessels', items: ['VH_M_superior_vena_cava', 'VH_M_inferior_vena_cava', 'VH_M_pulmonary_trunk', 'VH_M_pulmonary_artery_R', 'VH_M_pulmonary_artery_L', 'VH_M_pulmonary_vein', 'VH_M_ascending_aorta', 'VH_M_aortic_arch', 'VH_M_descending_aorta'] },
   { id: 'coronaryVessels', layer: 'coronaryVessels', items: ['VH_M_left_coronary_artery', 'VH_M_right_coronary_artery', 'VH_M_left_anterior_descending_artery', 'VH_M_coronary_sinus', 'VH_M_great_cardiac_vein'] },
+  { id: 'lungs', layer: 'lungs', items: ['VH_M_lungs_R', 'VH_M_lungs_R_upper_lobe', 'VH_M_lungs_R_middle_lobe', 'VH_M_lungs_R_lower_lobe', 'VH_M_lungs_L', 'VH_M_lungs_L_upper_lobe', 'VH_M_lungs_L_lower_lobe'] },
+  { id: 'airways', layer: 'airways', items: ['VH_M_trachea', 'VH_M_carina', 'VH_M_right_main_bronchus', 'VH_M_left_main_bronchus', 'VH_M_bronchi'] },
 ];

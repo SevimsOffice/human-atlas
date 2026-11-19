@@ -12,6 +12,7 @@ interface AtlasState {
   flowOn: boolean;
   flowStep: number;
   flowBeats: number;
+  breaths: number;
   hovered: string | null;
   loadedModels: string[];
   view: View;
@@ -20,6 +21,7 @@ interface AtlasState {
   toggleLayer: (l: Layer) => void;
   setFlowOn: (on: boolean) => void;
   setFlowStep: (step: number, beats: number) => void;
+  setBreaths: (n: number) => void;
   setHovered: (name: string | null) => void;
   markLoaded: (file: string) => void;
   setView: (v: View) => void;
@@ -29,10 +31,11 @@ interface AtlasState {
 export const useAtlas = create<AtlasState>((set) => ({
   scenario: 'rest',
   selected: null,
-  layers: { heart: true, greatVessels: true, coronaryVessels: true },
+  layers: { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true },
   flowOn: true,
   flowStep: 0,
   flowBeats: 0,
+  breaths: 0,
   hovered: null,
   loadedModels: [],
   view: location.hash === '#/credits' ? 'credits' : 'atlas',
@@ -41,6 +44,7 @@ export const useAtlas = create<AtlasState>((set) => ({
   toggleLayer: (l) => set((s) => ({ layers: { ...s.layers, [l]: !s.layers[l] } })),
   setFlowOn: (flowOn) => set({ flowOn }),
   setFlowStep: (flowStep, flowBeats) => set({ flowStep, flowBeats }),
+  setBreaths: (breaths) => set({ breaths }),
   setHovered: (name) => set({ hovered: name ? resolveSelectable(name) : null }),
   markLoaded: (file) => set((s) => (s.loadedModels.includes(file) ? s : { loadedModels: [...s.loadedModels, file] })),
   setView: (view) => { location.hash = view === 'credits' ? '#/credits' : ''; set({ view }); },

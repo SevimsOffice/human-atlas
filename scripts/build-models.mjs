@@ -1,6 +1,7 @@
 // Builds the optimized GLBs shipped in apps/web/public/models from the raw HRA files in data/raw/hubmap.
 //  heart.glb         <- VH_M_Heart.glb (all nodes)
 //  heart-vessels.glb <- VH_M_Blood_Vasculature.glb, subtree "VH_M_blood_vasculature_of_heart" only
+//  lungs.glb         <- VH_M_Lung.glb (all nodes: lungs + tracheobronchial tree)
 // Changes (recorded in docs/SOURCES.md): subtree extraction, dedup, weld, Meshopt compression (quantization).
 // Node names are preserved: they are the join key to the anatomy manifest.
 import { NodeIO } from '@gltf-transform/core';
@@ -38,3 +39,4 @@ async function build(src, dest, keepSubtree) {
 
 await build('VH_M_Heart.glb', 'heart.glb');
 await build('VH_M_Blood_Vasculature.glb', 'heart-vessels.glb', 'VH_M_blood_vasculature_of_heart');
+await build('VH_M_Lung.glb', 'lungs.glb');

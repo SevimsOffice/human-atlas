@@ -6,65 +6,593 @@
     "reviewWorkflow": "Reviewer changes `tr` if needed and sets `status` to `expert-reviewed` plus `reviewer` and `date`."
   },
   "terms": {
-    "heart": { "tr": "Kalp", "status": "needs-expert-review" },
-    "cardiac_chamber": { "tr": "Kalp boşlukları", "status": "needs-expert-review" },
-    "right_cardiac_atrium": { "tr": "Sağ kulakçık (atrium dextrum)", "status": "needs-expert-review" },
-    "left_cardiac_atrium": { "tr": "Sol kulakçık (atrium sinistrum)", "status": "needs-expert-review" },
-    "heart_right_ventricle": { "tr": "Sağ karıncık (ventriculus dexter)", "status": "needs-expert-review" },
-    "heart_left_ventricle": { "tr": "Sol karıncık (ventriculus sinister)", "status": "needs-expert-review" },
-    "interventricular_septum": { "tr": "Karıncıklar arası bölme (septum interventriculare)", "status": "needs-expert-review" },
-    "heart_valve": { "tr": "Kalp kapakları", "status": "needs-expert-review" },
-    "tricuspid_valve": { "tr": "Triküspit kapak (valva atrioventricularis dextra)", "status": "needs-expert-review" },
-    "mitral_valve": { "tr": "Mitral kapak (valva atrioventricularis sinistra)", "status": "needs-expert-review" },
-    "pulmonary_valve": { "tr": "Pulmoner kapak (valva trunci pulmonalis)", "status": "needs-expert-review" },
-    "aortic_valve": { "tr": "Aort kapağı (valva aortae)", "status": "needs-expert-review" },
-    "papillary_muscle_of_heart": { "tr": "Papiller kaslar (musculi papillares)", "status": "needs-expert-review" },
-    "papillary_muscle_of_heart_anterior": { "tr": "Sol karıncığın ön papiller kası", "status": "needs-expert-review" },
-    "papillary_muscle_of_heart_anterolateral": { "tr": "Sol karıncık lateral papiller kasının anterolateral başı", "status": "needs-expert-review" },
-    "papillary_muscle_of_heart_medial": { "tr": "Sağ karıncığın septal papiller kası", "status": "needs-expert-review" },
-    "papillary_muscle_of_heart_posterior": { "tr": "Sağ karıncığın arka papiller kası", "status": "needs-expert-review" },
-    "papillary_muscle_of_heart_posteromedial": { "tr": "Sol karıncık arka papiller kasının posteromedial başı", "status": "needs-expert-review" },
-    "blood_vasculature_of_heart": { "tr": "Kalbin kan damarları", "status": "needs-expert-review" },
-    "arteries_of_heart": { "tr": "Kalbin atardamarları", "status": "needs-expert-review" },
-    "veins_of_heart": { "tr": "Kalbin toplardamarları", "status": "needs-expert-review" },
-    "aorta": { "tr": "Aort", "status": "needs-expert-review" },
-    "ascending_aorta": { "tr": "Çıkan aort (aorta ascendens)", "status": "needs-expert-review" },
-    "aortic_arch": { "tr": "Aort kavsi (arcus aortae)", "status": "needs-expert-review" },
-    "descending_aorta": { "tr": "İnen aort (aorta descendens)", "status": "needs-expert-review" },
-    "brachiocephalic_artery": { "tr": "Brakiyosefalik arter (truncus brachiocephalicus)", "status": "needs-expert-review" },
-    "left_common_carotid_artery": { "tr": "Sol ortak karotis arter ve dalları", "status": "needs-expert-review" },
-    "left_subclavian_artery": { "tr": "Sol subklavyen arter", "status": "needs-expert-review" },
-    "pulmonary_artery": { "tr": "Pulmoner arterler", "status": "needs-expert-review" },
-    "pulmonary_trunk": { "tr": "Pulmoner gövde (truncus pulmonalis)", "status": "needs-expert-review" },
-    "pulmonary_artery_L": { "tr": "Sol pulmoner arter", "status": "needs-expert-review" },
-    "pulmonary_artery_R": { "tr": "Sağ pulmoner arter", "status": "needs-expert-review" },
-    "pulmonary_vein": { "tr": "Pulmoner venler", "status": "needs-expert-review" },
-    "pulmonary_vein_L_inf": { "tr": "Sol alt pulmoner ven", "status": "needs-expert-review" },
-    "pulmonary_vein_L_sup": { "tr": "Sol üst pulmoner ven", "status": "needs-expert-review" },
-    "pulmonary_vein_R_inf": { "tr": "Sağ alt pulmoner ven", "status": "needs-expert-review" },
-    "pulmonary_vein_R_sup": { "tr": "Sağ üst pulmoner ven", "status": "needs-expert-review" },
-    "vena_cava": { "tr": "Ana toplardamarlar (venae cavae)", "status": "needs-expert-review" },
-    "superior_vena_cava": { "tr": "Üst ana toplardamar (vena cava superior)", "status": "needs-expert-review" },
-    "inferior_vena_cava": { "tr": "Alt ana toplardamar (vena cava inferior)", "status": "needs-expert-review" },
-    "brachiocephalic_vein": { "tr": "Brakiyosefalik venler", "status": "needs-expert-review" },
-    "brachiocephalic_vein_L": { "tr": "Sol brakiyosefalik ven", "status": "needs-expert-review" },
-    "brachiocephalic_vein_R": { "tr": "Sağ brakiyosefalik ven", "status": "needs-expert-review" },
-    "cardiac_artery": { "tr": "Koroner arterler", "status": "needs-expert-review" },
-    "left_coronary_artery": { "tr": "Sol koroner arter", "status": "needs-expert-review" },
-    "right_coronary_artery": { "tr": "Sağ koroner arter", "status": "needs-expert-review" },
-    "left_anterior_descending_artery": { "tr": "Sol ön inen arter (ramus interventricularis anterior)", "status": "needs-expert-review" },
-    "diagonal_branch_of_anterior_descending_branch_of_left_coronary_artery": { "tr": "Sol ön inen arterin diyagonal dalı", "status": "needs-expert-review" },
-    "diagonal_branch_of_left_anterior_descending_artery": { "tr": "Sol ön inen arterin diyagonal dalı", "status": "needs-expert-review" },
-    "left_marginal_branch": { "tr": "Sol marjinal arter", "status": "needs-expert-review" },
-    "right_marginal_artery": { "tr": "Sağ koroner arterin marjinal dalı", "status": "needs-expert-review" },
-    "right_posterior_descending_artery": { "tr": "Sağ koroner arterin arka interventriküler dalı", "status": "needs-expert-review" },
-    "cardiac_vein": { "tr": "Kalp venleri", "status": "needs-expert-review" },
-    "coronary_sinus": { "tr": "Koroner sinüs (sinus coronarius)", "status": "needs-expert-review" },
-    "great_cardiac_vein": { "tr": "Büyük kalp veni (vena cardiaca magna)", "status": "needs-expert-review" },
-    "middle_cardiac_vein": { "tr": "Orta kalp veni (vena cardiaca media)", "status": "needs-expert-review" },
-    "small_cardiac_vein": { "tr": "Küçük kalp veni (vena cardiaca parva)", "status": "needs-expert-review" },
-    "anterior_cardiac_vein": { "tr": "Ön kalp veni", "status": "needs-expert-review" },
-    "oblique_vein_of_left_atrium": { "tr": "Sol kulakçığın oblik veni", "status": "needs-expert-review" },
-    "posterior_vein_of_left_ventricle": { "tr": "Sol karıncığın arka veni", "status": "needs-expert-review" }
+    "heart": {
+      "tr": "Kalp",
+      "status": "needs-expert-review"
+    },
+    "cardiac_chamber": {
+      "tr": "Kalp boşlukları",
+      "status": "needs-expert-review"
+    },
+    "right_cardiac_atrium": {
+      "tr": "Sağ kulakçık (atrium dextrum)",
+      "status": "needs-expert-review"
+    },
+    "left_cardiac_atrium": {
+      "tr": "Sol kulakçık (atrium sinistrum)",
+      "status": "needs-expert-review"
+    },
+    "heart_right_ventricle": {
+      "tr": "Sağ karıncık (ventriculus dexter)",
+      "status": "needs-expert-review"
+    },
+    "heart_left_ventricle": {
+      "tr": "Sol karıncık (ventriculus sinister)",
+      "status": "needs-expert-review"
+    },
+    "interventricular_septum": {
+      "tr": "Karıncıklar arası bölme (septum interventriculare)",
+      "status": "needs-expert-review"
+    },
+    "heart_valve": {
+      "tr": "Kalp kapakları",
+      "status": "needs-expert-review"
+    },
+    "tricuspid_valve": {
+      "tr": "Triküspit kapak (valva atrioventricularis dextra)",
+      "status": "needs-expert-review"
+    },
+    "mitral_valve": {
+      "tr": "Mitral kapak (valva atrioventricularis sinistra)",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_valve": {
+      "tr": "Pulmoner kapak (valva trunci pulmonalis)",
+      "status": "needs-expert-review"
+    },
+    "aortic_valve": {
+      "tr": "Aort kapağı (valva aortae)",
+      "status": "needs-expert-review"
+    },
+    "papillary_muscle_of_heart": {
+      "tr": "Papiller kaslar (musculi papillares)",
+      "status": "needs-expert-review"
+    },
+    "papillary_muscle_of_heart_anterior": {
+      "tr": "Sol karıncığın ön papiller kası",
+      "status": "needs-expert-review"
+    },
+    "papillary_muscle_of_heart_anterolateral": {
+      "tr": "Sol karıncık lateral papiller kasının anterolateral başı",
+      "status": "needs-expert-review"
+    },
+    "papillary_muscle_of_heart_medial": {
+      "tr": "Sağ karıncığın septal papiller kası",
+      "status": "needs-expert-review"
+    },
+    "papillary_muscle_of_heart_posterior": {
+      "tr": "Sağ karıncığın arka papiller kası",
+      "status": "needs-expert-review"
+    },
+    "papillary_muscle_of_heart_posteromedial": {
+      "tr": "Sol karıncık arka papiller kasının posteromedial başı",
+      "status": "needs-expert-review"
+    },
+    "blood_vasculature_of_heart": {
+      "tr": "Kalbin kan damarları",
+      "status": "needs-expert-review"
+    },
+    "arteries_of_heart": {
+      "tr": "Kalbin atardamarları",
+      "status": "needs-expert-review"
+    },
+    "veins_of_heart": {
+      "tr": "Kalbin toplardamarları",
+      "status": "needs-expert-review"
+    },
+    "aorta": {
+      "tr": "Aort",
+      "status": "needs-expert-review"
+    },
+    "ascending_aorta": {
+      "tr": "Çıkan aort (aorta ascendens)",
+      "status": "needs-expert-review"
+    },
+    "aortic_arch": {
+      "tr": "Aort kavsi (arcus aortae)",
+      "status": "needs-expert-review"
+    },
+    "descending_aorta": {
+      "tr": "İnen aort (aorta descendens)",
+      "status": "needs-expert-review"
+    },
+    "brachiocephalic_artery": {
+      "tr": "Brakiyosefalik arter (truncus brachiocephalicus)",
+      "status": "needs-expert-review"
+    },
+    "left_common_carotid_artery": {
+      "tr": "Sol ortak karotis arter ve dalları",
+      "status": "needs-expert-review"
+    },
+    "left_subclavian_artery": {
+      "tr": "Sol subklavyen arter",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_artery": {
+      "tr": "Pulmoner arterler",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_trunk": {
+      "tr": "Pulmoner gövde (truncus pulmonalis)",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_artery_L": {
+      "tr": "Sol pulmoner arter",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_artery_R": {
+      "tr": "Sağ pulmoner arter",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_vein": {
+      "tr": "Pulmoner venler",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_vein_L_inf": {
+      "tr": "Sol alt pulmoner ven",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_vein_L_sup": {
+      "tr": "Sol üst pulmoner ven",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_vein_R_inf": {
+      "tr": "Sağ alt pulmoner ven",
+      "status": "needs-expert-review"
+    },
+    "pulmonary_vein_R_sup": {
+      "tr": "Sağ üst pulmoner ven",
+      "status": "needs-expert-review"
+    },
+    "vena_cava": {
+      "tr": "Ana toplardamarlar (venae cavae)",
+      "status": "needs-expert-review"
+    },
+    "superior_vena_cava": {
+      "tr": "Üst ana toplardamar (vena cava superior)",
+      "status": "needs-expert-review"
+    },
+    "inferior_vena_cava": {
+      "tr": "Alt ana toplardamar (vena cava inferior)",
+      "status": "needs-expert-review"
+    },
+    "brachiocephalic_vein": {
+      "tr": "Brakiyosefalik venler",
+      "status": "needs-expert-review"
+    },
+    "brachiocephalic_vein_L": {
+      "tr": "Sol brakiyosefalik ven",
+      "status": "needs-expert-review"
+    },
+    "brachiocephalic_vein_R": {
+      "tr": "Sağ brakiyosefalik ven",
+      "status": "needs-expert-review"
+    },
+    "cardiac_artery": {
+      "tr": "Koroner arterler",
+      "status": "needs-expert-review"
+    },
+    "left_coronary_artery": {
+      "tr": "Sol koroner arter",
+      "status": "needs-expert-review"
+    },
+    "right_coronary_artery": {
+      "tr": "Sağ koroner arter",
+      "status": "needs-expert-review"
+    },
+    "left_anterior_descending_artery": {
+      "tr": "Sol ön inen arter (ramus interventricularis anterior)",
+      "status": "needs-expert-review"
+    },
+    "diagonal_branch_of_anterior_descending_branch_of_left_coronary_artery": {
+      "tr": "Sol ön inen arterin diyagonal dalı",
+      "status": "needs-expert-review"
+    },
+    "diagonal_branch_of_left_anterior_descending_artery": {
+      "tr": "Sol ön inen arterin diyagonal dalı",
+      "status": "needs-expert-review"
+    },
+    "left_marginal_branch": {
+      "tr": "Sol marjinal arter",
+      "status": "needs-expert-review"
+    },
+    "right_marginal_artery": {
+      "tr": "Sağ koroner arterin marjinal dalı",
+      "status": "needs-expert-review"
+    },
+    "right_posterior_descending_artery": {
+      "tr": "Sağ koroner arterin arka interventriküler dalı",
+      "status": "needs-expert-review"
+    },
+    "cardiac_vein": {
+      "tr": "Kalp venleri",
+      "status": "needs-expert-review"
+    },
+    "coronary_sinus": {
+      "tr": "Koroner sinüs (sinus coronarius)",
+      "status": "needs-expert-review"
+    },
+    "great_cardiac_vein": {
+      "tr": "Büyük kalp veni (vena cardiaca magna)",
+      "status": "needs-expert-review"
+    },
+    "middle_cardiac_vein": {
+      "tr": "Orta kalp veni (vena cardiaca media)",
+      "status": "needs-expert-review"
+    },
+    "small_cardiac_vein": {
+      "tr": "Küçük kalp veni (vena cardiaca parva)",
+      "status": "needs-expert-review"
+    },
+    "anterior_cardiac_vein": {
+      "tr": "Ön kalp veni",
+      "status": "needs-expert-review"
+    },
+    "oblique_vein_of_left_atrium": {
+      "tr": "Sol kulakçığın oblik veni",
+      "status": "needs-expert-review"
+    },
+    "posterior_vein_of_left_ventricle": {
+      "tr": "Sol karıncığın arka veni",
+      "status": "needs-expert-review"
+    },
+    "respiratory_system": {
+      "tr": "Solunum sistemi",
+      "status": "needs-expert-review"
+    },
+    "lungs": {
+      "tr": "Akciğerler",
+      "status": "needs-expert-review"
+    },
+    "lungs_L": {
+      "tr": "Sol akciğer",
+      "status": "needs-expert-review"
+    },
+    "lungs_R": {
+      "tr": "Sağ akciğer",
+      "status": "needs-expert-review"
+    },
+    "hilum_L": {
+      "tr": "Sol akciğer hilusu",
+      "status": "needs-expert-review"
+    },
+    "hilum_R": {
+      "tr": "Sağ akciğer hilusu",
+      "status": "needs-expert-review"
+    },
+    "hilum_upper_L": {
+      "tr": "Sol akciğer hilusu (üst lob)",
+      "status": "needs-expert-review"
+    },
+    "hilum_lower_L": {
+      "tr": "Sol akciğer hilusu (alt lob)",
+      "status": "needs-expert-review"
+    },
+    "hilum_middle_R": {
+      "tr": "Sağ akciğer hilusu (orta lob)",
+      "status": "needs-expert-review"
+    },
+    "hilum_lower_R": {
+      "tr": "Sağ akciğer hilusu (alt lob)",
+      "status": "needs-expert-review"
+    },
+    "hilum_upper_R": {
+      "tr": "Sağ akciğer hilusu (üst lob)",
+      "status": "needs-expert-review"
+    },
+    "lungs_L_upper_lobe": {
+      "tr": "Sol akciğer üst lobu",
+      "status": "needs-expert-review"
+    },
+    "lungs_L_lower_lobe": {
+      "tr": "Sol akciğer alt lobu",
+      "status": "needs-expert-review"
+    },
+    "lungs_R_upper_lobe": {
+      "tr": "Sağ akciğer üst lobu",
+      "status": "needs-expert-review"
+    },
+    "lungs_R_middle_lobe": {
+      "tr": "Sağ akciğer orta lobu",
+      "status": "needs-expert-review"
+    },
+    "lungs_R_lower_lobe": {
+      "tr": "Sağ akciğer alt lobu",
+      "status": "needs-expert-review"
+    },
+    "left_lingula_superior_bronchopulmonary_segment": {
+      "tr": "Sol üst lingular segment",
+      "status": "needs-expert-review"
+    },
+    "left_lingula_inferior_bronchopulmonary_segment": {
+      "tr": "Sol alt lingular segment",
+      "status": "needs-expert-review"
+    },
+    "left_posterior_bronchopulmonary_segment": {
+      "tr": "Sol posterior bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "left_anterior_bronchopulmonary_segment": {
+      "tr": "Sol anterior bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "left_apical_bronchopulmonary_segment": {
+      "tr": "Sol apikal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "left_anterior_basal_bronchopulmonary_segment": {
+      "tr": "Sol anterior bazal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "left_lateral_basal_bronchopulmonary_segment": {
+      "tr": "Sol lateral bazal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "left_medial_basal_bronchopulmonary_segment": {
+      "tr": "Sol medial bazal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "left_posetrior_basal_bronchopulmonary_segment": {
+      "tr": "Sol posterior bazal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "left_superior_bronchopulmonary_segment": {
+      "tr": "Sol superior bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_lateral_bronchopulmonary_segment": {
+      "tr": "Sağ lateral bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_medial_bronchopulmonary_segment": {
+      "tr": "Sağ medial bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_anterior_basal_bronchopulmonary_segment": {
+      "tr": "Sağ anterior bazal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_lateral_basal_bronchopulmonary_segment": {
+      "tr": "Sağ lateral bazal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_medial_basal_bronchopulmonary_segment": {
+      "tr": "Sağ medial bazal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_posterior_basal_bronchopulmonary_segment": {
+      "tr": "Sağ posterior bazal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_superior_bronchopulmonary_segment": {
+      "tr": "Sağ superior bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_apical_bronchopulmonary_segment": {
+      "tr": "Sağ apikal bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_posterior_bronchopulmonary_segment": {
+      "tr": "Sağ posterior bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "right_anterior_bronchopulmonary_segment": {
+      "tr": "Sağ anterior bronkopulmoner segment",
+      "status": "needs-expert-review"
+    },
+    "tracheobronchial_tree": {
+      "tr": "Trakeobronşiyal ağaç",
+      "status": "needs-expert-review"
+    },
+    "trachea": {
+      "tr": "Soluk borusu (trakea)",
+      "status": "needs-expert-review"
+    },
+    "cartilage_of_tracheobronchial_tree": {
+      "tr": "Trakeobronşiyal ağaç kıkırdakları",
+      "status": "needs-expert-review"
+    },
+    "bronchial_cartilage": {
+      "tr": "Bronş kıkırdağı",
+      "status": "needs-expert-review"
+    },
+    "carina": {
+      "tr": "Karina (carina tracheae)",
+      "status": "needs-expert-review"
+    },
+    "cricoid_cartilage": {
+      "tr": "Krikoid kıkırdak",
+      "status": "needs-expert-review"
+    },
+    "epiglottic_cartilage": {
+      "tr": "Epiglot kıkırdağı",
+      "status": "needs-expert-review"
+    },
+    "thyroid_cartilage": {
+      "tr": "Tiroid kıkırdak",
+      "status": "needs-expert-review"
+    },
+    "arytenoid_cartilage": {
+      "tr": "Aritenoid kıkırdaklar",
+      "status": "needs-expert-review"
+    },
+    "arytenoid_cartilage_L": {
+      "tr": "Sol aritenoid kıkırdak",
+      "status": "needs-expert-review"
+    },
+    "arytenoid_cartilage_R": {
+      "tr": "Sağ aritenoid kıkırdak",
+      "status": "needs-expert-review"
+    },
+    "corniculate_cartilage": {
+      "tr": "Kornikülat kıkırdaklar",
+      "status": "needs-expert-review"
+    },
+    "corniculate_cartilage_L": {
+      "tr": "Sol kornikülat kıkırdak",
+      "status": "needs-expert-review"
+    },
+    "corniculate_cartilage_R": {
+      "tr": "Sağ kornikülat kıkırdak",
+      "status": "needs-expert-review"
+    },
+    "tracheal_cartilage": {
+      "tr": "Trakea kıkırdakları",
+      "status": "needs-expert-review"
+    },
+    "bronchi": {
+      "tr": "Bronşlar",
+      "status": "needs-expert-review"
+    },
+    "bronchus": {
+      "tr": "Bronş",
+      "status": "needs-expert-review"
+    },
+    "bronchi_L": {
+      "tr": "Sol bronşlar",
+      "status": "needs-expert-review"
+    },
+    "bronchi_R": {
+      "tr": "Sağ bronşlar",
+      "status": "needs-expert-review"
+    },
+    "left_main_bronchus": {
+      "tr": "Sol ana bronş",
+      "status": "needs-expert-review"
+    },
+    "right_main_bronchus": {
+      "tr": "Sağ ana bronş",
+      "status": "needs-expert-review"
+    },
+    "lobar_bronchus_L": {
+      "tr": "Sol lob bronşları",
+      "status": "needs-expert-review"
+    },
+    "lobar_bronchi_R": {
+      "tr": "Sağ lob bronşları",
+      "status": "needs-expert-review"
+    },
+    "left_superior_lobar_bronchus": {
+      "tr": "Sol üst lob bronşu",
+      "status": "needs-expert-review"
+    },
+    "left_inferior_lobar_bronchus": {
+      "tr": "Sol alt lob bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_intermediate_bronchus": {
+      "tr": "Sağ ara bronş (bronchus intermedius)",
+      "status": "needs-expert-review"
+    },
+    "right_middle_lobar_bronchus": {
+      "tr": "Sağ orta lob bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_superior_lobar_bronchus": {
+      "tr": "Sağ üst lob bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_lower_lobar_bronchus": {
+      "tr": "Sağ alt lob bronşu",
+      "status": "needs-expert-review"
+    },
+    "tertiary_bronchi_L": {
+      "tr": "Sol segment bronşları",
+      "status": "needs-expert-review"
+    },
+    "tertiary_bronchi_R": {
+      "tr": "Sağ segment bronşları",
+      "status": "needs-expert-review"
+    },
+    "left_superior_bronchus": {
+      "tr": "Sol superior segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "left_posterior_basal_bronchus": {
+      "tr": "Sol posterior bazal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "left_medial_basal_bronchus": {
+      "tr": "Sol medial bazal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "left_apical_bronchus": {
+      "tr": "Sol apikal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "left_anterior_bronchus": {
+      "tr": "Sol anterior segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "left_lingular_bronchus": {
+      "tr": "Lingular bronş",
+      "status": "needs-expert-review"
+    },
+    "left_lingula_superior_bronchus": {
+      "tr": "Üst lingular bronş",
+      "status": "needs-expert-review"
+    },
+    "left_lingula_inferior_bronchus": {
+      "tr": "Alt lingular bronş",
+      "status": "needs-expert-review"
+    },
+    "left_lateral_basal_bronchus": {
+      "tr": "Sol lateral bazal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "left_anterior_basal_bronchus": {
+      "tr": "Sol anterior bazal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_anterior_bronchus": {
+      "tr": "Sağ anterior segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_lateral_basal_bronchus": {
+      "tr": "Sağ lateral bazal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_lateral_bronchus": {
+      "tr": "Sağ lateral segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_medial_basal_bronchus": {
+      "tr": "Sağ medial bazal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_medial_bronchus": {
+      "tr": "Sağ medial segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_posterior_basal": {
+      "tr": "Sağ posterior bazal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_posterior_bronchus": {
+      "tr": "Sağ posterior segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_superior_bronchus": {
+      "tr": "Sağ superior segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_apical_bronchus": {
+      "tr": "Sağ apikal segment bronşu",
+      "status": "needs-expert-review"
+    },
+    "right_anterior_basal_bronchus": {
+      "tr": "Sağ anterior bazal segment bronşu",
+      "status": "needs-expert-review"
+    }
   }
 }

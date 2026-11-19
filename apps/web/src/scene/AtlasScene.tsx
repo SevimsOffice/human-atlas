@@ -27,7 +27,7 @@ export function AtlasScene() {
   const select = useAtlas((s) => s.select);
   return (
     <Canvas
-      camera={{ position: [target[0], target[1] + 0.03, target[2] + 0.44], fov: 35, near: 0.005, far: 5 }}
+      camera={{ position: [target[0], target[1] + 0.03, target[2] + 0.6], fov: 35, near: 0.005, far: 5 }}
       dpr={softwareRendering ? 1 : [1, 2]}
       gl={{ antialias: !softwareRendering }}
       frameloop={softwareRendering ? 'demand' : 'always'}

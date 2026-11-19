@@ -3,7 +3,7 @@
 An interactive, sourced, browser-based exploration of the human body — anatomy (structure) and physiology (function).
 Educational only: not medical advice, not a diagnostic tool, no patient data.
 
-**Live:** https://sevimsoffice.github.io/human-atlas/ · Status: **Milestone 1 — heart vertical slice** (see `docs/ROADMAP.md`).
+**Live:** https://sevimsoffice.github.io/human-atlas/ · Status: **Milestone 2 — lungs and respiratory engine** (see `docs/ROADMAP.md`).
 
 ## Run locally
 ```bash
@@ -15,12 +15,12 @@ npm run e2e -- --trace off   # Playwright main journey (builds + previews under 
 
 ## Rebuild the data (only needed when sources change)
 ```bash
-npm run data:download  # HuBMAP HRA heart + vasculature, crosswalk, Uberon → data/raw (git-ignored)
+npm run data:download  # HuBMAP HRA heart, vasculature, lung, crosswalk, Uberon → data/raw (git-ignored)
 npm run data:build     # → apps/web/public/models/*.glb + packages/anatomy-manifest/src/manifest.json
 ```
 
 ## Where things are
-- `packages/physiology` — pure engine (HR, SV, CO, cycle duration) with cited reference values
+- `packages/physiology` — pure engine: cardiac (HR, SV, CO) and respiratory (RR, VT, VE, VO2, O2 extraction) with cited reference values
 - `packages/anatomy-manifest` — generated mesh ↔ Uberon ↔ source manifest, labels, texts, blood path
 - `apps/web` — React + R3F app · `content/` — own texts, TR terms (needs expert review), blood path
 - Docs: `docs/SPEC.md`, `ARCHITECTURE.md`, `DATA_SOURCES.md`, `SOURCES.md` (asset register), `PHYSIOLOGY_MODEL.md`, `adr/`
