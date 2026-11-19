@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --color-graphite: #2b2e33;
+  --color-graphite-soft: #5b6068;
+  --color-line: #d9dcdf;
+  --color-paper: #f5f6f7;
+  --color-cardio: #8e2f36;
+  --color-blood-low: #4b6a8c;
+  --color-blood-high: #a8323a;
+}
+
+html, body, #root { height: 100%; }
+body { margin: 0; background: var(--color-paper); color: var(--color-graphite); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+@keyframes beat { 0%, 100% { transform: scale(0.7); opacity: .45 } 12% { transform: scale(1); opacity: 1 } 40% { transform: scale(0.75); opacity: .55 } }
+.beat-dot { animation: beat var(--cycle, 0.8s) infinite ease-out; }
+@media (prefers-reduced-motion: reduce) { .beat-dot { animation: none; } }

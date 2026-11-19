@@ -1,0 +1,159 @@
+{
+  "_meta": {
+    "about": "Short explanatory texts written for HUMAN ATLAS (own wording; facts cited to OpenStax A&P 2e §19.1 [OSX-19.1], which is CC BY-NC-SA 4.0 — no text copied). Licence of these texts: project licence.",
+    "status": "unreviewed = written during development, not yet checked by a domain expert. Set to reviewed with reviewer + date after checking.",
+    "keys": "GLB node name without VH_M_. Segment meshes (_a/_b) and children inherit the nearest ancestor's text."
+  },
+  "texts": {
+    "heart": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "en": "A muscular pump with four chambers: two atria that receive blood and two ventricles that pump it out.",
+      "tr": "Dört boşluklu kaslı bir pompa: kanı karşılayan iki kulakçık ve kanı dışarı pompalayan iki karıncık."
+    },
+    "right_cardiac_atrium": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "low",
+      "en": "Receives oxygen-poor blood from the body through the superior and inferior venae cavae and the coronary sinus, and passes it to the right ventricle.",
+      "tr": "Vücuttan gelen oksijeni az kanı üst ve alt ana toplardamarlar ile koroner sinüs aracılığıyla alır ve sağ karıncığa iletir."
+    },
+    "heart_right_ventricle": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "low",
+      "en": "Pumps oxygen-poor blood into the pulmonary trunk, towards the lungs (pulmonary circuit).",
+      "tr": "Oksijeni az kanı pulmoner gövdeye, akciğerlere doğru pompalar (küçük dolaşım)."
+    },
+    "left_cardiac_atrium": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "high",
+      "en": "Receives oxygen-rich blood from the lungs through the pulmonary veins and passes it to the left ventricle.",
+      "tr": "Akciğerlerden gelen oksijeni zengin kanı pulmoner venler aracılığıyla alır ve sol karıncığa iletir."
+    },
+    "heart_left_ventricle": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "high",
+      "en": "The main pumping chamber of the systemic circuit: it ejects oxygen-rich blood through the aortic valve into the aorta.",
+      "tr": "Büyük dolaşımın ana pompa boşluğu: oksijeni zengin kanı aort kapağından aorta fırlatır."
+    },
+    "interventricular_septum": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "en": "The wall that separates the right and left ventricles.",
+      "tr": "Sağ ve sol karıncığı birbirinden ayıran duvar."
+    },
+    "tricuspid_valve": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "low",
+      "en": "Valve between the right atrium and right ventricle; lets blood move forward into the ventricle.",
+      "tr": "Sağ kulakçık ile sağ karıncık arasındaki kapak; kanın karıncığa doğru ilerlemesini sağlar."
+    },
+    "mitral_valve": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "high",
+      "en": "Valve between the left atrium and left ventricle (also called the bicuspid valve).",
+      "tr": "Sol kulakçık ile sol karıncık arasındaki kapak (biküspit kapak olarak da bilinir)."
+    },
+    "pulmonary_valve": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "low",
+      "en": "Semilunar valve between the right ventricle and the pulmonary trunk.",
+      "tr": "Sağ karıncık ile pulmoner gövde arasındaki yarımay kapak."
+    },
+    "aortic_valve": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "high",
+      "en": "Semilunar valve between the left ventricle and the aorta.",
+      "tr": "Sol karıncık ile aort arasındaki yarımay kapak."
+    },
+    "papillary_muscle_of_heart": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "en": "Muscles in the ventricles connected to the flaps of the tricuspid and mitral valves by chordae tendineae.",
+      "tr": "Karıncıklarda bulunan ve triküspit ile mitral kapak yaprakçıklarına chordae tendineae ile bağlanan kaslar."
+    },
+    "pulmonary_artery": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "low",
+      "en": "The pulmonary trunk carries oxygen-poor blood from the right ventricle and divides into the left and right pulmonary arteries, which lead to the lungs.",
+      "tr": "Pulmoner gövde sağ karıncıktan çıkan oksijeni az kanı taşır ve akciğerlere giden sol ve sağ pulmoner arterlere ayrılır."
+    },
+    "pulmonary_vein": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "high",
+      "en": "Return oxygen-rich blood from the lungs to the left atrium; after birth they are the only veins carrying highly oxygenated blood.",
+      "tr": "Akciğerlerden gelen oksijeni zengin kanı sol kulakçığa taşır; doğumdan sonra oksijeni yüksek kan taşıyan tek venlerdir."
+    },
+    "aorta": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "high",
+      "en": "The great artery that receives oxygen-rich blood from the left ventricle and distributes it to the systemic circuit.",
+      "tr": "Sol karıncıktan oksijeni zengin kanı alan ve büyük dolaşıma dağıtan ana atardamar."
+    },
+    "vena_cava": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "low",
+      "en": "The two major systemic veins returning blood to the right atrium; the inferior vena cava drains the regions below the diaphragm.",
+      "tr": "Kanı sağ kulakçığa geri getiren iki büyük toplardamar; alt ana toplardamar diyaframın altındaki bölgelerin kanını toplar."
+    },
+    "cardiac_artery": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "high",
+      "en": "Coronary arteries supply blood to the heart muscle (myocardium) itself.",
+      "tr": "Koroner arterler kalp kasının (miyokard) kendisini kanla besler."
+    },
+    "cardiac_vein": {
+      "status": "unreviewed",
+      "cites": [
+        "OSX-19.1"
+      ],
+      "blood": "low",
+      "en": "Veins that drain the heart muscle; the coronary sinus collects this blood and empties into the right atrium.",
+      "tr": "Kalp kasının kanını toplayan venler; koroner sinüs bu kanı toplayarak sağ kulakçığa boşaltır."
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "VH_M_left_anterior_descending_artery": {
+    "uberonId": "UBERON:8600102",
+    "crosswalkLabel": "left anterior descending artery",
+    "reason": "HRA crosswalk (v1.3-v2.0) maps this node to FMA:8636 'Anterior descending branch of left pulmonary artery'; the mesh is a coronary artery. Uberon UBERON:8600102 'left anterior descending artery' (xref FMA:3862) is the matching term. Reported upstream: docs/upstream/hubmap-crosswalk-lad-issue.md"
+  }
+}

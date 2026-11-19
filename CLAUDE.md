@@ -23,13 +23,15 @@ docs/                   ARCHITECTURE, DATA_SOURCES, SOURCES, PHYSIOLOGY_MODEL, R
 ```
 
 ## Commands
-- Download heart data: `./scripts/download-hubmap-heart.sh`
-- Data spike: `cd spikes/hubmap-heart && npm i && node run.mjs`
-- (from M1) `npm test` (Vitest), `npm run e2e -- --trace off` (Playwright), `npm run dev`
+- `npm ci` · `npm run dev` · `npm test` (Vitest) · `npm run e2e -- --trace off` (Playwright) · `npm run typecheck`
+- Data: `npm run data:download` then `npm run data:build` (regenerates models + manifest; commit both)
+- Deploy: push to `main` or a `claude/**` branch → `.github/workflows/ci-pages.yml` → https://sevimsoffice.github.io/human-atlas/
+- Content to review: `content/texts/structures.json` (status unreviewed/reviewed), `content/terms/anatomy-terms.tr.json` (needs-expert-review)
 
 ## Working rules
 - Keep edits focused; prefer scripts over hand-written data; keep token use low.
 - After each milestone: app runs, tests pass, existing behaviour preserved, `docs/SOURCES.md` updated, report done vs outstanding.
 - Ask before: adding any new data source, using share-alike assets, adding a backend, changing a reference value.
+- Git: one feature branch + PR per milestone; owner reviews, then Claude merges.
 - Sub-agents: `.claude/agents/` (graphics-engineer, physiology-engineer, test-writer, code-reviewer).
 - Network note (cloud sessions): `cdn.humanatlas.io`, `openstax.org`, `purl.obolibrary.org` are blocked; scripts fall back to the GitHub mirrors (`raw.githubusercontent.com`).

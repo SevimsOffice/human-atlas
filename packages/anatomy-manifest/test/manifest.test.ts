@@ -1,0 +1,92 @@
+import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { manifest, trTerms, texts, bloodPath, label, textFor, resolveSelectable, meshesUnder, LIST_GROUPS, SOURCES } from '../src';
+
+const sourcesMd = readFileSync(new URL('../../../docs/SOURCES.md', import.meta.url), 'utf8');
+const model = readFileSync(new URL('../../../docs/PHYSIOLOGY_MODEL.md', import.meta.url), 'utf8');
+const all = Object.values(manifest.structures);
+
+describe('anatomy manifest integrity', () => {
+  it('has the heart chambers, valves and the great vessels needed for the blood path', () => {
+    for (const n of ['VH_M_right_cardiac_atrium', 'VH_M_heart_left_ventricle', 'VH_M_mitral_valve', 'VH_M_aorta', 'VH_M_pulmonary_trunk', 'VH_M_superior_vena_cava', 'VH_M_pulmonary_vein'])
+      expect(manifest.structures[n], n).toBeDefined();
+  });
+  it('every structure comes from a model registered in docs/SOURCES.md', () => {
+    for (const s of all) {
+      expect(manifest.models.map((m) => m.file)).toContain(s.model);
+      expect(sourcesMd).toContain(`| ${s.sourceId} |`);
+    }
+  });
+  it('every credited source is registered in docs/SOURCES.md', () => {
+    for (const s of SOURCES) expect(sourcesMd, s.id).toContain(`| ${s.id} |`);
+  });
+  it('key structures carry the expected Uberon IDs (from the HRA crosswalk)', () => {
+    expect(manifest.structures.VH_M_heart_left_ventricle.uberon?.id).toBe('UBERON:0002084');
+    expect(manifest.structures.VH_M_right_cardiac_atrium.uberon?.id).toBe('UBERON:0002078');
+    expect(manifest.structures.VH_M_aortic_valve.uberon?.id).toBe('UBERON:0002137');
+    expect(manifest.structures.VH_M_superior_vena_cava.uberon).toMatchObject({ id: 'UBERON:0001585', via: 'uberon-xref:FMA:4720' });
+  });
+  it('the LAD mapping error is corrected only through a documented override', () => {
+    const lad = manifest.structures.VH_M_left_anterior_descending_artery;
+    expect(lad.crosswalk?.id).toBe('FMA:8636');
+    expect(lad.uberon).toMatchObject({ id: 'UBERON:8600102', via: 'override' });
+    expect(lad.override?.reason).toMatch(/pulmonary artery/);
+    expect(all.filter((s) => s.uberon?.via === 'override').map((s) => s.name)).toEqual(['VH_M_left_anterior_descending_artery']);
+  });
+  it('mesh nodes have geometry facts; neighbour relations are symmetric', () => {
+    for (const s of all.filter((x) => x.isMesh)) {
+      expect(s.center).toHaveLength(3);
+      for (const n of s.neighbors ?? []) expect(manifest.structures[n].neighbors).toContain(s.name);
+    }
+  });
+});
+
+describe('labels and texts', () => {
+  it('every structure has a Turkish term marked for review and an English label', () => {
+    for (const s of all) {
+      const tr = label(s.name, 'tr');
+      expect(tr.text.length, s.name).toBeGreaterThan(2);
+      expect(trTerms[resolveSelectable(s.name).replace('VH_M_', '')], s.name).toBeDefined();
+      expect(label(s.name, 'en').text.length).toBeGreaterThan(2);
+    }
+    expect(Object.values(trTerms).every((t) => t.status === 'needs-expert-review')).toBe(true);
+  });
+  it('no orphan terms or texts (every key is a real node)', () => {
+    const keys = new Set(all.map((s) => s.name.replace('VH_M_', '')));
+    for (const k of [...Object.keys(trTerms), ...Object.keys(texts)]) expect(keys.has(k), k).toBe(true);
+  });
+  it('texts are bilingual, carry a status and cite a documented reference', () => {
+    for (const [k, t] of Object.entries(texts)) {
+      expect(t.en && t.tr, k).toBeTruthy();
+      expect(['unreviewed', 'reviewed']).toContain(t.status);
+      for (const c of t.cites) expect(model + sourcesMd).toContain(c);
+    }
+  });
+  it('segments resolve to their parent; texts inherit from ancestors', () => {
+    expect(resolveSelectable('VH_M_descending_aorta_a')).toBe('VH_M_descending_aorta');
+    expect(resolveSelectable('VH_M_pulmonary_artery_L')).toBe('VH_M_pulmonary_artery_L');
+    expect(textFor('VH_M_ascending_aorta')?.key).toBe('aorta');
+    expect(label('VH_M_left_anterior_descending_artery', 'en').text).toBe('Left anterior descending artery');
+  });
+  it('inspector list items exist', () => {
+    for (const g of LIST_GROUPS) for (const i of g.items) expect(manifest.structures[i], i).toBeDefined();
+  });
+});
+
+describe('blood path', () => {
+  it('follows body → right heart → lungs → left heart → aorta', () => {
+    expect(bloodPath.map((s) => s.id)).toEqual(['venaeCavae', 'rightAtrium', 'tricuspidValve', 'rightVentricle', 'pulmonaryValve', 'pulmonaryTrunk', 'pulmonaryArteries', 'lungs', 'pulmonaryVeins', 'leftAtrium', 'mitralValve', 'leftVentricle', 'aorticValve', 'ascendingAorta', 'aorticArch', 'descendingAorta', 'body']);
+  });
+  it('blood is oxygen-poor until the lungs and oxygen-rich after', () => {
+    const i = bloodPath.findIndex((s) => s.id === 'lungs');
+    expect(bloodPath.slice(0, i + 1).every((s) => s.blood === 'low')).toBe(true);
+    expect(bloodPath.slice(i + 1).every((s) => s.blood === 'high')).toBe(true);
+  });
+  it('every modelled step points at real meshes', () => {
+    for (const s of bloodPath) {
+      if (!s.modelled) { expect(s.at).toBeNull(); continue; }
+      expect(manifest.structures[s.at!]?.center, s.id).toBeTruthy();
+      for (const h of s.highlight) expect(meshesUnder(h).length, h).toBeGreaterThan(0);
+    }
+  });
+});

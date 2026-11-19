@@ -24,15 +24,17 @@ Verification method: files fetched from the primary host where reachable, otherw
 | File | Size | Notes |
 |---|---|---|
 | `VH_M_Heart.glb` | 4.07 MB | 14 meshes / 18 nodes, 164,119 triangles, 1 shared material. Chambers, valves, septum, papillary muscles. |
-| `VH_M_Blood_Vasculature.glb` | 7.44 MB | Great vessels + systemic vasculature (101 crosswalk rows). Not yet inspected. |
+| `VH_M_Blood_Vasculature.glb` | 7.44 MB | 153 nodes / 104 meshes. Subtree `VH_M_blood_vasculature_of_heart` (used in M1): aorta (ascending, arch, branches, descending), pulmonary trunk + L/R pulmonary arteries, 4 pulmonary veins, venae cavae, brachiocephalic veins, coronary arteries and cardiac veins. Same coordinate frame as the heart file (verified: no placement transform needed). |
 | `VH_M_Lung.glb` | 6.36 MB | Lungs, lobes, bronchi (102 crosswalk rows). Not yet inspected. |
 | Female equivalents | — | `VH_F_Heart`, `VH_F_Lungs`, `VH_F_Blood_Vasculature` exist. |
 
 - **Coverage gaps / issues found**
-  - The heart GLB contains **no great vessels** (no aorta, pulmonary trunk, venae cavae, pulmonary veins) and **no coronary arteries**, although the crosswalk lists ~50 such rows under `VH_M_Heart`. They must come from `VH_M_Blood_Vasculature.glb` (to inspect in M1).
+  - (Resolved in M1 by adding the vasculature subtree.) The heart GLB contains **no great vessels** (no aorta, pulmonary trunk, venae cavae, pulmonary veins) and **no coronary arteries**, although the crosswalk lists ~50 such rows under `VH_M_Heart`. They must come from `VH_M_Blood_Vasculature.glb` (to inspect in M1).
   - Heart model is v1.2 (2022); newer HRA releases (v1.4, v2.0) re-reference the same heart model.
   - Chamber meshes are closed solids, not hollow lumens — the blood-path animation must run along a curve through chamber centroids, not inside a modelled lumen.
-  - Crosswalk quality: papillary muscles use FMA IDs; `VH_M_left_anterior_descending_artery` is labelled "Anterior descending branch of left *pulmonary* artery" (FMA:8636) — apparent error. We will record corrections in our manifest, never edit upstream silently.
+  - Crosswalk rows for heart vessels are filed under model ID `VH_M_Heart` although the meshes live in `VH_M_Blood_Vasculature`; the manifest builder matches by node name.
+  - FMA-only rows are resolved to Uberon through Uberon's own `xref: FMA:` lines (10 structures, e.g. SVC → UBERON:0001585); no hand mapping.
+  - Crosswalk quality: papillary muscles use FMA IDs; `VH_M_left_anterior_descending_artery` is labelled "Anterior descending branch of left *pulmonary* artery" (FMA:8636) — apparent error, still present in v1.4 and v2.0 (male and female). Corrected in our manifest via `packages/anatomy-manifest/overrides.json` → UBERON:8600102; issue text for upstream in `docs/upstream/hubmap-crosswalk-lad-issue.md`.
   - Single material for all meshes → we assign our own materials (allowed; recorded as a change in SOURCES.md).
   - Organ coverage: ~30 organs, no full skeleton/muscle system (only vertebrae, pelvis, knees, ligaments). Skeletal/muscular layers (M4) will need another source (see §4).
 

@@ -1,0 +1,67 @@
+{
+  "app": { "title": "HUMAN ATLAS", "subtitle": "Kalp · Milestone 1", "skip": "Ana içeriğe geç" },
+  "nav": { "atlas": "Atlas", "credits": "Kaynaklar ve katkılar" },
+  "lang": { "label": "Dil", "tr": "TR", "en": "EN" },
+  "disclaimer": "Yalnızca eğitim amaçlıdır. Tıbbi tavsiye ya da tanı aracı değildir. Gerçek hasta verisi kullanılmaz.",
+  "loading": "3B model yükleniyor…",
+  "scenario": {
+    "title": "Senaryo",
+    "rest": "Dinlenme",
+    "running": "Koşu (yoğun egzersiz)",
+    "walkingNote": "Yürüme senaryosu, doğrulanmış ikinci bir kaynak bulunana kadar eklenmedi."
+  },
+  "measure": {
+    "title": "Fizyoloji motoru",
+    "hr": "Kalp hızı", "sv": "Atım hacmi", "co": "Kalp debisi", "cycle": "Kalp döngüsü süresi",
+    "ref": "Kaynak", "derived": "türetilmiş", "range": "aralık", "beat": "Atım göstergesi"
+  },
+  "layers": { "title": "Katmanlar", "heart": "Kalp", "greatVessels": "Büyük damarlar", "coronaryVessels": "Koroner damarlar", "flow": "Kan yolu animasyonu" },
+  "flow": {
+    "title": "Kan yolu",
+    "current": "Şu anki adım",
+    "timing": "Şematik zamanlama: her kalp atışında bir adım ({{s}} s). Gerçek akış süreleri değildir.",
+    "pause": "Duraklat", "play": "Oynat",
+    "notModelled": "modelde yok",
+    "lowO2": "oksijeni az kan", "highO2": "oksijeni zengin kan",
+    "steps": {
+      "venaeCavae": "Ana toplardamarlar (vücuttan dönüş)",
+      "rightAtrium": "Sağ kulakçık", "tricuspidValve": "Triküspit kapak", "rightVentricle": "Sağ karıncık",
+      "pulmonaryValve": "Pulmoner kapak", "pulmonaryTrunk": "Pulmoner gövde", "pulmonaryArteries": "Pulmoner arterler",
+      "lungs": "Akciğerler (Milestone 2)", "pulmonaryVeins": "Pulmoner venler", "leftAtrium": "Sol kulakçık",
+      "mitralValve": "Mitral kapak", "leftVentricle": "Sol karıncık", "aorticValve": "Aort kapağı",
+      "ascendingAorta": "Çıkan aort", "aorticArch": "Aort kavsi", "descendingAorta": "İnen aort", "body": "Vücut dokuları"
+    }
+  },
+  "list": { "title": "Yapılar", "chambers": "Boşluklar", "valves": "Kapaklar ve kaslar", "greatVessels": "Büyük damarlar", "coronaryVessels": "Koroner damarlar" },
+  "inspector": {
+    "title": "Yapı inceleyici",
+    "empty": "3B modelde ya da listede bir yapıya tıklayın.",
+    "close": "Seçimi kaldır",
+    "ontology": "Ontoloji kimliği",
+    "noUberon": "Uberon karşılığı yok (kaynaktaki kimlik: {{id}})",
+    "noId": "Kaynakta ontoloji kimliği yok",
+    "via": { "hra-crosswalk": "HRA eşleme tablosu", "uberon-xref": "Uberon çapraz başvurusu ({{x}})", "override": "Belgelenmiş düzeltme" },
+    "overrideNote": "Kaynak eşleme düzeltildi: {{reason}}",
+    "definition": "Uberon tanımı (İngilizce)",
+    "partOf": "Parçası olduğu yapı",
+    "parts": "Parçaları",
+    "neighbors": "Komşu yapılar",
+    "neighborsNote": "Modelde yüzeyleri {{mm}} mm'den yakın olan yapılar (geometriden hesaplandı).",
+    "function": "İşlevi",
+    "blood": "Taşıdığı kan",
+    "systems": "İlgili sistemler",
+    "cardiovascular": "Dolaşım sistemi",
+    "source": "Kaynak",
+    "textStatus": { "unreviewed": "uzman incelemesi yapılmadı", "reviewed": "uzman incelemesinden geçti" },
+    "termReview": "Türkçe terim uzman incelemesi bekliyor",
+    "noText": "Bu yapı için henüz açıklama metni yok."
+  },
+  "credits": {
+    "title": "Kaynaklar ve katkılar",
+    "intro": "Bu uygulamadaki her 3B model, eşleme, ontoloji ve sayısal değer aşağıdaki kaynaklardan gelir.",
+    "license": "Lisans", "changes": "Yapılan değişiklikler", "attribution": "Atıf",
+    "texts": "Açıklama metinleri projeye aittir; olgular OpenStax A&P 2e §19.1'e dayanır ve henüz uzman incelemesinden geçmemiştir.",
+    "terms": "Türkçe anatomi terimleri geliştirme sırasında çevrilmiştir ve yayından önce uzman incelemesi gerektirir.",
+    "back": "Atlasa dön"
+  }
+}

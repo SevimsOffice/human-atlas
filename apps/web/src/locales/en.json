@@ -1,0 +1,67 @@
+{
+  "app": { "title": "HUMAN ATLAS", "subtitle": "Heart · Milestone 1", "skip": "Skip to main content" },
+  "nav": { "atlas": "Atlas", "credits": "Sources & credits" },
+  "lang": { "label": "Language", "tr": "TR", "en": "EN" },
+  "disclaimer": "Educational only. Not medical advice and not a diagnostic tool. No real patient data is used.",
+  "loading": "Loading 3D model…",
+  "scenario": {
+    "title": "Scenario",
+    "rest": "Rest",
+    "running": "Running (vigorous exercise)",
+    "walkingNote": "Walking is not included until a second verified source is found."
+  },
+  "measure": {
+    "title": "Physiology engine",
+    "hr": "Heart rate", "sv": "Stroke volume", "co": "Cardiac output", "cycle": "Cardiac cycle duration",
+    "ref": "Source", "derived": "derived", "range": "range", "beat": "Beat indicator"
+  },
+  "layers": { "title": "Layers", "heart": "Heart", "greatVessels": "Great vessels", "coronaryVessels": "Coronary vessels", "flow": "Blood path animation" },
+  "flow": {
+    "title": "Blood path",
+    "current": "Current step",
+    "timing": "Schematic timing: one step per heartbeat ({{s}} s). Not real transit times.",
+    "pause": "Pause", "play": "Play",
+    "notModelled": "not in model",
+    "lowO2": "oxygen-poor blood", "highO2": "oxygen-rich blood",
+    "steps": {
+      "venaeCavae": "Venae cavae (return from body)",
+      "rightAtrium": "Right atrium", "tricuspidValve": "Tricuspid valve", "rightVentricle": "Right ventricle",
+      "pulmonaryValve": "Pulmonary valve", "pulmonaryTrunk": "Pulmonary trunk", "pulmonaryArteries": "Pulmonary arteries",
+      "lungs": "Lungs (Milestone 2)", "pulmonaryVeins": "Pulmonary veins", "leftAtrium": "Left atrium",
+      "mitralValve": "Mitral valve", "leftVentricle": "Left ventricle", "aorticValve": "Aortic valve",
+      "ascendingAorta": "Ascending aorta", "aorticArch": "Aortic arch", "descendingAorta": "Descending aorta", "body": "Body tissues"
+    }
+  },
+  "list": { "title": "Structures", "chambers": "Chambers", "valves": "Valves and muscles", "greatVessels": "Great vessels", "coronaryVessels": "Coronary vessels" },
+  "inspector": {
+    "title": "Structure inspector",
+    "empty": "Click a structure in the 3D model or in the list.",
+    "close": "Clear selection",
+    "ontology": "Ontology ID",
+    "noUberon": "No Uberon match (source ID: {{id}})",
+    "noId": "No ontology ID in source",
+    "via": { "hra-crosswalk": "HRA crosswalk", "uberon-xref": "Uberon cross-reference ({{x}})", "override": "Documented correction" },
+    "overrideNote": "Source mapping corrected: {{reason}}",
+    "definition": "Uberon definition",
+    "partOf": "Part of",
+    "parts": "Parts",
+    "neighbors": "Neighbouring structures",
+    "neighborsNote": "Structures whose surfaces are within {{mm}} mm in the model (computed from geometry).",
+    "function": "Function",
+    "blood": "Blood carried",
+    "systems": "Related systems",
+    "cardiovascular": "Cardiovascular system",
+    "source": "Source",
+    "textStatus": { "unreviewed": "not yet expert-reviewed", "reviewed": "expert-reviewed" },
+    "termReview": "Turkish term awaiting expert review",
+    "noText": "No explanatory text for this structure yet."
+  },
+  "credits": {
+    "title": "Sources & credits",
+    "intro": "Every 3D model, mapping, ontology term and number in this app comes from the sources below.",
+    "license": "License", "changes": "Changes made", "attribution": "Attribution",
+    "texts": "Explanatory texts are the project's own wording; facts are cited to OpenStax A&P 2e §19.1 and have not yet been expert-reviewed.",
+    "terms": "Turkish anatomical terms were translated during development and need expert review before public release.",
+    "back": "Back to atlas"
+  }
+}

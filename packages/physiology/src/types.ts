@@ -1,0 +1,19 @@
+/** A value taken from a cited reference. `ref` must exist in docs/PHYSIOLOGY_MODEL.md. */
+export interface RefValue {
+  readonly value: number;
+  readonly unit: string;
+  readonly ref: ReferenceId;
+  /** Quote anchor in the reference, so a reviewer can find the sentence. */
+  readonly quote: string;
+  readonly range?: readonly [number, number];
+}
+
+/** A value computed by a named formula from other values. Never typed in by hand. */
+export interface DerivedValue {
+  readonly value: number;
+  readonly unit: string;
+  readonly formula: FormulaId;
+}
+
+export type ReferenceId = 'OSX-19.4';
+export type FormulaId = 'CO=HR*SV' | 'T=60/HR';
