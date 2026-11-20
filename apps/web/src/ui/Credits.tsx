@@ -33,7 +33,7 @@ export function Credits() {
         </ul>
       </section>
       <p className="mt-6 text-sm">{t('credits.texts')}</p>
-      <p className="mt-2 text-sm">{t('credits.terms')}</p>
+      <p className="mt-2 rounded-sm border border-amber-300 bg-amber-50 px-2 py-1 text-sm" data-testid="terms-review-note">{t('credits.terms')}</p>
       <p className="mt-6 border-t border-line pt-3"><PoweredBy testId="credits-powered-by" /></p>
       <button onClick={() => setView('atlas')} className="mt-6 rounded-sm border border-line bg-white px-3 py-1.5 text-sm hover:bg-paper">← {t('credits.back')}</button>
     </main>

@@ -5,10 +5,10 @@ import bloodPathJson from '../../../content/blood-path.json';
 
 export * from './sources';
 
-export type Layer = 'heart' | 'greatVessels' | 'coronaryVessels' | 'lungs' | 'airways' | 'urinary' | 'digestive' | 'lymphatic' | 'nervous' | 'skeletal';
+export type Layer = 'heart' | 'greatVessels' | 'coronaryVessels' | 'lungs' | 'airways' | 'urinary' | 'digestive' | 'lymphatic' | 'nervous' | 'skeletal' | 'skin';
 
 /** Layers grouped by body system (Milestone 4 overview). */
-export const SYSTEM_LAYERS: { system: 'cardiovascular' | 'respiratory' | 'urinary' | 'digestive' | 'lymphatic' | 'nervous' | 'skeletal'; layers: Layer[] }[] = [
+export const SYSTEM_LAYERS: { system: 'cardiovascular' | 'respiratory' | 'urinary' | 'digestive' | 'lymphatic' | 'nervous' | 'skeletal' | 'integumentary'; layers: Layer[] }[] = [
   { system: 'cardiovascular', layers: ['heart', 'greatVessels', 'coronaryVessels'] },
   { system: 'respiratory', layers: ['lungs', 'airways'] },
   { system: 'urinary', layers: ['urinary'] },
@@ -16,6 +16,7 @@ export const SYSTEM_LAYERS: { system: 'cardiovascular' | 'respiratory' | 'urinar
   { system: 'lymphatic', layers: ['lymphatic'] },
   { system: 'nervous', layers: ['nervous'] },
   { system: 'skeletal', layers: ['skeletal'] },
+  { system: 'integumentary', layers: ['skin'] },
 ];
 export type Lang = 'tr' | 'en';
 export type Blood = 'low' | 'high';
@@ -111,4 +112,5 @@ export const LIST_GROUPS: { id: string; layer: Layer; items: string[] }[] = [
   { id: 'lymphatic', layer: 'lymphatic', items: ['VH_M_spleen'] },
   { id: 'nervous', layer: 'nervous', items: ['VH_M_spinal_cord'] },
   { id: 'skeletal', layer: 'skeletal', items: ['VH_M_pelvis', 'VH_M_sacrum', 'VH_M_coccyx', 'VH_M_femur_R', 'VH_M_femur_L', 'VH_M_patella_R', 'VH_M_patella_L', 'VH_M_tibia_R', 'VH_M_tibia_L', 'VH_M_fibula_R', 'VH_M_fibula_L'] },
+  { id: 'skin', layer: 'skin', items: ['VH_M_skin'] },
 ];

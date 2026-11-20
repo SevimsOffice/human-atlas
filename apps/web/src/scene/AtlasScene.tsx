@@ -4,6 +4,7 @@ import { CameraRig } from './CameraRig';
 import { DEFAULT_VIEW, STAGE_Y } from '../lib/camera';
 import { HeartModels } from './HeartModels';
 import { BloodFlow } from './BloodFlow';
+import { SceneProbe } from './SceneProbe';
 import { useAtlas } from '../store';
 import { softwareRendering, SOFTWARE_FRAME_GAP_MS } from '../lib/renderProfile';
 
@@ -49,6 +50,7 @@ export function AtlasScene() {
         <BloodFlow />
       </Suspense>
       <CameraRig />
+      <SceneProbe />
     </Canvas>
   );
 }
