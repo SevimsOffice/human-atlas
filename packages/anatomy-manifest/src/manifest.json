@@ -104,6 +104,12 @@
    "sourceId": "HRA-KNEE-R-M",
    "hraId": "VH_M_Knee_R",
    "layer": "skeletal"
+  },
+  {
+   "file": "skin.glb",
+   "sourceId": "HRA-SKIN-M",
+   "hraId": "VH_M_Skin",
+   "layer": "skin"
   }
  ],
  "structures": {
@@ -3345,7 +3351,9 @@
     0.3994,
     0.0868
    ],
-   "neighbors": []
+   "neighbors": [
+    "VH_M_skin"
+   ]
   },
   "VH_M_fibula_R": {
    "name": "VH_M_fibula_R",
@@ -11608,7 +11616,8 @@
     0.0736
    ],
    "neighbors": [
-    "VH_M_sigmoid_colon"
+    "VH_M_sigmoid_colon",
+    "VH_M_skin"
    ]
   },
   "VH_M_renal_column_L": {
@@ -15715,6 +15724,47 @@
     "VH_M_seventh_thoracic_spinal_cord_segment"
    ]
   },
+  "VH_M_skin": {
+   "name": "VH_M_skin",
+   "model": "skin.glb",
+   "sourceId": "HRA-SKIN-M",
+   "layer": "skin",
+   "parent": null,
+   "children": [],
+   "isMesh": true,
+   "crosswalk": {
+    "label": "skin of body",
+    "id": "UBERON:0002097"
+   },
+   "override": null,
+   "uberon": {
+    "id": "UBERON:0002097",
+    "via": "hra-crosswalk",
+    "label": "skin of body",
+    "definition": "The organ covering the body that consists of the dermis and epidermis.",
+    "partOf": [
+     {
+      "id": "UBERON:0002199",
+      "label": "integument"
+     }
+    ]
+   },
+   "center": [
+    -0.0003,
+    0.0001,
+    -0.0025
+   ],
+   "size": [
+    1.0466,
+    1.8295,
+    0.3162
+   ],
+   "neighbors": [
+    "VH_M_fibula_L",
+    "VH_M_rectum",
+    "VH_M_tibia_R"
+   ]
+  },
   "VH_M_small_cardiac_vein": {
    "name": "VH_M_small_cardiac_vein",
    "model": "heart-vessels.glb",
@@ -16447,7 +16497,8 @@
     "VH_M_articular_cartilage_of_knee_R",
     "VH_M_distal_most_point_of_medial_condyle_of_femur_R",
     "VH_M_lateral_condyle_of_femur_frontal_R",
-    "VH_M_meniscus_R"
+    "VH_M_meniscus_R",
+    "VH_M_skin"
    ]
   },
   "VH_M_trachea": {

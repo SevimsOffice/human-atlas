@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "HUMAN ATLAS",
-    "subtitle": "Vücut sistemleri · Milestone 5",
+    "subtitle": "Vücut sistemleri · v1.0",
     "skip": "Ana içeriğe geç"
   },
   "nav": {
@@ -19,7 +19,7 @@
     "title": "Senaryo",
     "rest": "Dinlenme",
     "running": "Koşu (yoğun egzersiz)",
-    "walkingNote": "Yürüme senaryosu, doğrulanmış ikinci bir kaynak bulunana kadar eklenmedi.",
+    "walkingNote": "Yürüme senaryosu yok: kalp ve solunum değerlerini sağlıklı yetişkinlerde aynı yürüme yoğunluğunda birlikte veren tek bir kaynak bulununca eklenecek.",
     "short": {
       "rest": "Dinlenme",
       "running": "Koşu"
@@ -48,7 +48,8 @@
     "digestive": "Sindirim organları",
     "lymphatic": "Dalak",
     "nervous": "Omurilik",
-    "skeletal": "Leğen ve bacak kemikleri"
+    "skeletal": "Leğen ve bacak kemikleri",
+    "skin": "Deri (vücut dış hattı)"
   },
   "flow": {
     "title": "Kan yolu",
@@ -91,7 +92,8 @@
     "digestive": "Sindirim",
     "lymphatic": "Lenf",
     "nervous": "Sinir",
-    "skeletal": "İskelet (kısmi)"
+    "skeletal": "İskelet (kısmi)",
+    "skin": "Deri"
   },
   "inspector": {
     "title": "Yapı inceleyici",
@@ -169,7 +171,7 @@
     "flowNote": "Her organın tablo sütunundaki payı × motorun kalp debisi (türetilmiş). Koşu değerleri OpenStax A&P 2e §20.4 tablosunun maksimal egzersiz sütununa dayanır.",
     "compareTitle": "Dinlenme → koşu",
     "runShort": "Koşu",
-    "compareNote": "Tüm değerler motordan; oranlar türetilmiştir. Kas modelleri Milestone 4'te.",
+    "compareNote": "Tüm değerler motordan; oranlar türetilmiştir. Kas modeli henüz eklenmedi.",
     "rows": {
       "heartRate": "Kalp hızı",
       "strokeVolume": "Atım hacmi",
@@ -205,7 +207,8 @@
     "digestive": "Sindirim sistemi",
     "lymphatic": "Lenf sistemi",
     "nervous": "Sinir sistemi",
-    "skeletal": "İskelet sistemi"
+    "skeletal": "İskelet sistemi",
+    "integumentary": "Örtü sistemi (deri)"
   },
   "section": {
     "title": "Kesit",

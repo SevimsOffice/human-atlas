@@ -422,3 +422,41 @@ test('mission: what changes when you start running — scenario switches and val
   await page.getByTestId('lang-en').click();
   await expect(page.getByTestId('mission-feedback')).toContainText('12.8-fold');
 });
+
+// ---- v1.0: full body ----
+test('opens on the whole body (HRA skin outline), then glides to heart and lungs; reset frames the body again', async ({ page }) => {
+  await ready(page);
+  await expect(page.getByTestId('layer-skin')).toBeChecked();
+  const stage = page.getByTestId('stage');
+  const whole = await cam(page);
+  expect(whole.distance).toBeGreaterThan(2.5); // ≈1.83 m tall body fits the view
+  await expect(stage).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  const close = await cam(page);
+  expect(close.distance).toBeLessThan(1.2);
+  expect(Number(close.target.split(',')[1])).toBeGreaterThan(0.35); // chest height (heart ≈ 0.42–0.53 m)
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 10_000 }).toBeGreaterThan(2.5);
+  // the skin is a real structure from the HRA (Uberon "skin of body"), selectable from the list
+  await page.getByRole('button', { name: /^Deri/ }).click();
+  await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0002097');
+  await expect(page.getByTestId('inspector-source')).toContainText('Skin, Male v1.2');
+});
+
+test('hidden layers are lazy-loaded: the skeleton models are fetched only when the layer is switched on', async ({ page }) => {
+  const fetched: string[] = [];
+  page.on('request', (r) => { if (r.url().endsWith('.glb')) fetched.push(r.url().split('/').pop()!); });
+  await ready(page);
+  expect(fetched).toContain('skin.glb');
+  expect(fetched).toContain('heart.glb');
+  expect(fetched).not.toContain('pelvis.glb');
+  await page.getByTestId('layer-skeletal').check();
+  await expect.poll(() => fetched.includes('pelvis.glb')).toBe(true);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-ready', 'true', { timeout: 60_000 });
+});
+
+test('the Sources page keeps the Turkish-terms expert-review note visible', async ({ page }) => {
+  await ready(page);
+  await page.getByTestId('nav-credits').click();
+  await expect(page.getByTestId('terms-review-note')).toContainText('uzman incelemesi');
+  await expect(page.getByText(/Skin, Male v1\.2/).first()).toBeVisible();
+});

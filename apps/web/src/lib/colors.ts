@@ -10,6 +10,7 @@ export const COLORS = {
   lymphatic: '#8d85b3', // muted violet
   nervous: '#d6a03c', // amber (spec)
   skeletal: '#e6dfcc', // ivory (spec)
+  skin: '#c9bcb0', // neutral translucent outline
   valve: '#d8d0bf',
   bloodLow: '#4b6a8c',
   bloodHigh: '#a8323a',
@@ -21,7 +22,7 @@ export const COLORS = {
 export function colorFor(s: Structure): string {
   if (s.layer === 'lungs') return COLORS.lung;
   if (s.layer === 'airways') return COLORS.airway;
-  if (s.layer === 'urinary' || s.layer === 'digestive' || s.layer === 'lymphatic' || s.layer === 'nervous' || s.layer === 'skeletal') return COLORS[s.layer];
+  if (s.layer === 'urinary' || s.layer === 'digestive' || s.layer === 'lymphatic' || s.layer === 'nervous' || s.layer === 'skeletal' || s.layer === 'skin') return COLORS[s.layer];
   if (/valve/.test(s.name)) return COLORS.valve;
   if (s.layer !== 'heart') {
     const blood = textFor(s.name)?.text.blood;

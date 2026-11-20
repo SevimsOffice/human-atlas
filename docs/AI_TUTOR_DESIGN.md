@@ -1,6 +1,6 @@
 # AI Tutor — Design (Milestone 6, Phase 0)
 
-Status: **draft for owner approval** · No code is written until this is approved.
+Status: **postponed** (owner decision 2026-11-20 — no tutor in v1.0, no API keys, no paid services). Kept as a future option.
 
 ## 1. Goal and non-goals
 

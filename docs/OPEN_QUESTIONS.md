@@ -12,6 +12,12 @@ Q13: running uses the "maximal exercise" column, labelled "based on the maximal 
 ## Decided 2026-11-19 (M4 approval)
 Q15: male/female switch later (ROADMAP milestone 9) · Q16: no share-alike assets; muscles chart-only with a note in the 3D view; owner allowed 3d.nih.gov + NCBI hosts (done, plus eutils.ncbi.nlm.nih.gov) · Q17: all 237 sub-structure terms translated (needs-expert-review).
 
+## Decided 2026-11-20 (v1.0 brief)
+AI tutor postponed (design kept: docs/AI_TUTOR_DESIGN.md) · camera mode dropped · full-body view: HRA has a CC BY whole-body skin (VH_M_Skin, HRA-SKIN-M), so no own silhouette was needed · NIH skeleton wanted as a non-clickable outline (see Q20).
+
+## Open (v1.0)
+- **Q20 NIH CT skeleton file.** The download host was added to the environment's allowed hosts, but the download was refused by the session's permission check, so the file is not here. File: `Skeleton.stl` (NIH 3D 3DPX-016838, CC BY), URL https://nih3d-v2-data-cln-media-prod.s3.amazonaws.com/497900/Skeleton.stl, 26,643,984 bytes (25.4 MiB, under 50 MB → no Git LFS needed). Upload: commit it to `data/external/nih3d-3DPX-016838/Skeleton.stl` with git on the command line or GitHub Desktop (the github.com web uploader stops at 25 MB). I then fit it to the HRA pelvis + femurs by a script and ship a compressed, non-clickable outline layer.
+
 ## Decided (M5 approval)
 Q18: no walking from mixed studies; add only when one source gives heart + breathing for healthy adults at the same intensity (ROADMAP note) · Q19: skip the NIH skeleton; keep HRA partial skeleton; revisit only for a segmented CC BY skeleton.
 

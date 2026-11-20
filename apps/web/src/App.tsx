@@ -18,6 +18,7 @@ import { PoweredBy } from './ui/PoweredBy';
 import { MissionCard, MissionList, MissionRunner } from './ui/Missions';
 import { sectionPlane } from './lib/section';
 import { boundsOf } from './lib/camera';
+import { modelsFor } from './lib/models';
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -47,7 +48,8 @@ function Header() {
 function Stage() {
   const { t } = useTranslation();
   const { active } = useProgress();
-  const loaded = useAtlas((s) => s.loadedModels.length === manifest.models.length);
+  // ready when every model of the visible layers is in the scene (hidden layers are lazy-loaded)
+  const loaded = useAtlas((s) => modelsFor(s.layers).every((f) => s.loadedModels.includes(f)));
   const hovered = useAtlas((s) => s.hovered);
   const section = useAtlas((s) => s.section);
   const layers = useAtlas((s) => s.layers);
