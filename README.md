@@ -13,9 +13,9 @@
 ![Exercise view: blood flow to each organ at rest and while running, from the physiology engine](docs/screenshots/exercise.png)
 
 ## What it does
-- **Whole body, then the organs inside it.** The atlas opens on a full male body (translucent skin outline) with the organs inside, then zooms in on the heart and lungs. *Görünümü sıfırla / Reset view* frames the full body again.
+- **Whole body, then the organs inside it.** The atlas opens on a full male body: every organ and the (partial) skeleton inside a very faint skin outline (10 % opacity, drawn last so it never hides anything), then zooms in on the heart and lungs. *Görünümü sıfırla / Reset view* frames the full body again.
 - **Click any structure** (in 3D or in the list) to see its Turkish and English name, its Uberon ontology ID, its body system, its neighbours, a short text and the 3D model it comes from. Double-click to fly to it.
-- **Body systems as layers:** heart, great and coronary vessels, lungs and airways, kidneys and urinary tract, liver, pancreas and intestines, spleen, spinal cord, pelvis and leg bones, and the skin outline. Layers that start hidden are only downloaded when you switch them on.
+- **Body systems as layers:** heart, great and coronary vessels, lungs and airways, kidneys and urinary tract, liver, pancreas and intestines, spleen, spinal cord, pelvis and leg bones, and the skin outline. All layers are on at start; the skin outline is loaded last so it never appears empty.
 - **Cross-section:** transverse, sagittal or coronal clipping plane with a slider.
 - **Blood path animation:** step by step through the heart and lungs, timed by the engine's heart rate.
 - **Rest ↔ running:** heart rate, stroke volume, cardiac output, breathing rate, tidal volume, ventilation, O₂ uptake and organ blood flow all change together; the breathing animation follows the engine's breathing rate.
@@ -52,11 +52,11 @@ No share-alike (CC BY-SA) assets are used. **A muscle model is not included yet*
 ## Built with
 React 19 · Vite 6 · TypeScript · Three.js + React Three Fiber + drei · Zustand · Tailwind CSS 4 · i18next · Vitest · Playwright · glTF-Transform + meshoptimizer · GitHub Actions + GitHub Pages.
 
-Models are converted by scripts, never by hand: `npm run data:download` fetches the HuBMAP files listed in [`scripts/models.config.json`](scripts/models.config.json), `npm run data:build` cleans, compresses (Meshopt) and writes the GLBs plus a generated manifest that links each mesh to its Uberon ID and source. The default scene is about 5 MB of models; hidden layers load on demand.
+Models are converted by scripts, never by hand: `npm run data:download` fetches the HuBMAP files listed in [`scripts/models.config.json`](scripts/models.config.json), `npm run data:build` cleans, compresses (Meshopt) and writes the GLBs plus a generated manifest that links each mesh to its Uberon ID and source. The default scene is about 5.7 MB of models (18 GLBs); any layer switched off by default would load on demand.
 
 ## Tests
 - **Vitest — 80 unit tests:** physiology engine (values, refs, quotes present in the model document, derived formulas), anatomy manifest integrity (every mesh has a registered source, Uberon IDs, Turkish terms, list groups), camera framing, cross-section, missions, animation timing, model lazy-loading.
-- **Playwright — 31 end-to-end tests** in a real browser (software WebGL): the full user journey — language switch, picking, inspector, layers, cross-section, scenarios, exercise chart, breathing, missions, full-body view and reset, lazy-loaded skeleton.
+- **Playwright — 32 end-to-end tests** in a real browser (software WebGL): the full user journey — language switch, picking, inspector, layers, cross-section, scenarios, exercise chart, breathing, missions, full-body view and reset, and a pixel test that switches each organ layer and the skeleton off in the default view and checks the picture really changes (so nothing is hidden by the skin).
 - Both run on every push in GitHub Actions before the site is deployed.
 
 ```bash

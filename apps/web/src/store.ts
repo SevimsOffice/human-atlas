@@ -46,7 +46,7 @@ export const useAtlas = create<AtlasState>((set) => ({
   scenario: 'rest',
   selected: null,
   // skeleton (pelvis + legs down to the knees) starts hidden so the first view frames the trunk organs
-  layers: { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true, urinary: true, digestive: true, lymphatic: true, nervous: true, skeletal: false, skin: true },
+  layers: { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true, urinary: true, digestive: true, lymphatic: true, nervous: true, skeletal: true, skin: true },
   section: { enabled: false, axis: 'coronal', t: 0.5 },
   setSection: (patch) => set((s) => ({ section: { ...s.section, ...patch } })),
   flowOn: true,

@@ -49,7 +49,7 @@ const ALL = ALL_LAYERS;
 /** Specimen stage (floor) just below the lowest structure of every model, so nothing sinks into it. */
 export const STAGE_Y = boundsOf(ALL_LAYERS)!.min[1] - 0.02;
 /** Initial view before the canvas size is known (16:10): the whole body. */
-export const DEFAULT_VIEW = fitView({ ...ALL, skeletal: false }, 1.6);
+export const DEFAULT_VIEW = fitView(ALL, 1.6);
 
 /** Layers framed by "reset view": always the whole body outline plus whatever else is visible. */
 export const bodyLayers = (layers: Partial<Record<Layer, boolean>>) => ({ ...layers, skin: true });

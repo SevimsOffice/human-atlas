@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import sharp from 'sharp';
 
 async function ready(page: Page) {
   await page.goto('./');
@@ -314,10 +315,9 @@ test('side panels: compact scenario control and one-line structure rows', async 
 });
 
 // ---- Milestone 4: remaining systems + cross-section ----
-test('body systems are layers: urinary, digestive, lymphatic and nervous on, skeleton off by default', async ({ page }) => {
+test('body systems are layers: urinary, digestive, lymphatic, nervous and skeleton on by default', async ({ page }) => {
   await ready(page);
-  for (const l of ['urinary', 'digestive', 'lymphatic', 'nervous']) await expect(page.getByTestId(`layer-${l}`)).toBeChecked();
-  await expect(page.getByTestId('layer-skeletal')).not.toBeChecked();
+  for (const l of ['urinary', 'digestive', 'lymphatic', 'nervous', 'skeletal']) await expect(page.getByTestId(`layer-${l}`)).toBeChecked();
   await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
   await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0004538');
   await expect(page.getByTestId('inspector-system')).toHaveText('Boşaltım sistemi');
@@ -328,15 +328,9 @@ test('body systems are layers: urinary, digestive, lymphatic and nervous on, ske
   await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0002240');
 });
 
-test('turning the skeleton on lazy-loads it; reset still frames the whole body', async ({ page }) => {
+test('the HuBMAP partial skeleton is shown by default; reset frames the whole body even with the skin off', async ({ page }) => {
   await ready(page);
   await page.getByTestId('layer-skin').uncheck();
-  await page.getByTestId('reset-view').click();
-  await page.waitForTimeout(1500);
-  const before = await cam(page);
-  expect(before.distance).toBeGreaterThan(2.5); // reset always frames the whole body outline
-  await page.getByTestId('layer-skeletal').check();
-  await expect(page.getByTestId('stage')).toHaveAttribute('data-ready', 'true', { timeout: 60_000 });
   await page.getByTestId('reset-view').click();
   await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
   await page.getByRole('button', { name: /^Sol uyluk kemiği/ }).click();
@@ -447,16 +441,70 @@ test('opens on the whole body (HRA skin outline), then glides to heart and lungs
   await expect(page.getByTestId('inspector-source')).toContainText('Skin, Male v1.2');
 });
 
-test('hidden layers are lazy-loaded: the skeleton models are fetched only when the layer is switched on', async ({ page }) => {
+test('the skin outline is requested only after every organ and bone model, so it never appears alone', async ({ page }) => {
   const fetched: string[] = [];
   page.on('request', (r) => { if (r.url().endsWith('.glb')) fetched.push(r.url().split('/').pop()!); });
   await ready(page);
-  expect(fetched).toContain('skin.glb');
-  expect(fetched).toContain('heart.glb');
-  expect(fetched).not.toContain('pelvis.glb');
-  await page.getByTestId('layer-skeletal').check();
-  await expect.poll(() => fetched.includes('pelvis.glb')).toBe(true);
-  await expect(page.getByTestId('stage')).toHaveAttribute('data-ready', 'true', { timeout: 60_000 });
+  for (const f of ['heart.glb', 'lungs.glb', 'liver.glb', 'pelvis.glb', 'knee-left.glb', 'skin.glb']) expect(fetched).toContain(f);
+  expect(fetched.at(-1)).toBe('skin.glb');
+});
+
+// Decodes a PNG screenshot into raw RGBA pixels.
+async function pixels(png: Buffer) {
+  const { data, info } = await sharp(png).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  return { data, w: info.width, h: info.height };
+}
+/** Number of pixels whose colour changed noticeably between two equally sized screenshots. */
+function changed(a: { data: Buffer }, b: { data: Buffer }) {
+  let n = 0;
+  for (let i = 0; i < a.data.length; i += 4) {
+    if (Math.abs(a.data[i] - b.data[i]) + Math.abs(a.data[i + 1] - b.data[i + 1]) + Math.abs(a.data[i + 2] - b.data[i + 2]) > 30) n++;
+  }
+  return n;
+}
+type Probe = Record<string, { shown: number; inView: number; minOpacity: number; maxOpacity: number; depthWrite: boolean; renderOrder: number }>;
+
+test('default full-body view: every organ layer and the skeleton are really drawn and the faint skin hides none of them', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  await page.getByTestId('layer-flow').uncheck(); // stop the moving blood cells so screenshots only differ by what we toggle
+  await page.getByTestId('reset-view').click(); // the default whole-body framing
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 10_000 }).toBeGreaterThan(2.5);
+  await page.waitForTimeout(1500);
+
+  const layers = ['heart', 'greatVessels', 'lungs', 'airways', 'urinary', 'digestive', 'lymphatic', 'nervous', 'skeletal'];
+  const probe = JSON.parse((await page.getByTestId('stage').getAttribute('data-scene'))!) as Probe;
+  for (const l of layers) {
+    expect(probe[l]?.shown, `${l} meshes shown`).toBeGreaterThan(0);
+    expect(probe[l]?.inView, `${l} meshes inside the view`).toBeGreaterThan(0);
+  }
+  // skin: very faint, never writes depth, drawn after everything else
+  expect(probe.skin.maxOpacity).toBeGreaterThanOrEqual(0.08);
+  expect(probe.skin.maxOpacity).toBeLessThanOrEqual(0.12);
+  expect(probe.skin.depthWrite).toBe(false);
+  for (const l of layers) expect(probe.skin.renderOrder, `skin drawn after ${l}`).toBeGreaterThan(probe[l].renderOrder);
+
+  // pixels: with the skin ON, switching each layer off must visibly change the picture
+  const canvas = page.locator('[data-testid=stage] canvas');
+  const shot = async () => pixels(await canvas.screenshot());
+  const measure = async (list: string[]) => {
+    const base = await shot();
+    const noise = Math.max(changed(base, await shot()), changed(base, await shot())); // remaining animation
+    for (const l of list) {
+      await page.getByTestId(`layer-${l}`).uncheck();
+      await page.waitForTimeout(700);
+      const diff = changed(base, await shot());
+      expect(diff, `${l}: changed pixels vs noise ${noise}`).toBeGreaterThan(noise * 2 + 60); // ≥ 60 changed pixels: thin structures (spinal cord) cover ~170 px at full-body scale
+      await page.getByTestId(`layer-${l}`).check();
+      await page.waitForTimeout(500);
+    }
+  };
+  // the lungs breathe (they are the only moving model): check them first, then hide them so the rest is measured without that motion
+  await measure(['lungs']);
+  await page.getByTestId('layer-lungs').uncheck();
+  await page.waitForTimeout(700);
+  await measure(layers.filter((l) => l !== 'lungs'));
 });
 
 test('the Sources page keeps the Turkish-terms expert-review note visible', async ({ page }) => {
