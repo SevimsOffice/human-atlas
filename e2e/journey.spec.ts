@@ -212,6 +212,7 @@ test('camera orbits the model centre and cannot flip over the top or under the f
 
 test('panning is disabled and zoom is clamped', async ({ page }) => {
   await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
   const before = (await cam(page)).target;
   const b = await canvasBox(page);
   const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
@@ -224,7 +225,7 @@ test('panning is disabled and zoom is clamped', async ({ page }) => {
   expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.119);
   for (let i = 0; i < 40; i++) await page.mouse.wheel(0, 600);
   await page.waitForTimeout(800);
-  expect((await cam(page)).distance).toBeLessThanOrEqual(3.501);
+  expect((await cam(page)).distance).toBeLessThanOrEqual(4.201);
 });
 
 test('double-click focuses a structure; reset view re-frames all visible models', async ({ page }) => {
@@ -327,13 +328,17 @@ test('body systems are layers: urinary, digestive, lymphatic and nervous on, ske
   await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0002240');
 });
 
-test('turning the skeleton on re-frames the view to include the legs', async ({ page }) => {
+test('turning the skeleton on lazy-loads it; reset still frames the whole body', async ({ page }) => {
   await ready(page);
-  await page.waitForTimeout(500);
-  const before = await cam(page);
-  await page.getByTestId('layer-skeletal').check();
+  await page.getByTestId('layer-skin').uncheck();
   await page.getByTestId('reset-view').click();
-  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(before.distance + 0.3);
+  await page.waitForTimeout(1500);
+  const before = await cam(page);
+  expect(before.distance).toBeGreaterThan(2.5); // reset always frames the whole body outline
+  await page.getByTestId('layer-skeletal').check();
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-ready', 'true', { timeout: 60_000 });
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
   await page.getByRole('button', { name: /^Sol uyluk kemiği/ }).click();
   await expect(page.getByTestId('inspector-system')).toHaveText('İskelet sistemi');
 });

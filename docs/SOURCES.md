@@ -2,6 +2,8 @@
 
 Every shipped or downloaded asset gets one row **before** it is used. The in-app "Sources & credits" page lists the same entries (`packages/anatomy-manifest/src/sources.ts`); a test fails if an ID used by the app is missing here.
 
+Compression note (v1.0, 2026-11-20): all HRA models are encoded with gltf-transform `meshopt` at level **high** (adds Meshopt vertex filters, e.g. octahedral normals) instead of medium: 8.1 MB → 5.7 MB in total. Geometry and node names unchanged; the manifest is built from the raw files.
+
 | ID | Asset | Type | Source URL | License | Attribution / citation | Changes made | Used in | Status |
 |---|---|---|---|---|---|---|---|---|
 | HRA-HEART-M | VH_M_Heart.glb (Heart, Male v1.2), SHA-256 b1237e7e… | 3D model (GLB) | https://cdn.humanatlas.io/hra-releases/v1.3/models/VH_M_Heart.glb (mirror: github.com/hubmapconsortium/ccf-releases v1.3/models) | CC BY 4.0 | Kristen Browne; Heidi Schlehlein. 2022. 3D Reference Organ for Heart, Male v1.2. HuBMAP. doi:10.48539/HBM373.VSTV.568 | prune + dedup + weld + Meshopt compression (quantized positions/normals) → `apps/web/public/models/heart.glb` (4.07 MB → ~1.0 MB). Node names unchanged. Materials replaced at runtime. | apps/web | shipped |
