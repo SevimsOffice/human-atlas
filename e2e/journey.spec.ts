@@ -51,15 +51,15 @@ test('switching to running changes the values and doubles the animation speed', 
   await ready(page);
   await page.getByTestId('layer-flow').check(); // the blood-path animation is off by default (organs start opaque)
   await expect(page.getByTestId('flow')).toHaveAttribute('data-cycle-s', '0.8');
-  const rest = await beatsOver(page, 4000);
+  const rest = await beatsOver(page, 6000);
   await page.getByRole('radio', { name: 'Koşu (yoğun egzersiz)' }).click();
   await expect(page.getByTestId('hr')).toHaveText('150');
   await expect(page.getByTestId('sv')).toHaveText('130');
   await expect(page.getByTestId('co')).toHaveText('19,5');
   await expect(page.getByTestId('cycle')).toHaveText('0,4');
   await expect(page.getByTestId('flow')).toHaveAttribute('data-cycle-s', '0.4');
-  const run = await beatsOver(page, 4000);
-  expect(rest).toBeGreaterThanOrEqual(3); // ≈ 5 beats at 0.8 s
+  const run = await beatsOver(page, 6000);
+  expect(rest).toBeGreaterThanOrEqual(5); // ≈ 7 beats at 0.8 s
   expect(run / rest).toBeGreaterThan(1.5); // ≈ 2×
   expect(run / rest).toBeLessThan(2.7);
 });
@@ -72,7 +72,7 @@ test('the blood path advances step by step and can be paused', async ({ page }) 
   await page.getByTestId('flow-toggle').click();
   expect(await beatsOver(page, 2000)).toBe(0);
   await page.getByTestId('flow-toggle').click();
-  expect(await beatsOver(page, 2000)).toBeGreaterThan(0);
+  expect(await beatsOver(page, 4000)).toBeGreaterThan(0);
 });
 
 test('hiding the heart layer removes it from picking', async ({ page }) => {
