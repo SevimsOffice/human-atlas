@@ -79,8 +79,9 @@ export function focusView(name: string, currentPosition: V3, currentTarget: V3):
   const s = manifest.structures[name];
   if (!s?.center || !s.size) return null;
   const extent = Math.max(...s.size);
-  const distance = clamp(extent * 2.8, CAMERA_LIMITS.minDistance, CAMERA_LIMITS.maxDistance);
   const dir = currentPosition.map((p, i) => p - currentTarget[i]) as V3;
   const len = Math.hypot(...dir) || 1;
+  // fly close: never farther away than the camera already is
+  const distance = clamp(Math.min(extent * 2.8, len), CAMERA_LIMITS.minDistance, CAMERA_LIMITS.maxDistance);
   return { target: s.center, position: s.center.map((c, i) => c + (dir[i] / len) * distance) as V3 };
 }

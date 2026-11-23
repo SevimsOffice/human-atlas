@@ -31,7 +31,7 @@ export function AtlasScene() {
     <Canvas
       camera={{ position: DEFAULT_VIEW.position, fov: 35, near: CAMERA_LIMITS.near, far: CAMERA_LIMITS.far }}
       dpr={softwareRendering ? 1 : [1, 2]}
-      gl={{ antialias: !softwareRendering }}
+      gl={{ antialias: !softwareRendering, stencil: true }}
       frameloop={softwareRendering ? 'demand' : 'always'}
       onPointerMissed={() => select(null)}
       aria-label="3D anatomy model"

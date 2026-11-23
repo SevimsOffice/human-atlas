@@ -6,9 +6,9 @@
 
 > Educational only. Not medical advice, not a diagnostic tool, no patient data.
 
-![Full body on load: translucent skin outline with the organs inside](docs/screenshots/full-body.png)
+![Default view: the whole body with opaque, colour-coded organs, the labelled pelvis and leg bones, a pale full skeleton and a faint skin outline](docs/screenshots/default-view.png)
 
-![After loading the camera glides to the heart and lungs; a red blood cell path runs through the heart](docs/screenshots/heart-lungs.png)
+![Heart up close: double-click flies in, the heart is isolated (everything else dimmed) and the inspector shows its Uberon ID and source](docs/screenshots/heart-close.png)
 
 ![Exercise view: blood flow to each organ at rest and while running, from the physiology engine](docs/screenshots/exercise.png)
 
@@ -60,8 +60,8 @@ React 19 · Vite 6 · TypeScript · Three.js + React Three Fiber + drei · Zusta
 Models are converted by scripts, never by hand: `npm run data:download` fetches the HuBMAP files listed in [`scripts/models.config.json`](scripts/models.config.json), `npm run data:build` cleans, compresses (Meshopt) and writes the GLBs plus a generated manifest that links each mesh to its Uberon ID and source. The default scene is about 5.7 MB of models (18 GLBs); any layer switched off by default would load on demand.
 
 ## Tests
-- **Vitest — 80 unit tests:** physiology engine (values, refs, quotes present in the model document, derived formulas), anatomy manifest integrity (every mesh has a registered source, Uberon IDs, Turkish terms, list groups), camera framing, cross-section, missions, animation timing, model lazy-loading.
-- **Playwright — 32 end-to-end tests** in a real browser (software WebGL): the full user journey — language switch, picking, inspector, layers, cross-section, scenarios, exercise chart, breathing, missions, full-body view and reset, and a pixel test that switches each organ layer and the skeleton off in the default view and checks the picture really changes (so nothing is hidden by the skin).
+- **Vitest — 86 unit tests:** physiology engine (values, refs, quotes present in the model document, derived formulas), anatomy manifest integrity (every mesh has a registered source, Uberon IDs, Turkish terms, list groups), camera framing, close-zoom and pan limits, click-to-orbit, appearance rules (opaque organs, faint skin, isolate), cross-section, missions, animation timing, model lazy-loading.
+- **Playwright — 35 end-to-end tests** in a real browser (software WebGL): the full user journey — language switch, picking, inspector, layers, cross-section, scenarios, exercise chart, breathing, missions, full-body view and reset, click-to-orbit and double-click close-ups, zoom limits (3 cm … 4.2 m), clamped panning, isolate / show all, hover outline, and a pixel test that switches each organ layer and the skeleton off in the default view and checks the picture really changes (so nothing is hidden by the skin).
 - Both run on every push in GitHub Actions before the site is deployed.
 
 ```bash

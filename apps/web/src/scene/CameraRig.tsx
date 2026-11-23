@@ -61,6 +61,15 @@ export function CameraRig() {
     return () => clearTimeout(timer);
   }, [ready, size]);
   const endIntro = () => { if (intro.current !== 'done') { intro.current = 'done'; setIntro('done'); } };
+  // any wheel / pointer input takes over from a running glide (reset, focus, intro)
+  const gl = useThree((s) => s.gl);
+  useEffect(() => {
+    const el = gl.domElement;
+    const takeOver = () => { goal.current = null; endIntro(); };
+    el.addEventListener('wheel', takeOver, { passive: true });
+    el.addEventListener('pointerdown', takeOver);
+    return () => { el.removeEventListener('wheel', takeOver); el.removeEventListener('pointerdown', takeOver); };
+  }, [gl]); // eslint-disable-line react-hooks/exhaustive-deps
   const request = useAtlas((s) => s.cameraRequest);
 
   useEffect(() => {
@@ -95,7 +104,7 @@ export function CameraRig() {
     const t = c.target.toArray() as V3, ct = clampTarget(t);
     if (ct.some((x, k) => x !== t[k])) { const d = v(ct).sub(c.target); c.target.add(d); camera.position.add(d); c.update(); }
     // hover outline: constant on-screen width at any zoom
-    outlineThickness.value = 0.0035 * camera.position.distanceTo(c.target);
+    outlineThickness.value = 0.004 * camera.position.distanceTo(c.target);
     publish(c, camera);
   });
 

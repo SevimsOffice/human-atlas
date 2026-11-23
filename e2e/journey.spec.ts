@@ -49,6 +49,7 @@ test('clicking the 3D model picks a structure', async ({ page }) => {
 
 test('switching to running changes the values and doubles the animation speed', async ({ page }) => {
   await ready(page);
+  await page.getByTestId('layer-flow').check(); // the blood-path animation is off by default (organs start opaque)
   await expect(page.getByTestId('flow')).toHaveAttribute('data-cycle-s', '0.8');
   const rest = await beatsOver(page, 4000);
   await page.getByRole('radio', { name: 'Koşu (yoğun egzersiz)' }).click();
@@ -65,6 +66,7 @@ test('switching to running changes the values and doubles the animation speed', 
 
 test('the blood path advances step by step and can be paused', async ({ page }) => {
   await ready(page);
+  await page.getByTestId('layer-flow').check(); // the blood-path animation is off by default (organs start opaque)
   const s0 = await page.getByTestId('flow').getAttribute('data-step');
   await expect(page.getByTestId('flow')).not.toHaveAttribute('data-step', s0!, { timeout: 5000 });
   await page.getByTestId('flow-toggle').click();
@@ -210,24 +212,6 @@ test('camera orbits the model centre and cannot flip over the top or under the f
     expect(polar).toBeGreaterThanOrEqual(11.4); // minPolar 0.2 rad
     expect(polar).toBeLessThanOrEqual(97.3); // maxPolar 0.54π
   }
-});
-
-test('panning is disabled and zoom is clamped', async ({ page }) => {
-  await ready(page);
-  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
-  const before = (await cam(page)).target;
-  const b = await canvasBox(page);
-  const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
-  await page.mouse.move(cx, cy); await page.mouse.down({ button: 'right' });
-  await page.mouse.move(cx + 200, cy + 100, { steps: 8 }); await page.mouse.up({ button: 'right' });
-  await page.waitForTimeout(500);
-  expect((await cam(page)).target).toBe(before);
-  for (let i = 0; i < 25; i++) await page.mouse.wheel(0, -400);
-  await page.waitForTimeout(800);
-  expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.119);
-  for (let i = 0; i < 40; i++) await page.mouse.wheel(0, 600);
-  await page.waitForTimeout(800);
-  expect((await cam(page)).distance).toBeLessThanOrEqual(4.201);
 });
 
 test('double-click focuses a structure; reset view re-frames all visible models', async ({ page }) => {
@@ -534,21 +518,30 @@ test('click orbits around the clicked structure; double-click flies close; reset
   const picked = (await page.getByTestId('inspector').getAttribute('data-structure'))!;
   const c = MANIFEST.structures[picked].center!;
   await expect.poll(async () => Math.hypot(...(await targetOf(page)).map((v, i) => v - c[i])), { timeout: 8000 }).toBeLessThan(0.002);
-  expect((await cam(page)).distance).toBeLessThan(0.6);
+  expect((await cam(page)).distance).toBeLessThanOrEqual(before.distance + 0.001); // never farther away
   await page.getByTestId('reset-view').click();
   await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
 });
 
 test('zoom goes down to 3 cm and no further, out to the limit; panning is clamped to the body', async ({ page }) => {
+  test.setTimeout(240_000); // each wheel step is rendered by the software rasterizer in CI
   await ready(page);
   await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
   const b = await canvasBox(page);
+  // fly close to a structure first, then wheel in (each wheel step zooms ~5 %) until the 3 cm limit holds
+  await page.mouse.dblclick(b.x + b.width / 2, b.y + b.height / 2);
+  await page.waitForTimeout(2000);
   await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
-  for (let i = 0; i < 60; i++) await page.mouse.wheel(0, -500);
-  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeLessThan(0.05);
+  for (let i = 0; i < 90 && (await cam(page)).distance > 0.0302; i++) await page.mouse.wheel(0, -500);
+  await page.waitForTimeout(800);
+  expect((await cam(page)).distance).toBeLessThan(0.035);
   expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.0299);
-  for (let i = 0; i < 80; i++) await page.mouse.wheel(0, 800);
-  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(3);
+  // out: from the whole-body view a few steps reach the outer limit
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2); // back over the 3D view (the click left it on the button)
+  for (let i = 0; i < 15; i++) await page.mouse.wheel(0, 800);
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(4.1);
   expect((await cam(page)).distance).toBeLessThanOrEqual(4.201);
   // right-drag far to the side: the target moves, but never beyond the body box + 15 cm
   await page.getByTestId('reset-view').click();
@@ -591,6 +584,7 @@ test('hovering a structure outlines it', async ({ page }) => {
   const before = await pixels(await canvas.screenshot());
   await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
   await expect(page.getByTestId('hover-label')).toBeVisible();
+  await expect(page.getByTestId('stage')).not.toHaveAttribute('data-outlined', '0');
   await page.waitForTimeout(800);
   const after = await pixels(await canvas.screenshot());
   // outline pixels: strongly blue (accent #1f6feb) where there were none before

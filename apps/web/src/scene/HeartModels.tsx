@@ -12,12 +12,22 @@ import { modelsFor } from '../lib/models';
 import { appearanceFor } from '../lib/appearance';
 import { softwareRendering } from '../lib/renderProfile';
 
-/** Inverted-hull hover outline: a back-face copy of the mesh pushed out along its normals, in the accent colour. */
+/**
+ * Hover outline (stencil): 1) a mask pass marks the hovered structure's pixels, 2) a copy pushed out along its
+ * normals is drawn on top of everything except those pixels → a clean contour, visible even behind other organs.
+ */
 export const outlineThickness = { value: 0.002 };
-const outlineMaterial = new THREE.MeshBasicMaterial({ color: COLORS.hover, side: THREE.BackSide });
+const maskMaterial = new THREE.MeshBasicMaterial({
+  colorWrite: false, depthWrite: false, depthTest: false, transparent: true, // transparent: sorted with the organs (which are), so it draws after them
+  stencilWrite: true, stencilRef: 1, stencilFunc: THREE.AlwaysStencilFunc, stencilZPass: THREE.ReplaceStencilOp,
+});
+const outlineMaterial = new THREE.MeshBasicMaterial({
+  color: COLORS.hover, depthWrite: false, depthTest: false, transparent: true,
+  stencilWrite: true, stencilRef: 1, stencilFunc: THREE.NotEqualStencilFunc, stencilZPass: THREE.KeepStencilOp,
+});
 outlineMaterial.onBeforeCompile = (shader) => {
   shader.uniforms.uThickness = outlineThickness;
-  shader.vertexShader = `uniform float uThickness;\n${shader.vertexShader}`.replace('#include <begin_vertex>', '#include <begin_vertex>\ntransformed += normalize(objectNormal) * uThickness;');
+  shader.vertexShader = `uniform float uThickness;\n${shader.vertexShader}`.replace('#include <project_vertex>', '#include <project_vertex>\nmvPosition.xyz += normalize(normalMatrix * normal) * uThickness; // view space: metres, independent of mesh quantization\ngl_Position = projectionMatrix * mvPosition;');
 };
 const noRaycast = () => {};
 
@@ -81,7 +91,7 @@ function Model({ file }: { file: string }) {
 
   // One material per mesh so each structure can be highlighted independently.
   const meshes = useMemo(() => {
-    const list: { mesh: THREE.Mesh; name: string; mat: THREE.MeshStandardMaterial; base: THREE.Color; outline: THREE.Mesh | null }[] = [];
+    const list: { mesh: THREE.Mesh; name: string; mat: THREE.MeshStandardMaterial; base: THREE.Color; outline: THREE.Object3D | null }[] = [];
     const found: THREE.Object3D[] = [];
     scene.traverse((o) => { if ((o as THREE.Mesh).isMesh && !o.userData.outline) found.push(o); }); // collect first: outlines are added below
     found.forEach((o) => {
@@ -92,10 +102,13 @@ function Model({ file }: { file: string }) {
       const mat = organMaterial(base);
       const mesh = o as THREE.Mesh;
       mesh.material = mat;
-      let outline = (mesh.children.find((c) => c.userData.outline) as THREE.Mesh | undefined) ?? null;
+      let outline = mesh.children.find((c) => c.userData.outline) ?? null;
       if (!outline && s.layer !== 'skin' && mesh.geometry.attributes.normal) {
-        outline = new THREE.Mesh(mesh.geometry, outlineMaterial);
-        outline.visible = false; outline.raycast = noRaycast; outline.userData.outline = true;
+        outline = new THREE.Group();
+        const mask = new THREE.Mesh(mesh.geometry, maskMaterial), hull = new THREE.Mesh(mesh.geometry, outlineMaterial);
+        mask.renderOrder = 100; hull.renderOrder = 101; // after every organ and the skin: every mask first, then every hull
+        for (const m of [mask, hull]) { m.raycast = noRaycast; m.userData.outline = true; outline.add(m); }
+        outline.visible = false; outline.userData.outline = true;
         mesh.add(outline);
       }
       list.push({ mesh, name, mat, base, outline });

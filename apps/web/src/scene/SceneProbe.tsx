@@ -32,8 +32,10 @@ export function SceneProbe() {
       camera.updateMatrixWorld();
       frustum.setFromProjectionMatrix(m.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
       const out: Partial<Record<Layer, LayerProbe>> = {};
+      let outlined = 0;
       scene.traverse((o) => {
         const mesh = o as THREE.Mesh;
+        if (mesh.isMesh && mesh.userData.outline && mesh.renderOrder === 101 && shownInScene(mesh)) outlined++;
         if (!mesh.isMesh || mesh.userData.outline) return;
         const name = structureOf(mesh);
         const layer = (mesh.userData.layer as Layer | undefined) ?? (name ? manifest.structures[name].layer : undefined);
@@ -48,6 +50,7 @@ export function SceneProbe() {
         p.renderOrder = Math.max(p.renderOrder, mesh.renderOrder);
       });
       el.dataset.scene = JSON.stringify(out);
+      el.dataset.outlined = String(outlined); // hover-outline meshes currently drawn
     }, 500);
     return () => clearInterval(id);
   }, [scene, camera]);
