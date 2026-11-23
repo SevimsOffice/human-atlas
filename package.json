@@ -14,7 +14,8 @@
     "preview": "npm run preview -w @atlas/web",
     "test": "vitest run",
     "typecheck": "tsc -p packages/physiology && tsc -p packages/anatomy-manifest && tsc -p apps/web",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "data:nih-skeleton": "node scripts/build-nih-skeleton.mjs"
   },
   "devDependencies": {
     "@gltf-transform/core": "^4.5.1",
@@ -25,5 +26,6 @@
     "sharp": "^0.35.5",
     "typescript": "^5.9.3",
     "vitest": "^3.2.7"
-  }
+  },
+  "license": "MIT"
 }

@@ -5,7 +5,7 @@ import bloodPathJson from '../../../content/blood-path.json';
 
 export * from './sources';
 
-export type Layer = 'heart' | 'greatVessels' | 'coronaryVessels' | 'lungs' | 'airways' | 'urinary' | 'digestive' | 'lymphatic' | 'nervous' | 'skeletal' | 'skin';
+export type Layer = 'heart' | 'greatVessels' | 'coronaryVessels' | 'lungs' | 'airways' | 'urinary' | 'digestive' | 'lymphatic' | 'nervous' | 'skeletal' | 'skeletonOutline' | 'skin';
 
 /** Layers grouped by body system (Milestone 4 overview). */
 export const SYSTEM_LAYERS: { system: 'cardiovascular' | 'respiratory' | 'urinary' | 'digestive' | 'lymphatic' | 'nervous' | 'skeletal' | 'integumentary'; layers: Layer[] }[] = [
@@ -15,7 +15,7 @@ export const SYSTEM_LAYERS: { system: 'cardiovascular' | 'respiratory' | 'urinar
   { system: 'digestive', layers: ['digestive'] },
   { system: 'lymphatic', layers: ['lymphatic'] },
   { system: 'nervous', layers: ['nervous'] },
-  { system: 'skeletal', layers: ['skeletal'] },
+  { system: 'skeletal', layers: ['skeletal', 'skeletonOutline'] },
   { system: 'integumentary', layers: ['skin'] },
 ];
 export type Lang = 'tr' | 'en';

@@ -34,10 +34,10 @@ export function SceneProbe() {
       const out: Partial<Record<Layer, LayerProbe>> = {};
       scene.traverse((o) => {
         const mesh = o as THREE.Mesh;
-        if (!mesh.isMesh) return;
+        if (!mesh.isMesh || mesh.userData.outline) return;
         const name = structureOf(mesh);
-        if (!name || !shownInScene(mesh)) return;
-        const layer = manifest.structures[name].layer;
+        const layer = (mesh.userData.layer as Layer | undefined) ?? (name ? manifest.structures[name].layer : undefined);
+        if (!layer || !shownInScene(mesh)) return;
         const mat = mesh.material as THREE.MeshStandardMaterial;
         const p = (out[layer] ??= { shown: 0, inView: 0, minOpacity: 1, maxOpacity: 0, depthWrite: false, renderOrder: mesh.renderOrder });
         p.shown++;

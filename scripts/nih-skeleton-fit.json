@@ -1,0 +1,87 @@
+{
+ "source": "NIH 3D 3DPX-016838 Skeleton.stl",
+ "etag": "721bf512b82796efb45cb2b64febda27-4",
+ "method": "per-part trimmed ICP, similarity transform (Umeyama 1991); parts = connected components of the CT mesh",
+ "bones": 183,
+ "torso": {
+  "scale": 1.14135,
+  "rotationDeg": 10.24,
+  "translation": [
+   0.0004,
+   0.9561,
+   -0.1074
+  ],
+  "rotation": [
+   [
+    0.99998,
+    0.00003,
+    -0.00627
+   ],
+   [
+    0.00109,
+    0.98409,
+    0.17765
+   ],
+   [
+    0.00617,
+    -0.17766,
+    0.98407
+   ]
+  ],
+  "trimmedRmsMetres": 0.003
+ },
+ "leftLeg": {
+  "scale": 1.14135,
+  "rotationDeg": 37.41,
+  "translation": [
+   -0.3618,
+   0.9544,
+   0.2793
+  ],
+  "rotation": [
+   [
+    0.82663,
+    -0.26866,
+    -0.49448
+   ],
+   [
+    0.12875,
+    0.94567,
+    -0.29856
+   ],
+   [
+    0.54782,
+    0.18314,
+    0.8163
+   ]
+  ],
+  "trimmedRmsMetres": 0.0104
+ },
+ "rightLeg": {
+  "scale": 1.14135,
+  "rotationDeg": 25.37,
+  "translation": [
+   0.3366,
+   0.9389,
+   0.2882
+  ],
+  "rotation": [
+   [
+    0.92675,
+    0.25817,
+    0.27291
+   ],
+   [
+    -0.19246,
+    0.95016,
+    -0.24528
+   ],
+   [
+    -0.32263,
+    0.17479,
+    0.93025
+   ]
+  ],
+  "trimmedRmsMetres": 0.0099
+ }
+}

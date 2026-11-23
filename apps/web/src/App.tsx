@@ -70,11 +70,16 @@ function Stage() {
 
 function StageControls() {
   const { t } = useTranslation();
-  const { leftOpen, rightOpen, togglePanel, requestCamera } = useAtlas();
+  const { leftOpen, rightOpen, togglePanel, requestCamera, selected, isolate, setIsolate } = useAtlas();
   const btn = 'pointer-events-auto rounded-sm border border-line bg-white/90 px-2 py-1 text-[11px] hover:bg-white';
   return (
     <>
       <div className="pointer-events-none absolute right-2 top-2 flex gap-1">
+        {selected && (
+          <button className={btn} onClick={() => setIsolate(!isolate)} aria-pressed={!isolate} data-testid="show-all">
+            {isolate ? t('stage.showAll') : t('stage.isolate')}
+          </button>
+        )}
         <button className={btn} onClick={() => requestCamera({ kind: 'reset' })} data-testid="reset-view">{t('stage.reset')}</button>
       </div>
       <div className="pointer-events-none absolute bottom-2 left-2 hidden gap-1 lg:flex">
@@ -94,7 +99,7 @@ function StageControls() {
 
 function HoverLabel({ name }: { name: string }) {
   const { i18n } = useTranslation();
-  return <div className="pointer-events-none absolute left-3 top-3 rounded-sm border border-line bg-white/90 px-2 py-1 text-xs">{label(name, i18n.language as Lang).text}</div>;
+  return <div data-testid="hover-label" className="pointer-events-none absolute left-3 top-3 rounded-sm border border-line bg-white/90 px-2 py-1 text-xs">{label(name, i18n.language as Lang).text}</div>;
 }
 
 export default function App() {

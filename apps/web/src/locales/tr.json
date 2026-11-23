@@ -49,7 +49,8 @@
     "lymphatic": "Dalak",
     "nervous": "Omurilik",
     "skeletal": "Leğen ve bacak kemikleri",
-    "skin": "Deri (vücut dış hattı)"
+    "skin": "Deri (vücut dış hattı)",
+    "skeletonOutline": "Tam iskelet (NIH, ana hat)"
   },
   "flow": {
     "title": "Kan yolu",
@@ -194,8 +195,10 @@
     "reset": "Görünümü sıfırla",
     "leftPanel": "Sol panel",
     "rightPanel": "Sağ panel",
-    "hint": "Sürükle: döndür · Tekerlek: yakınlaştır · Çift tık: yapıya odaklan",
-    "muscleNote": "Kas modeli henüz eklenmedi; kas kan akışı egzersiz panelinde gösterilir."
+    "hint": "Sürükle: döndür · Sağ tık / iki parmak: kaydır · Tekerlek: imlece yakınlaş · Tık: yapının etrafında dön · Çift tık: yakına git",
+    "muscleNote": "Kas modeli henüz eklenmedi; kas kan akışı egzersiz panelinde gösterilir.",
+    "showAll": "Tümünü göster",
+    "isolate": "Seçileni ayır"
   },
   "credit": {
     "poweredBy": "Geliştiren:"

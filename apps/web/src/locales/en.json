@@ -49,7 +49,8 @@
     "lymphatic": "Spleen",
     "nervous": "Spinal cord",
     "skeletal": "Pelvis and leg bones",
-    "skin": "Skin (body outline)"
+    "skin": "Skin (body outline)",
+    "skeletonOutline": "Full skeleton (NIH, outline)"
   },
   "flow": {
     "title": "Blood path",
@@ -194,8 +195,10 @@
     "reset": "Reset view",
     "leftPanel": "Left panel",
     "rightPanel": "Right panel",
-    "hint": "Drag: rotate · Wheel: zoom · Double-click: focus a structure",
-    "muscleNote": "No muscle model yet; muscle blood flow is shown in the exercise panel."
+    "hint": "Drag: rotate · Right-drag / two fingers: pan · Wheel: zoom to cursor · Click: orbit a structure · Double-click: fly close",
+    "muscleNote": "No muscle model yet; muscle blood flow is shown in the exercise panel.",
+    "showAll": "Show all",
+    "isolate": "Isolate selection"
   },
   "credit": {
     "poweredBy": "Powered by"

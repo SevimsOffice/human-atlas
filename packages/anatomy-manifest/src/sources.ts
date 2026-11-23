@@ -42,6 +42,12 @@ export const SOURCES: readonly SourceEntry[] = [
   },
   ...GENERATED_MODEL_SOURCES,
   {
+    id: 'NIH3D-SKELETON', kind: 'model', title: 'Human Skeleton (NIH 3D Print Exchange 3DPX-016838, CT segmentation)',
+    url: 'https://3d.nih.gov/entries/3DPX-016838', license: 'CC BY (version not stated by NIH 3D)', licenseUrl: 'https://3d.nih.gov/entries/3DPX-016838',
+    attribution: '"Human Skeleton", My Segmenter (MySegmenter.com), NIH 3D Print Exchange 3DPX-016838.',
+    changes: 'Converted from STL; fitted to the HuBMAP pelvis and leg bones (similarity transform, scripts/nih-skeleton-fit.json); simplified to 64k triangles; Meshopt. Shown as a non-clickable outline.',
+  },
+  {
     id: 'HRA-XWALK-1.3', kind: 'mapping', title: 'ASCT+B Tables to 3D Reference Object Library Mapping (HRA v1.3)',
     url: 'https://github.com/hubmapconsortium/ccf-releases/tree/main/v1.3/models', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
     attribution: 'Ellen M. Quardokus; Heidi Schlehlein; Bruce Herr II; Katy Börner. HuBMAP.',

@@ -13,9 +13,10 @@
 ![Exercise view: blood flow to each organ at rest and while running, from the physiology engine](docs/screenshots/exercise.png)
 
 ## What it does
-- **Whole body, then the organs inside it.** The atlas opens on a full male body: every organ and the (partial) skeleton inside a very faint skin outline (10 % opacity, drawn last so it never hides anything), then zooms in on the heart and lungs. *Görünümü sıfırla / Reset view* frames the full body again.
-- **Click any structure** (in 3D or in the list) to see its Turkish and English name, its Uberon ontology ID, its body system, its neighbours, a short text and the 3D model it comes from. Double-click to fly to it.
-- **Body systems as layers:** heart, great and coronary vessels, lungs and airways, kidneys and urinary tract, liver, pancreas and intestines, spleen, spinal cord, pelvis and leg bones, and the skin outline. All layers are on at start; the skin outline is loaded last so it never appears empty.
+- **Whole body, then the organs inside it.** The atlas opens on a full male body: opaque organs in clearly different colours, the labelled HuBMAP pelvis and leg bones, a pale full skeleton (NIH 3D CT) and a very faint skin outline (10 % opacity, drawn last so it never hides anything). It then zooms in on the heart and lungs. *Görünümü sıfırla / Reset view* frames the full body again.
+- **Hover** outlines a structure. **Click** it (in 3D or in the list) to see its Turkish and English name, Uberon ontology ID, body system, neighbours, a short text and the 3D model it comes from; the camera then orbits around it and everything else is dimmed (*Tümünü göster / Show all* brings it back). **Double-click** flies close.
+- **Camera:** drag to rotate, wheel or pinch to zoom toward the cursor (down to 3 cm from a structure), right-drag or two fingers to pan. Panning is clamped to the body, so it can't be lost.
+- **Body systems as layers:** heart, great and coronary vessels, lungs and airways, kidneys and urinary tract, liver, pancreas and intestines, spleen, spinal cord, pelvis and leg bones, the full skeleton outline and the skin outline. All layers are on at start; the skin outline is loaded last so it never appears empty.
 - **Cross-section:** transverse, sagittal or coronal clipping plane with a slider.
 - **Blood path animation:** step by step through the heart and lungs, timed by the engine's heart rate.
 - **Rest ↔ running:** heart rate, stroke volume, cardiac output, breathing rate, tidal volume, ventilation, O₂ uptake and organ blood flow all change together; the breathing animation follows the engine's breathing rate.
@@ -41,13 +42,17 @@ Full register with URLs, checksums and every change made: [`docs/SOURCES.md`](do
 | What | Source | Licence |
 |---|---|---|
 | 3D organs (18 models: heart, vessels, lungs, kidneys, ureters, bladder, liver, pancreas, intestines, spleen, spinal cord, pelvis, knees, skin) | HuBMAP Human Reference Atlas v1.3, 3D Reference Object Library (Kristen Browne, Heidi Schlehlein et al.; Visible Human Male data, U.S. National Library of Medicine) | CC BY 4.0 |
+| Full skeleton outline (one unlabelled CT mesh, non-clickable) | "Human Skeleton", My Segmenter, NIH 3D Print Exchange 3DPX-016838; fitted to the HuBMAP pelvis and legs by [`scripts/build-nih-skeleton.mjs`](scripts/build-nih-skeleton.mjs) | CC BY |
 | Ontology IDs and definitions | Uberon (Mungall et al., Genome Biology 2012) via the HRA crosswalk | CC BY 3.0 |
 | Physiology numbers | OpenStax A&P 2e, OpenStax College Physics 2e, Lee et al. 2025 | facts cited (CC BY-NC-SA 4.0 / CC BY 4.0 / CC BY 4.0) |
 | Short texts, missions, Turkish terms | written for this project | project's own work |
 
-No share-alike (CC BY-SA) assets are used. **A muscle model is not included yet**; muscle blood flow is shown in the exercise chart.
+No share-alike (CC BY-SA) assets are used. Organ colours are a teaching convention (like a printed atlas), not measured tissue colours. **A muscle model is not included yet**; muscle blood flow is shown in the exercise chart.
 
 > ⚠️ **Turkish anatomical terms need expert review.** All Turkish names were translated during development and are marked `needs-expert-review` in [`content/terms/anatomy-terms.tr.json`](content/terms/anatomy-terms.tr.json). The short texts are also unreviewed. The Sources page says the same.
+
+## Licence
+The **code** is released under the [MIT licence](LICENSE). The **data and 3D models keep their own licences** and attribution requirements, listed per item in [`docs/SOURCES.md`](docs/SOURCES.md) and on the in-app Sources page (HuBMAP models CC BY 4.0, NIH 3D skeleton CC BY, Uberon CC BY 3.0; OpenStax facts are cited, no text copied). The project's own texts, missions and Turkish terms are part of this repository.
 
 ## Built with
 React 19 · Vite 6 · TypeScript · Three.js + React Three Fiber + drei · Zustand · Tailwind CSS 4 · i18next · Vitest · Playwright · glTF-Transform + meshoptimizer · GitHub Actions + GitHub Pages.
@@ -69,7 +74,7 @@ npm run typecheck
 
 ## Known limitations
 - One reference body (Visible Human Male); a female model is planned (ROADMAP milestone 9).
-- Skeleton is partial (pelvis and leg bones from HuBMAP). A full CT skeleton outline (NIH 3D, CC BY) is planned once its file is added to the repository.
+- Only the pelvis and leg bones are labelled (HuBMAP). The full skeleton is an unlabelled outline from a different body (NIH 3D CT): it is fitted to the HuBMAP pelvis and legs, its arms keep the CT pose (bent forward) and do not match the skin's arms.
 - No muscle model, no brain, eyes or other organs not listed above.
 - Two scenarios only (rest, running at 9 km/h); running organ blood flow uses the "maximal exercise" column of the source table.
 - Blood path timing is schematic (one step per heartbeat), not real transit time.
@@ -83,4 +88,4 @@ npm run typecheck
 ## Credits
 Created by **Sevim Durmuş** — [Instagram](https://www.instagram.com/sevimsoffice/) · [LinkedIn](https://www.linkedin.com/in/sevimdurmus/)
 
-3D models: HuBMAP Human Reference Atlas (CC BY 4.0). Ontology: Uberon (CC BY 3.0). Physiology references: OpenStax (cited), Lee et al. 2025 (CC BY 4.0). Full attributions in [`docs/SOURCES.md`](docs/SOURCES.md).
+3D models: HuBMAP Human Reference Atlas (CC BY 4.0); full skeleton: NIH 3D Print Exchange 3DPX-016838, My Segmenter (CC BY). Ontology: Uberon (CC BY 3.0). Physiology references: OpenStax (cited), Lee et al. 2025 (CC BY 4.0). Full attributions in [`docs/SOURCES.md`](docs/SOURCES.md).

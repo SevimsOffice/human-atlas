@@ -4,7 +4,8 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { useAtlas } from '../store';
-import { CAMERA_LIMITS, DEFAULT_VIEW, INTRO_LAYERS, bodyLayers, fitView, focusView, type V3 } from '../lib/camera';
+import { CAMERA_LIMITS, DEFAULT_VIEW, INTRO_LAYERS, bodyLayers, clampTarget, fitView, focusView, targetView, type V3 } from '../lib/camera';
+import { outlineThickness } from './HeartModels';
 import { modelsFor } from '../lib/models';
 
 /** Pause on the whole body before the intro close-up of heart and lungs (ms). */
@@ -71,7 +72,8 @@ export function CameraRig() {
       goal.current = { target: v(f.target), position: v(f.position) };
     }
     else {
-      const f = focusView(request.name, camera.position.toArray() as V3, c.target.toArray() as V3);
+      const view = request.kind === 'target' ? targetView : focusView;
+      const f = view(request.name, camera.position.toArray() as V3, c.target.toArray() as V3);
       if (f) goal.current = { target: v(f.target), position: v(f.position) };
     }
   }, [request, camera, size]);
@@ -89,6 +91,11 @@ export function CameraRig() {
       }
       c.update();
     }
+    // panning: keep the orbit target inside the body's box (moving the camera with it)
+    const t = c.target.toArray() as V3, ct = clampTarget(t);
+    if (ct.some((x, k) => x !== t[k])) { const d = v(ct).sub(c.target); c.target.add(d); camera.position.add(d); c.update(); }
+    // hover outline: constant on-screen width at any zoom
+    outlineThickness.value = 0.0035 * camera.position.distanceTo(c.target);
     publish(c, camera);
   });
 
@@ -97,7 +104,9 @@ export function CameraRig() {
       ref={controls}
       makeDefault
       target={DEFAULT_VIEW.target}
-      enablePan={false}
+      enablePan
+      screenSpacePanning
+      zoomToCursor
       enableDamping
       dampingFactor={CAMERA_LIMITS.damping}
       minPolarAngle={CAMERA_LIMITS.minPolar}

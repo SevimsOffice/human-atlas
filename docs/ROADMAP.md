@@ -17,5 +17,5 @@ Each milestone ends with: app runs, tests pass, existing behaviour preserved, SO
 
 Notes:
 - **Walking scenario (owner decision, M5 review):** do not combine studies with different intensities or populations. Walking is added only when ONE source gives both heart (HR/SV or CO) and breathing (RR/VT or VE) values for healthy adults at the same walking intensity. Keep searching occasionally (candidates checked so far: Lee et al. 2025 — breathing only; Liu et al. 2021 PLoS ONE — heart only, 6-min walk).
-- **Skeleton:** M5 review skipped the NIH 3D CT skeleton (3DPX-016838); the v1.0 brief (2026-11-20) asks for it as a non-clickable outline fitted to the HRA pelvis and leg bones. The file could not be downloaded in the build environment; it is added once the owner uploads it (see `docs/OPEN_QUESTIONS.md` Q20).
+- **Skeleton:** the NIH 3D CT skeleton (3DPX-016838, CC BY) ships in v1.0 as a non-clickable outline, fitted per part to the HRA pelvis and legs (`scripts/build-nih-skeleton.mjs`). A segmented, labelled CC BY skeleton would still be better (revisit if one is found).
 - Muscles stay chart-only (no CC BY/CC0 muscle model; share-alike not used, owner decision 2026-11-19).

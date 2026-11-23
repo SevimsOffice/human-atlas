@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import sharp from 'sharp';
+import { readFileSync } from 'node:fs';
 
 async function ready(page: Page) {
   await page.goto('./');
@@ -512,4 +513,87 @@ test('the Sources page keeps the Turkish-terms expert-review note visible', asyn
   await page.getByTestId('nav-credits').click();
   await expect(page.getByTestId('terms-review-note')).toContainText('uzman incelemesi');
   await expect(page.getByText(/Skin, Male v1\.2/).first()).toBeVisible();
+});
+
+// ---- v1.0 review: camera focus, zoom limits, panning, isolate, hover ----
+const MANIFEST = JSON.parse(readFileSync('packages/anatomy-manifest/src/manifest.json', 'utf8')) as { structures: Record<string, { center: number[] | null }> };
+const targetOf = async (page: Page) => (await cam(page)).target.split(',').map(Number);
+
+test('click orbits around the clicked structure; double-click flies close; reset frames the whole body', async ({ page }) => {
+  await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  // list click: the structure centre becomes the orbit target, distance kept
+  const before = await cam(page);
+  await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
+  const kidney = MANIFEST.structures.VH_M_left_kidney.center!;
+  await expect.poll(async () => Math.hypot(...(await targetOf(page)).map((v, i) => v - kidney[i])), { timeout: 8000 }).toBeLessThan(0.002);
+  expect((await cam(page)).distance).toBeCloseTo(before.distance, 2);
+  // double-click in 3D: select + fly close to that structure
+  const b = await canvasBox(page);
+  await page.mouse.dblclick(b.x + b.width / 2, b.y + b.height / 2);
+  const picked = (await page.getByTestId('inspector').getAttribute('data-structure'))!;
+  const c = MANIFEST.structures[picked].center!;
+  await expect.poll(async () => Math.hypot(...(await targetOf(page)).map((v, i) => v - c[i])), { timeout: 8000 }).toBeLessThan(0.002);
+  expect((await cam(page)).distance).toBeLessThan(0.6);
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
+});
+
+test('zoom goes down to 3 cm and no further, out to the limit; panning is clamped to the body', async ({ page }) => {
+  await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  const b = await canvasBox(page);
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+  for (let i = 0; i < 60; i++) await page.mouse.wheel(0, -500);
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeLessThan(0.05);
+  expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.0299);
+  for (let i = 0; i < 80; i++) await page.mouse.wheel(0, 800);
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(3);
+  expect((await cam(page)).distance).toBeLessThanOrEqual(4.201);
+  // right-drag far to the side: the target moves, but never beyond the body box + 15 cm
+  await page.getByTestId('reset-view').click();
+  await page.waitForTimeout(1500);
+  const t0 = await targetOf(page);
+  for (let k = 0; k < 4; k++) {
+    await page.mouse.move(b.x + 100, b.y + b.height / 2); await page.mouse.down({ button: 'right' });
+    await page.mouse.move(b.x + b.width - 50, b.y + b.height / 2, { steps: 8 }); await page.mouse.up({ button: 'right' });
+  }
+  await page.waitForTimeout(800);
+  const t1 = await targetOf(page);
+  expect(Math.abs(t1[0] - t0[0])).toBeGreaterThan(0.1); // panning works
+  expect(Math.abs(t1[0])).toBeLessThanOrEqual(0.53 + 0.15 + 0.01); // skin half-width + margin
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => Math.abs((await targetOf(page))[0] - t0[0]), { timeout: 8000 }).toBeLessThan(0.002);
+});
+
+test('selecting isolates the structure (others dimmed); "Tümünü göster" shows all again; organs are opaque by default', async ({ page }) => {
+  await ready(page);
+  const probe = async () => JSON.parse((await page.getByTestId('stage').getAttribute('data-scene'))!) as Probe;
+  await expect.poll(async () => (await probe()).digestive?.minOpacity).toBe(1);
+  for (const l of ['heart', 'lungs', 'urinary', 'lymphatic', 'nervous', 'skeletal']) expect((await probe())[l].minOpacity, l).toBe(1);
+  await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
+  await expect.poll(async () => (await probe()).digestive.maxOpacity).toBeLessThanOrEqual(0.1);
+  expect((await probe()).urinary.maxOpacity).toBe(1); // the kidney itself
+  await page.getByTestId('show-all').click();
+  await expect.poll(async () => (await probe()).digestive.minOpacity).toBe(1);
+  await page.getByTestId('show-all').click(); // toggles back to isolate
+  await expect.poll(async () => (await probe()).digestive.maxOpacity).toBeLessThanOrEqual(0.1);
+});
+
+test('hovering a structure outlines it', async ({ page }) => {
+  await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  await page.getByTestId('layer-flow').uncheck();
+  const canvas = page.locator('[data-testid=stage] canvas');
+  const b = await canvasBox(page);
+  await page.mouse.move(b.x + 5, b.y + 5); // empty corner
+  await page.waitForTimeout(600);
+  const before = await pixels(await canvas.screenshot());
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+  await expect(page.getByTestId('hover-label')).toBeVisible();
+  await page.waitForTimeout(800);
+  const after = await pixels(await canvas.screenshot());
+  // outline pixels: strongly blue (accent #1f6feb) where there were none before
+  const blue = (p: { data: Buffer }) => { let n = 0; for (let i = 0; i < p.data.length; i += 4) if (p.data[i + 2] > 180 && p.data[i] < 90 && p.data[i + 1] < 150) n++; return n; };
+  expect(blue(after)).toBeGreaterThan(blue(before) + 100);
 });

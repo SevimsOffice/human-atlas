@@ -9,6 +9,24 @@ import { breathClock } from '../lib/flowClock';
 import { breathScale } from '../lib/breathing';
 import { clipPlane, clippedAway } from './clipPlane';
 import { modelsFor } from '../lib/models';
+import { appearanceFor } from '../lib/appearance';
+import { softwareRendering } from '../lib/renderProfile';
+
+/** Inverted-hull hover outline: a back-face copy of the mesh pushed out along its normals, in the accent colour. */
+export const outlineThickness = { value: 0.002 };
+const outlineMaterial = new THREE.MeshBasicMaterial({ color: COLORS.hover, side: THREE.BackSide });
+outlineMaterial.onBeforeCompile = (shader) => {
+  shader.uniforms.uThickness = outlineThickness;
+  shader.vertexShader = `uniform float uThickness;\n${shader.vertexShader}`.replace('#include <begin_vertex>', '#include <begin_vertex>\ntransformed += normalize(objectNormal) * uThickness;');
+};
+const noRaycast = () => {};
+
+/** Realistic, slightly wet organ surface (clear coat) on GPUs; plain PBR on software renderers to stay fast. */
+function organMaterial(color: THREE.Color): THREE.MeshStandardMaterial {
+  return softwareRendering
+    ? new THREE.MeshStandardMaterial({ color, roughness: 0.55, metalness: 0, transparent: true })
+    : new THREE.MeshPhysicalMaterial({ color, roughness: 0.5, metalness: 0, clearcoat: 0.35, clearcoatRoughness: 0.45, transparent: true });
+}
 
 const url = (file: string) => `${import.meta.env.BASE_URL}models/${file}`;
 
@@ -20,8 +38,6 @@ function shownInScene(o: THREE.Object3D | null): boolean {
 /** Translucent wrappers that should not catch clicks meant for what lies inside them. */
 const isWrapper = (name: string) => { const l = manifest.structures[name]?.layer; return l === 'lungs' || l === 'skin'; };
 const isSkin = (name: string) => manifest.structures[name]?.layer === 'skin';
-export const SKIN_OPACITY = 0.1;
-const SKIN_OPACITY_FLOW = 0.1;
 
 /**
  * The manifest structure an object belongs to. A glTF mesh with several primitives is loaded by three.js as a
@@ -43,19 +59,6 @@ function pickFrom(intersections: THREE.Intersection[]): string | null {
   return hits.find((n) => !isWrapper(n)) ?? hits.find((n) => !isSkin(n)) ?? hits[0] ?? null;
 }
 
-/** Resting opacity per layer: lungs stay translucent so the heart remains visible inside. */
-function baseOpacity(layer: Layer, flowOn: boolean, somethingSelected: boolean): number {
-  // skin: a very faint outline (owner spec 8–12 %), never written to the depth buffer, drawn last → cannot hide what is inside
-  if (layer === 'skin') return flowOn ? SKIN_OPACITY_FLOW : SKIN_OPACITY;
-  if (layer === 'lungs') return flowOn ? 0.12 : 0.2;
-  if (layer === 'airways') return flowOn ? 0.45 : 0.75;
-  // organs and bones outside the blood path keep their strength while the animation runs (only heart + vessels fade)
-  if (layer === 'urinary' || layer === 'digestive' || layer === 'lymphatic' || layer === 'nervous') return 0.85;
-  if (layer === 'skeletal') return 0.95;
-  if (flowOn) return layer === 'heart' ? 0.22 : 0.5;
-  return somethingSelected ? 0.55 : 1;
-}
-
 /** Scales the lungs about their own centre once per breath (schematic amplitude). */
 function useBreathing(scene: THREE.Object3D) {
   const lungs = useMemo(() => scene.getObjectByName('VH_M_lungs') ?? null, [scene]);
@@ -73,20 +76,29 @@ function useBreathing(scene: THREE.Object3D) {
 
 function Model({ file }: { file: string }) {
   const { scene } = useGLTF(url(file)); // drei registers the Meshopt decoder (no network fetch)
-  const { selected, layers, flowOn, flowStep, select, setHovered, markLoaded, requestCamera, section } = useAtlas();
+  const { selected, hovered, isolate, layers, flowOn, flowStep, select, setHovered, markLoaded, requestCamera, section } = useAtlas();
   useBreathing(scene);
 
   // One material per mesh so each structure can be highlighted independently.
   const meshes = useMemo(() => {
-    const list: { mesh: THREE.Mesh; name: string; mat: THREE.MeshStandardMaterial; base: THREE.Color }[] = [];
-    scene.traverse((o) => {
-      const name = (o as THREE.Mesh).isMesh ? structureOf(o) : null;
+    const list: { mesh: THREE.Mesh; name: string; mat: THREE.MeshStandardMaterial; base: THREE.Color; outline: THREE.Mesh | null }[] = [];
+    const found: THREE.Object3D[] = [];
+    scene.traverse((o) => { if ((o as THREE.Mesh).isMesh && !o.userData.outline) found.push(o); }); // collect first: outlines are added below
+    found.forEach((o) => {
+      const name = structureOf(o);
       const s = name ? manifest.structures[name] : null;
       if (!s || !name) return;
       const base = new THREE.Color(colorFor(s));
-      const mat = new THREE.MeshStandardMaterial({ color: base, roughness: 0.62, metalness: 0.0, transparent: true });
-      (o as THREE.Mesh).material = mat;
-      list.push({ mesh: o as THREE.Mesh, name, mat, base });
+      const mat = organMaterial(base);
+      const mesh = o as THREE.Mesh;
+      mesh.material = mat;
+      let outline = (mesh.children.find((c) => c.userData.outline) as THREE.Mesh | undefined) ?? null;
+      if (!outline && s.layer !== 'skin' && mesh.geometry.attributes.normal) {
+        outline = new THREE.Mesh(mesh.geometry, outlineMaterial);
+        outline.visible = false; outline.raycast = noRaycast; outline.userData.outline = true;
+        mesh.add(outline);
+      }
+      list.push({ mesh, name, mat, base, outline });
     });
     return list;
   }, [scene]);
@@ -101,24 +113,32 @@ function Model({ file }: { file: string }) {
       const s = manifest.structures[name];
       mesh.visible = layers[s.layer];
       const isSel = sel.has(name);
-      const opacity = isSel ? (s.layer === 'skin' ? 0.2 : flowOn || s.layer === 'lungs' ? 0.6 : 0.95) : baseOpacity(s.layer, flowOn, !!selected);
-      mat.opacity = opacity;
-      mat.depthWrite = s.layer !== 'skin' && opacity > 0.9;
+      const a = appearanceFor({ layer: s.layer, isSelected: isSel, hasSelection: !!selected, isolate, flowOn });
+      mat.opacity = a.opacity;
+      mat.depthWrite = a.depthWrite;
+      mesh.renderOrder = a.renderOrder;
       mat.color.copy(base);
       mat.emissive.set(isSel ? COLORS.selected : stepMeshes.has(name) ? COLORS.stepGlow : '#000000');
-      mat.emissiveIntensity = isSel ? 0.28 : s.layer === 'lungs' ? 0.15 : 0.3;
-      mesh.renderOrder = s.layer === 'skin' ? 5 : isSel ? 2 : s.layer === 'lungs' ? 4 : s.layer === 'heart' ? 1 : 0;
+      mat.emissiveIntensity = isSel ? 0.22 : 0.3;
       // cross-section: clip with the shared plane and show inner faces of cut organs
       const clip = section.enabled ? [clipPlane] : null;
       if ((mat.clippingPlanes?.length ?? 0) !== (clip?.length ?? 0)) { mat.clippingPlanes = clip; mat.side = clip ? THREE.DoubleSide : THREE.FrontSide; mat.needsUpdate = true; }
     }
-  }, [meshes, selected, layers, flowOn, flowStep, section.enabled]);
+  }, [meshes, selected, isolate, layers, flowOn, flowStep, section.enabled]);
+
+  // hover: outline the structure under the cursor
+  useEffect(() => {
+    const hov = new Set(hovered ? meshesUnder(hovered) : []);
+    for (const { name, outline } of meshes) if (outline) outline.visible = hov.has(name);
+  }, [meshes, hovered]);
 
   const pick = (e: ThreeEvent<MouseEvent>) => {
     const name = pickFrom(e.intersections);
     if (!name) return;
     e.stopPropagation();
     select(name);
+    // orbit around what was clicked (distance kept; double-click flies close)
+    requestCamera({ kind: 'target', name: useAtlas.getState().selected ?? name });
   };
   const hover = (e: ThreeEvent<PointerEvent>) => {
     const name = pickFrom(e.intersections);
