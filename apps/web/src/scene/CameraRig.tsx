@@ -102,7 +102,8 @@ export function CameraRig() {
     }
     // panning: keep the orbit target inside the body's box (moving the camera with it)
     const t = c.target.toArray() as V3, ct = clampTarget(t);
-    if (ct.some((x, k) => x !== t[k])) { const d = v(ct).sub(c.target); c.target.add(d); camera.position.add(d); c.update(); }
+    // (no controls.update() here: it would re-apply the pan damping and push the target back out)
+    if (ct.some((x, k) => x !== t[k])) { const d = v(ct).sub(c.target); c.target.add(d); camera.position.add(d); }
     // hover outline: constant on-screen width at any zoom
     outlineThickness.value = 0.004 * camera.position.distanceTo(c.target);
     publish(c, camera);
