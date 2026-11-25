@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "HUMAN ATLAS",
-    "subtitle": "Body systems · Milestone 5",
+    "subtitle": "Body systems · v1.0",
     "skip": "Skip to main content"
   },
   "nav": {
@@ -19,7 +19,7 @@
     "title": "Scenario",
     "rest": "Rest",
     "running": "Running (vigorous exercise)",
-    "walkingNote": "Walking is not included until a second verified source is found.",
+    "walkingNote": "No walking scenario yet: it will be added when one source gives both heart and breathing values for healthy adults at the same walking intensity.",
     "short": {
       "rest": "Rest",
       "running": "Running"
@@ -48,7 +48,7 @@
     "digestive": "Digestive organs",
     "lymphatic": "Spleen",
     "nervous": "Spinal cord",
-    "skeletal": "Pelvis and leg bones"
+    "skin": "Skin (body outline)"
   },
   "flow": {
     "title": "Blood path",
@@ -91,7 +91,7 @@
     "digestive": "Digestive",
     "lymphatic": "Lymphatic",
     "nervous": "Nervous",
-    "skeletal": "Skeletal (partial)"
+    "skin": "Skin"
   },
   "inspector": {
     "title": "Structure inspector",
@@ -169,7 +169,7 @@
     "flowNote": "Each organ's share of the table column × the engine's cardiac output (derived). Running is based on the maximal exercise column of OpenStax A&P 2e §20.4.",
     "compareTitle": "Rest → running",
     "runShort": "Running",
-    "compareNote": "All values from the engine; ratios are derived. Muscle models come in Milestone 4.",
+    "compareNote": "All values from the engine; ratios are derived. A muscle model is not included yet.",
     "rows": {
       "heartRate": "Heart rate",
       "strokeVolume": "Stroke volume",
@@ -192,8 +192,10 @@
     "reset": "Reset view",
     "leftPanel": "Left panel",
     "rightPanel": "Right panel",
-    "hint": "Drag: rotate · Wheel: zoom · Double-click: focus a structure",
-    "muscleNote": "No muscle model yet; muscle blood flow is shown in the exercise panel."
+    "hint": "Drag: rotate · Right-drag / two fingers: pan · Wheel: zoom to cursor · Click: orbit a structure · Double-click: fly close",
+    "muscleNote": "No muscle model yet; muscle blood flow is shown in the exercise panel.",
+    "showAll": "Show all",
+    "isolate": "Isolate selection"
   },
   "credit": {
     "poweredBy": "Powered by"
@@ -205,7 +207,7 @@
     "digestive": "Digestive system",
     "lymphatic": "Lymphatic system",
     "nervous": "Nervous system",
-    "skeletal": "Skeletal system"
+    "integumentary": "Integumentary system (skin)"
   },
   "section": {
     "title": "Cross-section",

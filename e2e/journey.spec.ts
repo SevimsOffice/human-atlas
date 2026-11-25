@@ -1,4 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
+import sharp from 'sharp';
+import { readFileSync } from 'node:fs';
 
 async function ready(page: Page) {
   await page.goto('./');
@@ -47,28 +49,30 @@ test('clicking the 3D model picks a structure', async ({ page }) => {
 
 test('switching to running changes the values and doubles the animation speed', async ({ page }) => {
   await ready(page);
+  await page.getByTestId('layer-flow').check(); // the blood-path animation is off by default (organs start opaque)
   await expect(page.getByTestId('flow')).toHaveAttribute('data-cycle-s', '0.8');
-  const rest = await beatsOver(page, 4000);
+  const rest = await beatsOver(page, 6000);
   await page.getByRole('radio', { name: 'Koşu (yoğun egzersiz)' }).click();
   await expect(page.getByTestId('hr')).toHaveText('150');
   await expect(page.getByTestId('sv')).toHaveText('130');
   await expect(page.getByTestId('co')).toHaveText('19,5');
   await expect(page.getByTestId('cycle')).toHaveText('0,4');
   await expect(page.getByTestId('flow')).toHaveAttribute('data-cycle-s', '0.4');
-  const run = await beatsOver(page, 4000);
-  expect(rest).toBeGreaterThanOrEqual(3); // ≈ 5 beats at 0.8 s
+  const run = await beatsOver(page, 6000);
+  expect(rest).toBeGreaterThanOrEqual(5); // ≈ 7 beats at 0.8 s
   expect(run / rest).toBeGreaterThan(1.5); // ≈ 2×
   expect(run / rest).toBeLessThan(2.7);
 });
 
 test('the blood path advances step by step and can be paused', async ({ page }) => {
   await ready(page);
+  await page.getByTestId('layer-flow').check(); // the blood-path animation is off by default (organs start opaque)
   const s0 = await page.getByTestId('flow').getAttribute('data-step');
   await expect(page.getByTestId('flow')).not.toHaveAttribute('data-step', s0!, { timeout: 5000 });
   await page.getByTestId('flow-toggle').click();
   expect(await beatsOver(page, 2000)).toBe(0);
   await page.getByTestId('flow-toggle').click();
-  expect(await beatsOver(page, 2000)).toBeGreaterThan(0);
+  expect(await beatsOver(page, 4000)).toBeGreaterThan(0);
 });
 
 test('hiding the heart layer removes it from picking', async ({ page }) => {
@@ -210,35 +214,18 @@ test('camera orbits the model centre and cannot flip over the top or under the f
   }
 });
 
-test('panning is disabled and zoom is clamped', async ({ page }) => {
-  await ready(page);
-  const before = (await cam(page)).target;
-  const b = await canvasBox(page);
-  const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
-  await page.mouse.move(cx, cy); await page.mouse.down({ button: 'right' });
-  await page.mouse.move(cx + 200, cy + 100, { steps: 8 }); await page.mouse.up({ button: 'right' });
-  await page.waitForTimeout(500);
-  expect((await cam(page)).target).toBe(before);
-  for (let i = 0; i < 25; i++) await page.mouse.wheel(0, -400);
-  await page.waitForTimeout(800);
-  expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.119);
-  for (let i = 0; i < 40; i++) await page.mouse.wheel(0, 600);
-  await page.waitForTimeout(800);
-  expect((await cam(page)).distance).toBeLessThanOrEqual(3.501);
-});
-
 test('double-click focuses a structure; reset view re-frames all visible models', async ({ page }) => {
   await ready(page);
-  await page.waitForTimeout(500);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 30_000 });
   const initial = await cam(page);
   const b = await canvasBox(page);
   await page.mouse.dblclick(b.x + b.width / 2, b.y + b.height / 2);
   const picked = await page.getByTestId('inspector').getAttribute('data-structure');
   expect(picked).toMatch(/^VH_M_/);
   await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).not.toBe(initial.target);
-  await page.getByTestId('reset-view').click();
-  await expect.poll(async () => (await cam(page)).target, { timeout: 8000 }).toBe(initial.target);
-  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeCloseTo(initial.distance, 2);
+  await page.getByTestId('reset-view').click(); // the whole body, centred
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
+  await expect.poll(async () => Math.abs(Number((await cam(page)).target.split(',')[1])), { timeout: 8000 }).toBeLessThan(0.05);
 });
 
 test('initial view frames every model: nothing is cut off at the top (trachea) or bottom', async ({ page }) => {
@@ -313,10 +300,10 @@ test('side panels: compact scenario control and one-line structure rows', async 
 });
 
 // ---- Milestone 4: remaining systems + cross-section ----
-test('body systems are layers: urinary, digestive, lymphatic and nervous on, skeleton off by default', async ({ page }) => {
+test('body systems are layers: urinary, digestive, lymphatic and nervous on by default; no bone layer', async ({ page }) => {
   await ready(page);
   for (const l of ['urinary', 'digestive', 'lymphatic', 'nervous']) await expect(page.getByTestId(`layer-${l}`)).toBeChecked();
-  await expect(page.getByTestId('layer-skeletal')).not.toBeChecked();
+  await expect(page.getByTestId('layer-skeletal')).toHaveCount(0);
   await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
   await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0004538');
   await expect(page.getByTestId('inspector-system')).toHaveText('Boşaltım sistemi');
@@ -327,15 +314,11 @@ test('body systems are layers: urinary, digestive, lymphatic and nervous on, ske
   await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0002240');
 });
 
-test('turning the skeleton on re-frames the view to include the legs', async ({ page }) => {
+test('reset frames the whole body even with the skin outline off', async ({ page }) => {
   await ready(page);
-  await page.waitForTimeout(500);
-  const before = await cam(page);
-  await page.getByTestId('layer-skeletal').check();
+  await page.getByTestId('layer-skin').uncheck();
   await page.getByTestId('reset-view').click();
-  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(before.distance + 0.3);
-  await page.getByRole('button', { name: /^Sol uyluk kemiği/ }).click();
-  await expect(page.getByTestId('inspector-system')).toHaveText('İskelet sistemi');
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
 });
 
 test('sub-structures of the new organs have Turkish terms marked for expert review', async ({ page }) => {
@@ -387,8 +370,7 @@ test('mission: follow a red blood cell — camera and inspector follow each step
   await expect(page.getByTestId('mission-text')).toContainText('5,25 L');
   await page.getByTestId('mission-next').click();
   await page.getByTestId('mission-next').click();
-  await expect(page.getByTestId('layer-skeletal')).toBeChecked(); // the leg step turns the skeleton on
-  await expect(page.getByTestId('inspector')).toHaveAttribute('data-structure', 'VH_M_femur_L');
+  await expect(page.getByTestId('inspector')).toHaveAttribute('data-structure', 'VH_M_descending_aorta'); // toward the legs (no muscle or bone models)
   await page.getByTestId('mission-next').click();
   await expect(page.getByTestId('mission-question')).toBeVisible();
   await page.getByTestId('mission-option-0').click();
@@ -421,4 +403,191 @@ test('mission: what changes when you start running — scenario switches and val
   await expect(page.getByTestId('mission-feedback')).toContainText('12,8');
   await page.getByTestId('lang-en').click();
   await expect(page.getByTestId('mission-feedback')).toContainText('12.8-fold');
+});
+
+// ---- v1.0: full body ----
+test('opens on the whole body (HRA skin outline), then glides to heart and lungs; reset frames the body again', async ({ page }) => {
+  await ready(page);
+  await expect(page.getByTestId('layer-skin')).toBeChecked();
+  const stage = page.getByTestId('stage');
+  const whole = await cam(page);
+  expect(whole.distance).toBeGreaterThan(2.5); // ≈1.83 m tall body fits the view
+  await expect(stage).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  const close = await cam(page);
+  expect(close.distance).toBeLessThan(1.2);
+  expect(Number(close.target.split(',')[1])).toBeGreaterThan(0.35); // chest height (heart ≈ 0.42–0.53 m)
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 10_000 }).toBeGreaterThan(2.5);
+  // the skin is a real structure from the HRA (Uberon "skin of body"), selectable from the list
+  await page.getByRole('button', { name: /^Deri/ }).click();
+  await expect(page.getByTestId('uberon-id')).toHaveText('UBERON:0002097');
+  await expect(page.getByTestId('inspector-source')).toContainText('Skin, Male v1.2');
+});
+
+test('the skin outline is requested only after every organ model, so it never appears alone', async ({ page }) => {
+  const fetched: string[] = [];
+  page.on('request', (r) => { if (r.url().endsWith('.glb')) fetched.push(r.url().split('/').pop()!); });
+  await ready(page);
+  for (const f of ['heart.glb', 'lungs.glb', 'liver.glb', 'spinal-cord.glb', 'skin.glb']) expect(fetched).toContain(f);
+  for (const f of ['pelvis.glb', 'knee-left.glb', 'skeleton-outline.glb']) expect(fetched).not.toContain(f); // no bones
+  expect(fetched.at(-1)).toBe('skin.glb');
+});
+
+// Decodes a PNG screenshot into raw RGBA pixels.
+async function pixels(png: Buffer) {
+  const { data, info } = await sharp(png).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  return { data, w: info.width, h: info.height };
+}
+/** Number of pixels whose colour changed noticeably between two equally sized screenshots. */
+function changed(a: { data: Buffer }, b: { data: Buffer }) {
+  let n = 0;
+  for (let i = 0; i < a.data.length; i += 4) {
+    if (Math.abs(a.data[i] - b.data[i]) + Math.abs(a.data[i + 1] - b.data[i + 1]) + Math.abs(a.data[i + 2] - b.data[i + 2]) > 30) n++;
+  }
+  return n;
+}
+type Probe = Record<string, { shown: number; inView: number; minOpacity: number; maxOpacity: number; depthWrite: boolean; renderOrder: number }>;
+
+test('default full-body view: every organ layer is really drawn and the faint skin hides none of them', async ({ page }) => {
+  test.setTimeout(300_000); // ~25 full-canvas screenshots on the CI software rasterizer
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  await page.getByTestId('layer-flow').uncheck(); // stop the moving blood cells so screenshots only differ by what we toggle
+  await page.getByTestId('reset-view').click(); // the default whole-body framing
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 10_000 }).toBeGreaterThan(2.5);
+  await page.waitForTimeout(1500);
+
+  const layers = ['heart', 'greatVessels', 'lungs', 'airways', 'urinary', 'digestive', 'lymphatic', 'nervous'];
+  const probe = JSON.parse((await page.getByTestId('stage').getAttribute('data-scene'))!) as Probe;
+  for (const l of layers) {
+    expect(probe[l]?.shown, `${l} meshes shown`).toBeGreaterThan(0);
+    expect(probe[l]?.inView, `${l} meshes inside the view`).toBeGreaterThan(0);
+  }
+  // skin: very faint, never writes depth, drawn after everything else
+  expect(probe.skin.maxOpacity).toBeGreaterThanOrEqual(0.08);
+  expect(probe.skin.maxOpacity).toBeLessThanOrEqual(0.12);
+  expect(probe.skin.depthWrite).toBe(false);
+  for (const l of layers) expect(probe.skin.renderOrder, `skin drawn after ${l}`).toBeGreaterThan(probe[l].renderOrder);
+
+  // pixels: with the skin ON, switching each layer off must visibly change the picture
+  const canvas = page.locator('[data-testid=stage] canvas');
+  const shot = async () => pixels(await canvas.screenshot());
+  const measure = async (list: string[]) => {
+    const base = await shot();
+    const noise = Math.max(changed(base, await shot()), changed(base, await shot())); // remaining animation
+    for (const l of list) {
+      await page.getByTestId(`layer-${l}`).uncheck();
+      await page.waitForTimeout(700);
+      const diff = changed(base, await shot());
+      expect(diff, `${l}: changed pixels vs noise ${noise}`).toBeGreaterThan(noise * 2 + 60); // ≥ 60 changed pixels: thin structures (spinal cord) cover ~170 px at full-body scale
+      await page.getByTestId(`layer-${l}`).check();
+      await page.waitForTimeout(500);
+    }
+  };
+  // the lungs breathe (they are the only moving model): check them first, then hide them so the rest is measured without that motion
+  await measure(['lungs']);
+  await page.getByTestId('layer-lungs').uncheck();
+  await page.waitForTimeout(700);
+  await measure(layers.filter((l) => l !== 'lungs'));
+});
+
+test('the Sources page keeps the Turkish-terms expert-review note visible', async ({ page }) => {
+  await ready(page);
+  await page.getByTestId('nav-credits').click();
+  await expect(page.getByTestId('terms-review-note')).toContainText('uzman incelemesi');
+  await expect(page.getByText(/Skin, Male v1\.2/).first()).toBeVisible();
+});
+
+// ---- v1.0 review: camera focus, zoom limits, panning, isolate, hover ----
+const MANIFEST = JSON.parse(readFileSync('packages/anatomy-manifest/src/manifest.json', 'utf8')) as { structures: Record<string, { center: number[] | null }> };
+const targetOf = async (page: Page) => (await cam(page)).target.split(',').map(Number);
+
+test('click orbits around the clicked structure; double-click flies close; reset frames the whole body', async ({ page }) => {
+  await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  // list click: the structure centre becomes the orbit target, distance kept
+  const before = await cam(page);
+  await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
+  const kidney = MANIFEST.structures.VH_M_left_kidney.center!;
+  await expect.poll(async () => Math.hypot(...(await targetOf(page)).map((v, i) => v - kidney[i])), { timeout: 8000 }).toBeLessThan(0.002);
+  expect((await cam(page)).distance).toBeCloseTo(before.distance, 2);
+  // double-click in 3D: select + fly close to that structure
+  const b = await canvasBox(page);
+  await page.mouse.dblclick(b.x + b.width / 2, b.y + b.height / 2);
+  const picked = (await page.getByTestId('inspector').getAttribute('data-structure'))!;
+  const c = MANIFEST.structures[picked].center!;
+  await expect.poll(async () => Math.hypot(...(await targetOf(page)).map((v, i) => v - c[i])), { timeout: 8000 }).toBeLessThan(0.002);
+  expect((await cam(page)).distance).toBeLessThanOrEqual(before.distance + 0.001); // never farther away
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
+});
+
+test('zoom goes down to 3 cm and no further, out to the limit; panning is clamped to the body', async ({ page }) => {
+  test.setTimeout(420_000); // each wheel step is rendered by the software rasterizer in CI
+  await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  const b = await canvasBox(page);
+  // fly close to a structure first, then wheel in (each wheel step zooms ~5 %) until the 3 cm limit holds
+  await page.mouse.dblclick(b.x + b.width / 2, b.y + b.height / 2);
+  await page.waitForTimeout(2000);
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+  for (let i = 0; i < 90 && (await cam(page)).distance > 0.0302; i++) await page.mouse.wheel(0, -500);
+  await page.waitForTimeout(800);
+  expect((await cam(page)).distance).toBeLessThan(0.035);
+  expect((await cam(page)).distance).toBeGreaterThanOrEqual(0.0299);
+  // out: from the whole-body view a few steps reach the outer limit
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(2.5);
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2); // back over the 3D view (the click left it on the button)
+  for (let i = 0; i < 15; i++) await page.mouse.wheel(0, 800);
+  await expect.poll(async () => (await cam(page)).distance, { timeout: 8000 }).toBeGreaterThan(4.1);
+  expect((await cam(page)).distance).toBeLessThanOrEqual(4.201);
+  // right-drag far to the side: the target moves, but never beyond the body box + 15 cm
+  await page.getByTestId('reset-view').click();
+  await page.waitForTimeout(1500);
+  const t0 = await targetOf(page);
+  for (let k = 0; k < 4; k++) {
+    await page.mouse.move(b.x + 100, b.y + b.height / 2); await page.mouse.down({ button: 'right' });
+    await page.mouse.move(b.x + b.width - 50, b.y + b.height / 2, { steps: 8 }); await page.mouse.up({ button: 'right' });
+  }
+  await page.waitForTimeout(800);
+  const t1 = await targetOf(page);
+  expect(Math.abs(t1[0] - t0[0])).toBeGreaterThan(0.1); // panning works
+  expect(Math.abs(t1[0])).toBeLessThanOrEqual(0.53 + 0.15 + 0.01); // skin half-width + margin
+  await page.getByTestId('reset-view').click();
+  await expect.poll(async () => Math.abs((await targetOf(page))[0] - t0[0]), { timeout: 8000 }).toBeLessThan(0.002);
+});
+
+test('selecting isolates the structure (others dimmed); "Tümünü göster" shows all again; organs are opaque by default', async ({ page }) => {
+  await ready(page);
+  const probe = async () => JSON.parse((await page.getByTestId('stage').getAttribute('data-scene')) ?? '{}') as Probe; // written every 0.5 s
+  await expect.poll(async () => (await probe()).digestive?.minOpacity).toBe(1);
+  for (const l of ['heart', 'lungs', 'urinary', 'lymphatic', 'nervous']) expect((await probe())[l].minOpacity, l).toBe(1);
+  await page.getByRole('button', { name: /^Sol böbrek$/ }).click();
+  await expect.poll(async () => (await probe()).digestive.maxOpacity).toBeLessThanOrEqual(0.1);
+  expect((await probe()).urinary.maxOpacity).toBe(1); // the kidney itself
+  await page.getByTestId('show-all').click();
+  await expect.poll(async () => (await probe()).digestive.minOpacity).toBe(1);
+  await page.getByTestId('show-all').click(); // toggles back to isolate
+  await expect.poll(async () => (await probe()).digestive.maxOpacity).toBeLessThanOrEqual(0.1);
+});
+
+test('hovering a structure outlines it', async ({ page }) => {
+  await ready(page);
+  await expect(page.getByTestId('stage')).toHaveAttribute('data-intro', 'done', { timeout: 20_000 });
+  await page.getByTestId('layer-flow').uncheck();
+  const canvas = page.locator('[data-testid=stage] canvas');
+  const b = await canvasBox(page);
+  await page.mouse.move(b.x + 5, b.y + 5); // empty corner
+  await page.waitForTimeout(600);
+  const before = await pixels(await canvas.screenshot());
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+  await expect(page.getByTestId('hover-label')).toBeVisible();
+  await expect(page.getByTestId('stage')).not.toHaveAttribute('data-outlined', '0');
+  await page.waitForTimeout(800);
+  const after = await pixels(await canvas.screenshot());
+  // outline pixels: strongly blue (accent #1f6feb) where there were none before
+  const blue = (p: { data: Buffer }) => { let n = 0; for (let i = 0; i < p.data.length; i += 4) if (p.data[i + 2] > 180 && p.data[i] < 90 && p.data[i + 1] < 150) n++; return n; };
+  expect(blue(after)).toBeGreaterThan(blue(before) + 100);
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { boundsOf, CAMERA_LIMITS, fitView, focusView, FOV_DEG, STAGE_Y } from './camera';
+import { BODY_BOUNDS, boundsOf, CAMERA_LIMITS, clampTarget, fitView, focusView, FOV_DEG, STAGE_Y, targetView } from './camera';
 
 import { ALL_LAYERS as ALL } from './camera';
 
@@ -40,5 +40,32 @@ describe('camera', () => {
     const d = Math.hypot(...f.position.map((p, i) => p - f.target[i]));
     expect(d).toBeGreaterThanOrEqual(CAMERA_LIMITS.minDistance);
     expect(focusView('nope', v.position, v.target)).toBeNull();
+  });
+  it('allows real close-ups: minimum distance a few cm, near plane well inside it', () => {
+    expect(CAMERA_LIMITS.minDistance).toBeLessThanOrEqual(0.05);
+    expect(CAMERA_LIMITS.near).toBeLessThan(CAMERA_LIMITS.minDistance / 5);
+    expect(CAMERA_LIMITS.far).toBeGreaterThan(CAMERA_LIMITS.maxDistance * 2);
+    // a small structure is focused closer than the old 12 cm limit
+    const v = fitView(ALL, 1.6);
+    const f = focusView('VH_M_aortic_valve', v.position, v.target)!;
+    expect(Math.hypot(...f.position.map((p, i) => p - f.target[i]))).toBeLessThan(0.12);
+  });
+  it('click: the structure centre becomes the orbit target and the camera keeps its offset', () => {
+    const v = fitView(ALL, 1.6);
+    const t = targetView('VH_M_left_kidney', v.position, v.target)!;
+    expect(t.target).toEqual(focusView('VH_M_left_kidney', v.position, v.target)!.target);
+    const off = (x: { position: number[]; target: number[] }) => x.position.map((p, i) => p - x.target[i]);
+    off(t).forEach((d, i) => expect(d).toBeCloseTo(off(v)[i], 9));
+    expect(targetView('nope', v.position, v.target)).toBeNull();
+  });
+  it('panning is clamped: the orbit target cannot leave the body box (+ margin)', () => {
+    const m = CAMERA_LIMITS.panMargin;
+    expect(clampTarget([0, 0, 0])).toEqual([0, 0, 0]);
+    const far = clampTarget([50, -50, 50]);
+    expect(far[0]).toBeCloseTo(BODY_BOUNDS.max[0] + m, 9);
+    expect(far[1]).toBeCloseTo(BODY_BOUNDS.min[1] - m, 9);
+    expect(far[2]).toBeCloseTo(BODY_BOUNDS.max[2] + m, 9);
+    // the box is the whole body: about 1.8 m tall
+    expect(BODY_BOUNDS.max[1] - BODY_BOUNDS.min[1]).toBeGreaterThan(1.7);
   });
 });

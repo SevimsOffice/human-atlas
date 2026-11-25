@@ -12,7 +12,22 @@ Q13: running uses the "maximal exercise" column, labelled "based on the maximal 
 ## Decided 2026-11-19 (M4 approval)
 Q15: male/female switch later (ROADMAP milestone 9) · Q16: no share-alike assets; muscles chart-only with a note in the 3D view; owner allowed 3d.nih.gov + NCBI hosts (done, plus eutils.ncbi.nlm.nih.gov) · Q17: all 237 sub-structure terms translated (needs-expert-review).
 
-## Open (Milestone 5)
+## Decided 2026-11-20 (v1.0 brief)
+AI tutor postponed (design kept: docs/AI_TUTOR_DESIGN.md) · camera mode dropped · full-body view: HRA has a CC BY whole-body skin (VH_M_Skin, HRA-SKIN-M), so no own silhouette was needed · NIH skeleton wanted as a non-clickable outline (see Q20).
+
+## Decided 2026-11-25 (final v1.0)
+Bones removed completely (NIH 3D skeleton and HuBMAP pelvis/knees); everything else in PR #6 kept; merge and tag v1.0; no further milestones.
+
+## Decided 2026-11-23 (PR #6 review)
+Q20 resolved: the owner uploaded Skeleton.stl (verified against the NIH 3D S3 ETag); converted and fitted by scripts/build-nih-skeleton.mjs, the STL is not stored in the repo · code licence: MIT; data and models keep their own licences (SOURCES.md) · organs opaque with distinct colours, hover outline, isolate on select, zoom to cursor, close zoom, clamped panning.
+
+## Open (v1.0, answered above)
+- **Q20 NIH CT skeleton file.** The download host was added to the environment's allowed hosts, but the download was refused by the session's permission check, so the file is not here. File: `Skeleton.stl` (NIH 3D 3DPX-016838, CC BY), URL https://nih3d-v2-data-cln-media-prod.s3.amazonaws.com/497900/Skeleton.stl, 26,643,984 bytes (25.4 MiB, under 50 MB → no Git LFS needed). Upload: commit it to `data/external/nih3d-3DPX-016838/Skeleton.stl` with git on the command line or GitHub Desktop (the github.com web uploader stops at 25 MB). I then fit it to the HRA pelvis + femurs by a script and ship a compressed, non-clickable outline layer.
+
+## Decided (M5 approval)
+Q18: no walking from mixed studies; add only when one source gives heart + breathing for healthy adults at the same intensity (ROADMAP note) · Q19: skip the NIH skeleton; keep HRA partial skeleton; revisit only for a segmented CC BY skeleton.
+
+## Open (Milestone 5, answered above)
 - **Q18 Walking scenario.** Now possible from two CC BY peer-reviewed sources (see PHYSIOLOGY_MODEL.md): breathing at 5 km/h from Lee et al. 2025; heart rate/stroke volume/cardiac output at the end of a brisk 6-minute walk from Liu et al. 2021 (PLoS ONE). The two describe different walking intensities and groups. Add a "Yürüme" scenario labelled with both sources, or keep walking out?
 - **Q19 NIH CT skeleton (3DPX-016838).** CC BY confirmed via the NIH 3D API. File `Skeleton.stl`, 26,643,984 bytes, at https://nih3d-v2-data-cln-media-prod.s3.amazonaws.com/497900/Skeleton.stl (host not allowed here). It is ONE unlabelled mesh from a different body and coordinate frame: no per-bone selection or Uberon IDs, and it must be registered (scaled/aligned) to the HRA frame. Options: (a) allow the S3 host and let me register it to the HRA pelvis/femurs by a scripted fit, shown as an unlabelled "full skeleton (outline)" layer; (b) skip it and keep the HRA partial skeleton.
 

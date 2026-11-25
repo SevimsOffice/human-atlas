@@ -17,7 +17,7 @@ function NameParts({ text, selected }: { text: string; selected: boolean }) {
 
 export function StructureList() {
   const { t, i18n } = useTranslation();
-  const { selected, select, hovered, layers } = useAtlas();
+  const { selected, select, hovered, layers, requestCamera } = useAtlas();
   return (
     <Panel title={t('list.title')} id="list-h">
       <nav aria-labelledby="list-h" className="space-y-2">
@@ -27,7 +27,7 @@ export function StructureList() {
             <ul className="space-y-px">
               {g.items.map((n) => (
                 <li key={n}>
-                  <button onClick={() => select(n)} aria-current={selected === n}
+                  <button onClick={() => { select(n); requestCamera({ kind: 'target', name: n }); }} aria-current={selected === n}
                     title={label(n, i18n.language as Lang).text}
                     className={`flex w-full items-baseline gap-1.5 truncate whitespace-nowrap rounded-sm px-2 py-[3px] text-left text-[13px] leading-tight ${selected === n ? 'bg-graphite text-white' : hovered === n ? 'bg-white' : 'hover:bg-white'}`}>
                     <NameParts text={label(n, i18n.language as Lang).text} selected={selected === n} />

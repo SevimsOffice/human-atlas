@@ -18,6 +18,7 @@ import { PoweredBy } from './ui/PoweredBy';
 import { MissionCard, MissionList, MissionRunner } from './ui/Missions';
 import { sectionPlane } from './lib/section';
 import { boundsOf } from './lib/camera';
+import { modelsFor } from './lib/models';
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -47,7 +48,9 @@ function Header() {
 function Stage() {
   const { t } = useTranslation();
   const { active } = useProgress();
-  const loaded = useAtlas((s) => s.loadedModels.length === manifest.models.length);
+  // ready when every model of the visible layers is in the scene (hidden layers are lazy-loaded)
+  const loaded = useAtlas((s) => modelsFor(s.layers).every((f) => s.loadedModels.includes(f)));
+  const progress = useAtlas((s) => { const need = modelsFor(s.layers); return `${need.filter((f) => s.loadedModels.includes(f)).length}/${need.length}`; });
   const hovered = useAtlas((s) => s.hovered);
   const section = useAtlas((s) => s.section);
   const layers = useAtlas((s) => s.layers);
@@ -56,7 +59,7 @@ function Stage() {
     <div className="relative min-h-[300px] flex-1" data-testid="stage" data-ready={loaded && !active}
       data-section={section.enabled ? `${section.axis}:${section.t.toFixed(2)}` : 'off'} data-section-pos={sectionPos.toFixed(4)}>
       <AtlasScene />
-      {(!loaded || active) && <div className="pointer-events-none absolute inset-0 grid place-items-center text-sm text-graphite-soft">{t('loading')}</div>}
+      {(!loaded || active) && <div className="pointer-events-none absolute inset-0 grid place-items-center text-sm text-graphite-soft" data-testid="loading">{t('loading')} {progress}</div>}
       {hovered && <HoverLabel name={hovered} />}
       <StageControls />
       <MissionCard />
@@ -67,11 +70,16 @@ function Stage() {
 
 function StageControls() {
   const { t } = useTranslation();
-  const { leftOpen, rightOpen, togglePanel, requestCamera } = useAtlas();
+  const { leftOpen, rightOpen, togglePanel, requestCamera, selected, isolate, setIsolate } = useAtlas();
   const btn = 'pointer-events-auto rounded-sm border border-line bg-white/90 px-2 py-1 text-[11px] hover:bg-white';
   return (
     <>
       <div className="pointer-events-none absolute right-2 top-2 flex gap-1">
+        {selected && (
+          <button className={btn} onClick={() => setIsolate(!isolate)} aria-pressed={!isolate} data-testid="show-all">
+            {isolate ? t('stage.showAll') : t('stage.isolate')}
+          </button>
+        )}
         <button className={btn} onClick={() => requestCamera({ kind: 'reset' })} data-testid="reset-view">{t('stage.reset')}</button>
       </div>
       <div className="pointer-events-none absolute bottom-2 left-2 hidden gap-1 lg:flex">
@@ -91,7 +99,7 @@ function StageControls() {
 
 function HoverLabel({ name }: { name: string }) {
   const { i18n } = useTranslation();
-  return <div className="pointer-events-none absolute left-3 top-3 rounded-sm border border-line bg-white/90 px-2 py-1 text-xs">{label(name, i18n.language as Lang).text}</div>;
+  return <div data-testid="hover-label" className="pointer-events-none absolute left-3 top-3 rounded-sm border border-line bg-white/90 px-2 py-1 text-xs">{label(name, i18n.language as Lang).text}</div>;
 }
 
 export default function App() {

@@ -663,58 +663,6 @@
       "tr": "Omurilik (medulla spinalis)",
       "status": "needs-expert-review"
     },
-    "pelvis": {
-      "tr": "Leğen kemiği (pelvis)",
-      "status": "needs-expert-review"
-    },
-    "sacrum": {
-      "tr": "Sakrum (kuyruk sokumu kemiği)",
-      "status": "needs-expert-review"
-    },
-    "coccyx": {
-      "tr": "Koksiks",
-      "status": "needs-expert-review"
-    },
-    "femur_L": {
-      "tr": "Sol uyluk kemiği (femur)",
-      "status": "needs-expert-review"
-    },
-    "femur_R": {
-      "tr": "Sağ uyluk kemiği (femur)",
-      "status": "needs-expert-review"
-    },
-    "patella_L": {
-      "tr": "Sol diz kapağı kemiği (patella)",
-      "status": "needs-expert-review"
-    },
-    "patella_R": {
-      "tr": "Sağ diz kapağı kemiği (patella)",
-      "status": "needs-expert-review"
-    },
-    "tibia_L": {
-      "tr": "Sol kaval kemiği (tibia)",
-      "status": "needs-expert-review"
-    },
-    "tibia_R": {
-      "tr": "Sağ kaval kemiği (tibia)",
-      "status": "needs-expert-review"
-    },
-    "fibula_L": {
-      "tr": "Sol baldır kemiği (fibula)",
-      "status": "needs-expert-review"
-    },
-    "fibula_R": {
-      "tr": "Sağ baldır kemiği (fibula)",
-      "status": "needs-expert-review"
-    },
-    "knee_L": {
-      "tr": "Sol diz",
-      "status": "needs-expert-review"
-    },
-    "knee_R": {
-      "tr": "Sağ diz",
-      "status": "needs-expert-review"
-    },
     "C1_segment_of_cervical_spinal_cord": {
       "tr": "Omuriliğin C1 servikal segmenti",
       "status": "needs-expert-review"
@@ -745,22 +693,6 @@
     },
     "C8_segment_of_cervical_spinal_cord": {
       "tr": "Omuriliğin C8 servikal segmenti",
-      "status": "needs-expert-review"
-    },
-    "anterior_cruciate_enthesis_L": {
-      "tr": "Sol ön çapraz bağ yapışma yeri",
-      "status": "needs-expert-review"
-    },
-    "anterior_cruciate_enthesis_R": {
-      "tr": "Sağ ön çapraz bağ yapışma yeri",
-      "status": "needs-expert-review"
-    },
-    "articular_cartilage_of_knee_L": {
-      "tr": "Sol femur alt ucu eklem kıkırdağı",
-      "status": "needs-expert-review"
-    },
-    "articular_cartilage_of_knee_R": {
-      "tr": "Sağ femur alt ucu eklem kıkırdağı",
       "status": "needs-expert-review"
     },
     "ascending_colon": {
@@ -821,14 +753,6 @@
     },
     "diaphragmatic_surface_of_spleen": {
       "tr": "Dalağın diyafragmatik yüzü",
-      "status": "needs-expert-review"
-    },
-    "distal_most_point_of_medial_condyle_of_femur_L": {
-      "tr": "Sol femur medial kondilinin en alt noktası",
-      "status": "needs-expert-review"
-    },
-    "distal_most_point_of_medial_condyle_of_femur_R": {
-      "tr": "Sağ femur medial kondilinin en alt noktası",
       "status": "needs-expert-review"
     },
     "duodenal_ampulla": {
@@ -959,70 +883,6 @@
       "tr": "Terminal ileum",
       "status": "needs-expert-review"
     },
-    "ilium": {
-      "tr": "İlium",
-      "status": "needs-expert-review"
-    },
-    "ilium_compact_bone": {
-      "tr": "Ilium kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ilium_compact_bone_L": {
-      "tr": "Sol ilium kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ilium_compact_bone_R": {
-      "tr": "Sağ ilium kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ilium_spongy_bone": {
-      "tr": "Ilium süngerimsi (trabeküler) kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ilium_spongy_bone_L": {
-      "tr": "Sol ilium süngerimsi (trabeküler) kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ilium_spongy_bone_R": {
-      "tr": "Sağ ilium süngerimsi (trabeküler) kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "intercondylar_fossa_L": {
-      "tr": "Sol femur interkondiler çukuru",
-      "status": "needs-expert-review"
-    },
-    "intercondylar_fossa_R": {
-      "tr": "Sağ femur interkondiler çukuru",
-      "status": "needs-expert-review"
-    },
-    "ischium": {
-      "tr": "İskiyum",
-      "status": "needs-expert-review"
-    },
-    "ischium_compact_bone": {
-      "tr": "Iskiyum kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ischium_compact_bone_L": {
-      "tr": "Sol iskiyum kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ischium_compact_bone_R": {
-      "tr": "Sağ iskiyum kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ischium_spongy_bone": {
-      "tr": "Iskiyum süngerimsi (trabeküler) kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ischium_spongy_bone_L": {
-      "tr": "Sol iskiyum süngerimsi (trabeküler) kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "ischium_spongy_bone_R": {
-      "tr": "Sağ iskiyum süngerimsi (trabeküler) kemik dokusu",
-      "status": "needs-expert-review"
-    },
     "kidney_calyx_L": {
       "tr": "Sol böbrek kaliksleri",
       "status": "needs-expert-review"
@@ -1033,54 +893,6 @@
     },
     "kidney_capsule_R": {
       "tr": "Sağ böbrek kapsülü",
-      "status": "needs-expert-review"
-    },
-    "knee_joint_L": {
-      "tr": "Sol diz eklemi",
-      "status": "needs-expert-review"
-    },
-    "knee_joint_R": {
-      "tr": "Sağ diz eklemi",
-      "status": "needs-expert-review"
-    },
-    "lateral_condyle_of_femur_frontal_L": {
-      "tr": "Sol femur lateral kondili (ön)",
-      "status": "needs-expert-review"
-    },
-    "lateral_condyle_of_femur_frontal_R": {
-      "tr": "Sağ femur lateral kondili (ön)",
-      "status": "needs-expert-review"
-    },
-    "lateral_condyle_of_femur_inf_L": {
-      "tr": "Sol femur lateral kondili (alt)",
-      "status": "needs-expert-review"
-    },
-    "lateral_condyle_of_femur_inf_R": {
-      "tr": "Sağ femur lateral kondili (alt)",
-      "status": "needs-expert-review"
-    },
-    "lateral_condyle_of_femur_sup_L": {
-      "tr": "Sol femur lateral kondili (üst)",
-      "status": "needs-expert-review"
-    },
-    "lateral_condyle_of_femur_sup_R": {
-      "tr": "Sağ femur lateral kondili (üst)",
-      "status": "needs-expert-review"
-    },
-    "lateral_epicondylar_enthesis_L": {
-      "tr": "Sol lateral epikondil yapışma yeri",
-      "status": "needs-expert-review"
-    },
-    "lateral_epicondylar_enthesis_R": {
-      "tr": "Sağ lateral epikondil yapışma yeri",
-      "status": "needs-expert-review"
-    },
-    "lateral_perichondular_surface_L": {
-      "tr": "Sol lateral perikondral yüzey",
-      "status": "needs-expert-review"
-    },
-    "lateral_perichondular_surface_R": {
-      "tr": "Sağ lateral perikondral yüzey",
       "status": "needs-expert-review"
     },
     "left_anterolateral_segment": {
@@ -1149,46 +961,6 @@
     },
     "major_calyx_R_b": {
       "tr": "Sağ büyük böbrek kaliksi (b)",
-      "status": "needs-expert-review"
-    },
-    "medial_condyle_of_left_femur_inf": {
-      "tr": "Sol femur medial kondili (alt)",
-      "status": "needs-expert-review"
-    },
-    "medial_condyle_of_left_femur_sup": {
-      "tr": "Sol femur medial kondili (üst)",
-      "status": "needs-expert-review"
-    },
-    "medial_condyle_of_right_femur_inf": {
-      "tr": "Sağ femur medial kondili (alt)",
-      "status": "needs-expert-review"
-    },
-    "medial_condyle_of_right_femur_sup": {
-      "tr": "Sağ femur medial kondili (üst)",
-      "status": "needs-expert-review"
-    },
-    "medial_epicondylar_enthesis_L": {
-      "tr": "Sol medial epikondil yapışma yeri",
-      "status": "needs-expert-review"
-    },
-    "medial_epicondylar_enthesis_R": {
-      "tr": "Sağ medial epikondil yapışma yeri",
-      "status": "needs-expert-review"
-    },
-    "medial_perichondular_surface_L": {
-      "tr": "Sol medial perikondral yüzey",
-      "status": "needs-expert-review"
-    },
-    "medial_perichondular_surface_R": {
-      "tr": "Sağ medial perikondral yüzey",
-      "status": "needs-expert-review"
-    },
-    "meniscus_L": {
-      "tr": "Sol diz menisküsü",
-      "status": "needs-expert-review"
-    },
-    "meniscus_R": {
-      "tr": "Sağ diz menisküsü",
       "status": "needs-expert-review"
     },
     "minor_calyx_L": {
@@ -1291,52 +1063,8 @@
       "tr": "Duodenum papillası (Santorini)",
       "status": "needs-expert-review"
     },
-    "patellar_surface_L": {
-      "tr": "Sol femur patellar yüzü",
-      "status": "needs-expert-review"
-    },
-    "patellar_surface_R": {
-      "tr": "Sağ femur patellar yüzü",
-      "status": "needs-expert-review"
-    },
     "porta_hepatis": {
       "tr": "Porta hepatis (karaciğer kapısı)",
-      "status": "needs-expert-review"
-    },
-    "posterior_cruciate_enthesis_L": {
-      "tr": "Sol arka çapraz bağ yapışma yeri",
-      "status": "needs-expert-review"
-    },
-    "posterior_cruciate_enthesis_R": {
-      "tr": "Sağ arka çapraz bağ yapışma yeri",
-      "status": "needs-expert-review"
-    },
-    "pubis": {
-      "tr": "Pubis",
-      "status": "needs-expert-review"
-    },
-    "pubis_compact_bone": {
-      "tr": "Pubis kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "pubis_compact_bone_L": {
-      "tr": "Sol pubis kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "pubis_compact_bone_R": {
-      "tr": "Sağ pubis kompakt kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "pubis_spongy_bone": {
-      "tr": "Pubis süngerimsi (trabeküler) kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "pubis_spongy_bone_L": {
-      "tr": "Sol pubis süngerimsi (trabeküler) kemik dokusu",
-      "status": "needs-expert-review"
-    },
-    "pubis_spongy_bone_R": {
-      "tr": "Sağ pubis süngerimsi (trabeküler) kemik dokusu",
       "status": "needs-expert-review"
     },
     "quadrate_lobe_of_liver": {
@@ -1661,6 +1389,10 @@
     },
     "vermiform_appendix": {
       "tr": "Apendiks (appendix vermiformis)",
+      "status": "needs-expert-review"
+    },
+    "skin": {
+      "tr": "Deri (vücut derisi)",
       "status": "needs-expert-review"
     }
   }

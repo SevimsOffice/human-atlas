@@ -4,11 +4,16 @@ import type { Layer } from '@atlas/anatomy-manifest';
 import type { SectionAxis } from './lib/section';
 import { resolveSelectable } from '@atlas/anatomy-manifest';
 
+/** reset: frame the whole body · target: orbit around a structure (distance kept) · focus: fly close to it */
+export type CameraRequest = { kind: 'reset' } | { kind: 'target'; name: string } | { kind: 'focus'; name: string };
 export type View = 'atlas' | 'credits';
 
 interface AtlasState {
   scenario: ScenarioId;
   selected: string | null;
+  /** dim everything except the selection (on with every new selection; "show all" turns it off) */
+  isolate: boolean;
+  setIsolate: (on: boolean) => void;
   layers: Record<Layer, boolean>;
   flowOn: boolean;
   section: { enabled: boolean; axis: SectionAxis; t: number };
@@ -19,7 +24,7 @@ interface AtlasState {
   hovered: string | null;
   loadedModels: string[];
   view: View;
-  cameraRequest: { kind: 'reset' } | { kind: 'focus'; name: string } | null;
+  cameraRequest: CameraRequest | null;
   leftOpen: boolean;
   mission: { id: string; step: number; answer: number | null } | null;
   startMission: (id: string) => void;
@@ -28,7 +33,7 @@ interface AtlasState {
   exitMission: () => void;
   rightOpen: boolean;
   bottomOpen: boolean;
-  requestCamera: (r: { kind: 'reset' } | { kind: 'focus'; name: string }) => void;
+  requestCamera: (r: CameraRequest) => void;
   togglePanel: (side: 'left' | 'right' | 'bottom') => void;
   setScenario: (s: ScenarioId) => void;
   select: (name: string | null) => void;
@@ -45,11 +50,11 @@ interface AtlasState {
 export const useAtlas = create<AtlasState>((set) => ({
   scenario: 'rest',
   selected: null,
-  // skeleton (pelvis + legs down to the knees) starts hidden so the first view frames the trunk organs
-  layers: { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true, urinary: true, digestive: true, lymphatic: true, nervous: true, skeletal: false },
+  isolate: true,
+  layers: { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true, urinary: true, digestive: true, lymphatic: true, nervous: true, skin: true },
   section: { enabled: false, axis: 'coronal', t: 0.5 },
   setSection: (patch) => set((s) => ({ section: { ...s.section, ...patch } })),
-  flowOn: true,
+  flowOn: false, // organs start opaque; the blood-path animation is one click away
   flowStep: 0,
   flowBeats: 0,
   breaths: 0,
@@ -69,7 +74,8 @@ export const useAtlas = create<AtlasState>((set) => ({
   togglePanel: (side) => set((s) => (side === 'left' ? { leftOpen: !s.leftOpen } : side === 'right' ? { rightOpen: !s.rightOpen } : { bottomOpen: !s.bottomOpen })),
   view: location.hash === '#/credits' ? 'credits' : 'atlas',
   setScenario: (scenario) => set({ scenario }),
-  select: (name) => set({ selected: name ? resolveSelectable(name) : null }),
+  select: (name) => set({ selected: name ? resolveSelectable(name) : null, isolate: true }),
+  setIsolate: (isolate) => set({ isolate }),
   toggleLayer: (l) => set((s) => ({ layers: { ...s.layers, [l]: !s.layers[l] } })),
   setFlowOn: (flowOn) => set({ flowOn }),
   setFlowStep: (flowStep, flowBeats) => set({ flowStep, flowBeats }),

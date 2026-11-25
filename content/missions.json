@@ -20,8 +20,8 @@
         { "id": "aorta", "focus": "VH_M_descending_aorta",
           "text": { "tr": "Aort, oksijeni zengin kanı büyük dolaşımın dallarına dağıtır; inen aort gövde boyunca aşağı uzanır.", "en": "The aorta distributes oxygen-rich blood to the branches of the systemic circuit; the descending aorta runs down through the trunk." },
           "cites": ["OSX-19.1"], "status": "unreviewed" },
-        { "id": "leg-muscle", "focus": "VH_M_femur_L", "layers": { "skeletal": true },
-          "text": { "tr": "Bacakta iskelet kası bu kanı alır (kas modeli henüz yok; uyluk kemiği konumu gösteriyor). Dinlenmede kalp debisinin %{muscleShare}'i ({muscleFlow} L/dk) iskelet kaslarına gider.", "en": "In the leg, skeletal muscle receives this blood (no muscle model yet; the femur marks the location). At rest {muscleShare}% of cardiac output ({muscleFlow} L/min) goes to skeletal muscle." },
+        { "id": "leg-muscle", "focus": "VH_M_descending_aorta",
+          "text": { "tr": "Kan inen aorttan aşağı, bacaklara iner; orada iskelet kası bu kanı alır (kas ve kemik modelleri bu atlasta yok). Dinlenmede kalp debisinin %{muscleShare}'i ({muscleFlow} L/dk) iskelet kaslarına gider.", "en": "From the descending aorta the blood flows down to the legs, where skeletal muscle receives it (this atlas has no muscle or bone models). At rest {muscleShare}% of cardiac output ({muscleFlow} L/min) goes to skeletal muscle." },
           "cites": ["OSX-20.4"], "status": "unreviewed" }
       ],
       "question": {
