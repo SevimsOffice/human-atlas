@@ -8,7 +8,7 @@ describe('model lazy-loading', () => {
     expect(MODEL_LAYERS['skin.glb']).toEqual(['skin']);
   });
   it('needs only the files of visible layers', () => {
-    expect(modelsFor({ skeletal: true }).sort()).toEqual(['knee-left.glb', 'knee-right.glb', 'pelvis.glb']);
+    expect(modelsFor({ urinary: true }).sort()).toEqual(['kidney-left.glb', 'kidney-right.glb', 'ureter-left.glb', 'ureter-right.glb', 'urinary-bladder.glb']);
     expect(modelsFor({ heart: true })).toContain('heart.glb');
     expect(modelsFor({})).toEqual([]);
   });

@@ -71,16 +71,16 @@ describe('lungs (Milestone 2)', () => {
 });
 
 describe('remaining systems (Milestone 4)', () => {
-  it('adds HuBMAP urinary, digestive, lymphatic, nervous and skeletal models, all CC BY sources', () => {
+  it('adds HuBMAP urinary, digestive, lymphatic and nervous models (no bones), all CC BY sources', () => {
     const layers = new Set(all.map((s) => s.layer));
-    for (const l of ['urinary', 'digestive', 'lymphatic', 'nervous', 'skeletal']) expect(layers.has(l as never), l).toBe(true);
+    for (const l of ['urinary', 'digestive', 'lymphatic', 'nervous']) expect(layers.has(l as never), l).toBe(true);
+    expect(layers.has('skeletal' as never)).toBe(false); // bones are not included (owner decision, v1.0)
     for (const m of manifest.models) expect(SOURCES.find((s) => s.id === m.sourceId)?.license, m.sourceId).toBe('CC BY 4.0');
   });
   it('key organs carry Uberon IDs from the crosswalk', () => {
     expect(manifest.structures.VH_M_left_kidney.uberon?.id).toBe('UBERON:0004538');
     expect(manifest.structures.VH_M_liver.uberon?.id).toBe('UBERON:0002107');
     expect(manifest.structures.VH_M_spinal_cord.uberon?.id).toBe('UBERON:0002240');
-    expect(manifest.structures.VH_M_pelvis.uberon?.id).toBe('UBERON:0001270');
   });
   it('no node name is reused across models', () => {
     expect(new Set(all.map((s) => s.name)).size).toBe(all.length);

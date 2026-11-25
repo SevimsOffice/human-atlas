@@ -14,8 +14,7 @@
     "preview": "npm run preview -w @atlas/web",
     "test": "vitest run",
     "typecheck": "tsc -p packages/physiology && tsc -p packages/anatomy-manifest && tsc -p apps/web",
-    "e2e": "playwright test",
-    "data:nih-skeleton": "node scripts/build-nih-skeleton.mjs"
+    "e2e": "playwright test"
   },
   "devDependencies": {
     "@gltf-transform/core": "^4.5.1",

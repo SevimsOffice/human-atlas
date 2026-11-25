@@ -15,7 +15,6 @@ export const COLORS = {
   digestive: '#b5866a',
   lymphatic: '#6b4589', // spleen: violet
   nervous: '#efce6a', // spinal cord: pale amber
-  skeletal: '#ebe3cd', // ivory
   skin: '#d6c2b2', // neutral translucent outline
   valve: '#efe4cf',
   bloodLow: '#3f6fb0',
@@ -38,7 +37,6 @@ const BY_MODEL: Record<string, string> = {
 export function colorFor(s: Structure): string {
   if (s.layer === 'lungs') return COLORS.lung;
   if (s.layer === 'airways') return COLORS.airway;
-  if (s.layer === 'skeletal') return COLORS.skeletal;
   if (s.layer === 'skin') return COLORS.skin;
   if (BY_MODEL[s.model]) return BY_MODEL[s.model];
   if (s.layer === 'urinary' || s.layer === 'digestive' || s.layer === 'lymphatic' || s.layer === 'nervous') return COLORS[s.layer];

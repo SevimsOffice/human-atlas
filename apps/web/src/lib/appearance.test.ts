@@ -5,7 +5,7 @@ const base = { isSelected: false, hasSelection: false, isolate: true, flowOn: fa
 
 describe('appearance', () => {
   it('organs and bones are opaque by default; only the skin outline is faint and drawn last', () => {
-    for (const layer of ['heart', 'lungs', 'urinary', 'digestive', 'lymphatic', 'nervous', 'skeletal', 'greatVessels'] as const) {
+    for (const layer of ['heart', 'lungs', 'urinary', 'digestive', 'lymphatic', 'nervous', 'greatVessels'] as const) {
       expect(appearanceFor({ ...base, layer })).toEqual({ opacity: 1, depthWrite: true, renderOrder: 0 });
     }
     const skin = appearanceFor({ ...base, layer: 'skin' });
@@ -27,6 +27,5 @@ describe('appearance', () => {
     expect(appearanceFor({ ...base, layer: 'heart', flowOn: true }).opacity).toBeLessThan(0.5);
     expect(appearanceFor({ ...base, layer: 'lungs', flowOn: true }).opacity).toBeLessThan(0.5);
     expect(appearanceFor({ ...base, layer: 'digestive', flowOn: true }).opacity).toBe(1);
-    expect(appearanceFor({ ...base, layer: 'skeletal', flowOn: true }).opacity).toBe(1);
   });
 });

@@ -2,7 +2,7 @@
 //  heart.glb         <- VH_M_Heart.glb (all nodes)
 //  heart-vessels.glb <- VH_M_Blood_Vasculature.glb, subtree "VH_M_blood_vasculature_of_heart" only
 //  lungs.glb         <- VH_M_Lung.glb (all nodes: lungs + tracheobronchial tree)
-//  …and every other model listed in scripts/models.config.json (M4: urinary, digestive, lymphatic, nervous, skeletal; v1.0: skin outline, simplified)
+//  …and every other model listed in scripts/models.config.json (M4: urinary, digestive, lymphatic, nervous; v1.0: skin outline, simplified)
 // Changes (recorded in docs/SOURCES.md): subtree extraction, dedup, weld, optional simplification, Meshopt compression (quantization).
 // Node names are preserved: they are the join key to the anatomy manifest.
 import { NodeIO } from '@gltf-transform/core';

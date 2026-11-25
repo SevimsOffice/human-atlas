@@ -48,9 +48,7 @@
     "digestive": "Digestive organs",
     "lymphatic": "Spleen",
     "nervous": "Spinal cord",
-    "skeletal": "Pelvis and leg bones",
-    "skin": "Skin (body outline)",
-    "skeletonOutline": "Full skeleton (NIH, outline)"
+    "skin": "Skin (body outline)"
   },
   "flow": {
     "title": "Blood path",
@@ -93,7 +91,6 @@
     "digestive": "Digestive",
     "lymphatic": "Lymphatic",
     "nervous": "Nervous",
-    "skeletal": "Skeletal (partial)",
     "skin": "Skin"
   },
   "inspector": {
@@ -210,7 +207,6 @@
     "digestive": "Digestive system",
     "lymphatic": "Lymphatic system",
     "nervous": "Nervous system",
-    "skeletal": "Skeletal system",
     "integumentary": "Integumentary system (skin)"
   },
   "section": {

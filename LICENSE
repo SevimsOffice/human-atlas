@@ -23,5 +23,4 @@ SOFTWARE.
 ---
 Scope: this licence covers the source code of HUMAN ATLAS only. The 3D models,
 ontology data and reference values keep their own licences and attributions,
-listed in docs/SOURCES.md (HuBMAP HRA models: CC BY 4.0; NIH 3D skeleton: CC BY;
-Uberon: CC BY 3.0; OpenStax facts are cited, no text copied: CC BY-NC-SA 4.0).
+listed in docs/SOURCES.md (HuBMAP HRA models: CC BY 4.0; Uberon: CC BY 3.0; OpenStax facts are cited, no text copied: CC BY-NC-SA 4.0).

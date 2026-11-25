@@ -48,9 +48,7 @@
     "digestive": "Sindirim organları",
     "lymphatic": "Dalak",
     "nervous": "Omurilik",
-    "skeletal": "Leğen ve bacak kemikleri",
-    "skin": "Deri (vücut dış hattı)",
-    "skeletonOutline": "Tam iskelet (NIH, ana hat)"
+    "skin": "Deri (vücut dış hattı)"
   },
   "flow": {
     "title": "Kan yolu",
@@ -93,7 +91,6 @@
     "digestive": "Sindirim",
     "lymphatic": "Lenf",
     "nervous": "Sinir",
-    "skeletal": "İskelet (kısmi)",
     "skin": "Deri"
   },
   "inspector": {
@@ -210,7 +207,6 @@
     "digestive": "Sindirim sistemi",
     "lymphatic": "Lenf sistemi",
     "nervous": "Sinir sistemi",
-    "skeletal": "İskelet sistemi",
     "integumentary": "Örtü sistemi (deri)"
   },
   "section": {

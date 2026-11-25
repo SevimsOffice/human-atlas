@@ -5,7 +5,6 @@ import { CAMERA_LIMITS, DEFAULT_VIEW, STAGE_Y } from '../lib/camera';
 import { HeartModels } from './HeartModels';
 import { BloodFlow } from './BloodFlow';
 import { SceneProbe } from './SceneProbe';
-import { SkeletonOutline } from './SkeletonOutline';
 import { Lighting } from './Lighting';
 import { useAtlas } from '../store';
 import { softwareRendering, SOFTWARE_FRAME_GAP_MS } from '../lib/renderProfile';
@@ -48,9 +47,6 @@ export function AtlasScene() {
       <Suspense fallback={null}>
         <HeartModels />
         <BloodFlow />
-      </Suspense>
-      <Suspense fallback={null}>
-        <SkeletonOutline />
       </Suspense>
       <CameraRig />
       <SceneProbe />

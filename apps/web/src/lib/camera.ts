@@ -47,7 +47,7 @@ export function fitView(layers: Partial<Record<Layer, boolean>>, aspect: number,
   return { target, position: target.map((t, k) => t + (dir[k] / n) * distance) as V3 };
 }
 
-export const ALL_LAYERS: Record<Layer, boolean> = { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true, urinary: true, digestive: true, lymphatic: true, nervous: true, skeletal: true, skeletonOutline: true, skin: true };
+export const ALL_LAYERS: Record<Layer, boolean> = { heart: true, greatVessels: true, coronaryVessels: true, lungs: true, airways: true, urinary: true, digestive: true, lymphatic: true, nervous: true, skin: true };
 const ALL = ALL_LAYERS;
 /** Specimen stage (floor) just below the lowest structure of every model, so nothing sinks into it. */
 export const STAGE_Y = boundsOf(ALL_LAYERS)!.min[1] - 0.02;

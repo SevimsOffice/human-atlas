@@ -15,6 +15,9 @@ Q15: male/female switch later (ROADMAP milestone 9) · Q16: no share-alike asset
 ## Decided 2026-11-20 (v1.0 brief)
 AI tutor postponed (design kept: docs/AI_TUTOR_DESIGN.md) · camera mode dropped · full-body view: HRA has a CC BY whole-body skin (VH_M_Skin, HRA-SKIN-M), so no own silhouette was needed · NIH skeleton wanted as a non-clickable outline (see Q20).
 
+## Decided 2026-11-25 (final v1.0)
+Bones removed completely (NIH 3D skeleton and HuBMAP pelvis/knees); everything else in PR #6 kept; merge and tag v1.0; no further milestones.
+
 ## Decided 2026-11-23 (PR #6 review)
 Q20 resolved: the owner uploaded Skeleton.stl (verified against the NIH 3D S3 ETag); converted and fitted by scripts/build-nih-skeleton.mjs, the STL is not stored in the repo · code licence: MIT; data and models keep their own licences (SOURCES.md) · organs opaque with distinct colours, hover outline, isolate on select, zoom to cursor, close zoom, clamped panning.
 
